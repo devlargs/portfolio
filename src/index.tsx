@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Main from "./Main";
 import * as serviceWorker from "./serviceWorker";
+
+// CSS
 import "antd/dist/antd.css";
 
 ReactDOM.render(

@@ -5,4 +5,5 @@ export const Root = styled.div`
   padding-right: 15%;
   padding-left: 15%;
   width: 100%;
+  background-color: lightgray;
 `;
