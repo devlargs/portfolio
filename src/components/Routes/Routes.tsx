@@ -8,7 +8,7 @@ import Home from "../../screens/Home";
 import Resume from "../../screens/Resume";
 import Portfolio from "../../screens/Portfolio";
 
-const Content = () => {
+const Routes = () => {
   return (
     <Switch>
       <Route path="/" exact>
@@ -33,4 +33,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default Routes;

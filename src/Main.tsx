@@ -2,7 +2,7 @@ import React from "react";
 import { Layout } from "antd";
 
 import Sidebar from "./components/Sidebar";
-import Content from "./components/Content";
+import Routes from "./components/Routes";
 import { BrowserRouter } from "react-router-dom";
 
 const Main = () => {
@@ -10,7 +10,7 @@ const Main = () => {
     <Layout style={{ height: "100vh" }}>
       <BrowserRouter>
         <Sidebar />
-        <Content />
+        <Routes />
       </BrowserRouter>
     </Layout>
   );
