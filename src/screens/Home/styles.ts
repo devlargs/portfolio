@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const Background = styled.div`
   background: url("nature.png") no-repeat;
-  background-size: 100% 100% !important;
   width: calc(100vw - 200px);
   opacity: 0.9;
 
   .container {
+    margin-left: 100px;
     position: absolute;
     text-align: center;
     top: 50%;

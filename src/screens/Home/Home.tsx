@@ -7,14 +7,14 @@ const Home = () => {
     <Background>
       <div className="container">
         <h1 className="name">
-          Ralph <span className="surname">Largo</span>
+          Ralph<span className="surname">Largo</span>
         </h1>
         <h1 className="job">
           I am&nbsp;
           <TypeEffect>
             <TypingEffect
-              speed={100}
-              eraseDelay={500}
+              speed={50}
+              eraseDelay={1000}
               typingDelay={10}
               text={[
                 "a Front End Web Developer.",
