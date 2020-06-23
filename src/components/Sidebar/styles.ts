@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledImage = styled.img`
   width: 200px;
-  height: 180px;
+  height: 190px;
 `;
 
 export const ImageContainer = styled.div`
@@ -15,7 +15,7 @@ export const NameTag = styled.div`
   position: absolute;
   width: 200px;
   height: 44px;
-  background-color: #00a3e1;
+  background-color: #1890ff;
   left: 0;
   bottom: 0;
   margin: 0;
@@ -24,7 +24,7 @@ export const NameTag = styled.div`
     white-space: nowrap;
     z-index: -1;
     text-transform: uppercase;
-    padding-top: 22px;
+    padding-top: 9px;
     font-size: 20px;
     text-align: center;
     color: white;
