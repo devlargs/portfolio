@@ -1,5 +1,6 @@
 import React from "react";
-import { Background } from "./styles";
+import { Background, TypeEffect } from "./styles";
+import TypingEffect from "react-typing-effect";
 
 const Home = () => {
   return (
@@ -8,7 +9,21 @@ const Home = () => {
         <h1 className="name">
           Ralph <span className="surname">Largo</span>
         </h1>
-        <h1 className="job">I am a web developer</h1>
+        <h1 className="job">
+          I am&nbsp;
+          <TypeEffect>
+            <TypingEffect
+              speed={100}
+              eraseDelay={500}
+              typingDelay={10}
+              text={[
+                "a Front End Web Developer.",
+                "looking for Remote Work.",
+                "a React JS Developer.",
+              ]}
+            />
+          </TypeEffect>
+        </h1>
       </div>
     </Background>
   );

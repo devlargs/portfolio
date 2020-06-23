@@ -16,7 +16,7 @@ export const Background = styled.div`
     -ms-transform: translateY(-50%);
     transform: translateY(-50%) translateX(-50%);
     .name {
-      font-size: 4em;
+      font-size: 5em;
       color: white;
       margin-bottom: 0px;
       .surname {
@@ -28,4 +28,9 @@ export const Background = styled.div`
       color: white;
     }
   }
+`;
+
+export const TypeEffect = styled.span`
+  font-weight: bold;
+  border-bottom: 1px solid #3d95f8;
 `;
