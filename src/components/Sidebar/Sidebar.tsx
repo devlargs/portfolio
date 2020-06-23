@@ -18,7 +18,7 @@ const Sidebar = () => {
     <Sider trigger={null}>
       <ImageContainer>
         <NameTag>
-          <p>Ralph Largo</p>
+          <p>ralph largo</p>
         </NameTag>
         <StyledImage src={ProfileImage} alt="" />
       </ImageContainer>
@@ -31,10 +31,10 @@ const Sidebar = () => {
           <Link to="/about">ABOUT ME</Link>
         </Menu.Item>
         <Menu.Item key="3" icon={<FileProtectOutlined />}>
-          RESUME
+          <Link to="/resume">RESUME</Link>
         </Menu.Item>
         <Menu.Item key="4" icon={<AppstoreOutlined />}>
-          PORTFOLIO
+          <Link to="/portfolio">PORTFOLIO</Link>
         </Menu.Item>
         <Menu.Item key="5" icon={<PhoneOutlined />}>
           <Link to="/contact">CONTACT</Link>

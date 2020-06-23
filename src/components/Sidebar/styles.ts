@@ -28,5 +28,6 @@ export const NameTag = styled.div`
     font-size: 20px;
     text-align: center;
     color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   }
 `;
