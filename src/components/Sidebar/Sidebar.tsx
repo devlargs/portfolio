@@ -5,6 +5,7 @@ import {
   FileProtectOutlined,
   PhoneOutlined,
   AppstoreOutlined,
+  ApartmentOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import ProfileImage from "../../assets/images/profile.jpg";
@@ -38,6 +39,10 @@ const Sidebar = () => {
         </Menu.Item>
         <Menu.Item key="5" icon={<PhoneOutlined />}>
           <Link to="/contact">CONTACT</Link>
+        </Menu.Item>
+
+        <Menu.Item key="5" icon={<ApartmentOutlined />}>
+          <Link to="/contact">SKILLS</Link>
         </Menu.Item>
       </Menu>
     </Sider>

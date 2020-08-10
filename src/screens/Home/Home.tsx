@@ -7,7 +7,7 @@ const Home = () => {
     <Background>
       <div className="container">
         <h1 className="name">
-          Ralph<span className="surname">Largo</span>
+          Hi! I am <span className="surname">Ralph Largo</span>
         </h1>
         <h1 className="job">
           I am&nbsp;
@@ -20,6 +20,7 @@ const Home = () => {
                 "a Front End Web Developer.",
                 "looking for Remote Work.",
                 "a React JS Developer.",
+                "",
               ]}
             />
           </TypeEffect>
