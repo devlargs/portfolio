@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  /* TODO Change this @apply bg-red-400 p-12; */
+  padding: 0;
+  margin: 0;
+}
+
+.place-items-center {
+  place-items: center;
+}
