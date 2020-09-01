@@ -1,9 +1,15 @@
 module.exports = {
   purge: [],
-
-  variants: {},
-  plugins: [],
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        primary: "#272727",
+      },
+    },
+  },
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
   variants: {},
   plugins: [],
 };

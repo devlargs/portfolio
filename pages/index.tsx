@@ -1,7 +1,11 @@
 const Index = () => (
-  <div className="p-4 shadow rounded bg-white">
-    <h1 className="text-purple-500 leading-normal">Next.js</h1>
-    <p className="text-gray-500 flex-">with Tailwind CSS</p>
+  <div className="grid place-items-center h-screen bg-primary">
+    <div>
+      <h1 className="text-center text-5xl text-gray-300 capitalize">
+        Website maintenance
+      </h1>
+      <h2 className="text-center text-3xl text-red-500">ralphlargo.com</h2>
+    </div>
   </div>
 );
 
