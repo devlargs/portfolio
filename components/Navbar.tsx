@@ -1,5 +1,14 @@
+import Link from "next/link";
 import Logo from "components/Logo";
 import styled from "styled-components";
+
+const Anchor = ({ title, link }: { title: string; link?: string }) => (
+  <Link href={link || `/${title.toLowerCase()}`}>
+    <a className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 capitalize">
+      {title}
+    </a>
+  </Link>
+);
 
 const Navbar = () => {
   return (
@@ -31,54 +40,13 @@ const Navbar = () => {
         >
           <nav>
             <ul className="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
-              <li>
-                <a
-                  href="#"
-                  className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400"
-                >
-                  Features
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400"
-                >
-                  Features
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400"
-                >
-                  Features
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400"
-                >
-                  Features
-                </a>
-              </li>
+              <li>{<Anchor title="Home" link="/" />}</li>
+              <li>{<Anchor title="Skills" />}</li>
+              <li>{<Anchor title="Projects" />}</li>
+              <li>{<Anchor title="Blog" />}</li>
+              <li>{<Anchor title="Contact" />}</li>
             </ul>
           </nav>
-
-          <a
-            href="#"
-            className="lg:ml-4 flex items-center justify-start lg:mb-0 mb-4 cursor-pointer w-12"
-          >
-            <img
-              src="https://philnews.ph/wp-content/uploads/2020/05/kathryn-bernardo-2.jpg"
-              className="rounded-full w-10 h-10 border-2 border-transparent hover:border-indigo-400"
-              alt="Ralph Largo"
-            />
-          </a>
         </div>
       </header>
     </Root>
