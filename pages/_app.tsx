@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <Root>
       <Head>
+        <title>devlargs</title>
         <script
           dangerouslySetInnerHTML={{
             __html: `
