@@ -1,8 +1,5 @@
 @tailwind base;
 @tailwind components;
-
-/* Add Extractable classes here */
-
 @tailwind utilities;
 
 * {
