@@ -35,7 +35,7 @@ const Projects = ({ data = [] }: Props) => {
                     <div className="space-y-2">
                       <div className="text-lg leading-6 font-medium space-y-1">
                         <a href={q.url} target="_blank">
-                          Free Code Camp Projects
+                          {q.title}
                         </a>
                       </div>
                       <ul className="flex space-x-3">
