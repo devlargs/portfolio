@@ -1,3 +1,3 @@
-const Contact = () => <div>Contact</div>;
+const Contact = () => <div className="bg-white">Contact</div>;
 
 export default Contact;
