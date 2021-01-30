@@ -1,13 +1,14 @@
 import getFirestoreCollection from "utils/auth/getFirestoreCollection";
 
 type ProjectProps = {
-  codefactorImgUrl: string;
-  codefactorUrl: string;
-  deepscanImgUrl: string;
-  deepscanUrl: string;
+  codefactorImgUrl?: string;
+  codefactorUrl?: string;
+  deepscanImgUrl?: string;
+  deepscanUrl?: string;
   slug: string;
   title: string;
   url: string;
+  requiresLogin?: boolean;
 };
 
 type Props = {
@@ -39,16 +40,27 @@ const Projects = ({ data = [] }: Props) => {
                         </a>
                       </div>
                       <ul className="flex space-x-3">
-                        <li>
-                          <a href={q.deepscanUrl} target="_blank">
-                            <img src={q.deepscanImgUrl} alt="DeepScan grade" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href={q.codefactorUrl} target="_blank">
-                            <img src={q.codefactorImgUrl} alt="CodeFactor" />
-                          </a>
-                        </li>
+                        {q?.deepscanImgUrl && q?.deepscanUrl ? (
+                          <li>
+                            <a href={q.deepscanUrl} target="_blank">
+                              <img
+                                src={q.deepscanImgUrl}
+                                alt="DeepScan grade"
+                              />
+                            </a>
+                          </li>
+                        ) : (
+                          <></>
+                        )}
+                        {q?.codefactorImgUrl && q?.codefactorUrl ? (
+                          <li>
+                            <a href={q.codefactorUrl} target="_blank">
+                              <img src={q.codefactorImgUrl} alt="CodeFactor" />
+                            </a>
+                          </li>
+                        ) : (
+                          <></>
+                        )}
                       </ul>
                     </div>
                   </div>
