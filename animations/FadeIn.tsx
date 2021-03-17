@@ -9,14 +9,14 @@ type Props = {
 };
 
 const defaultVariant = {
-  visible: { opacity: 1 },
-  hidden: { opacity: 0 },
+  visible: { y: 0, opacity: 1 },
+  hidden: { y: 100, opacity: 0 },
 };
 
 const FadeIn: FC<Props> = ({
   duration = 0.3,
   variant = defaultVariant,
-  children
+  children,
 }) => {
   const controls = useAnimation();
   const [ref, inView] = useInView();
@@ -25,21 +25,25 @@ const FadeIn: FC<Props> = ({
     if (process.browser && inView) {
       controls.start("visible");
     } else {
-        controls.start('visible');
+      controls.start("visible");
     }
   }, [controls, inView]);
 
-  return (
-    <motion.div
-      ref={ref}
-      animate={controls}
-      initial="hidden"
-      transition={{ duration }}
-      variants={variant}
-    >
-      {children}
-    </motion.div>
-  );
+  if (process.browser) {
+    return (
+      <motion.div
+        ref={ref}
+        animate={controls}
+        initial="hidden"
+        transition={{ duration }}
+        variants={variant}
+      >
+        {children}
+      </motion.div>
+    );
+  } else {
+    return <>{children}</>;
+  }
 };
 
 export default FadeIn;
