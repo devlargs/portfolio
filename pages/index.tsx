@@ -1,3 +1,4 @@
+import FloatUp from "animations/FloatUp";
 import Image from "next/image";
 
 const Index = () => (
@@ -17,7 +18,9 @@ const Index = () => (
       </a>
     </div>
     <div className="sm:w-3/5">
-      <Image src="/images/home.svg" width="700" height="500" />
+      <FloatUp>
+        <Image src="/images/home.svg" width="700" height="500" />
+      </FloatUp>
     </div>
   </div>
 );
