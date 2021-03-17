@@ -1,3 +1,4 @@
+import FadeIn from "animations/FadeIn";
 import getFirestoreCollection from "utils/auth/getFirestoreCollection";
 
 type ProjectProps = {
@@ -23,7 +24,8 @@ const Projects = ({ data = [] }: Props) => {
           <div className="space-y-12">
             <ul className="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
               {data.map((q: ProjectProps) => (
-                <li key={q.slug}>
+                <FadeIn>
+                  <li key={q.slug}>
                   <div className="space-y-4">
                     <div className="aspect-w-3 aspect-h-2">
                       <img
@@ -65,6 +67,8 @@ const Projects = ({ data = [] }: Props) => {
                     </div>
                   </div>
                 </li>
+
+                </FadeIn>
               ))}
             </ul>
           </div>
