@@ -4,7 +4,7 @@ import Header from "components/Header";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div className="overflow-x-hidden">
       <link
         href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900&display=swap"
         rel="stylesheet"
