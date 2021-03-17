@@ -1,4 +1,5 @@
 import FadeIn from "animations/FadeIn";
+import Image from "next/image";
 import getFirestoreCollection from "utils/auth/getFirestoreCollection";
 
 type ProjectProps = {
@@ -28,9 +29,11 @@ const Projects = ({ data = [] }: Props) => {
                   <li key={q.slug}>
                     <div className="space-y-4">
                       <div className="aspect-w-3 aspect-h-2">
-                        <img
-                          className="object-cover shadow-lg rounded-lg"
+                        <Image
+                          className="shadow-lg rounded-lg"
                           src={`/images/${q.slug}.png`}
+                          width="384"
+                          height="240"
                           alt=""
                         />
                       </div>
