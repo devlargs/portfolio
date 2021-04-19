@@ -30,7 +30,7 @@ class AppDocument extends Document {
             as="font"
             crossOrigin="anonymous"
           />
-          {/* <link
+          <link
             rel="preload"
             href="/fonts/roboto-condensed/roboto-condensed-v19-latin-300italic.woff2"
             as="font"
@@ -59,7 +59,7 @@ class AppDocument extends Document {
             href="/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.woff2"
             as="font"
             crossOrigin="anonymous"
-          /> */}
+          />
         </Head>
         <body>
           <Main />
