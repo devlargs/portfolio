@@ -21,9 +21,15 @@ export default function Home() {
                 Ralph Largo
               </Text>
               <Box h="2" />
-              <Text size="15px" color="#767676">
-                Front End Developer based in Philippines and Lorem ipsum keme
-                keme keme 48 years at nang at ang sangkatuts ng juts nang nang
+              <Text size="15px" color="gray">
+                Hi! I’m Ralph Largo, and I’m a developer who has passion for
+                building clean web applications with intuitive functionality. I
+                enjoy the process of turning ideas into reality using creative
+                solutions. I mainly use ReactJS. I’m always curious about
+                learning new skills, tools, and concepts. In addition to working
+                on various solo hobby projects, I have worked with creative
+                teams, which involves daily stand-ups and communications, source
+                control, and project management.
               </Text>
               <Box mt="5" d="flex">
                 <Box pr="3">
