@@ -1,5 +1,5 @@
-import { Avatar, Box, Icon, Text, useColorModeValue } from "@chakra-ui/react";
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "theme/icons";
+import { Avatar, Box, Icon, Text, useColorModeValue } from "@chakra-ui/react";
 
 export default function Home() {
   const iconColor = useColorModeValue("black", "white");
