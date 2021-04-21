@@ -1,5 +1,12 @@
 import { FC } from "react";
-import { Box, Stack, Switch } from "@chakra-ui/react";
+import {
+  Box,
+  Stack,
+  Switch,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import Container from "components/Container";
 
 const MenuLinks: FC<{ title: string }> = ({ title }) => {
   return (
@@ -21,40 +28,51 @@ const MenuLinks: FC<{ title: string }> = ({ title }) => {
 };
 
 const Navbar: FC = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  console.log(colorMode);
+
   return (
     <Box
-      bg="primary.500"
+      bg={useColorModeValue("brand.light", "brand.dark")}
       color="white"
       fontFamily="heading"
       width="100vw"
-      h="80px"
-      p="5"
-      d="flex"
-      alignItems="center"
+      h="5rem"
+      py="5"
     >
-      <Box flex="1" fontSize="20px">
-        ralphlargo
-      </Box>
-      <Box flex="1">
-        <Box
-          d={{
-            base: "none",
-            xl: "flex",
-          }}
-          justifyContent="flex-end"
-          textAlign="center"
-        >
-          <MenuLinks title="About" />
-          <MenuLinks title="Skills" />
-          <MenuLinks title="Projects" />
-          <MenuLinks title="Blogs" />
-          <Box fontSize="20px" width="6.25em">
-            <Stack align="center" direction="row">
-              <Switch size="lg" colorScheme="gray" />
-            </Stack>
+      <Container>
+        <Box alignItems="center" d="flex">
+          <Box flex="1" fontSize="20px">
+            ralphlargo
+          </Box>
+          <Box flex="1">
+            <Box
+              d={{
+                base: "none",
+                xl: "flex",
+              }}
+              justifyContent="flex-end"
+              textAlign="center"
+            >
+              <MenuLinks title="About" />
+              <MenuLinks title="Skills" />
+              <MenuLinks title="Projects" />
+              <MenuLinks title="Blogs" />
+              <Box fontSize="20px" width="6.25em">
+                <Stack align="center" direction="row">
+                  <Switch
+                    size="lg"
+                    colorScheme="blue"
+                    onChange={toggleColorMode}
+                    outline="none"
+                  />
+                </Stack>
+              </Box>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </Container>
     </Box>
   );
 };
