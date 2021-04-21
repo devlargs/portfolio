@@ -5,7 +5,7 @@ export default function Home() {
   const iconColor = useColorModeValue("black", "white");
 
   return (
-    <Box>
+    <Box fontFamily="heading">
       <Box h="calc(100vh - 10rem)">
         <Box d="grid" placeItems="center" h="100%">
           <Box d="flex" h="100%" flexWrap="wrap">
@@ -17,7 +17,9 @@ export default function Home() {
               />
             </Box>
             <Box flex="1" alignSelf="center" textAlign="left">
-              <Text fontSize="55px">Ralph Largo</Text>
+              <Text fontSize="55px" fontWeight="700" as="h1">
+                Ralph Largo
+              </Text>
               <Box h="2" />
               <Text size="15px" color="#767676">
                 Front End Developer based in Philippines and Lorem ipsum keme

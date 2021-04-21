@@ -7,6 +7,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import Container from "components/Container";
+import Link from "next/link";
 
 const MenuLinks: FC<{ title: string }> = ({ title }) => {
   return (
@@ -22,15 +23,17 @@ const MenuLinks: FC<{ title: string }> = ({ title }) => {
       }}
       cursor="pointer"
     >
-      {title}
+      <Link
+        href={title.toLowerCase() === "about" ? "/" : `/${title.toLowerCase()}`}
+      >
+        {title}
+      </Link>
     </Box>
   );
 };
 
 const Navbar: FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-
-  console.log(colorMode);
 
   return (
     <Box
@@ -58,7 +61,7 @@ const Navbar: FC = () => {
               <MenuLinks title="About" />
               <MenuLinks title="Skills" />
               <MenuLinks title="Projects" />
-              <MenuLinks title="Blogs" />
+              <MenuLinks title="TIL" />
               <Box fontSize="20px" width="6.25em">
                 <Stack align="center" direction="row">
                   <Switch
