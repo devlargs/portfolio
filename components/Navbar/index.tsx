@@ -43,6 +43,8 @@ const Navbar: FC = () => {
       width="100vw"
       h="5rem"
       py="5"
+      d="flex"
+      alignItems="center"
     >
       <Container>
         <Box alignItems="center" d="flex">
