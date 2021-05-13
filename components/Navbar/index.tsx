@@ -45,6 +45,7 @@ const Navbar: FC = () => {
       py="5"
       d="flex"
       alignItems="center"
+      overflow="hidden"
     >
       <Container>
         <Box alignItems="center" d="flex">
