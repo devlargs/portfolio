@@ -1,4 +1,14 @@
-import { Box, Image, Flex, Button, Text, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Flex,
+  Button,
+  Text,
+  Link,
+  Stack,
+  Badge,
+  useColorMode,
+} from "@chakra-ui/react";
 import { ProjectDataProps } from "interfaces/project.interfaces";
 import { FC } from "react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
@@ -6,6 +16,8 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 const ProjectCard: FC<{
   data: ProjectDataProps;
 }> = ({ data }) => {
+  const { colorMode } = useColorMode();
+
   return (
     <Box h="100%" key={data._id}>
       <Box
@@ -19,16 +31,28 @@ const ProjectCard: FC<{
         }}
         color="#1A202C"
       >
-        <Image minH="500px" src={data?.imageUrl} alt={data.slug} w="100%" />
-        <Box bg="#0099FF" color="white" p="1rem">
+        <Image
+          minH="500px"
+          src={data?.imageUrl}
+          alt={data?.slug.current}
+          w="100%"
+        />
+        <Box bg={`brand.${colorMode}`} color="white" p="1rem">
           <Flex justifyContent="space-between" alignItems="center">
-            <Text fontSize="1.3rem">{data.name}</Text>
+            <Box>
+              <Text fontSize="1.3rem">{data.name}</Text>
+              <Stack direction="row" mt="2">
+                <Badge>Firebase</Badge>
+                <Badge>React</Badge>
+                <Badge>Tailwind CSS</Badge>
+              </Stack>
+            </Box>
             <Link
               href={data.websiteUrl}
               isExternal
               textDecor="none"
               _hover={{
-                color: "#1A202C",
+                color: `brand.hover.${colorMode}`,
               }}
             >
               <Button
