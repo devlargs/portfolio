@@ -1,28 +1,50 @@
-import { Box, Image, Flex, Icon, Text } from "@chakra-ui/react";
-import { SettingsIcon } from "@chakra-ui/icons";
+import { Box, Image, Flex, Button, Text, Link } from "@chakra-ui/react";
+import { ProjectDataProps } from "interfaces/project.interfaces";
+import { FC } from "react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
-const ProjectCard = () => {
+const ProjectCard: FC<{
+  data: ProjectDataProps;
+}> = ({ data }) => {
   return (
-    <Box>
+    <Box h="100%" key={data._id}>
       <Box
-        bg="#FEFFFF"
-        p="1rem"
+        bg="#fefefe"
         boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
         mb="4"
         borderRadius="0.5rem"
-        transition="0.25s ease-in"
+        transition="0.5s ease-in"
         _hover={{
-          boxShadow: "rgba(0, 0, 0, 0.2) 0px 20px 30px",
+          boxShadow: "lightgray 0px 5px 10px",
         }}
+        color="#1A202C"
       >
-        <Image
-          src="/assets/png/maximum-performance.png"
-          alt="Segun Adebayo"
-          height="250px"
-          w="100%"
-        />
-
-        <Text mt="2.5">Maximum Performance</Text>
+        <Image minH="500px" src={data?.imageUrl} alt={data.slug} w="100%" />
+        <Box bg="#0099FF" color="white" p="1rem">
+          <Flex justifyContent="space-between" alignItems="center">
+            <Text fontSize="1.3rem">{data.name}</Text>
+            <Link
+              href={data.websiteUrl}
+              isExternal
+              textDecor="none"
+              _hover={{
+                color: "#1A202C",
+              }}
+            >
+              <Button
+                transition="0.25s ease-out"
+                rightIcon={<ArrowForwardIcon />}
+                colorScheme="white"
+                variant="link"
+                _hover={{
+                  textDecor: "none",
+                }}
+              >
+                Go to link
+              </Button>
+            </Link>
+          </Flex>
+        </Box>
       </Box>
     </Box>
   );

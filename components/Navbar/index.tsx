@@ -51,7 +51,6 @@ const Navbar: FC = () => {
       <Container>
         <Box alignItems="center" d="flex">
           <Box flex="1">
-            {/* ralphlargo */}
             <Logo />
           </Box>
           <Box flex="1">
