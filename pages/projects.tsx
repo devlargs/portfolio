@@ -29,6 +29,7 @@ const ProjectCardWithHeading: FC<{
         gridTemplateColumns={{
           md: "1fr",
           lg: "1fr 1fr",
+          xl: "1fr 1fr 1fr",
         }}
         gridGap="1rem"
       >
@@ -44,18 +45,16 @@ const Projects: FC<{
   contributions: ProjectDataProps[];
   personal: ProjectDataProps[];
   clones: ProjectDataProps[];
-}> = ({ personal, contributions, clones }) => {
-  return (
-    <>
-      <ProjectCardWithHeading data={personal} title="Personal Projects" />
-      <ProjectCardWithHeading
-        data={contributions}
-        title="Projects I contributed to my previous company"
-      />
-      <ProjectCardWithHeading data={clones} title="Clones / Mockups" />
-    </>
-  );
-};
+}> = ({ personal, contributions, clones }) => (
+  <>
+    <ProjectCardWithHeading data={personal} title="Personal Projects" />
+    <ProjectCardWithHeading
+      data={contributions}
+      title="Projects I contributed to my previous company"
+    />
+    <ProjectCardWithHeading data={clones} title="Clones / Mockups" />
+  </>
+);
 
 interface IProjectTypes {
   _id: string;

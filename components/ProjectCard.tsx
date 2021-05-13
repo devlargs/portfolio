@@ -36,7 +36,7 @@ const ProjectCard: FC<{
             base: "250px",
             sm: "300px",
             md: "450px",
-            xl: "400px",
+            xl: "330px",
           }}
           src={data?.imageUrl}
           alt={data?.slug.current}
