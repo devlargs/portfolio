@@ -32,7 +32,12 @@ const ProjectCard: FC<{
         color="#1A202C"
       >
         <Image
-          minH="500px"
+          h={{
+            base: "250px",
+            sm: "300px",
+            md: "450px",
+            xl: "400px",
+          }}
           src={data?.imageUrl}
           alt={data?.slug.current}
           w="100%"
@@ -41,11 +46,13 @@ const ProjectCard: FC<{
           <Flex justifyContent="space-between" alignItems="center">
             <Box>
               <Text fontSize="1.3rem">{data.name}</Text>
-              <Stack direction="row" mt="2">
-                <Badge>Firebase</Badge>
-                <Badge>React</Badge>
-                <Badge>Tailwind CSS</Badge>
-              </Stack>
+              {false && (
+                <Stack direction="row" mt="2">
+                  <Badge>Firebase</Badge>
+                  <Badge>React</Badge>
+                  <Badge>Tailwind CSS</Badge>
+                </Stack>
+              )}
             </Box>
             <Link
               href={data.websiteUrl}

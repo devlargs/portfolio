@@ -88,6 +88,7 @@ export const getStaticProps: GetStaticProps = async () => {
       contributions,
       personal,
     },
+    revalidate: 60,
   };
 };
 

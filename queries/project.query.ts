@@ -13,7 +13,7 @@ export const PROJECTS = `
 `;
 
 export const PROJECTS_BY_TYPE = `
-    *[_type == "project" && projectType._ref == $projectTypeId] {
+    *[_type == "project" && projectType._ref == $projectTypeId] | order(_createdAt asc) {
         _id,
         name,
         slug,
