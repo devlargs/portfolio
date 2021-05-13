@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import Container from "components/Container";
 import Link from "next/link";
+import Logo from "./Logo";
 
 const MenuLinks: FC<{ title: string }> = ({ title }) => {
   return (
@@ -49,8 +50,9 @@ const Navbar: FC = () => {
     >
       <Container>
         <Box alignItems="center" d="flex">
-          <Box flex="1" fontSize="20px">
-            ralphlargo
+          <Box flex="1">
+            {/* ralphlargo */}
+            <Logo />
           </Box>
           <Box flex="1">
             <Box
