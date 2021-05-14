@@ -1,6 +1,5 @@
 import {
   Box,
-  Image,
   Flex,
   Button,
   Text,
@@ -12,11 +11,13 @@ import {
 import { ProjectDataProps } from "interfaces/project.interfaces";
 import { FC } from "react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { FillPictureAsset } from "sanity-lazy-load";
 
 const ProjectCard: FC<{
   data: ProjectDataProps;
 }> = ({ data }) => {
   const { colorMode } = useColorMode();
+  console.log(data);
 
   return (
     <Box h="100%" key={data._id}>
@@ -31,17 +32,17 @@ const ProjectCard: FC<{
         }}
         color="#1A202C"
       >
-        <Image
+        <Box
           h={{
             base: "250px",
             sm: "300px",
             md: "450px",
             xl: "330px",
           }}
-          src={data?.imageUrl}
-          alt={data?.slug.current}
-          w="100%"
-        />
+        >
+          <FillPictureAsset image={data.imageUrl} />
+        </Box>
+
         <Box bg={`brand.${colorMode}`} color="white" p="1rem">
           <Flex justifyContent="space-between" alignItems="center">
             <Box>
