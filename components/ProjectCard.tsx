@@ -17,8 +17,6 @@ const ProjectCard: FC<{
   data: ProjectDataProps;
 }> = ({ data }) => {
   const { colorMode } = useColorMode();
-  console.log(data);
-
   return (
     <Box h="100%" key={data._id}>
       <Box
