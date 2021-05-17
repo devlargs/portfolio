@@ -6,6 +6,7 @@ import { FC } from "react";
 import { ProjectDataProps } from "interfaces/project.interfaces";
 import { PROJECT_TYPES, PROJECTS_BY_TYPE } from "queries/project.query";
 import { keyBy } from "helpers/objectManipulation";
+import { globalStyles } from "styles/global";
 
 const ProjectCardWithHeading: FC<{
   data: ProjectDataProps[];
@@ -14,7 +15,7 @@ const ProjectCardWithHeading: FC<{
   const { colorMode } = useColorMode();
 
   return (
-    <Box mt="2rem" overflow="hidden">
+    <Box mt={globalStyles.container.marginTop} overflow="hidden">
       <Heading
         as="h1"
         textAlign="center"

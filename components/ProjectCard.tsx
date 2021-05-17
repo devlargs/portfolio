@@ -12,6 +12,7 @@ import { ProjectDataProps } from "interfaces/project.interfaces";
 import { FC } from "react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { FillPictureAsset } from "sanity-lazy-load";
+import { globalStyles } from "styles/global";
 
 const ProjectCard: FC<{
   data: ProjectDataProps;
@@ -21,7 +22,7 @@ const ProjectCard: FC<{
     <Box h="100%" key={data._id}>
       <Box
         bg="#fefefe"
-        boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
+        boxShadow={globalStyles.misc.boxShadow}
         mb="4"
         borderRadius="0.5rem"
         transition="0.5s ease-in"

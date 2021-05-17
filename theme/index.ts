@@ -5,7 +5,7 @@ const customTheme: ThemeOverride = {
     black: "#1A202C",
     white: "#F8F8F8",
     brand: {
-      dark: "#252732",
+      dark: "#0f0f0f",
       light: "#0099ff",
       hover: {
         dark: "#0099ff",
