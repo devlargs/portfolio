@@ -14,12 +14,12 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@sanity/client": "^2.8.0",
-    "framer-motion": "^4.1.16",
+    "framer-motion": "^4.1.17",
     "next": "10.2.0",
     "nprogress": "^0.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-intersection-observer": "^8.31.1",
+    "react-intersection-observer": "^8.32.0",
     "sanity-lazy-load": "^3.0.0"
   },
   "devDependencies": {
