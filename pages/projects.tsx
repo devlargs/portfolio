@@ -34,7 +34,7 @@ const ProjectCardWithHeading: FC<{
         gridGap="1rem"
       >
         {data.map((q) => {
-          return <ProjectCard data={q} />;
+          return <ProjectCard data={q} key={q?.slug?.current} />;
         })}
       </Box>
     </Box>

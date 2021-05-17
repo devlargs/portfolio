@@ -10,7 +10,10 @@ import Container from "components/Container";
 import Link from "next/link";
 import Logo from "./Logo";
 
-const MenuLinks: FC<{ title: string }> = ({ title }) => {
+const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
+  title,
+  customUrl,
+}) => {
   return (
     <Box
       width="6.25em"
@@ -25,7 +28,10 @@ const MenuLinks: FC<{ title: string }> = ({ title }) => {
       cursor="pointer"
     >
       <Link
-        href={title.toLowerCase() === "about" ? "/" : `/${title.toLowerCase()}`}
+        href={
+          customUrl ||
+          (title.toLowerCase() === "about" ? "/" : `/${title.toLowerCase()}`)
+        }
       >
         {title}
       </Link>
@@ -65,7 +71,7 @@ const Navbar: FC = () => {
               <MenuLinks title="About" />
               <MenuLinks title="Skills" />
               <MenuLinks title="Projects" />
-              <MenuLinks title="TIL" />
+              <MenuLinks title="Learnings" />
               <Box fontSize="20px" width="6.25em">
                 <Stack align="center" direction="row">
                   <Switch
