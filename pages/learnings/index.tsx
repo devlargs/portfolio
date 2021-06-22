@@ -2,27 +2,34 @@ import { Box } from "@chakra-ui/react";
 import { globalStyles } from "styles/global";
 import Featured from "components/Featured";
 import LatestPosts from "components/LatestPosts";
+import React from "react";
+import BlogPosts from "components/BlogPosts"
 
 export default function TIL() {
   return (
-    <Box mt={globalStyles.container.marginTop}>
-      <Box
-        d={{
-          base: "inherit",
-          md: "flex",
-        }}
-      >
-        <Box flex="1">
-          <Featured />
-        </Box>
+    <>
+      <Box mt={globalStyles.container.marginTop}>
         <Box
-          width={{
-            lg: "400px",
+          d={{
+            base: "inherit",
+            md: "flex",
           }}
         >
-          <LatestPosts />
+          <Box flex="1">
+            <Featured />
+          </Box>
+          <Box
+            width={{
+              lg: "400px",
+            }}
+          >
+            <LatestPosts />
+          </Box>
         </Box>
+      </Box>{" "}
+      <Box mt={globalStyles.container.marginTop}>
+        <BlogPosts />
       </Box>
-    </Box>
+    </>
   );
 }
