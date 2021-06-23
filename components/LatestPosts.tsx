@@ -1,30 +1,16 @@
 import { Box, Badge, Center, Heading } from "@chakra-ui/layout";
+import React from "react";
 import { globalStyles } from "styles/global";
 
 
 const LatestPosts = () => {
-  const property = [
-    {
-      id:"1",
-      badges: "New",
-      title: "Modern home in city center in the heart of historic Los Angeles",
-    },
-    {
-      id:"2",
-      badges: "New",
-      title: "Modern home in city center in the heart of historic Los Angeles",
-    },
-    {
-      id:"3",
-      badges: "New",
-      title: "Modern home in city center in the heart of historic Los Angeles",
-    },
-    {
-      id:"4",
-      badges: "New",
-      title: "Modern home in city center in the heart of historic Los Angeles",
-    },
-  ];
+
+  const property = Array.from({ length : 5}).map(q => ({
+    id:"1",
+    badges: "New",
+    title: "Modern home in city center in the heart of historic Los Angeles",
+  }))
+
   return (
     <Box>
         <Center h="50px">

@@ -2,32 +2,14 @@ import { Box, Image, Tag, Grid, Heading } from "@chakra-ui/react";
 import { globalStyles } from "styles/global";
 
 const BlogPosts = () => {
-  const property = [
-    {
-      imageUrl: "https://bit.ly/2Z4KKcF",
-      imageAlt: "Rear view of modern home with pool",
-      tag: "Sample tag",
-      title: "Modern home in city center in the heart of historic Los Angeles",
-    },
-    {
-      imageUrl: "https://bit.ly/2Z4KKcF",
-      imageAlt: "Rear view of modern home with pool",
-      tag: "Sample tag",
-      title: "Modern home in city center in the heart of historic Los Angeles",
-    },
-    {
-      imageUrl: "https://bit.ly/2Z4KKcF",
-      imageAlt: "Rear view of modern home with pool",
-      tag: "Sample tag",
-      title: "Modern home in city center in the heart of historic Los Angeles",
-    },
-    {
-      imageUrl: "https://bit.ly/2Z4KKcF",
-      imageAlt: "Rear view of modern home with pool",
-      tag: "Sample tag",
-      title: "Modern home in city center in the heart of historic Los Angeles",
-    },
-  ];
+  
+
+  const property = Array.from({ length : 8}).map(q => ({
+    imageUrl: "https://bit.ly/2Z4KKcF",
+    imageAlt: "Rear view of modern home with pool",
+    tag: "Sample tag",
+    title: "Modern home in city center in the heart of historic Los Angeles",
+  }))
 
   return (
     <>
@@ -36,7 +18,11 @@ const BlogPosts = () => {
           Blog Posts
         </Heading>
       </Box>
-      <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+      <Grid templateColumns={{
+          base: "repeat(1, 1fr)",
+          md: "repeat(2, 1fr)",
+          lg: "repeat(4, 1fr)"
+      }} gap={6}>
         {property.map((q) => {
           return (
             <Box
