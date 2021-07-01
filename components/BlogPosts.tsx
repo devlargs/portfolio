@@ -1,15 +1,8 @@
-import { Box, Image, Tag, Grid, Heading } from "@chakra-ui/react";
+import { Box, Image, Grid, Heading, Link } from "@chakra-ui/react";
 import { globalStyles } from "styles/global";
 
-const BlogPosts = () => {
-  
-
-  const property = Array.from({ length : 8}).map(q => ({
-    imageUrl: "https://bit.ly/2Z4KKcF",
-    imageAlt: "Rear view of modern home with pool",
-    tag: "Sample tag",
-    title: "Modern home in city center in the heart of historic Los Angeles",
-  }))
+const BlogPosts = ({ data }) => {
+  console.log(data);
 
   return (
     <>
@@ -18,37 +11,45 @@ const BlogPosts = () => {
           Blog Posts
         </Heading>
       </Box>
-      <Grid templateColumns={{
+      <Grid
+        templateColumns={{
           base: "repeat(1, 1fr)",
           md: "repeat(2, 1fr)",
-          lg: "repeat(4, 1fr)"
-      }} gap={6}>
-        {property.map((q) => {
+          lg: "repeat(4, 1fr)",
+        }}
+        gap={6}
+      >
+        {data?.map((q) => {
           return (
-            <Box
-              boxShadow={globalStyles.misc.boxShadow}
-              maxW="sm"
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-            >
-              <Image src={q.imageUrl} alt={q.imageAlt} />
-              <Box p="6">
-                <Box d="flex" alignItems="baseline">
-                  <Tag>Sample Tag</Tag>
-                </Box>
-
-                <Box
-                  mt="1"
-                  fontWeight="semibold"
-                  as="h4"
-                  lineHeight="tight"
-                  isTruncated
-                >
-                  {q.title}
+            <Link href={`/learnings/${q.slug}`}>
+              <Box
+                boxShadow={globalStyles.misc.boxShadow}
+                maxW="sm"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+              >
+                <Image
+                  src={q.imageUrl}
+                  h={350}
+                  w="400px"
+                  objectFit="cover"
+                  layout={"fill"}
+                  overflow="hidden"
+                />
+                <Box p="6">
+                  <Box
+                    mt="1"
+                    fontWeight="semibold"
+                    as="h4"
+                    lineHeight="tight"
+                    isTruncated
+                  >
+                    {q.name}
+                  </Box>
                 </Box>
               </Box>
-            </Box>
+            </Link>
           );
         })}
       </Grid>
