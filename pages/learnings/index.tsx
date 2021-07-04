@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/react";
-import { globalStyles } from "styles/global";
+import BlogPosts from "components/BlogPosts";
 import Featured from "components/Featured";
 import LatestPosts from "components/LatestPosts";
-import React from "react";
-import BlogPosts from "components/BlogPosts";
 import client from "helpers/sanityClient";
 import { LEARNINGS } from "queries/learnings.query";
+import React from "react";
+import { globalStyles } from "styles/global";
 
 const TIL = ({ data }) => {
   return (
@@ -14,7 +14,7 @@ const TIL = ({ data }) => {
         <Box
           d={{
             base: "inherit",
-            md: "flex",
+            lg: "flex",
           }}
         >
           <Box flex="1">

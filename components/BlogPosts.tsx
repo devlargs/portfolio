@@ -1,4 +1,4 @@
-import { Box, Image, Grid, Heading, Link } from "@chakra-ui/react";
+import { Box, Grid, Heading, Image, Link } from "@chakra-ui/react";
 import { globalStyles } from "styles/global";
 
 const BlogPosts = ({ data }) => {
@@ -7,8 +7,8 @@ const BlogPosts = ({ data }) => {
   return (
     <>
       <Box m={2}>
-        <Heading as="h2" size="lg">
-          Blog Posts
+        <Heading as="h2" size="md">
+          All Posts
         </Heading>
       </Box>
       <Grid

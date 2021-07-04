@@ -16,6 +16,7 @@ const customTheme: ThemeOverride = {
       light: "#1A202C",
       dark: "#F8F8F8",
     },
+    
   },
   fonts: {
     heading: "Roboto Condensed, sans-serif",
