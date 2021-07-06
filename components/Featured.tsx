@@ -36,7 +36,7 @@ const Featured = () => {
         color="white"
         maxW={200}
       >
-        <Text>LOREM LOREM LOREM LOREM LOREM LOREM</Text>
+        <Text>TBD TBD TBD TBD TBD </Text>
       </Box>
     </Box>
   );

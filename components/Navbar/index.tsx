@@ -1,13 +1,7 @@
-import { FC } from "react";
-import {
-  Box,
-  Stack,
-  Switch,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import Container from "components/Container";
 import Link from "next/link";
+import { FC } from "react";
 import Logo from "./Logo";
 
 const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
@@ -72,7 +66,7 @@ const Navbar: FC = () => {
               <MenuLinks title="Skills" />
               <MenuLinks title="Projects" />
               <MenuLinks title="Learnings" />
-              <Box fontSize="20px" width="6.25em">
+              {/* <Box fontSize="20px" width="6.25em">
                 <Stack align="center" direction="row">
                   <Switch
                     size="lg"
@@ -81,7 +75,7 @@ const Navbar: FC = () => {
                     outline="none"
                   />
                 </Stack>
-              </Box>
+              </Box> */}
             </Box>
           </Box>
         </Box>
