@@ -36,7 +36,7 @@ const Featured = () => {
         color="white"
         maxW={200}
       >
-        <Text>TBD TBD TBD TBD TBD </Text>
+        <Text>FEATURE POST. TBD</Text>
       </Box>
     </Box>
   );

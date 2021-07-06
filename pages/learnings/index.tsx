@@ -25,7 +25,7 @@ const TIL = ({ data }) => {
               lg: "400px",
             }}
           >
-            <LatestPosts />
+            <LatestPosts data={data.slice(0, 4)} />
           </Box>
         </Box>
       </Box>

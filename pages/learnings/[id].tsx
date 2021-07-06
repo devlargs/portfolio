@@ -11,8 +11,6 @@ import "react-notion/src/styles.css";
 export const getStaticPaths: GetStaticPaths = async () => {
   const types = await client.fetch(BLOG_IDS);
 
-  console.log(types.map(({ notionId }) => notionId));
-
   return {
     paths: types.map(({ notionId }) => ({
       params: { id: notionId },
@@ -29,8 +27,6 @@ export async function getStaticProps({ params }) {
   const details = await client.fetch(LEARNINGS_BY_ID, {
     notionId: params.id,
   });
-
-  console.log(details);
 
   return {
     props: {
