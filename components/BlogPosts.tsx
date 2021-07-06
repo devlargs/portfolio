@@ -7,7 +7,7 @@ import { globalStyles } from "styles/global";
 interface BlogProps {
   name: string;
   notionId: string;
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
@@ -43,7 +43,7 @@ const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
                 bg="white"
               >
                 <Image
-                  src={q.imageUrl}
+                  src={q?.imageUrl ?? "/assets/jpg/placeholder.jpg"}
                   height={300}
                   width={400}
                   objectFit="fill"
