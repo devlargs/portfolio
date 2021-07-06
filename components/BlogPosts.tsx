@@ -1,4 +1,4 @@
-import { Box, Grid, Heading } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
@@ -12,25 +12,30 @@ interface BlogProps {
 
 const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
   return (
-    <>
+    <Box overflow="hidden">
       <Box m={2}>
         <Heading as="h2" size="lg" my="5">
           All Posts
         </Heading>
       </Box>
-      <Grid
-        templateColumns={{
+
+      <Box
+        d="grid"
+        gridTemplateColumns={{
           base: "repeat(1, 1fr)",
           sm: "repeat(2, 1fr)",
           lg: "repeat(3, 1fr)",
           xl: "repeat(4, 1fr)",
         }}
-        gap={6}
+        gridGap="2rem"
       >
         {data?.map((q) => {
           return (
             <Link href={`/learnings/${q.notionId}`}>
               <Box
+                bg="white"
+                d="grid"
+                gridTemplateRows="max-content 1fr"
                 maxW="sm"
                 borderWidth="1px"
                 borderRadius="lg"
@@ -40,7 +45,6 @@ const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
                   cursor: "pointer",
                   boxShadow: globalStyles.misc.boxShadow,
                 }}
-                bg="white"
               >
                 <Image
                   src={q?.imageUrl ?? "/assets/jpg/placeholder.jpg"}
@@ -49,22 +53,27 @@ const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
                   objectFit="cover"
                   objectPosition="center center"
                 />
-                <Box
-                  p="6"
-                  bg="white"
-                  borderTop="1px dotted lightgray"
+                <Heading
+                  h="100%"
+                  // bg="yellow"
+                  d="grid"
+                  placeContent="center"
                   textAlign="center"
+                  mt="1"
+                  fontWeight="normal"
+                  as="h4"
+                  lineHeight="tight"
+                  fontSize="1rem"
+                  p="4"
                 >
-                  <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight">
-                    {q.name}
-                  </Box>
-                </Box>
+                  {q.name}
+                </Heading>
               </Box>
             </Link>
           );
         })}
-      </Grid>
-    </>
+      </Box>
+    </Box>
   );
 };
 

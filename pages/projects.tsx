@@ -1,11 +1,11 @@
 import { Box, Heading, useColorMode } from "@chakra-ui/react";
 import ProjectCard from "components/ProjectCard";
-import { GetStaticProps } from "next";
-import client from "helpers/sanityClient";
-import { FC } from "react";
-import { ProjectDataProps } from "interfaces/project.interfaces";
-import { PROJECT_TYPES, PROJECTS_BY_TYPE } from "queries/project.query";
 import { keyBy } from "helpers/objectManipulation";
+import client from "helpers/sanityClient";
+import { ProjectDataProps } from "interfaces/project.interfaces";
+import { GetStaticProps } from "next";
+import { PROJECTS_BY_TYPE, PROJECT_TYPES } from "queries/project.query";
+import { FC } from "react";
 import { globalStyles } from "styles/global";
 
 const ProjectCardWithHeading: FC<{
@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps = async () => {
       contributions,
       personal,
     },
-    revalidate: 60,
+    revalidate: 30,
   };
 };
 
