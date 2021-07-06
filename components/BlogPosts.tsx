@@ -12,7 +12,7 @@ interface BlogProps {
 
 const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
   return (
-    <Box overflow="hidden">
+    <Box overflow="hidden" p="10">
       <Box m={2}>
         <Heading as="h2" size="lg" my="5">
           All Posts
