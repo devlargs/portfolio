@@ -1,15 +1,13 @@
-import { FC } from "react";
-import {
-  Box,
-  Stack,
-  Switch,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import Container from "components/Container";
 import Link from "next/link";
+import { FC } from "react";
+import Logo from "./Logo";
 
-const MenuLinks: FC<{ title: string }> = ({ title }) => {
+const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
+  title,
+  customUrl,
+}) => {
   return (
     <Box
       width="6.25em"
@@ -24,7 +22,10 @@ const MenuLinks: FC<{ title: string }> = ({ title }) => {
       cursor="pointer"
     >
       <Link
-        href={title.toLowerCase() === "about" ? "/" : `/${title.toLowerCase()}`}
+        href={
+          customUrl ||
+          (title.toLowerCase() === "about" ? "/" : `/${title.toLowerCase()}`)
+        }
       >
         {title}
       </Link>
@@ -43,11 +44,14 @@ const Navbar: FC = () => {
       width="100vw"
       h="5rem"
       py="5"
+      d="flex"
+      alignItems="center"
+      overflow="hidden"
     >
       <Container>
         <Box alignItems="center" d="flex">
-          <Box flex="1" fontSize="20px">
-            ralphlargo
+          <Box flex="1">
+            <Logo />
           </Box>
           <Box flex="1">
             <Box
@@ -61,8 +65,8 @@ const Navbar: FC = () => {
               <MenuLinks title="About" />
               <MenuLinks title="Skills" />
               <MenuLinks title="Projects" />
-              <MenuLinks title="TIL" />
-              <Box fontSize="20px" width="6.25em">
+              <MenuLinks title="Learnings" />
+              {/* <Box fontSize="20px" width="6.25em">
                 <Stack align="center" direction="row">
                   <Switch
                     size="lg"
@@ -71,7 +75,7 @@ const Navbar: FC = () => {
                     outline="none"
                   />
                 </Stack>
-              </Box>
+              </Box> */}
             </Box>
           </Box>
         </Box>
