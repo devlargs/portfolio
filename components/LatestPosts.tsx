@@ -26,7 +26,7 @@ const LatestPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
       </Center>
       {data.map((q, i) => {
         return (
-          <Link href={`/learnings/${q.notionId}`}>
+          <Link href={`/learnings/${q.notionId}`} key={i}>
             <Box
               m="auto"
               maxW="sm"

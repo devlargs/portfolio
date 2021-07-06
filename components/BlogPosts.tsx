@@ -12,9 +12,9 @@ interface BlogProps {
 
 const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
   return (
-    <Box overflow="hidden" p="10">
+    <Box overflow="hidden" px="5">
       <Box m={2}>
-        <Heading as="h2" size="lg" my="5">
+        <Heading as="h2" size="lg" mb="5">
           All Posts
         </Heading>
       </Box>
@@ -28,10 +28,12 @@ const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
           xl: "repeat(4, 1fr)",
         }}
         gridGap="2rem"
+        px="5"
+        py="10"
       >
         {data?.map((q) => {
           return (
-            <Link href={`/learnings/${q.notionId}`}>
+            <Link href={`/learnings/${q.notionId}`} key={q.notionId}>
               <Box
                 bg="white"
                 d="grid"
@@ -52,6 +54,7 @@ const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
                   width={400}
                   objectFit="cover"
                   objectPosition="center center"
+                  priority
                 />
                 <Heading
                   h="100%"

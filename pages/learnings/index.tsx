@@ -10,7 +10,7 @@ import { globalStyles } from "styles/global";
 const TIL = ({ data }) => {
   return (
     <>
-      <Box mt={globalStyles.container.marginTop}>
+      <Box mt={globalStyles.container.marginTop} p="5">
         <Box
           d={{
             base: "inherit",
