@@ -14,20 +14,21 @@ const LatestPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
 
   return (
     <Box h={400}>
-      <Center h="50px">
+      <Center h="50px" my="5">
         <Heading
           as="h2"
-          size="md"
+          size="lg"
           isTruncated
           color={`typography.${colorMode}`}
         >
-          Latest Posts
+          Latest Learnings
         </Heading>
       </Center>
       {data.map((q, i) => {
         return (
           <Link href={`/learnings/${q.notionId}`}>
             <Box
+              m="auto"
               maxW="sm"
               borderWidth="1px"
               borderRadius="lg"

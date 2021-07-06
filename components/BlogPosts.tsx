@@ -14,7 +14,7 @@ const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
   return (
     <>
       <Box m={2}>
-        <Heading as="h2" size="md">
+        <Heading as="h2" size="lg" my="5">
           All Posts
         </Heading>
       </Box>
@@ -46,7 +46,7 @@ const BlogPosts: FC<{ data: BlogProps[] }> = ({ data }) => {
                   src={q?.imageUrl ?? "/assets/jpg/placeholder.jpg"}
                   height={300}
                   width={400}
-                  objectFit="fill"
+                  objectFit="cover"
                   objectPosition="center center"
                 />
                 <Box
