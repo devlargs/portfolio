@@ -1,6 +1,5 @@
-import { Box, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Box, useColorMode, useColorModeValue, Link } from "@chakra-ui/react";
 import Container from "components/Container";
-import Link from "next/link";
 import { FC } from "react";
 import Logo from "./Logo";
 
@@ -50,8 +49,10 @@ const Navbar: FC = () => {
     >
       <Container>
         <Box alignItems="center" d="flex">
-          <Box flex="1">
-            <Logo />
+          <Box flex="1" cursor="pointer">
+            <Link href="/">
+              <Logo />
+            </Link>
           </Box>
           <Box flex="1">
             <Box
