@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import Container from "components/Container";
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import Logo from "./Logo";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
@@ -22,6 +22,19 @@ const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
   title,
   customUrl,
 }) => {
+  const [color, setColor] = useState("black");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const pathname = window.location.pathname.split("/")[1];
+      const temp =
+        pathname === "" || pathname === title.toLowerCase()
+          ? "#1A202C"
+          : "white";
+      setColor(temp);
+    }
+  }, []);
+
   return (
     <Box
       width="6.25em"
@@ -34,9 +47,10 @@ const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
       transition="0.5s ease-in"
       _hover={{
         color: "#1A202C",
-        fontWeight: "bold",
       }}
+      _selected={{ bg: "#1A202C" }}
       cursor="pointer"
+      color={color}
     >
       <Link
         href={
