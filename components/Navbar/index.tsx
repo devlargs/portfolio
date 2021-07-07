@@ -1,7 +1,9 @@
-import { Box, useColorMode, useColorModeValue, Link } from "@chakra-ui/react";
+import { Box, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import Container from "components/Container";
+import Link from "next/link";
 import { FC } from "react";
 import Logo from "./Logo";
+import { useState } from "react";
 
 const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
   title,
@@ -15,8 +17,9 @@ const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
         lg: "18px",
         xl: "20px",
       }}
+      transition="0.5s ease-in"
       _hover={{
-        color: "secondary.500",
+        color: "#1A202C",
       }}
       cursor="pointer"
     >
@@ -32,8 +35,9 @@ const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
   );
 };
 
-const Navbar: FC = () => {
+const Navbar: FC = ({}) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Box
@@ -49,11 +53,12 @@ const Navbar: FC = () => {
     >
       <Container>
         <Box alignItems="center" d="flex">
-          <Box flex="1" cursor="pointer">
-            <Link href="/">
+          <Link href="/">
+            <Box flex="1" cursor="pointer">
               <Logo />
-            </Link>
-          </Box>
+            </Box>
+          </Link>
+
           <Box flex="1">
             <Box
               d={{
