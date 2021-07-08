@@ -3,7 +3,8 @@ export const LEARNINGS = `
         _id,
         name,
         "imageUrl": image.asset->url,
-        notionId
+        notionId,
+        "banner": banner.asset->url,
     }
 `;
 
@@ -12,6 +13,7 @@ export const LEARNINGS_BY_ID = `
         _id,
         name,
         "imageUrl": image.asset->url,
-        notionId
+        notionId,
+        "banner": banner.asset->url,
     }
 `;
