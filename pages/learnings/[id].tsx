@@ -52,7 +52,6 @@ const Slug = ({ blockMap, name, banner }) => {
           objectPosition="center center"
           quality={100}
           priority
-          // loader={<>gago</>}
         />
       </Box>
       <Box style={{ maxWidth: 900 }} margin="auto" p="10" bg="white">
