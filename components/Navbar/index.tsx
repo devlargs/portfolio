@@ -1,7 +1,21 @@
-import { Box, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  useColorMode,
+  useColorModeValue,
+  IconButton,
+  useDisclosure,
+  Drawer,
+  DrawerBody,
+  Stack,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from "@chakra-ui/react";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Container from "components/Container";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import Logo from "./Logo";
 import { useState } from "react";
 
@@ -13,7 +27,8 @@ const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
     <Box
       width="6.25em"
       fontSize={{
-        base: "14px",
+        base: "18px",
+        sm: "20px",
         lg: "18px",
         xl: "20px",
       }}
@@ -37,7 +52,7 @@ const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
 
 const Navbar: FC = ({}) => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box
@@ -63,6 +78,8 @@ const Navbar: FC = ({}) => {
             <Box
               d={{
                 base: "none",
+                md: "flex",
+                lg: "flex",
                 xl: "flex",
               }}
               justifyContent="flex-end"
@@ -84,8 +101,45 @@ const Navbar: FC = ({}) => {
               </Box> */}
             </Box>
           </Box>
+          <IconButton
+            bg="#0099FF"
+            _hover={{
+              bg: "#0099FF",
+            }}
+            aria-label="Open Menu"
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            d={{
+              base: "flex",
+              sm: "flex",
+              md: "none",
+              xl: "none",
+              lg: "none",
+            }}
+            onClick={isOpen ? onClose : onOpen}
+          />
         </Box>
       </Container>
+
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent bg="#0099FF">
+          <DrawerHeader alignSelf="center">
+            <Link href="/">
+              <Box flex="1" cursor="pointer">
+                <Logo />
+              </Box>
+            </Link>
+          </DrawerHeader>
+          <DrawerBody onClick={onClose}>
+            <Stack spacing={4} color="#F8F8F8">
+              <MenuLinks title="About" />
+              <MenuLinks title="Skills" />
+              <MenuLinks title="Projects" />
+              <MenuLinks title="Learnings" />
+            </Stack>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </Box>
   );
 };
