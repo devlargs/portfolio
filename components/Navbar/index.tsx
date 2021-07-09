@@ -10,14 +10,12 @@ import {
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Container from "components/Container";
 import Link from "next/link";
-import { FC, useRef } from "react";
+import { FC } from "react";
 import Logo from "./Logo";
-import { useState } from "react";
 
 const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
   title,
@@ -27,8 +25,7 @@ const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
     <Box
       width="6.25em"
       fontSize={{
-        base: "18px",
-        sm: "20px",
+        base: "20px",
         lg: "18px",
         xl: "20px",
       }}
@@ -122,8 +119,8 @@ const Navbar: FC = ({}) => {
 
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
-        <DrawerContent bg="#0099FF">
-          <DrawerHeader alignSelf="center">
+        <DrawerContent bg="#0099FF" alignItems="center">
+          <DrawerHeader>
             <Link href="/">
               <Box flex="1" cursor="pointer">
                 <Logo />
