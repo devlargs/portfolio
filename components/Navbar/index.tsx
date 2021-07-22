@@ -1,17 +1,17 @@
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Box,
-  useColorMode,
-  useColorModeValue,
-  IconButton,
-  useDisclosure,
   Drawer,
   DrawerBody,
-  Stack,
+  DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
+  IconButton,
+  Stack,
+  useColorMode,
+  useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Container from "components/Container";
 import Link from "next/link";
 import { FC } from "react";
@@ -22,28 +22,28 @@ const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
   customUrl,
 }) => {
   return (
-    <Box
-      width="6.25em"
-      fontSize={{
-        base: "20px",
-        lg: "18px",
-        xl: "20px",
-      }}
-      transition="0.5s ease-in"
-      _hover={{
-        color: "#1A202C",
-      }}
-      cursor="pointer"
+    <Link
+      href={
+        customUrl ||
+        (title.toLowerCase() === "about" ? "/" : `/${title.toLowerCase()}`)
+      }
     >
-      <Link
-        href={
-          customUrl ||
-          (title.toLowerCase() === "about" ? "/" : `/${title.toLowerCase()}`)
-        }
+      <Box
+        width="6.25em"
+        fontSize={{
+          base: "20px",
+          lg: "18px",
+          xl: "20px",
+        }}
+        transition="0.5s ease-in"
+        _hover={{
+          color: "#1A202C",
+        }}
+        cursor="pointer"
       >
         {title}
-      </Link>
-    </Box>
+      </Box>
+    </Link>
   );
 };
 
