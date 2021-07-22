@@ -1,43 +1,55 @@
-import { Box, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  IconButton,
+  Stack,
+  useColorMode,
+  useColorModeValue,
+  useDisclosure,
+} from "@chakra-ui/react";
 import Container from "components/Container";
 import Link from "next/link";
 import { FC } from "react";
 import Logo from "./Logo";
-import { useState } from "react";
 
 const MenuLinks: FC<{ title: string; customUrl?: string }> = ({
   title,
   customUrl,
 }) => {
   return (
-    <Box
-      width="6.25em"
-      fontSize={{
-        base: "14px",
-        lg: "18px",
-        xl: "20px",
-      }}
-      transition="0.5s ease-in"
-      _hover={{
-        color: "#1A202C",
-      }}
-      cursor="pointer"
+    <Link
+      href={
+        customUrl ||
+        (title.toLowerCase() === "about" ? "/" : `/${title.toLowerCase()}`)
+      }
     >
-      <Link
-        href={
-          customUrl ||
-          (title.toLowerCase() === "about" ? "/" : `/${title.toLowerCase()}`)
-        }
+      <Box
+        width="6.25em"
+        fontSize={{
+          base: "20px",
+          lg: "18px",
+          xl: "20px",
+        }}
+        transition="0.5s ease-in"
+        _hover={{
+          color: "#1A202C",
+        }}
+        cursor="pointer"
       >
         {title}
-      </Link>
-    </Box>
+      </Box>
+    </Link>
   );
 };
 
 const Navbar: FC = ({}) => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box
@@ -63,6 +75,8 @@ const Navbar: FC = ({}) => {
             <Box
               d={{
                 base: "none",
+                md: "flex",
+                lg: "flex",
                 xl: "flex",
               }}
               justifyContent="flex-end"
@@ -84,8 +98,45 @@ const Navbar: FC = ({}) => {
               </Box> */}
             </Box>
           </Box>
+          <IconButton
+            bg="#0099FF"
+            _hover={{
+              bg: "#0099FF",
+            }}
+            aria-label="Open Menu"
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            d={{
+              base: "flex",
+              sm: "flex",
+              md: "none",
+              xl: "none",
+              lg: "none",
+            }}
+            onClick={isOpen ? onClose : onOpen}
+          />
         </Box>
       </Container>
+
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent bg="#0099FF" alignItems="center">
+          <DrawerHeader>
+            <Link href="/">
+              <Box flex="1" cursor="pointer">
+                <Logo />
+              </Box>
+            </Link>
+          </DrawerHeader>
+          <DrawerBody onClick={onClose}>
+            <Stack spacing={4} color="#F8F8F8">
+              <MenuLinks title="About" />
+              <MenuLinks title="Skills" />
+              <MenuLinks title="Projects" />
+              <MenuLinks title="Learnings" />
+            </Stack>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </Box>
   );
 };

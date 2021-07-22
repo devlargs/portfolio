@@ -1,4 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
+import Container from "components/Container";
 import NOTION_API_URL from "constants/notionApiUrl";
 import client from "helpers/sanityClient";
 import { GetStaticPaths } from "next";
@@ -34,7 +35,7 @@ export async function getStaticProps({ params }) {
       blockMap: data,
       name: details?.[0]?.name ?? "",
       banner:
-        details?.[0]?.banner ??
+        details?.[0]?.bannerUrl ??
         "https://images.unsplash.com/photo-1608597003542-9d831d8d6ff4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     },
   };
@@ -43,23 +44,27 @@ export async function getStaticProps({ params }) {
 const Slug = ({ blockMap, name, banner }) => {
   return (
     <>
-      <Box w="110vw" ml="-10vw">
+      <Box w="100vw" pos="relative">
         <Image
+          layout="responsive"
           width={2000}
           height={400}
           src={banner}
           objectFit="cover"
           objectPosition="center center"
-          quality={100}
+          quality={75}
           priority
         />
       </Box>
-      <Box style={{ maxWidth: 900 }} margin="auto" p="10" bg="white">
-        <Heading as="h1" mb="10" borderBottom="1px dotted lightgray" p="4">
-          {name}
-        </Heading>
-        <NotionRenderer blockMap={blockMap} />
-      </Box>
+
+      <Container minH="calc(100vh - 160px)">
+        <Box style={{ maxWidth: 900 }} margin="auto" p="10" bg="white">
+          <Heading as="h1" mb="10" borderBottom="1px dotted lightgray" p="4">
+            {name}
+          </Heading>
+          <NotionRenderer blockMap={blockMap} />
+        </Box>
+      </Container>
     </>
   );
 };

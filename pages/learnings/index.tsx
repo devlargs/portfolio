@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import BlogPosts from "components/BlogPosts";
+import Container from "components/Container";
 import Featured from "components/Featured";
 import LatestPosts from "components/LatestPosts";
 import client from "helpers/sanityClient";
@@ -9,7 +10,7 @@ import { globalStyles } from "styles/global";
 
 const TIL = ({ data }) => {
   return (
-    <>
+    <Container minH="calc(100vh - 160px)">
       <Box mt={globalStyles.container.marginTop} p="5">
         <Box
           d={{
@@ -32,7 +33,7 @@ const TIL = ({ data }) => {
       <Box mt={globalStyles.container.marginTop}>
         <BlogPosts data={data} />
       </Box>
-    </>
+    </Container>
   );
 };
 

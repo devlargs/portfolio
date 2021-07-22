@@ -1,4 +1,5 @@
 import { Box, Heading, useColorMode } from "@chakra-ui/react";
+import Container from "components/Container";
 import ProjectCard from "components/ProjectCard";
 import { keyBy } from "helpers/objectManipulation";
 import client from "helpers/sanityClient";
@@ -47,14 +48,14 @@ const Projects: FC<{
   personal: ProjectDataProps[];
   clones: ProjectDataProps[];
 }> = ({ personal, contributions, clones }) => (
-  <>
+  <Container minH="calc(100vh - 160px)">
     <ProjectCardWithHeading data={personal} title="Personal Projects" />
     <ProjectCardWithHeading
       data={contributions}
       title="Projects I contributed to my previous company"
     />
     <ProjectCardWithHeading data={clones} title="Clones / Mockups" />
-  </>
+  </Container>
 );
 
 interface IProjectTypes {
