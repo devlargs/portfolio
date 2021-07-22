@@ -1,18 +1,17 @@
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
+  Badge,
   Box,
-  Flex,
   Button,
-  Text,
+  Flex,
   Link,
   Stack,
-  Badge,
+  Text,
   useColorMode,
 } from "@chakra-ui/react";
 import { ProjectDataProps } from "interfaces/project.interfaces";
 import { FC } from "react";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { FillPictureAsset } from "sanity-lazy-load";
-import { globalStyles } from "styles/global";
 
 const ProjectCard: FC<{
   data: ProjectDataProps;
@@ -21,13 +20,12 @@ const ProjectCard: FC<{
   return (
     <Box h="100%" key={data._id}>
       <Box
-        bg="#fefefe"
-        boxShadow={globalStyles.misc.boxShadow}
-        mb="4"
+        border="5px dotted darkgray"
+        mb="10"
         borderRadius="0.5rem"
         transition="0.5s ease-in"
         _hover={{
-          boxShadow: "lightgray 0px 5px 10px",
+          border: "5px dashed black",
         }}
         color="#1A202C"
       >
