@@ -1,3 +1,11 @@
-const Skills = () => <div>Skills</div>;
+import { Box, Text } from "@chakra-ui/react";
 
-export default Skills;
+export default function Skills() {
+  return (
+    <Box d="grid" placeItems="center" h="calc(100vh - 160px)">
+      <Text fontSize="2rem" fontWeight="bold">
+        TBD
+      </Text>
+    </Box>
+  );
+}
