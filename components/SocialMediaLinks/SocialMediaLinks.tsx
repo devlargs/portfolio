@@ -1,5 +1,5 @@
 import { Box, Flex, Image } from '@chakra-ui/react';
-import SOCIAL_MEDIA_LINKS from 'constants/socialMediaLinks';
+import SOCIAL_MEDIA_LINKS from '@constants/socialMediaLinks';
 import { FC } from 'react';
 
 const SocialLinks: FC = () => (

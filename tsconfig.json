@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
       "@theme/*": ["theme/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
