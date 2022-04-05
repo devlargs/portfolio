@@ -1,4 +1,4 @@
-import { Box, ChakraProvider } from "@chakra-ui/react";
+import { Box, ChakraProvider, Text } from "@chakra-ui/react";
 import Footer from "components/Footer";
 import Navbar from "components/Navbar";
 import { useRouter } from "next/router";
@@ -29,16 +29,24 @@ const App = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={theme}>
       <Box
-        overflowX="hidden"
-        backgroundImage={`url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0V0zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm20 0a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM10 37a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm10-17h20v20H20V20zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E")`}
+        d="grid"
+        placeContent="center"
+        h="100vh"
+        w="100vw"
+        textAlign="center"
       >
-        <Progress />
-        <Fonts />
-        <Navbar />
-        {/* <Container minH="calc(100vh - 160px)"> */}
-        <Component {...pageProps} />
-        {/* </Container> */}
-        <Footer />
+        <>
+          <Text mb="10" fontSize="20px">
+            Currently undergoing maintenance. ralphlargo.com
+          </Text>
+          <iframe
+            id="existing-iframe-example"
+            width="640"
+            height="360"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&enablejsapi=1"
+            frameborder="0"
+          ></iframe>
+        </>
       </Box>
     </ChakraProvider>
   );
