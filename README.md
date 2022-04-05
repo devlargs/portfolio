@@ -1,34 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJS, Typescript, Chakra UI Boilerplate
 
-## Getting Started
+A simple repository that bootstraps application. npm packages will be updated from time to time.
 
-First, run the development server:
+## Setup
 
-```bash
-npm run dev
-# or
-yarn dev
+- git clone this repo
+- npm install
+- npm run dev
+
+```
+*if ever you encounter errors during npm install, you can try to run `npm i --legacy-peer-deps`
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Directory Structure
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+The boilerplate has basic default folders. The top level directory structure will be as follows:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- .vscode - A default vscode configuration to help organize imports
+- components - This is where we put global shared/reusable components, such as layout (wrappers, navigation), form components, buttons
+- pages - NextJS page files
+- public - folder for self hosted assets
+- store - Global state management tool
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Path aliasing
 
-## Learn More
+Added path aliasing **(@folder-name)** is used to easily determine which files were imported locally and from library, this is very helpful for better organization of imports. Library imports should come first then local.
 
-To learn more about Next.js, take a look at the following resources:
+## We use this tools
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [ESLint](https://eslint.org/docs/user-guide/configuring/)
+- [Husky](https://typicode.github.io/husky/#/)
+- [Prettier](https://prettier.io/)
+- [Lint Staged](https://github.com/okonet/lint-staged)
+- [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### [Structure reference](https://www.taniarascia.com/react-architecture-directory-structure)
