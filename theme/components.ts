@@ -2,13 +2,33 @@ const Text = {
   variants: {
     navlink: {
       color: 'white',
-      fontFamily: 'Work Sans, sans-serif',
       marginRight: '2rem',
+    },
+    gradient: {
+      background: 'linear-gradient(90deg, #F07929 11.4%, #EE2A7B 72.93%), #EFF1F6',
+      backgroundClip: 'text',
+      lineHeight: '64px',
+      fontSize: '48px',
+      fontWeight: 600,
+      marginBottom: '2rem',
+    },
+  },
+};
+
+const Button = {
+  variants: {
+    primary: {
+      color: 'white',
+      bg: 'primary',
+      fontSize: '18px',
+      fontWeight: 600,
+      lineHeight: '21px',
     },
   },
 };
 
 const COMPONENTS = {
+  Button,
   Text,
 };
 

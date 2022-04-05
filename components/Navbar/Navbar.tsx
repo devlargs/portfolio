@@ -1,14 +1,15 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import COMMONS from '@theme/commons';
 import { FC } from 'react';
 
 const Navbar: FC = () => {
   return (
-    <Box h="96px" bg="#1a222d">
+    <Box px={COMMONS.px} h="96px" bg="brand">
       <Flex h="100%" alignItems="center" justifyContent="flex-end">
         <Text variant="navlink">About me</Text>
         <Text variant="navlink">Projects</Text>
         <Text variant="navlink">Learnings</Text>
-        <Text>Let's talkh</Text>
+        <Button variant="primary">Let’s talk →</Button>
       </Flex>
     </Box>
   );

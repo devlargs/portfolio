@@ -1,4 +1,4 @@
-const globalFonts = `
+export const globalFonts = `
      /* work-sans-100 - latin */
     @font-face {
     font-family: 'Work Sans';
@@ -164,8 +164,10 @@ const globalFonts = `
 `;
 
 const CUSTOM_STYLES = {
-  test: {
-    '@fontFace': globalFonts,
+  global: {
+    'html, body': {
+      fontFamily: 'Work Sans, sans-serif',
+    },
   },
 };
 

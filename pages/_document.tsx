@@ -1,3 +1,5 @@
+import { Global } from '@emotion/react';
+import { globalFonts } from '@theme/custom';
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import { ReactElement } from 'react';
 
@@ -11,9 +13,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-          <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet" />
+          <Global styles={`${globalFonts}`} />
         </Head>
         <body style={{ margin: 0 }}>
           <Main />
