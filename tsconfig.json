@@ -5,6 +5,7 @@
     "paths": {
       "@components/*": ["components/*"],
       "@constants/*": ["constants/*"],
+      "@sections/*": ["sections/*"],
       "@theme/*": ["theme/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],

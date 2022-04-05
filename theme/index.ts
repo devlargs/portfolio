@@ -7,6 +7,7 @@ const semanticTokens = {
     brand: '#1a222d',
     white: '#EFF1F6',
     primary: '#405ED7',
+    link: '#0F4797',
   },
 };
 

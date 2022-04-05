@@ -25,6 +25,12 @@ const Button = {
       lineHeight: '21px',
     },
   },
+  link: {
+    color: '#0F4797',
+    lineHeight: '21px',
+    fontSize: '18px',
+    fontWeight: 500,
+  },
 };
 
 const COMPONENTS = {
