@@ -11,6 +11,12 @@ const App = ({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    }
+  }, []);
+
+  useEffect(() => {
     const nprogressStart = () => NProgress.start();
     const nprogressDone = () => {
       NProgress.done();
@@ -28,7 +34,7 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Box
+      {/* <Box
         d="grid"
         placeContent="center"
         h="100vh"
@@ -46,7 +52,7 @@ const App = ({ Component, pageProps }) => {
             src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&enablejsapi=1"
           ></iframe>
         </>
-      </Box>
+      </Box> */}
     </ChakraProvider>
   );
 };
