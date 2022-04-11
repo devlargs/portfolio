@@ -6,7 +6,6 @@ const Home: FC = () => (
   <>
     <Hero />
     <CompanyContribution />
-    <CompanyContribution />
   </>
 );
 
