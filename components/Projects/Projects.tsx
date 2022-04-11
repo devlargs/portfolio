@@ -26,8 +26,8 @@ const Projects: FC<Project> = ({ heading, variant, type }) => {
       <Grid templateColumns="repeat(4, 1fr)" gap={6}>
         {projectArray.map((item, i) => {
           return (
-            <Box key={i} bg="#E2E8F6" h="330px">
-              <Img src={`/images/projects/${item.name.split(' ').join('-').toLowerCase()}.png`} h="230px" w="100%" />
+            <Box key={i} bg="#E2E8F6" h="350px">
+              <Img src={`/images/projects/${item.name.split(' ').join('-').toLowerCase()}.png`} h="250px" w="100%" />
               <Box
                 h="100px"
                 d="flex"

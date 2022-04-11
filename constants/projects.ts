@@ -2,6 +2,7 @@ type Projects = {
   name: string;
   link: string;
   type: 'contribution' | 'clones' | 'personal';
+  ongoing?: boolean;
 };
 
 const PROJECTS: Projects[] = [
@@ -29,6 +30,30 @@ const PROJECTS: Projects[] = [
     name: 'Perfectus',
     link: 'https://perfectus.de',
     type: 'contribution',
+  },
+  {
+    name: 'Twice Polls',
+    link: 'https://twicepolls.com/polls',
+    type: 'personal',
+    ongoing: true,
+  },
+  {
+    name: 'Friend Finder',
+    link: 'http://social-network.ralphlargo.com/',
+    type: 'personal',
+    ongoing: true,
+  },
+  {
+    name: 'Movie Database Admin',
+    link: 'https://mdb-admin.vercel.app',
+    type: 'personal',
+    ongoing: true,
+  },
+  {
+    name: 'Pokedocs',
+    link: 'https://pokedocs.vercel.app',
+    type: 'personal',
+    ongoing: true,
   },
 ];
 
