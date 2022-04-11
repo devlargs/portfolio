@@ -4,7 +4,7 @@ import { FC } from 'react';
 const Footer: FC = () => {
   return (
     <footer>
-      <Box h="96px" d="grid" bg="brand" placeContent="center">
+      <Box h="96px" d="grid" bg="brand" placeContent="center" borderTop="2px solid #29303B">
         <Text color="white" lineHeight="21px" fontWeight={500}>
           Ralph Largo ⸺ Frontend Developer
         </Text>
