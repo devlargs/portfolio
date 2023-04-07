@@ -3,10 +3,7 @@
     "target": "es5",
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"],
-      "@constants/*": ["constants/*"],
-      "@sections/*": ["sections/*"],
-      "@theme/*": ["theme/*"]
+      "@components/*": ["components/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

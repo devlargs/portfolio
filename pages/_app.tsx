@@ -1,15 +1,12 @@
-import { ChakraProvider } from '@chakra-ui/react';
-import Footer from '@components/Footer';
-import Navbar from '@components/Navbar';
-import theme from '@theme/index';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 import { AppProps } from 'next/app';
 import { FC } from 'react';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => (
-  <ChakraProvider theme={theme}>
-    <Navbar />
-    <Component {...pageProps} />
-    <Footer />
+  <ChakraProvider>
+    <Box bg="#212428">
+      <Component {...pageProps} />
+    </Box>
   </ChakraProvider>
 );
 
