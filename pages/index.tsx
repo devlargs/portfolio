@@ -24,7 +24,7 @@ const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlacehol
       }}
     >
       <Box flex="1" color="white">
-        <HeroSection />
+        <HeroSection logoPlaceholder={imagePlaceholders.ralph} />
       </Box>
       <Box flex="1">
         <Box
@@ -71,7 +71,7 @@ const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlacehol
           )}
 
           <ContentContainer title="Recommendations">
-            <Testimonials />
+            <Testimonials imagePlaceholders={imagePlaceholders} />
           </ContentContainer>
 
           <ContentContainer title="Contact With Me">
@@ -112,11 +112,17 @@ export const getStaticProps: GetStaticProps = async () => {
     'vue',
     'zustand',
   ];
+  const jpgs = ['gabriel', 'josua', 'marc', 'nemuel', 'ralph', 'zadkiel'];
+
   const imagePlaceholders: Record<string, string> = {};
   const dataPng = await Promise.all(pngs.map((item) => getPlaiceholder(`/images/${item}.png`)));
-
   dataPng.map((q, i) => {
     imagePlaceholders[pngs[i]] = q.base64;
+  });
+
+  const dataJpg = await Promise.all(jpgs.map((item) => getPlaiceholder(`/images/linkedin/${item}.jpg`)));
+  dataJpg.map((q, i) => {
+    imagePlaceholders[jpgs[i]] = q.base64;
   });
 
   return {

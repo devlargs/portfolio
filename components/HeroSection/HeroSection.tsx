@@ -3,7 +3,9 @@ import Image from 'next/image';
 import { FC } from 'react';
 import defaults from 'theme/defaults';
 
-const HeroSection: FC = () => {
+const HeroSection: FC<{
+  logoPlaceholder: string;
+}> = ({ logoPlaceholder }) => {
   return (
     <Box
       display="grid"
@@ -24,11 +26,13 @@ const HeroSection: FC = () => {
           }}
         >
           <Image
-            src="/images/ralph.jpg"
+            src="/images/linkedin/ralph.jpg"
             width={3968}
             height={4016}
             alt="Logo"
             style={{ borderRadius: '50%', border: `5px solid #32363b` }}
+            placeholder="blur"
+            blurDataURL={logoPlaceholder}
           />
         </Box>
         <Box h="20px" />
