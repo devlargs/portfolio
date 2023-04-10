@@ -1,6 +1,7 @@
 import { Box, chakra, Text } from '@chakra-ui/react';
 import ContentContainer from '@components/ContentContainer';
 import Skills from '@components/Skills';
+import Testimonials from '@components/Testimonials';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
 import Image from 'next/image';
 import { FC } from 'react';
@@ -76,29 +77,11 @@ const Home: FC = () => (
 
         <ContentContainer title="Portfolio"></ContentContainer>
 
-        <ContentContainer title="Testimonial">
-          <Text fontSize="18px" color="#878e99" mb="25px">
-            I’m a developer who has passion for building clean web applications with intuitive functionality. I enjoy
-            the process of turning ideas into reality using creative solutions. I mainly use ReactJS. I’m always curious
-            about learning new skills, tools, and concepts.
-          </Text>
-          <Text fontSize="18px" color="#878e99">
-            In addition to working on various solo hobby projects, I have worked with creative teams, which involves
-            daily stand-ups and communications, source control, and project management.
-          </Text>
+        <ContentContainer title="Testimonials">
+          <Testimonials />
         </ContentContainer>
 
-        <ContentContainer title="Contact With Me">
-          <Text fontSize="18px" color="#878e99" mb="25px">
-            I’m a developer who has passion for building clean web applications with intuitive functionality. I enjoy
-            the process of turning ideas into reality using creative solutions. I mainly use ReactJS. I’m always curious
-            about learning new skills, tools, and concepts.
-          </Text>
-          <Text fontSize="18px" color="#878e99">
-            In addition to working on various solo hobby projects, I have worked with creative teams, which involves
-            daily stand-ups and communications, source control, and project management.
-          </Text>
-        </ContentContainer>
+        <ContentContainer title="Contact With Me"></ContentContainer>
       </Box>
     </Box>
   </Box>

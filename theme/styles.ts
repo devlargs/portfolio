@@ -17,6 +17,18 @@ const styles = {
     p: {
       fontFamily: firaSans.style.fontFamily,
     },
+    '.slick-dots': {
+      top: '-10px',
+      left: '-10px',
+      width: 'initial',
+      height: '10px',
+    },
+    '.slick-dots li button:before': {
+      color: 'white',
+    },
+    '.slick-dots li.slick-active button:before': {
+      color: '#32ABFF',
+    },
   },
 };
 
