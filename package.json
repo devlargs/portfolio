@@ -35,10 +35,12 @@
     "framer-motion": "^9.0.2",
     "next": "^13.3.0",
     "nodemailer": "^6.9.1",
+    "plaiceholder": "^2.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-slick": "^0.29.0",
+    "sharp": "^0.32.0",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {

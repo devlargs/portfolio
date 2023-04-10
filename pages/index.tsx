@@ -6,12 +6,13 @@ import Portfolio from '@components/Portfolio';
 import Skills from '@components/Skills';
 import Testimonials from '@components/Testimonials';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
+import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
+import { getPlaiceholder } from 'plaiceholder';
 import { FC } from 'react';
 
-const Home: FC = () => {
+const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlaceholders }) => {
   const router = useRouter();
-
   const isPortfolio = Boolean(router.query.portfolio);
 
   return (
@@ -58,9 +59,9 @@ const Home: FC = () => {
           </ContentContainer>
 
           <ContentContainer title="Skills">
-            <Skills skills={PRIMARY_SKILLS} title="Primary Skills" />
+            <Skills skills={PRIMARY_SKILLS} title="Primary Skills" imagePlaceholders={imagePlaceholders} />
             <Box h="16px" />
-            <Skills skills={SECONDARY_SKILLS} title="Secondary Skills" />
+            <Skills skills={SECONDARY_SKILLS} title="Secondary Skills" imagePlaceholders={imagePlaceholders} />
           </ContentContainer>
 
           {isPortfolio && (
@@ -80,6 +81,49 @@ const Home: FC = () => {
       </Box>
     </Box>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const pngs = [
+    'angular',
+    'antd',
+    'apollo',
+    'chakra-ui',
+    'electron',
+    'ethers',
+    'express',
+    'firebase',
+    'git',
+    'graphql',
+    'heroku',
+    'javascript',
+    'jest',
+    'mongodb',
+    'next-js',
+    'node',
+    'nx',
+    'react-js',
+    'react-testing-library',
+    'redux',
+    'sanity-io',
+    'sass',
+    'tailwind',
+    'typescript',
+    'vue',
+    'zustand',
+  ];
+  const imagePlaceholders: Record<string, string> = {};
+  const dataPng = await Promise.all(pngs.map((item) => getPlaiceholder(`/images/${item}.png`)));
+
+  dataPng.map((q, i) => {
+    imagePlaceholders[pngs[i]] = q.base64;
+  });
+
+  return {
+    props: {
+      imagePlaceholders,
+    },
+  };
 };
 
 export default Home;

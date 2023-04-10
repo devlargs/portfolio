@@ -5,7 +5,8 @@ import { FC } from 'react';
 const Skills: FC<{
   skills: string[];
   title: string;
-}> = ({ skills, title }) => {
+  imagePlaceholders: Record<string, string>;
+}> = ({ skills, title, imagePlaceholders }) => {
   return (
     <>
       <Text mb="16px" fontSize="14px" fontWeight={300} color="#c4cfde" letterSpacing="3px" textTransform="uppercase">
@@ -37,6 +38,8 @@ const Skills: FC<{
                   style={{ objectFit: 'cover', objectPosition: 'center' }}
                   width={348}
                   height={348}
+                  placeholder="blur"
+                  blurDataURL={imagePlaceholders[`${item.replace(/ /gi, '-').toLowerCase()}`]}
                 />
               </Box>
             </Box>
