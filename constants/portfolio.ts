@@ -90,4 +90,53 @@ export const COMPANY_CONTRIBUTIONS: Projects[] = [
   },
 ];
 
-export const PERSONAL_PROJECTS: Projects[] = [];
+export const PERSONAL_PROJECTS: Projects[] = [
+  {
+    link: 'https://reddit-images-gallery.vercel.app/',
+    title: 'Reddit Images Gallery',
+  },
+  {
+    link: 'https://fcc.ralphlargo.com/',
+    title: 'Free Code Camp Projects',
+  },
+  {
+    link: 'https://movies.ralphlargo.com/',
+    title: 'Movie Database Admin',
+  },
+  {
+    link: 'https://pokedocs.vercel.app/pokedex',
+    title: 'Simple Pokedex',
+  },
+  {
+    link: 'https://social-network.ralphlargo.com',
+    title: 'Social Network',
+  },
+  {
+    link: 'https://pickup-booking.vercel.app/customers',
+    title: 'Pickup Booking',
+  },
+  {
+    link: 'https://twicepolls.ralphlargo.com/polls',
+    title: 'Twice Polls',
+  },
+  {
+    link: 'https://todo-lists.ralphlargo.com/vue',
+    title: 'Vue Todo List',
+  },
+  {
+    link: 'https://todo-lists.ralphlargo.com/react',
+    title: 'React Todo List',
+  },
+  {
+    link: 'https://trello-clone.ralphlargo.com/',
+    title: 'Non Functional Trello Clone',
+  },
+  {
+    link: 'https://angular-test.ralphlargo.com/',
+    title: 'Politicians Speeches',
+  },
+  {
+    link: 'https://collateral-phi.vercel.app/securitiesLending/cash',
+    title: 'Absolute Collateral',
+  },
+];

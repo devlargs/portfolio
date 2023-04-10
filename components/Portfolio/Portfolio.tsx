@@ -1,6 +1,6 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { Box, ListItem, Text, UnorderedList } from '@chakra-ui/react';
-import { COMPANY_CONTRIBUTIONS } from '@constants/portfolio';
+import { COMPANY_CONTRIBUTIONS, PERSONAL_PROJECTS } from '@constants/portfolio';
 import openNewTab from '@utils/openNewTab';
 import { FC, useState } from 'react';
 import defaults from 'theme/defaults';
@@ -33,9 +33,19 @@ const Portfolio: FC = () => {
         Personal Projects
       </Text>
       <UnorderedList fontSize="16px" lineHeight="28px" color="#878e99">
-        <ListItem cursor="pointer" _hover={{ color: defaults.primary }} transition="0.5s ease-in-out">
-          Betvision <ArrowForwardIcon />
-        </ListItem>
+        {PERSONAL_PROJECTS.map((item) => (
+          <ListItem
+            cursor="pointer"
+            key={item.title}
+            _hover={{ color: defaults.primary }}
+            transition="0.5s ease-in-out"
+            onMouseLeave={(): void => setHovered('')}
+            onMouseEnter={(): void => setHovered(item.title)}
+            onClick={(): void => openNewTab(item.link)}
+          >
+            {item.title} {hovered === item.title ? <ArrowForwardIcon transition="0.5 ease-in-out" /> : null}
+          </ListItem>
+        ))}
       </UnorderedList>
     </Box>
   );

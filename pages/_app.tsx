@@ -4,10 +4,11 @@ import { FC } from 'react';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import theme from 'theme';
+import defaults from 'theme/defaults';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => (
   <ChakraProvider theme={theme}>
-    <Box bg="#212428">
+    <Box bg="#212428" backgroundImage={defaults.backgroundPattern}>
       <Component {...pageProps} />
     </Box>
   </ChakraProvider>

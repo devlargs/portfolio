@@ -1,4 +1,5 @@
 import { Box, chakra, Text } from '@chakra-ui/react';
+import ContactForm from '@components/ContactForm';
 import ContentContainer from '@components/ContentContainer';
 import Portfolio from '@components/Portfolio';
 import Skills from '@components/Skills';
@@ -92,7 +93,9 @@ const Home: FC = () => {
             <Testimonials />
           </ContentContainer>
 
-          <ContentContainer title="Contact With Me"></ContentContainer>
+          <ContentContainer title="Contact With Me">
+            <ContactForm />
+          </ContentContainer>
         </Box>
       </Box>
     </Box>
