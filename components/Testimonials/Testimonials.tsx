@@ -1,4 +1,5 @@
 import { Box, chakra, Text } from '@chakra-ui/react';
+import openNewTab from '@utils/openNewTab';
 import testimonials from 'constants/testimonials';
 import Image from 'next/image';
 import { FC } from 'react';
@@ -40,14 +41,7 @@ const Testimonials: FC = () => {
                   fontWeight="bold"
                   color={defaults.primary}
                   cursor="pointer"
-                  onClick={(): void => {
-                    const newWindow = window.open(
-                      `https://linkedin.com/in/${testimonial.url}`,
-                      '_blank',
-                      'noopener,noreferrer'
-                    );
-                    if (newWindow) newWindow.opener = null;
-                  }}
+                  onClick={(): void => openNewTab(`https://linkedin.com/in/${testimonial.url}`)}
                 >
                   {testimonial.name}
                 </chakra.span>
