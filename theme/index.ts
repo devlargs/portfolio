@@ -1,28 +1,8 @@
-import { extendTheme, ThemeOverride } from "@chakra-ui/react";
+import { extendTheme } from '@chakra-ui/react';
+import styles from './styles';
 
-const customTheme: ThemeOverride = {
-  colors: {
-    black: "#1A202C",
-    white: "#F8F8F8",
-    brand: {
-      dark: "#0f0f0f",
-      light: "#0099ff",
-      hover: {
-        dark: "#0099ff",
-        light: "#252732",
-      },
-    },
-    typography: {
-      light: "#1A202C",
-      dark: "#F8F8F8",
-    },
-    
-  },
-  fonts: {
-    heading: "Roboto Condensed, sans-serif",
-  },
-};
-
-export const theme = extendTheme({
-  ...customTheme,
+const theme = extendTheme({
+  styles,
 });
+
+export default theme;
