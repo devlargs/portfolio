@@ -1,14 +1,13 @@
-import { Box, chakra, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import ContactForm from '@components/ContactForm';
 import ContentContainer from '@components/ContentContainer';
+import HeroSection from '@components/HeroSection';
 import Portfolio from '@components/Portfolio';
 import Skills from '@components/Skills';
 import Testimonials from '@components/Testimonials';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
-import defaults from 'theme/defaults';
 
 const Home: FC = () => {
   const router = useRouter();
@@ -24,29 +23,7 @@ const Home: FC = () => {
       }}
     >
       <Box flex="1" color="white">
-        <Box display="grid" placeContent="center" h="100vh" p="80px">
-          <Box>
-            <Box h="180px" w="180px" mb="20px">
-              <Image
-                src="/images/ralph.jpg"
-                width={3968}
-                height={4016}
-                alt="Logo"
-                style={{ borderRadius: '50%', border: `5px solid #32363b` }}
-              />
-            </Box>
-            <Text fontSize="60px" lineHeight="62px" mb="8px" fontWeight="bold" as="h1">
-              Hi, I'm <chakra.span color={defaults.primary}>Ralph Largo</chakra.span>
-            </Text>
-            <Text fontSize="48px" as="h1" fontWeight="bold">
-              ReactJS Developer.
-            </Text>
-            <Text fontSize="18px" color="#878e99">
-              Passionate developer experienced in building clean and intuitive web applications with ReactJS, dedicated
-              to constantly expanding skills and collaborating effectively with creative teams.
-            </Text>
-          </Box>
-        </Box>
+        <HeroSection />
       </Box>
       <Box flex="1">
         <Box
@@ -63,7 +40,10 @@ const Home: FC = () => {
             lg: 'hidden',
           }}
           py="60px"
-          px="100px"
+          px={{
+            base: '16px',
+            lg: '100px',
+          }}
         >
           <ContentContainer title="About Me">
             <Text fontSize="18px" color="#878e99" mb="25px">

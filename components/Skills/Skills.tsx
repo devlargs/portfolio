@@ -12,7 +12,13 @@ const Skills: FC<{
         {title}
       </Text>
 
-      <Grid gridTemplateColumns="repeat(5, 1fr)" gridGap="16px">
+      <Grid
+        gridTemplateColumns={{
+          base: 'repeat(4, 1fr)',
+          lg: 'repeat(5, 1fr)',
+        }}
+        gridGap="16px"
+      >
         {skills.map((item) => {
           return (
             <Box
