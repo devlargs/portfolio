@@ -48,6 +48,7 @@ const ContactForm: FC = () => {
         {...register('name', {
           required: true,
         })}
+        border="1px solid gray"
       />
       {errors.name && (
         <Text fontSize="12px" mt="8px" color="red.400">
@@ -62,7 +63,7 @@ const ContactForm: FC = () => {
         control={control}
         name="email"
         rules={{ required: true, validate: validateEmail }}
-        render={({ field }): ReactElement => <Input placeholder="Email" size="sm" {...field} />}
+        render={({ field }): ReactElement => <Input placeholder="Email" size="sm" {...field} border="1px solid gray" />}
       />
       {errors.email?.type === 'required' && (
         <Text fontSize="12px" mt="8px" color="red.400">
@@ -84,6 +85,7 @@ const ContactForm: FC = () => {
         {...register('subject', {
           required: true,
         })}
+        border="1px solid gray"
       />
       {errors.subject && (
         <Text fontSize="12px" mt="8px" color="red.400">
@@ -101,6 +103,7 @@ const ContactForm: FC = () => {
         {...register('message', {
           required: true,
         })}
+        border="1px solid gray"
       />
       {errors.message && (
         <Text fontSize="12px" mt="8px" color="red.400">

@@ -31,13 +31,7 @@ const HeroSection: FC = () => {
             style={{ borderRadius: '50%', border: `5px solid #32363b` }}
           />
         </Box>
-        <Box
-          h="20px"
-          display={{
-            base: 'block',
-            lg: 'none',
-          }}
-        />
+        <Box h="20px" />
         <Text
           fontSize={{
             base: '28px',
@@ -50,6 +44,10 @@ const HeroSection: FC = () => {
           mb="8px"
           fontWeight="bold"
           as="h1"
+          textAlign={{
+            base: 'center',
+            lg: 'left',
+          }}
         >
           Hi, I'm <chakra.span color={defaults.primary}>Ralph Largo</chakra.span>
         </Text>
@@ -60,6 +58,10 @@ const HeroSection: FC = () => {
           }}
           as="h1"
           fontWeight="bold"
+          textAlign={{
+            base: 'center',
+            lg: 'left',
+          }}
         >
           React JS Developer.
         </Text>
@@ -69,6 +71,10 @@ const HeroSection: FC = () => {
             lg: '18px',
           }}
           color="#878e99"
+          textAlign={{
+            base: 'center',
+            lg: 'left',
+          }}
         >
           Passionate developer experienced in building clean and intuitive web applications with ReactJS, dedicated to
           constantly expanding skills and collaborating effectively with creative teams.
