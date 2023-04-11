@@ -34,6 +34,7 @@
     "@supabase/supabase-js": "^2.15.0",
     "framer-motion": "^9.0.2",
     "next": "^13.3.0",
+    "nextjs-google-analytics": "^2.3.3",
     "nodemailer": "^6.9.1",
     "plaiceholder": "^2.5.0",
     "react": "18.2.0",

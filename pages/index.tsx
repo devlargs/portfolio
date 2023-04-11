@@ -91,6 +91,8 @@ const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlacehol
             <ContentContainer title="Contact With Me">
               <ContactForm />
             </ContentContainer>
+
+            {/* <ContentContainer title="Social"></ContentContainer> */}
           </Box>
         </Box>
       </Box>
