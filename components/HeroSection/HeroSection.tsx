@@ -38,11 +38,11 @@ const HeroSection: FC<{
         <Box h="20px" />
         <Text
           fontSize={{
-            base: '28px',
+            base: '26px',
             lg: '60px',
           }}
           lineHeight={{
-            base: '32px',
+            base: '30px',
             lg: '62px',
           }}
           mb="8px"
@@ -57,7 +57,7 @@ const HeroSection: FC<{
         </Text>
         <Text
           fontSize={{
-            base: '24px',
+            base: '22px',
             lg: '48px',
           }}
           as="h1"

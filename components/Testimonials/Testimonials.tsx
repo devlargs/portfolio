@@ -57,7 +57,18 @@ const Testimonials: FC<{
                 </Text>
               </Box>
               <Box mt="16px">
-                <Text fontSize="16px" lineHeight="28px" color="#c4cfde">
+                <Text
+                  fontSize="16px"
+                  lineHeight={{
+                    base: '24px',
+                    lg: '28px',
+                  }}
+                  color="#c4cfde"
+                  textAlign={{
+                    base: 'justify',
+                    lg: 'initial',
+                  }}
+                >
                   {testimonial.testimonial}
                 </Text>
               </Box>
