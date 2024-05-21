@@ -17,7 +17,6 @@ const description =
 
 const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlaceholders }) => {
   const router = useRouter();
-  const isPortfolio = Boolean(router.query.portfolio);
 
   return (
     <>
@@ -78,17 +77,15 @@ const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlacehol
               <Skills skills={SECONDARY_SKILLS} title="Secondary Skills" imagePlaceholders={imagePlaceholders} />
             </ContentContainer>
 
-            {isPortfolio && (
-              <ContentContainer title="Portfolio">
-                <Portfolio />
-              </ContentContainer>
-            )}
+            <ContentContainer title="Portfolio">
+              <Portfolio />
+            </ContentContainer>
 
             <ContentContainer title="Recommendations">
               <Testimonials imagePlaceholders={imagePlaceholders} />
             </ContentContainer>
 
-            <ContentContainer title="Contact With Me">
+            <ContentContainer title="Contact Me">
               <ContactForm />
             </ContentContainer>
 
