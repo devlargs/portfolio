@@ -21,6 +21,10 @@ export const COMPANY_CONTRIBUTIONS: Projects[] = [
     title: 'Maximum Performance Luxury',
   },
   {
+    link: 'https://thailate.vercel.app',
+    title: 'Thailate',
+  },
+  {
     link: 'https://evelan.de',
     title: 'Evelan',
   },
