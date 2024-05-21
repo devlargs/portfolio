@@ -8,7 +8,6 @@ import Testimonials from '@components/Testimonials';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { getPlaiceholder } from 'plaiceholder';
 import { FC } from 'react';
 
@@ -16,8 +15,6 @@ const description =
   'Passionate developer experienced in building clean and intuitive web applications with ReactJS, dedicated to constantly expanding skills and collaborating effectively with creative teams.';
 
 const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlaceholders }) => {
-  const router = useRouter();
-
   return (
     <>
       <Head>

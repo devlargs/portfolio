@@ -11,6 +11,10 @@ const firaSans = Fira_Sans({
 
 const styles = {
   global: {
+    html: {
+      boxSizing: 'border-box',
+      overflowX: 'hidden',
+    },
     h1: {
       fontFamily: montserrat.style.fontFamily,
     },
