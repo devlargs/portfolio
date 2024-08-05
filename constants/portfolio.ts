@@ -37,6 +37,10 @@ export const COMPANY_CONTRIBUTIONS: Projects[] = [
     title: 'Asia CEO Org',
   },
   {
+    link: 'https://chainedmetrics.com/',
+    title: 'Chained Metrics'
+  },
+  {
     link: 'https://racketstudios.com',
     title: 'Racket Studios',
   },
