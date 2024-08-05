@@ -21,7 +21,7 @@ export const COMPANY_CONTRIBUTIONS: Projects[] = [
     title: 'Maximum Performance Luxury',
   },
   {
-    link: 'https://thailate.vercel.app',
+    link: 'https://thailate.com',
     title: 'Thailate',
   },
   {
@@ -124,16 +124,8 @@ export const PERSONAL_PROJECTS: Projects[] = [
     title: 'Twice Polls',
   },
   {
-    link: 'https://todo-lists.ralphlargo.com/vue',
-    title: 'Vue Todo List',
-  },
-  {
-    link: 'https://todo-lists.ralphlargo.com/react',
-    title: 'React Todo List',
-  },
-  {
     link: 'https://trello-clone.ralphlargo.com/',
-    title: 'Non Functional Trello Clone',
+    title: 'Trello Clone',
   },
   {
     link: 'https://angular-test.ralphlargo.com/',
