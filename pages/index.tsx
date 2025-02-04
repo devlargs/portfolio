@@ -123,7 +123,7 @@ export const getStaticProps: GetStaticProps = async () => {
     'vue',
     'zustand',
   ];
-  const jpgs = ['gabriel', 'josua', 'marc', 'nemuel', 'ralph', 'zadkiel'];
+  const jpgs = ['gabriel', 'josua', 'marc', 'nemuel', 'ralph', 'zadkiel', 'arriele'];
 
   const imagePlaceholders: Record<string, string> = {};
   const dataPng = await Promise.all(pngs.map((item) => getPlaiceholder(`/images/${item}.png`)));

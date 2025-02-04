@@ -12,14 +12,13 @@ const Testimonials: FC<{
   const settings = {
     dots: true,
     infinite: true,
-    speed: 1000,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <></>,
     prevArrow: <></>,
-    autoplay: true,
+    autoplay: false,
     lazyLoad: true,
-    autoplaySpeed: 5000,
     pauseOnHover: true,
   };
 

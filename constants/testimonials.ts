@@ -7,6 +7,15 @@ const testimonials: Array<{
   url: string;
 }> = [
   {
+    name: 'Arriele Ancheta',
+    position: 'Quality Software Analyst',
+    company: 'Scaleforge',
+    testimonial:
+      'I strongly recommend Largo as one of the best front-end colleagues to work with. Largo consistently delivers high-quality work, meeting deadlines with precision. His collaboration skills and problem-solving mindset make every project smoother and more efficient. Working alongside Largo is both inspiring and rewarding, thanks to his dedication and expertise.',
+    avatar: '/images/linkedin/arriele.jpg',
+    url: 'arriele-ancheta',
+  },
+  {
     name: 'Gabriel Joshua Paet',
     position: 'Web Developer',
     company: 'Volenday',

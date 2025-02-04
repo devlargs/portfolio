@@ -67,7 +67,7 @@ const HeroSection: FC<{
             lg: 'left',
           }}
         >
-          React JS Developer.
+          Full Stack Web Developer
         </Text>
         <Text
           fontSize={{
