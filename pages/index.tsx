@@ -13,7 +13,7 @@ import { getPlaiceholder } from 'plaiceholder';
 import { FC } from 'react';
 
 const description =
-  'Passionate developer experienced in building clean and intuitive web applications with ReactJS, dedicated to constantly expanding skills and collaborating effectively with creative teams.';
+  'Passionate developer experienced in building clean and intuitive web applications with ReactJS, NodeJS & Typescript, dedicated to constantly expanding skills and collaborating effectively with creative teams.';
 
 const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlaceholders }) => {
   return (
@@ -60,8 +60,8 @@ const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlacehol
             <ContentContainer title="About Me">
               <Text fontSize="18px" color="#878e99" mb="25px">
                 I’m a developer who has passion for building clean web applications with intuitive functionality. I
-                enjoy the process of turning ideas into reality using creative solutions. I mainly use ReactJS. I’m
-                always curious about learning new skills, tools, and concepts.
+                enjoy the process of turning ideas into reality using creative solutions. I mainly use ReactJS, NodeJS &
+                Typescript. I’m always curious about learning new skills, tools, and concepts.
               </Text>
               <Text fontSize="18px" color="#878e99">
                 In addition to working on various solo hobby projects, I have worked with creative teams, which involves

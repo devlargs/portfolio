@@ -80,8 +80,8 @@ const HeroSection: FC<{
             lg: 'left',
           }}
         >
-          Passionate developer experienced in building clean and intuitive web applications with ReactJS, dedicated to
-          constantly expanding skills and collaborating effectively with creative teams.
+          Passionate developer experienced in building clean and intuitive web applications, dedicated to constantly
+          expanding skills and collaborating effectively with creative teams.
         </Text>
       </Box>
     </Box>
