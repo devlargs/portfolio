@@ -6,6 +6,7 @@ import Portfolio from '@components/Portfolio';
 import Skills from '@components/Skills';
 import Testimonials from '@components/Testimonials';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
+import { toKebabCase } from 'largs-utils';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { getPlaiceholder } from 'plaiceholder';
@@ -95,34 +96,7 @@ const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlacehol
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const pngs = [
-    'angular',
-    'antd',
-    'apollo',
-    'chakra-ui',
-    'electron',
-    'ethers',
-    'express',
-    'firebase',
-    'git',
-    'graphql',
-    'heroku',
-    'javascript',
-    'jest',
-    'mongodb',
-    'next-js',
-    'node',
-    'nx',
-    'react-js',
-    'react-testing-library',
-    'redux',
-    'sanity-io',
-    'sass',
-    'tailwind',
-    'typescript',
-    'vue',
-    'zustand',
-  ];
+  const pngs = [...PRIMARY_SKILLS, ...SECONDARY_SKILLS].map((item) => toKebabCase(item));
   const jpgs = ['gabriel', 'josua', 'marc', 'nemuel', 'ralph', 'zadkiel', 'arriele'];
 
   const imagePlaceholders: Record<string, string> = {};

@@ -12,10 +12,14 @@ export const PRIMARY_SKILLS = [
   'Antd',
   'Redux',
   'Zustand',
+  'Vite',
+  'Vitest',
   'Git',
 ];
 
 export const SECONDARY_SKILLS = [
+  'Nest JS',
+  'Strapi',
   'Sanity Io',
   'Electron',
   'Firebase',
@@ -27,4 +31,8 @@ export const SECONDARY_SKILLS = [
   'Vue',
   'MongoDB',
   'Heroku',
+  'Web3',
+  'Ethers',
+  'MySQL',
+  'Docker',
 ];

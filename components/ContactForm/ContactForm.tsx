@@ -1,5 +1,5 @@
 import { Button, Input, Text, Textarea, useToast } from '@chakra-ui/react';
-import validateEmail from '@utils/validateEmail';
+import { isValidEmail } from 'largs-utils';
 import { FC, ReactElement, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -73,7 +73,7 @@ const ContactForm: FC = () => {
       <Controller
         control={control}
         name="email"
-        rules={{ required: true, validate: validateEmail }}
+        rules={{ required: true, validate: isValidEmail }}
         render={({ field }): ReactElement => <Input placeholder="Email" size="sm" {...field} border="1px solid gray" />}
       />
       {errors.email?.type === 'required' && (
