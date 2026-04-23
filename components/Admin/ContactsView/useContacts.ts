@@ -33,7 +33,7 @@ const useContacts = (): UseContactsResult => {
       }
     };
 
-    fetchContacts();
+    void fetchContacts();
     return (): void => {
       cancelled = true;
     };
