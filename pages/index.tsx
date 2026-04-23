@@ -97,7 +97,7 @@ const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlacehol
 
 export const getStaticProps: GetStaticProps = async () => {
   const pngs = [...PRIMARY_SKILLS, ...SECONDARY_SKILLS].map((item) => toKebabCase(item));
-  const jpgs = ['gabriel', 'josua', 'marc', 'nemuel', 'ralph', 'zadkiel', 'arriele'];
+  const jpgs = ['gabriel', 'josua', 'marc', 'nemuel', 'ralph', 'zadkiel', 'arriele', 'andrien', 'johngo', 'cj'];
 
   const imagePlaceholders: Record<string, string> = {};
   const dataPng = await Promise.all(pngs.map((item) => getPlaiceholder(`/images/${item}.png`)));
