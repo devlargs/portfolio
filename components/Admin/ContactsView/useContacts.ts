@@ -1,10 +1,11 @@
 import { useToast } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Contact } from '../types';
 
 interface UseContactsResult {
   contacts: Contact[];
   loading: boolean;
+  removeContact: (id: string) => Promise<boolean>;
 }
 
 const useContacts = (): UseContactsResult => {
@@ -38,7 +39,27 @@ const useContacts = (): UseContactsResult => {
     };
   }, [toast]);
 
-  return { contacts, loading };
+  const removeContact = useCallback(
+    async (id: string): Promise<boolean> => {
+      try {
+        const res = await fetch(`/api/contacts?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.error) {
+          toast({ title: 'Error removing contact', description: data.error, status: 'error', position: 'bottom' });
+          return false;
+        }
+        setContacts((prev) => prev.filter((c) => c._id !== id));
+        toast({ title: 'Contact removed', status: 'success', position: 'bottom' });
+        return true;
+      } catch {
+        toast({ title: 'Error removing contact', status: 'error', position: 'bottom' });
+        return false;
+      }
+    },
+    [toast]
+  );
+
+  return { contacts, loading, removeContact };
 };
 
 export default useContacts;
