@@ -1,5 +1,5 @@
 import CORS from 'cors';
-import initMiddleware from './initMiddleware';
+import initMiddleware from '@lib/api/initMiddleware';
 
 export default initMiddleware(
   CORS({
