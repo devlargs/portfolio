@@ -101,13 +101,13 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const imagePlaceholders: Record<string, string> = {};
   const dataPng = await Promise.all(pngs.map((item) => getPlaiceholder(`/images/${item}.png`)));
-  dataPng.map((q, i) => {
-    imagePlaceholders[pngs[i]] = q.base64;
+  dataPng.forEach((q, i) => {
+    imagePlaceholders[pngs[i]!] = q.base64;
   });
 
   const dataJpg = await Promise.all(jpgs.map((item) => getPlaiceholder(`/images/linkedin/${item}.jpg`)));
-  dataJpg.map((q, i) => {
-    imagePlaceholders[jpgs[i]] = q.base64;
+  dataJpg.forEach((q, i) => {
+    imagePlaceholders[jpgs[i]!] = q.base64;
   });
 
   return {
