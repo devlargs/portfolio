@@ -6,6 +6,8 @@ import HeroSection from '@components/HeroSection';
 import Portfolio from '@components/Portfolio';
 import Skills from '@components/Skills';
 import Testimonials from '@components/Testimonials';
+import { COMPANY_CONTRIBUTIONS, PERSONAL_PROJECTS } from '@constants/portfolio';
+import { checkLink } from '@lib/checkLink';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
 import { toKebabCase } from 'largs-utils';
 import { GetStaticProps } from 'next';
@@ -16,7 +18,10 @@ import { FC } from 'react';
 const description =
   'Passionate developer experienced in building clean and intuitive web applications with ReactJS, NodeJS & Typescript, dedicated to constantly expanding skills and collaborating effectively with creative teams.';
 
-const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlaceholders }) => {
+const Home: FC<{ imagePlaceholders: Record<string, string>; brokenLinks: string[] }> = ({
+  imagePlaceholders,
+  brokenLinks,
+}) => {
   return (
     <>
       <Head>
@@ -69,7 +74,7 @@ const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlacehol
             </ContentContainer>
 
             <ContentContainer title="Portfolio">
-              <Portfolio />
+              <Portfolio brokenLinks={brokenLinks} />
             </ContentContainer>
 
             <ContentContainer title="Recommendations">
@@ -105,9 +110,14 @@ export const getStaticProps: GetStaticProps = async () => {
     imagePlaceholders[name] = dataJpg[i].base64;
   });
 
+  const allLinks = [...COMPANY_CONTRIBUTIONS, ...PERSONAL_PROJECTS].map((p) => p.link.trim());
+  const linkResults = await Promise.all(allLinks.map((url) => checkLink(url).then((ok) => ({ url, ok }))));
+  const brokenLinks = linkResults.filter((r) => !r.ok).map((r) => r.url);
+
   return {
     props: {
       imagePlaceholders,
+      brokenLinks,
     },
   };
 };

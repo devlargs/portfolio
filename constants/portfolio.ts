@@ -1,16 +1,69 @@
 export type Projects = {
   title: string;
   link: string;
+  highlight?: boolean;
 };
 
 export const COMPANY_CONTRIBUTIONS: Projects[] = [
   {
-    link: 'https://betvision.com',
-    title: 'BetVision',
-  },
-  {
     link: 'https://hov.co',
     title: 'High Output Ventures',
+    highlight: true,
+  },
+
+  {
+    link: 'https://evelan.de',
+    title: 'Evelan',
+    highlight: true,
+  },
+  {
+    link: 'https://volenday.com',
+    title: 'Volenday',
+    highlight: true,
+  },
+
+  {
+    link: 'https://dfknord.de',
+    title: 'DFK Nord',
+    highlight: true,
+  },
+  {
+    link: 'https://perfectus.de',
+    title: 'Perfectus',
+    highlight: true,
+  },
+  {
+    link: 'https://www.biontech.com/int/en/home.html ',
+    title: 'Biontech',
+    highlight: true,
+  },
+  {
+    link: 'https://pyxelchain.com',
+    title: 'Pyxelchain',
+  },
+  {
+    link: 'https://lottie.org',
+    title: 'Lottie Homes',
+  },
+
+  {
+    link: 'https://www.bluedroplabs.com/',
+    title: 'Blue Drop Labs',
+    highlight: true,
+  },
+  {
+    link: 'https://supertri.com/',
+    title: 'Supertri',
+    highlight: true,
+  },
+  {
+    link: 'https://by.supertri.com/chicago-triathlon',
+    title: 'Supertri Revamped',
+    highlight: true,
+  },
+  {
+    link: 'https://betvision.com',
+    title: 'BetVision',
   },
   {
     link: 'https://her.vn',
@@ -25,20 +78,33 @@ export const COMPANY_CONTRIBUTIONS: Projects[] = [
     title: 'Thailate',
   },
   {
-    link: 'https://evelan.de',
-    title: 'Evelan',
+    link: 'https://royal-community.vercel.app/',
+    title: 'Royal Community',
   },
   {
-    link: 'https://volenday.com',
-    title: 'Volenday',
+    link: 'https://royalprotocol.io/',
+    title: 'Royal Protocol',
+  },
+  {
+    link: 'https://mondu-cms.vercel.app/',
+    title: 'Mondu',
+  },
+  {
+    link: 'https://careers.etihad.com',
+    title: 'Etihad',
+    highlight: true,
   },
   {
     link: 'https://www.asia-ceo.org',
     title: 'Asia CEO Org',
   },
   {
+    link: 'https://ahamatic.com/',
+    title: 'Ahamatic',
+  },
+  {
     link: 'https://chainedmetrics.com/',
-    title: 'Chained Metrics'
+    title: 'Chained Metrics',
   },
   {
     link: 'https://racketstudios.com',
@@ -60,45 +126,13 @@ export const COMPANY_CONTRIBUTIONS: Projects[] = [
     link: 'https://pyx.is/',
     title: 'Pyxis',
   },
-  {
-    link: 'https://ahamatic.com/',
-    title: 'Ahamatic',
-  },
-  {
-    link: 'https://dfknord.de',
-    title: 'DFK Nord',
-  },
-  {
-    link: 'https://perfectus.de',
-    title: 'Perfectus',
-  },
-  {
-    link: 'https://www.biontech.com/int/en/home.html ',
-    title: 'Biontech',
-  },
-  {
-    link: 'https://pyxelchain.com',
-    title: 'Pyxelchain',
-  },
-  {
-    link: 'https://lottie.org',
-    title: 'Lottie Homes',
-  },
-  // {
-  //   link: 'https://royal-community.vercel.app/',
-  //   title: 'Royal Community'
-  // },
-  {
-    link: 'https://royalprotocol.io/',
-    title: 'Royal Protocol',
-  },
-  {
-    link: 'https://mondu-cms.vercel.app/',
-    title: 'Mondu',
-  },
 ];
 
 export const PERSONAL_PROJECTS: Projects[] = [
+  {
+    link: 'https://ralphlargo.com',
+    title: 'Portfolio Website',
+  },
   {
     link: 'https://reddit-images-gallery.vercel.app/',
     title: 'Reddit Images Gallery',

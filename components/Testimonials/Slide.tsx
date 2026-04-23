@@ -42,9 +42,10 @@ const Slide: FC<Props> = ({ testimonial, blurDataURL }) => (
       maxW="680px"
       _before={{
         content: '"\\201C"',
+        display: { base: 'none', md: 'block' },
         position: 'absolute',
         top: '-18px',
-        left: { base: '-4px', md: '-12px' },
+        left: '-12px',
         fontSize: '56px',
         lineHeight: '1',
         color: defaults.primary,
@@ -57,7 +58,7 @@ const Slide: FC<Props> = ({ testimonial, blurDataURL }) => (
         fontSize="16px"
         lineHeight={{ base: '24px', lg: '28px' }}
         color="#c4cfde"
-        textAlign={{ base: 'justify', md: 'center' }}
+        textAlign={{ base: 'left', md: 'center' }}
       >
         {testimonial.testimonial}
       </Text>
