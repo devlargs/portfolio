@@ -3,23 +3,27 @@ import { Box, chakra, IconButton, Text } from '@chakra-ui/react';
 import openNewTab from '@utils/openNewTab';
 import testimonials from 'constants/testimonials';
 import Image from 'next/image';
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, PointerEvent, useCallback, useEffect, useRef, useState } from 'react';
 import defaults from 'theme/defaults';
 
 const AUTOPLAY_MS = 6000;
-const FADE_MS = 250;
+const SLIDE_MS = 500;
+const SWIPE_THRESHOLD = 50;
 
 const Testimonials: FC<{
   imagePlaceholders: Record<string, string>;
 }> = ({ imagePlaceholders }) => {
   const [index, setIndex] = useState(0);
-  const [displayIndex, setDisplayIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const total = testimonials.length;
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+  const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const dragStartX = useRef<number>(0);
+  const trackWidth = useRef<number>(0);
 
   const goTo = useCallback(
     (next: number): void => {
@@ -28,38 +32,54 @@ const Testimonials: FC<{
     [total]
   );
 
-  useEffect(() => {
-    if (index === displayIndex) return;
-    setIsVisible(false);
-    const t = setTimeout(() => {
-      setDisplayIndex(index);
-      setIsVisible(true);
-    }, FADE_MS);
-    return (): void => clearTimeout(t);
-  }, [index, displayIndex]);
-
   const next = useCallback((): void => goTo(index + 1), [goTo, index]);
   const prev = useCallback((): void => goTo(index - 1), [goTo, index]);
 
   useEffect(() => {
-    if (!contentRef.current) return;
-    const node = contentRef.current;
-    const update = (): void => setContainerHeight(node.scrollHeight);
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(node);
-    return (): void => ro.disconnect();
-  }, [displayIndex]);
+    const measure = (): void => {
+      const node = slideRefs.current[index];
+      if (node) setContainerHeight(node.scrollHeight);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return (): void => window.removeEventListener('resize', measure);
+  }, [index]);
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || isDragging) return;
     timerRef.current = setInterval(() => {
       setIndex((i) => (i + 1) % total);
     }, AUTOPLAY_MS);
     return (): void => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isPaused, total]);
+  }, [isPaused, isDragging, total]);
+
+  const handlePointerDown = (e: PointerEvent<HTMLDivElement>): void => {
+    if (trackRef.current) {
+      trackWidth.current = trackRef.current.offsetWidth;
+      trackRef.current.setPointerCapture(e.pointerId);
+    }
+    dragStartX.current = e.clientX;
+    setIsDragging(true);
+  };
+
+  const handlePointerMove = (e: PointerEvent<HTMLDivElement>): void => {
+    if (!isDragging) return;
+    setDragOffset(e.clientX - dragStartX.current);
+  };
+
+  const handlePointerUp = (e: PointerEvent<HTMLDivElement>): void => {
+    if (!isDragging) return;
+    if (trackRef.current) trackRef.current.releasePointerCapture(e.pointerId);
+    const delta = e.clientX - dragStartX.current;
+    setIsDragging(false);
+    setDragOffset(0);
+    if (delta > SWIPE_THRESHOLD) prev();
+    else if (delta < -SWIPE_THRESHOLD) next();
+  };
+
+  const dragPercent = isDragging && trackWidth.current ? (dragOffset / trackWidth.current) * 100 : 0;
 
   return (
     <Box
@@ -109,19 +129,39 @@ const Testimonials: FC<{
         />
       </Box>
 
-      {((): JSX.Element => {
-        const testimonial = testimonials[displayIndex];
-        const splitted = testimonial.avatar.split('.jpg').filter(Boolean)[0].split('/');
-        const placeholder = splitted[splitted.length - 1];
+      <Box
+        position="relative"
+        overflow="hidden"
+        w="100%"
+        minW="0"
+        height={containerHeight ? `${containerHeight}px` : 'auto'}
+        transition={`height ${SLIDE_MS}ms ease-in-out`}
+        ref={trackRef}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        sx={{ touchAction: 'pan-y', userSelect: 'none', contain: 'layout' }}
+        cursor={isDragging ? 'grabbing' : 'grab'}
+      >
+        {testimonials.map((testimonial, i) => {
+          const splitted = testimonial.avatar.split('.jpg').filter(Boolean)[0].split('/');
+          const placeholder = splitted[splitted.length - 1];
+          const offset = (i - index) * 100 + dragPercent;
 
-        return (
-          <Box
-            height={containerHeight !== undefined ? `${containerHeight}px` : 'auto'}
-            transition={`height ${FADE_MS}ms ease-in-out, opacity ${FADE_MS}ms ease-in-out`}
-            opacity={isVisible ? 1 : 0}
-            overflow="hidden"
-          >
-            <Box ref={contentRef}>
+          return (
+            <Box
+              key={testimonial.name}
+              position="absolute"
+              top="0"
+              left="0"
+              w="100%"
+              transform={`translateX(${offset}%)`}
+              transition={isDragging ? 'none' : `transform ${SLIDE_MS}ms ease-in-out`}
+              ref={(el: HTMLDivElement | null): void => {
+                slideRefs.current[i] = el;
+              }}
+            >
               <Box gap="12px" display="flex" alignItems="center">
                 <Box w="40px" h="40px">
                   <Image
@@ -129,9 +169,10 @@ const Testimonials: FC<{
                     width={100}
                     height={100}
                     alt={testimonial.avatar}
-                    style={{ borderRadius: '50%' }}
+                    style={{ borderRadius: '50%', pointerEvents: 'none' }}
                     placeholder="blur"
                     blurDataURL={imagePlaceholders[placeholder]}
+                    draggable={false}
                   />
                 </Box>
                 <Text fontSize="14px" position="relative" zIndex="99">
@@ -157,9 +198,9 @@ const Testimonials: FC<{
                 </Text>
               </Box>
             </Box>
-          </Box>
-        );
-      })()}
+          );
+        })}
+      </Box>
     </Box>
   );
 };

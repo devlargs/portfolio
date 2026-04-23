@@ -1,7 +1,43 @@
 import { Button, Input, Text, Textarea, useToast } from '@chakra-ui/react';
 import { isValidEmail } from 'largs-utils';
-import { FC, ReactElement, useState } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+
+const IS_PRODUCTION = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production';
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+const RECAPTCHA_ENABLED = IS_PRODUCTION && Boolean(RECAPTCHA_SITE_KEY);
+const RECAPTCHA_SCRIPT_ID = 'recaptcha-v3-script';
+
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (cb: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+  }
+}
+
+const loadRecaptchaScript = (siteKey: string): void => {
+  if (typeof window === 'undefined') return;
+  if (document.getElementById(RECAPTCHA_SCRIPT_ID)) return;
+  const script = document.createElement('script');
+  script.id = RECAPTCHA_SCRIPT_ID;
+  script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+  script.async = true;
+  script.defer = true;
+  document.head.appendChild(script);
+};
+
+const getRecaptchaToken = (siteKey: string): Promise<string> =>
+  new Promise((resolve, reject) => {
+    if (!window.grecaptcha) {
+      reject(new Error('reCAPTCHA not loaded'));
+      return;
+    }
+    window.grecaptcha.ready(() => {
+      window.grecaptcha?.execute(siteKey, { action: 'contact' }).then(resolve).catch(reject);
+    });
+  });
 
 const ContactForm: FC = () => {
   const { register, handleSubmit, formState, control, reset } = useForm({
@@ -12,16 +48,34 @@ const ContactForm: FC = () => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (RECAPTCHA_ENABLED && RECAPTCHA_SITE_KEY) loadRecaptchaScript(RECAPTCHA_SITE_KEY);
+  }, []);
+
   const onSubmit = async (value): Promise<void> => {
     setLoading(true);
 
     try {
+      let recaptchaToken = '';
+      if (RECAPTCHA_ENABLED && RECAPTCHA_SITE_KEY) {
+        try {
+          recaptchaToken = await getRecaptchaToken(RECAPTCHA_SITE_KEY);
+        } catch {
+          toast({
+            title: 'reCAPTCHA failed to load. Please refresh and try again.',
+            status: 'error',
+            position: 'bottom',
+          });
+          return;
+        }
+      }
+
       const res = await fetch('/api/sendEmail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(value),
+        body: JSON.stringify({ ...value, recaptchaToken }),
       });
 
       const { error } = await res.json();
@@ -115,6 +169,30 @@ const ContactForm: FC = () => {
       >
         Send Message
       </Button>
+
+      {RECAPTCHA_ENABLED && (
+        <Text fontSize="11px" color="#878e99" mt="12px">
+          This site is protected by reCAPTCHA and the Google{' '}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noreferrer"
+            style={{ textDecoration: 'underline' }}
+          >
+            Privacy Policy
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://policies.google.com/terms"
+            target="_blank"
+            rel="noreferrer"
+            style={{ textDecoration: 'underline' }}
+          >
+            Terms of Service
+          </a>{' '}
+          apply.
+        </Text>
+      )}
     </form>
   );
 };
