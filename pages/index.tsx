@@ -1,4 +1,5 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import AboutMe from '@components/AboutMe';
 import ContactForm from '@components/ContactForm';
 import ContentContainer from '@components/ContentContainer';
 import HeroSection from '@components/HeroSection';
@@ -58,15 +59,7 @@ const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlacehol
             }}
           >
             <ContentContainer title="About Me">
-              <Text fontSize="18px" color="#878e99" mb="25px">
-                I’m a developer who has passion for building clean web applications with intuitive functionality. I
-                enjoy the process of turning ideas into reality using creative solutions. I mainly use ReactJS, NodeJS &
-                Typescript. I’m always curious about learning new skills, tools, and concepts.
-              </Text>
-              <Text fontSize="18px" color="#878e99">
-                In addition to working on various solo hobby projects, I have worked with creative teams, which involves
-                daily stand-ups and communications, source control, and project management.
-              </Text>
+              <AboutMe />
             </ContentContainer>
 
             <ContentContainer title="Skills">
