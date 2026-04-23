@@ -103,7 +103,7 @@ const ContactForm: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} data-contact-form>
       <Text fontSize="14px" color="#878e99">
         Name
       </Text>
