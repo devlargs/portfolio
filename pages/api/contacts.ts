@@ -16,7 +16,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } catch (error) {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
-  } else {
-    return res.status(405).json({ error: 'Method Not Allowed' });
   }
+
+  if (req.method === 'DELETE') {
+    try {
+      const { id } = req.query;
+      if (!id || typeof id !== 'string') {
+        return res.status(400).json({ error: 'Contact id is required' });
+      }
+      const deleted = await Contact.findByIdAndDelete(id);
+      if (!deleted) return res.status(404).json({ error: 'Contact not found' });
+      return res.status(200).json({ error: null });
+    } catch (error) {
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  return res.status(405).json({ error: 'Method Not Allowed' });
 }
