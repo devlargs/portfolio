@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { bodyParser } from './helpers/bodyParser';
-import { connectToDatabase } from './helpers/connectToDatabase';
-import cors from './helpers/cors';
-import Contact from './models/Contact';
+import { bodyParser } from '@lib/api/bodyParser';
+import { connectToDatabase } from '@lib/api/connectToDatabase';
+import cors from '@lib/api/cors';
+import Contact from '@lib/models/Contact';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   bodyParser();
