@@ -1,6 +1,7 @@
 import { Box, chakra, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import defaults from 'theme/defaults';
+import layout from 'theme/layout';
 import Avatar from './Avatar';
 import StatusBadge from './StatusBadge';
 
@@ -11,8 +12,8 @@ const HeroSection: FC<{
     position="relative"
     display="grid"
     placeContent="center"
-    h="100vh"
-    p={{ base: '60px', lg: '80px' }}
+    h={layout.left.height}
+    p={layout.left.padding}
     overflow="hidden"
     sx={{
       '@keyframes hero-fade-in': {

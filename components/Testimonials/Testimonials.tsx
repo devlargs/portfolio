@@ -4,7 +4,6 @@ import { FC, PointerEvent, useCallback, useEffect, useRef, useState } from 'reac
 import Nav from './Nav';
 import Slide from './Slide';
 
-const AUTOPLAY_MS = 6000;
 const SLIDE_MS = 500;
 const SWIPE_THRESHOLD = 50;
 
@@ -17,13 +16,10 @@ const Testimonials: FC<{
   imagePlaceholders: Record<string, string>;
 }> = ({ imagePlaceholders }) => {
   const [index, setIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isFormFocused, setIsFormFocused] = useState(false);
   const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const total = testimonials.length;
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const dragStartX = useRef<number>(0);
@@ -48,33 +44,6 @@ const Testimonials: FC<{
     window.addEventListener('resize', measure);
     return (): void => window.removeEventListener('resize', measure);
   }, [index]);
-
-  useEffect(() => {
-    const isInContactForm = (target: EventTarget | null): boolean =>
-      target instanceof Element && Boolean(target.closest('[data-contact-form]'));
-    const handleFocusIn = (e: FocusEvent): void => {
-      if (isInContactForm(e.target)) setIsFormFocused(true);
-    };
-    const handleFocusOut = (e: FocusEvent): void => {
-      if (isInContactForm(e.target)) setIsFormFocused(false);
-    };
-    document.addEventListener('focusin', handleFocusIn);
-    document.addEventListener('focusout', handleFocusOut);
-    return (): void => {
-      document.removeEventListener('focusin', handleFocusIn);
-      document.removeEventListener('focusout', handleFocusOut);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isPaused || isDragging || isFormFocused) return;
-    timerRef.current = setInterval(() => {
-      setIndex((i) => (i + 1) % total);
-    }, AUTOPLAY_MS);
-    return (): void => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [isPaused, isDragging, isFormFocused, total]);
 
   const handlePointerDown = (e: PointerEvent<HTMLDivElement>): void => {
     if (trackRef.current) {
@@ -103,12 +72,7 @@ const Testimonials: FC<{
   const dragPercent = isDragging && trackWidth.current ? (dragOffset / trackWidth.current) * 100 : 0;
 
   return (
-    <Box
-      w="100%"
-      position="relative"
-      onMouseEnter={(): void => setIsPaused(true)}
-      onMouseLeave={(): void => setIsPaused(false)}
-    >
+    <Box w="100%" position="relative">
       <Box mt="24px" mb="32px">
         <Nav total={total} index={index} onPrev={prev} onNext={next} onGoTo={goTo} />
       </Box>

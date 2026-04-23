@@ -26,7 +26,13 @@ const Slide: FC<Props> = ({ testimonial, blurDataURL }) => (
         fontWeight="bold"
         color={defaults.primary}
         cursor="pointer"
-        onClick={(): void => openNewTab(`https://linkedin.com/in/${testimonial.url}`)}
+        position="relative"
+        zIndex={2}
+        onPointerDown={(e): void => e.stopPropagation()}
+        onClick={(e): void => {
+          e.stopPropagation();
+          openNewTab(`https://linkedin.com/in/${testimonial.url}`);
+        }}
         _hover={{ textDecoration: 'underline' }}
       >
         {testimonial.name}
