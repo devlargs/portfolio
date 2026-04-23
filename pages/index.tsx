@@ -96,18 +96,20 @@ const Home: FC<{ imagePlaceholders: Record<string, string> }> = ({ imagePlacehol
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const pngs = [...PRIMARY_SKILLS, ...SECONDARY_SKILLS].map((item) => toKebabCase(item));
+  const pngs = [...PRIMARY_SKILLS, ...SECONDARY_SKILLS]
+    .map((item) => toKebabCase(item))
+    .filter((item): item is string => Boolean(item));
   const jpgs = ['gabriel', 'josua', 'marc', 'nemuel', 'ralph', 'zadkiel', 'arriele', 'andrien', 'johngo', 'cj'];
 
   const imagePlaceholders: Record<string, string> = {};
   const dataPng = await Promise.all(pngs.map((item) => getPlaiceholder(`/images/${item}.png`)));
-  dataPng.forEach((q, i) => {
-    imagePlaceholders[pngs[i]!] = q.base64;
+  pngs.forEach((name, i) => {
+    imagePlaceholders[name] = dataPng[i].base64;
   });
 
   const dataJpg = await Promise.all(jpgs.map((item) => getPlaiceholder(`/images/linkedin/${item}.jpg`)));
-  dataJpg.forEach((q, i) => {
-    imagePlaceholders[jpgs[i]!] = q.base64;
+  jpgs.forEach((name, i) => {
+    imagePlaceholders[name] = dataJpg[i].base64;
   });
 
   return {
