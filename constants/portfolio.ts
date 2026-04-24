@@ -78,6 +78,10 @@ export const COMPANY_CONTRIBUTIONS: Projects[] = [
     title: 'Thailate',
   },
   {
+    link: 'https://www.ontosadmissions.com/',
+    title: 'Ontos Admissions'
+  },
+  {
     link: 'https://royal-community.vercel.app/',
     title: 'Royal Community',
   },
