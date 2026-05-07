@@ -57,11 +57,6 @@ export const COMPANY_CONTRIBUTIONS: Projects[] = [
     highlight: true,
   },
   {
-    link: 'https://by.supertri.com/chicago-triathlon',
-    title: 'Supertri Revamped',
-    highlight: true,
-  },
-  {
     link: 'https://betvision.com',
     title: 'BetVision',
   },
@@ -79,7 +74,7 @@ export const COMPANY_CONTRIBUTIONS: Projects[] = [
   },
   {
     link: 'https://www.ontosadmissions.com/',
-    title: 'Ontos Admissions'
+    title: 'Ontos Admissions',
   },
   {
     link: 'https://royal-community.vercel.app/',
@@ -136,6 +131,12 @@ export const PERSONAL_PROJECTS: Projects[] = [
   {
     link: 'https://ralphlargo.com',
     title: 'Portfolio Website',
+    highlight: true,
+  },
+  {
+    link: 'http://christianlynzeiweds.com',
+    title: 'Wedding Invitation',
+    highlight: true,
   },
   {
     link: 'https://reddit-images-gallery.vercel.app/',

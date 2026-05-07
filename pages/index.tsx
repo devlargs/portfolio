@@ -1,8 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import AboutMe from '@components/AboutMe';
 import Activity from '@components/Activity';
-import { YearlyActivity } from '@lib/fetchGithubActivity';
-import layout from 'theme/layout';
 import ContactForm from '@components/ContactForm';
 import ContentContainer from '@components/ContentContainer';
 import HeroSection from '@components/HeroSection';
@@ -11,13 +9,14 @@ import Skills from '@components/Skills';
 import Testimonials from '@components/Testimonials';
 import { COMPANY_CONTRIBUTIONS, PERSONAL_PROJECTS } from '@constants/portfolio';
 import { checkLink } from '@lib/checkLink';
-import { fetchGithubActivity } from '@lib/fetchGithubActivity';
+import { fetchGithubActivity, YearlyActivity } from '@lib/fetchGithubActivity';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
 import { toKebabCase } from 'largs-utils';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { getPlaiceholder } from 'plaiceholder';
 import { FC } from 'react';
+import layout from 'theme/layout';
 
 const description =
   'Passionate developer experienced in building clean and intuitive web applications with ReactJS, NodeJS & Typescript, dedicated to constantly expanding skills and collaborating effectively with creative teams.';
@@ -74,10 +73,16 @@ const Home: FC<{
               <Testimonials imagePlaceholders={imagePlaceholders} />
             </ContentContainer>
 
-            {activity && activity.years.length > 0 && (
-              <ContentContainer title="GitHub Activity">
-                <Activity data={activity} />
-              </ContentContainer>
+            {/* Hide this for now  */}
+            {/* eslint-disable-next-line */}
+            {false && (
+              <>
+                {activity && activity!.years.length > 0 && (
+                  <ContentContainer title="GitHub Activity">
+                    <Activity data={activity} />
+                  </ContentContainer>
+                )}
+              </>
             )}
 
             <ContentContainer title="Contact Me">

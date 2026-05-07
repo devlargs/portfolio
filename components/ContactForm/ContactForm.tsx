@@ -1,6 +1,6 @@
 import { Box, Button, Input, Text, Textarea, useToast } from '@chakra-ui/react';
 import { isValidEmail } from 'largs-utils';
-import { FC, ReactElement, useEffect, useState } from 'react';
+import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import defaults from 'theme/defaults';
 import FormField from './FormField';
@@ -10,6 +10,20 @@ const IS_PRODUCTION = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production';
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 const RECAPTCHA_ENABLED = IS_PRODUCTION && Boolean(RECAPTCHA_SITE_KEY);
 const RECAPTCHA_SCRIPT_ID = 'recaptcha-v3-script';
+const RECAPTCHA_STYLE_ID = 'recaptcha-v3-style';
+const RECAPTCHA_VISIBLE_CLASS = 'recaptcha-badge-visible';
+
+const injectRecaptchaBadgeStyles = (): void => {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById(RECAPTCHA_STYLE_ID)) return;
+  const style = document.createElement('style');
+  style.id = RECAPTCHA_STYLE_ID;
+  style.innerHTML = `
+    .grecaptcha-badge { visibility: hidden; opacity: 0; transition: opacity 200ms ease; }
+    body.${RECAPTCHA_VISIBLE_CLASS} .grecaptcha-badge { visibility: visible; opacity: 1; }
+  `;
+  document.head.appendChild(style);
+};
 
 declare global {
   interface Window {
@@ -47,9 +61,28 @@ const ContactForm: FC = () => {
   const { errors } = formState;
   const toast = useToast();
   const [loading, setLoading] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (RECAPTCHA_ENABLED && RECAPTCHA_SITE_KEY) loadRecaptchaScript(RECAPTCHA_SITE_KEY);
+    if (!RECAPTCHA_ENABLED || !RECAPTCHA_SITE_KEY) return;
+    loadRecaptchaScript(RECAPTCHA_SITE_KEY);
+    injectRecaptchaBadgeStyles();
+
+    const el = formRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        document.body.classList.toggle(RECAPTCHA_VISIBLE_CLASS, entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+
+    return (): void => {
+      observer.disconnect();
+      document.body.classList.remove(RECAPTCHA_VISIBLE_CLASS);
+    };
   }, []);
 
   const onSubmit = async (value): Promise<void> => {
@@ -100,7 +133,7 @@ const ContactForm: FC = () => {
       : undefined;
 
   return (
-    <Box as="form" onSubmit={handleSubmit(onSubmit)} data-contact-form pt="8px">
+    <Box as="form" ref={formRef} onSubmit={handleSubmit(onSubmit)} data-contact-form pt="8px">
       <FormField label="Name" error={errors.name ? 'Name is required' : undefined}>
         <Input
           placeholder="Your name"
