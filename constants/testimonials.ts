@@ -16,6 +16,15 @@ const testimonials: Array<{
     url: 'arriele-ancheta',
   },
   {
+    name: 'Maria Jerina Garcia',
+    position: 'Customer & Technical Support Specialist',
+    company: 'Tumble',
+    testimonial:
+      'Ralph Largo is a highly dedicated and results-driven programmer who brings consistency, professionalism, and a strong work ethic to everything he does. It was a genuine pleasure working alongside him, and I have no doubt he would be a valuable asset to any team lucky enough to have him.',
+    avatar: '/images/linkedin/maria.jpg',
+    url: 'maria-jerina-garcia-388a60145',
+  },
+  {
     name: 'Andrien Pecson',
     position: 'Software Engineer',
     company: 'Fanrock',

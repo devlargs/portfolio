@@ -101,7 +101,19 @@ export const getStaticProps: GetStaticProps = async () => {
   const pngs = [...PRIMARY_SKILLS, ...SECONDARY_SKILLS]
     .map((item) => toKebabCase(item))
     .filter((item): item is string => Boolean(item));
-  const jpgs = ['gabriel', 'josua', 'marc', 'nemuel', 'ralph', 'zadkiel', 'arriele', 'andrien', 'johngo', 'cj'];
+  const jpgs = [
+    'gabriel',
+    'josua',
+    'marc',
+    'nemuel',
+    'ralph',
+    'zadkiel',
+    'arriele',
+    'andrien',
+    'johngo',
+    'cj',
+    'maria',
+  ];
 
   const imagePlaceholders: Record<string, string> = {};
   const dataPng = await Promise.all(pngs.map((item) => getPlaiceholder(`/images/${item}.png`)));
