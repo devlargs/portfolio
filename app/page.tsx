@@ -1,6 +1,5 @@
 import { COMPANY_CONTRIBUTIONS, PERSONAL_PROJECTS } from '@constants/portfolio';
 import { checkLink } from '@lib/checkLink';
-import { fetchGithubActivity } from '@lib/fetchGithubActivity';
 import { toKebabCase } from 'largs-utils';
 import { getPlaiceholder } from 'plaiceholder';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
@@ -38,13 +37,10 @@ const Page = async (): Promise<JSX.Element> => {
   });
 
   const allLinks = [...COMPANY_CONTRIBUTIONS, ...PERSONAL_PROJECTS].map((p) => p.link.trim());
-  const [linkResults, activity] = await Promise.all([
-    Promise.all(allLinks.map((url) => checkLink(url).then((ok) => ({ url, ok })))),
-    fetchGithubActivity('devlargs'),
-  ]);
+  const linkResults = await Promise.all(allLinks.map((url) => checkLink(url).then((ok) => ({ url, ok }))));
   const brokenLinks = linkResults.filter((r) => !r.ok).map((r) => r.url);
 
-  return <HomeView imagePlaceholders={imagePlaceholders} brokenLinks={brokenLinks} activity={activity} />;
+  return <HomeView imagePlaceholders={imagePlaceholders} brokenLinks={brokenLinks} />;
 };
 
 export default Page;
