@@ -169,7 +169,7 @@ const ContactForm: FC = () => {
         isDisabled={Boolean(Object.keys(errors).length)}
         isLoading={loading}
         bg={defaults.primary}
-        color="white"
+        color="#0a1929"
         fontSize="14px"
         fontWeight={600}
         px="28px"

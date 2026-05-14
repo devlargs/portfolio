@@ -52,12 +52,12 @@ const HeroSection: FC<{
       </Box>
 
       <Text
-        fontSize={{ base: '26px', lg: '60px' }}
-        lineHeight={{ base: '34px', lg: '68px' }}
+        fontSize={{ base: '26px', lg: '44px', xl: '60px' }}
+        lineHeight={{ base: '34px', lg: '52px', xl: '68px' }}
         mb="4px"
         fontWeight="bold"
         as="h1"
-        letterSpacing={{ base: '-0.5px', lg: '-1.5px' }}
+        letterSpacing={{ base: '-0.5px', lg: '-1px', xl: '-1.5px' }}
         textAlign={{ base: 'center', lg: 'left' }}
       >
         Hi, I&apos;m{' '}
@@ -75,12 +75,12 @@ const HeroSection: FC<{
       </Text>
 
       <Text
-        fontSize={{ base: '20px', lg: '40px' }}
-        lineHeight={{ base: '28px', lg: '48px' }}
+        fontSize={{ base: '20px', lg: '30px', xl: '40px' }}
+        lineHeight={{ base: '28px', lg: '38px', xl: '48px' }}
         as="h2"
         fontWeight={600}
         color="#c4cfde"
-        letterSpacing={{ base: '-0.3px', lg: '-1px' }}
+        letterSpacing={{ base: '-0.3px', lg: '-0.7px', xl: '-1px' }}
         textAlign={{ base: 'center', lg: 'left' }}
         mb="20px"
       >
