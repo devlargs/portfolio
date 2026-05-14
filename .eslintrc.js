@@ -14,13 +14,12 @@ module.exports = {
     },
   },
   extends: [
-    'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'prettier',
     'prettier/@typescript-eslint',
   ],
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'react-hooks'],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'error',
     'react-hooks/rules-of-hooks': 'error',

@@ -3,6 +3,7 @@ import { checkLink } from '@lib/checkLink';
 import { toKebabCase } from 'largs-utils';
 import { getPlaiceholder } from 'plaiceholder';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
+import { JSX } from 'react';
 import HomeView from './HomeView';
 
 export const dynamic = 'force-static';
