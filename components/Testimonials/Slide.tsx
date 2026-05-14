@@ -6,6 +6,7 @@ import Avatar from './Avatar';
 
 interface Testimonial {
   name: string;
+  position: string;
   company: string;
   avatar: string;
   url: string;
@@ -38,9 +39,29 @@ const Slide: FC<Props> = ({ testimonial, blurDataURL }) => (
         {testimonial.name}
       </chakra.span>
     </Text>
-    <Text fontSize="11px" color="#878e99" mt="4px" letterSpacing="0.5px" textTransform="uppercase">
-      {testimonial.company}
-    </Text>
+    <Box
+      mt="8px"
+      display="inline-flex"
+      alignItems="center"
+      gap="8px"
+      px="10px"
+      py="4px"
+      borderRadius="999px"
+      bg="rgba(255,255,255,0.04)"
+      border="1px solid"
+      borderColor="rgba(255,255,255,0.08)"
+    >
+      <Box w="6px" h="6px" borderRadius="999px" bg={defaults.primary} boxShadow={`0 0 8px ${defaults.primary}`} />
+      <Text fontSize="11px" color="#c4cfde" letterSpacing="0.3px" fontStyle="italic">
+        {testimonial.position}
+      </Text>
+      <Text fontSize="11px" color="#878e99">
+        ·
+      </Text>
+      <Text fontSize="11px" color="#878e99" letterSpacing="0.5px" textTransform="uppercase">
+        {testimonial.company}
+      </Text>
+    </Box>
 
     <Box
       mt="20px"

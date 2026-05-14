@@ -1,5 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import testimonials from 'constants/testimonials';
+import { shuffleArray } from 'largs-utils';
 import { FC, PointerEvent, useCallback, useEffect, useRef, useState } from 'react';
 import Nav from './Nav';
 import Slide from './Slide';
@@ -16,10 +17,15 @@ const Testimonials: FC<{
   imagePlaceholders: Record<string, string>;
 }> = ({ imagePlaceholders }) => {
   const [index, setIndex] = useState(0);
+  const [items, setItems] = useState(testimonials);
   const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const total = testimonials.length;
+  const total = items.length;
+
+  useEffect(() => {
+    setItems(shuffleArray(testimonials) ?? testimonials);
+  }, []);
   const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const dragStartX = useRef<number>(0);
@@ -92,7 +98,7 @@ const Testimonials: FC<{
         sx={{ touchAction: 'pan-y', userSelect: 'none', contain: 'layout' }}
         cursor={isDragging ? 'grabbing' : 'grab'}
       >
-        {testimonials.map((testimonial, i) => {
+        {items.map((testimonial, i) => {
           const offset = (i - index) * 100 + dragPercent;
           const isActive = i === index;
 
