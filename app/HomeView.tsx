@@ -1,13 +1,11 @@
 import { Box } from '@chakra-ui/react';
 import AboutMe from '@components/AboutMe';
-import Activity from '@components/Activity';
 import ContactForm from '@components/ContactForm';
 import ContentContainer from '@components/ContentContainer';
 import HeroSection from '@components/HeroSection';
 import Portfolio from '@components/Portfolio';
 import Skills from '@components/Skills';
 import Testimonials from '@components/Testimonials';
-import { YearlyActivity } from '@lib/fetchGithubActivity';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
 import { FC } from 'react';
 import layout from 'theme/layout';
@@ -15,10 +13,9 @@ import layout from 'theme/layout';
 interface Props {
   imagePlaceholders: Record<string, string>;
   brokenLinks: string[];
-  activity: YearlyActivity | null;
 }
 
-const HomeView: FC<Props> = ({ imagePlaceholders, brokenLinks, activity }) => (
+const HomeView: FC<Props> = ({ imagePlaceholders, brokenLinks }) => (
   <Box
     display="flex"
     flexDir={{
@@ -54,17 +51,6 @@ const HomeView: FC<Props> = ({ imagePlaceholders, brokenLinks, activity }) => (
         <ContentContainer title="Recommendations">
           <Testimonials imagePlaceholders={imagePlaceholders} />
         </ContentContainer>
-
-        {/* eslint-disable-next-line */}
-        {false && (
-          <>
-            {activity && activity!.years.length > 0 && (
-              <ContentContainer title="GitHub Activity">
-                <Activity data={activity} />
-              </ContentContainer>
-            )}
-          </>
-        )}
 
         <ContentContainer title="Contact Me">
           <ContactForm />
