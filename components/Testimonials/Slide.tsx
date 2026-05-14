@@ -58,7 +58,7 @@ const Slide: FC<Props> = ({ testimonial, blurDataURL }) => (
         {testimonial.position}
       </Text>
       <Text fontSize="11px" color="#878e99">
-        Â·
+        @
       </Text>
       <Text fontSize="11px" color="#878e99" letterSpacing="0.5px" textTransform="uppercase">
         {testimonial.company}
