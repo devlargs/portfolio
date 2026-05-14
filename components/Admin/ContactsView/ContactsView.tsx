@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Flex, IconButton, Spinner, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
 import { FC, useState } from 'react';

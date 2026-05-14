@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { Box, Button, Input, Text, Textarea, useToast } from '@chakra-ui/react';
 import { isValidEmail } from 'largs-utils';
 import { FC, ReactElement, useEffect, useRef, useState } from 'react';

@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { Box, Button, Container, Flex, Heading, Input, useToast, VStack } from '@chakra-ui/react';
 import { FC, FormEvent, useState } from 'react';
 

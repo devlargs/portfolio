@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { Box, Button, Grid, Text } from '@chakra-ui/react';
 import { Projects } from '@constants/portfolio';
 import { FC, useMemo, useRef, useState } from 'react';

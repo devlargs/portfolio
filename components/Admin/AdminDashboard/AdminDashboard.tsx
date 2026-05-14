@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import { FC, useMemo, useState } from 'react';
 import ContactsView from '../ContactsView';

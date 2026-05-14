@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { Box } from '@chakra-ui/react';
 import testimonials from 'constants/testimonials';
 import { shuffleArray } from 'largs-utils';

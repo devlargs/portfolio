@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { Box, Text, useToast } from '@chakra-ui/react';
 import openNewTab from '@utils/openNewTab';

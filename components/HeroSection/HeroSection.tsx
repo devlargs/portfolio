@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { Box, chakra, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import defaults from 'theme/defaults';

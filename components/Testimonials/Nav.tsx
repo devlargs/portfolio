@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, IconButton } from '@chakra-ui/react';
 import { FC } from 'react';

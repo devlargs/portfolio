@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { Box, Text } from '@chakra-ui/react';
 import { FC, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import DayCell from './DayCell';

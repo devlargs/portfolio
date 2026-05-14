@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { SettingsIcon } from '@chakra-ui/icons';
 import { Flex, Heading, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { FC } from 'react';

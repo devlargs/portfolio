@@ -1,3 +1,5 @@
+﻿'use client';
+
 import { Box, chakra, Text } from '@chakra-ui/react';
 import openNewTab from '@utils/openNewTab';
 import { FC } from 'react';
