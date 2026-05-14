@@ -1,10 +1,8 @@
 import { Box } from '@chakra-ui/react';
 import { PERSONAL_PROJECTS } from '@constants/portfolio';
-import dynamic from 'next/dynamic';
 import { FC } from 'react';
+import CompanyContributions from './CompanyContributions';
 import ProjectSection from './ProjectSection';
-
-const CompanyContributions = dynamic(() => import('./CompanyContributions'), { ssr: false });
 
 interface Props {
   brokenLinks?: string[];
