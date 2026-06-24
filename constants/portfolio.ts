@@ -33,6 +33,11 @@ export const COMPANY_CONTRIBUTIONS: Projects[] = [
     highlight: true,
   },
   {
+    link: 'https://telypas.com',
+    title: 'Telypas',
+    highlight: true,
+  },
+  {
     link: 'https://www.biontech.com/int/en/home.html ',
     title: 'Biontech',
     highlight: true,
