@@ -1,4 +1,5 @@
 import { connectToDatabase } from '@lib/api/connectToDatabase';
+import { sendContactEmail } from '@lib/api/sendContactEmail';
 import Contact from '@lib/models/Contact';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -44,6 +45,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const newContact = new Contact({ name, email, message });
     await newContact.save();
+
+    try {
+      await sendContactEmail({ name, email, message });
+    } catch (error) {
+      // eslint-disable-next-line
+      console.error(error);
+      // Email delivery is best-effort; the contact is already persisted.
+    }
+
     return NextResponse.json({ error: null }, { status: 201, headers: corsHeaders });
   } catch {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500, headers: corsHeaders });
