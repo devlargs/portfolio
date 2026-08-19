@@ -30,6 +30,7 @@
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.1085.0",
     "@chakra-ui/icons": "^2.2.6",
     "@chakra-ui/next-js": "^2.4.2",
     "@chakra-ui/react": "^2.10.9",
