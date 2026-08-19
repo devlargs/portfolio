@@ -41,7 +41,7 @@ const Page = async (): Promise<JSX.Element> => {
   const linkResults = await Promise.all(allLinks.map((url) => checkLink(url).then((ok) => ({ url, ok }))));
   const brokenLinks = linkResults.filter((r) => !r.ok).map((r) => r.url);
 
-  return <HomeView imagePlaceholders={imagePlaceholders} brokenLinks={brokenLinks} />;
+  return <HomeView imagePlaceholders={imagePlaceholders} brokenLinks={brokenLinks} year={new Date().getFullYear()} />;
 };
 
 export default Page;

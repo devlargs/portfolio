@@ -1,55 +1,71 @@
 const styles = {
   global: {
+    'html, body': {
+      /* clip, never hidden — `hidden` breaks position: sticky in the rail */
+      overflowX: 'clip',
+      background: 'var(--color-paper)',
+      color: 'var(--color-ink)',
+    },
     html: {
       boxSizing: 'border-box',
-      overflowX: 'hidden',
+      scrollBehavior: 'smooth',
+      /* the sticky masthead must not cover an anchored section head */
+      scrollPaddingTop: 'calc(var(--space-2xl) + 64px)',
+      WebkitFontSmoothing: 'antialiased',
+      textRendering: 'optimizeLegibility',
     },
-    h1: {
-      fontFamily: 'var(--font-montserrat)',
+    body: {
+      fontFamily: 'var(--font-body)',
+      fontSize: 'var(--text-md)',
+      lineHeight: 1.65,
+      transition: 'background var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out)',
     },
-    p: {
-      fontFamily: 'var(--font-fira)',
+    '*, *::before, *::after': { boxSizing: 'inherit' },
+    'h1, h2, h3, h4': {
+      fontFamily: 'var(--font-display)',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      color: 'var(--color-ink)',
+      overflowWrap: 'anywhere',
+      minWidth: 0,
     },
-    '.slick-dots': {
-      top: '-10px',
-      left: '-10px',
-      width: 'initial',
-      height: '10px',
+    p: { fontFamily: 'var(--font-body)' },
+    '::selection': {
+      background: 'var(--color-accent-soft)',
+      color: 'var(--color-ink)',
     },
-    '.slick-dots li button:before': {
-      color: 'white',
+    /* focus is never animated — it must appear the instant focus lands */
+    ':focus-visible': {
+      outline: '2px solid var(--color-focus)',
+      outlineOffset: '3px',
+      borderRadius: 'var(--radius-sm)',
+      transition: 'none',
     },
-    '.slick-dots li.slick-active button:before': {
-      color: '#32ABFF',
-    },
+    ':focus:not(:focus-visible)': { outline: 'none' },
     '*': {
       scrollbarWidth: 'thin',
-      scrollbarColor: 'rgba(50,171,255,0.35) transparent',
+      scrollbarColor: 'var(--color-rule-strong) transparent',
     },
-    '*::-webkit-scrollbar': {
-      width: '10px',
-      height: '10px',
-    },
-    '*::-webkit-scrollbar-track': {
-      background: 'transparent',
-    },
+    '*::-webkit-scrollbar': { width: '10px', height: '10px' },
+    '*::-webkit-scrollbar-track': { background: 'transparent' },
     '*::-webkit-scrollbar-thumb': {
-      background: 'linear-gradient(180deg, rgba(50,171,255,0.35) 0%, rgba(50,171,255,0.2) 100%)',
-      borderRadius: '999px',
-      border: '2px solid transparent',
+      background: 'var(--color-rule-strong)',
+      borderRadius: 'var(--radius-pill)',
+      border: '3px solid transparent',
       backgroundClip: 'padding-box',
-      transition: 'background 200ms ease',
     },
     '*::-webkit-scrollbar-thumb:hover': {
-      background: 'linear-gradient(180deg, rgba(50,171,255,0.7) 0%, rgba(50,171,255,0.45) 100%)',
+      background: 'var(--color-accent)',
       backgroundClip: 'padding-box',
     },
-    '*::-webkit-scrollbar-thumb:active': {
-      background: '#32ABFF',
-      backgroundClip: 'padding-box',
-    },
-    '*::-webkit-scrollbar-corner': {
-      background: 'transparent',
+    '@media (prefers-reduced-motion: reduce)': {
+      html: { scrollBehavior: 'auto' },
+      '*, *::before, *::after': {
+        animationDuration: '0.01ms !important',
+        animationIterationCount: '1 !important',
+        transitionDuration: '150ms !important',
+        scrollBehavior: 'auto !important',
+      },
     },
   },
 };

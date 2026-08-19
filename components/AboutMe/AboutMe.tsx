@@ -1,36 +1,85 @@
-﻿'use client';
+'use client';
 
-import { Box, chakra, Text } from '@chakra-ui/react';
-import { FC } from 'react';
-import defaults from 'theme/defaults';
-import TechChip from './TechChip';
+import { Box, Text } from '@chakra-ui/react';
+import Reveal from '@components/Reveal';
+import { FC, PropsWithChildren } from 'react';
+import StackList from './StackList';
 
-const TECH_STACK = ['ReactJS', 'Next.js', 'NodeJS', 'TypeScript', 'MongoDB'];
+const CORE_STACK = ['ReactJS', 'Next.js', 'NodeJS', 'TypeScript', 'MongoDB'] as const;
+const WAYS_OF_WORKING = ['Daily stand-ups', 'Code reviews', 'Shared project management'] as const;
 
-const Highlight = chakra('span', {
-  baseStyle: { color: defaults.primary, fontWeight: 600 },
-});
+const Lead: FC<PropsWithChildren> = ({ children }) => (
+  <Box as="span" color="var(--color-accent)">
+    {children}
+  </Box>
+);
 
+/**
+ * Broadsheet body: one reading column at measure, annotations in the margin.
+ * Collapses to a single column below md, notes last.
+ */
 const AboutMe: FC = () => (
-  <Box>
-    <Box position="relative" pl={{ base: '16px', md: '20px' }} borderLeft={`2px solid ${defaults.primary}`} mb="20px">
-      <Text fontSize="18px" color="#c4cfde" lineHeight="1.7">
-        I&rsquo;m a developer with a passion for building <Highlight>clean web applications</Highlight> that feel
-        intuitive to use. I enjoy turning ideas into reality through thoughtful, creative solutions, and I&rsquo;m
-        always curious to explore new tools and ideas along the way.
-      </Text>
+  <Box
+    display="grid"
+    gap={{ base: 'var(--space-xl)', md: 'var(--space-2xl)' }}
+    gridTemplateColumns={{ base: 'minmax(0, 1fr)', md: 'minmax(0, 1.6fr) minmax(0, 1fr)' }}
+    alignItems="start"
+  >
+    <Box minW="0">
+      <Reveal>
+        {/* drop-cap opening — the one place the display face runs inside body copy */}
+        <Text
+          fontSize="var(--text-xl)"
+          lineHeight={1.6}
+          color="var(--color-ink)"
+          maxW="var(--measure)"
+          m="0"
+          sx={{
+            '&::first-letter': {
+              fontFamily: 'var(--font-display)',
+              float: 'left',
+              fontSize: '3.4em',
+              lineHeight: 0.82,
+              paddingRight: '0.08em',
+              marginTop: '0.06em',
+              color: 'var(--color-accent)',
+            },
+          }}
+        >
+          I am a developer with a passion for building <Lead>clean web applications</Lead> that feel intuitive to use. I
+          enjoy turning ideas into reality through thoughtful, creative solutions, and I am always curious to explore
+          new tools and ideas along the way.
+        </Text>
+      </Reveal>
+
+      <Reveal delay={100}>
+        <Text
+          mt="var(--space-md)"
+          fontSize="var(--text-md)"
+          lineHeight={1.8}
+          color="var(--color-ink-2)"
+          maxW="var(--measure)"
+          m="0"
+          pt="var(--space-md)"
+        >
+          Beyond solo hobby projects, I have collaborated with creative teams through daily stand-ups, code reviews and
+          shared project management, shipping work that balances craft with pragmatism.
+        </Text>
+      </Reveal>
     </Box>
 
-    <Text fontSize="16px" color="#878e99" lineHeight="1.8" mb="24px">
-      Beyond solo hobby projects, I&rsquo;ve collaborated with creative teams through daily stand-ups, code reviews, and
-      shared project management, shipping work that balances craft with pragmatism.
-    </Text>
-
-    <Box display="flex" flexWrap="wrap" gap="8px">
-      {TECH_STACK.map((t) => (
-        <TechChip key={t} label={t} />
-      ))}
-    </Box>
+    <Reveal delay={160}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        gap="var(--space-lg)"
+        pl={{ base: '0', md: 'var(--space-md)' }}
+        borderLeft={{ base: 'none', md: 'var(--rule-hair) solid var(--color-rule)' }}
+      >
+        <StackList label="Core stack" items={CORE_STACK} />
+        <StackList label="Ways of working" items={WAYS_OF_WORKING} />
+      </Box>
+    </Reveal>
   </Box>
 );
 

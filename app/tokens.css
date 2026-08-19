@@ -1,0 +1,138 @@
+/* Hallmark · macrostructure: Long Document (Broadsheet) · genre: editorial
+ * theme: custom (tuned) · vibe: "warm paper, quiet authority, one red mark"
+ * paper oklch(97.2% 0.008 85) · accent oklch(47% 0.148 28)
+ * axes: paper-band=light · display-style=variable-serif (Fraunces, roman) · accent-hue=warm
+ * nav: N9 edge-aligned · footer: Ft5 statement · enrichment: none (typography only)
+ * tone: editorial · audience: hiring managers, recruiters, engineers
+ * pre-emit critique: P5 H5 E4 S5 R5 V5
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ground */
+  --color-paper: oklch(97.2% 0.008 85);
+  --color-paper-2: oklch(94.4% 0.011 84);
+  --color-paper-3: oklch(90.5% 0.014 83);
+
+  /* ink */
+  --color-ink: oklch(21% 0.015 60);
+  --color-ink-2: oklch(44% 0.012 62);
+  --color-ink-3: oklch(56% 0.012 64);
+
+  /* structure */
+  --color-rule: oklch(85% 0.01 80);
+  --color-rule-strong: oklch(70% 0.012 76);
+
+  /* accent */
+  --color-accent: oklch(47% 0.148 28);
+  --color-accent-hover: oklch(41% 0.152 28);
+  --color-accent-soft: oklch(93.5% 0.042 30);
+  --color-accent-ink: oklch(98% 0.01 60);
+
+  /* signal */
+  --color-focus: oklch(45% 0.15 28);
+  --color-danger: oklch(48% 0.17 26);
+  --color-danger-soft: oklch(94% 0.04 26);
+  --color-live: oklch(56% 0.14 145);
+
+  /* type roles — the family lists are set by next/font on <html> */
+  --font-display: var(--font-fraunces), 'Iowan Old Style', Georgia, serif;
+  --font-body: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-meta: var(--font-plex-mono), ui-monospace, 'SFMono-Regular', monospace;
+
+  /* scale */
+  --text-display: clamp(2.75rem, 1.1rem + 7.1vw, 7rem);
+  --text-display-s: clamp(2.25rem, 1.35rem + 4vw, 4.5rem);
+  --text-4xl: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  --text-3xl: clamp(1.625rem, 1.28rem + 1.5vw, 2.25rem);
+  --text-2xl: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --text-xl: 1.25rem;
+  --text-lg: 1.125rem;
+  --text-md: 1rem;
+  --text-sm: 0.9375rem;
+  --text-xs: 0.8125rem;
+  --text-2xs: 0.6875rem;
+
+  /* 4pt space scale */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 8rem;
+  --space-5xl: 10rem;
+
+  /* measure */
+  --measure: 62ch;
+  --measure-narrow: 44ch;
+  --page-max: 78rem;
+  --page-gutter: clamp(1.25rem, 0.4rem + 3.4vw, 4.5rem);
+  --rail-width: 2.75rem;
+
+  /* line */
+  --rule-hair: 1px;
+  --rule-thick: 2px;
+
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-pill: 999px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 140ms;
+  --dur-2: 220ms;
+  --dur-3: 380ms;
+  --dur-4: 640ms;
+}
+
+/* warm-dark inversion — system preference, unless the reader chose light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --color-paper: oklch(18.5% 0.012 62);
+    --color-paper-2: oklch(22.5% 0.014 62);
+    --color-paper-3: oklch(27% 0.016 62);
+    --color-ink: oklch(94% 0.01 85);
+    --color-ink-2: oklch(78% 0.011 78);
+    --color-ink-3: oklch(62% 0.012 72);
+    --color-rule: oklch(32% 0.014 62);
+    --color-rule-strong: oklch(45% 0.016 62);
+    --color-accent: oklch(70% 0.145 35);
+    --color-accent-hover: oklch(78% 0.13 38);
+    --color-accent-soft: oklch(29% 0.05 32);
+    --color-accent-ink: oklch(16% 0.02 40);
+    --color-focus: oklch(72% 0.15 35);
+    --color-danger: oklch(70% 0.15 26);
+    --color-danger-soft: oklch(28% 0.05 26);
+    --color-live: oklch(72% 0.14 148);
+  }
+}
+
+/* warm-dark inversion — explicit reader choice */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-paper: oklch(18.5% 0.012 62);
+  --color-paper-2: oklch(22.5% 0.014 62);
+  --color-paper-3: oklch(27% 0.016 62);
+  --color-ink: oklch(94% 0.01 85);
+  --color-ink-2: oklch(78% 0.011 78);
+  --color-ink-3: oklch(62% 0.012 72);
+  --color-rule: oklch(32% 0.014 62);
+  --color-rule-strong: oklch(45% 0.016 62);
+  --color-accent: oklch(70% 0.145 35);
+  --color-accent-hover: oklch(78% 0.13 38);
+  --color-accent-soft: oklch(29% 0.05 32);
+  --color-accent-ink: oklch(16% 0.02 40);
+  --color-focus: oklch(72% 0.15 35);
+  --color-danger: oklch(70% 0.15 26);
+  --color-danger-soft: oklch(28% 0.05 26);
+  --color-live: oklch(72% 0.14 148);
+}

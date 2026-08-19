@@ -1,12 +1,21 @@
+/** Page-level measurements for the Broadsheet document. */
 const layout = {
-  left: {
-    height: '100vh',
-    padding: { base: '60px', lg: '48px', xl: '80px' },
+  page: {
+    maxWidth: 'var(--page-max)',
+    gutter: 'var(--page-gutter)',
   },
-  right: {
-    height: { base: 'initial', lg: '100vh' },
-    paddingY: '60px',
-    paddingX: { base: '16px', lg: '32px', xl: '100px' },
+  rail: {
+    width: 'var(--rail-width)',
+  },
+  section: {
+    paddingY: { base: 'var(--space-2xl)', md: 'var(--space-3xl)' },
+  },
+  measure: {
+    body: 'var(--measure)',
+    narrow: 'var(--measure-narrow)',
+  },
+  masthead: {
+    height: { base: '56px', md: '64px' },
   },
 } as const;
 

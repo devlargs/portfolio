@@ -1,63 +1,88 @@
 import { Box } from '@chakra-ui/react';
 import AboutMe from '@components/AboutMe';
-import ContactForm from '@components/ContactForm';
-import ContentContainer from '@components/ContentContainer';
-import HeroSection from '@components/HeroSection';
-import Portfolio from '@components/Portfolio';
-import Skills from '@components/Skills';
-import Testimonials from '@components/Testimonials';
-import { PRIMARY_SKILLS, SECONDARY_SKILLS } from 'constants/skills';
+import Capabilities from '@components/Capabilities';
+import Colophon from '@components/Colophon';
+import Contact from '@components/Contact';
+import Masthead from '@components/Masthead';
+import Opening from '@components/Opening';
+import Recommendations from '@components/Recommendations';
+import Section, { SectionHead } from '@components/Section';
+import SideRail from '@components/SideRail';
+import WorkIndex from '@components/WorkIndex';
 import { FC } from 'react';
-import layout from 'theme/layout';
 
 interface Props {
   imagePlaceholders: Record<string, string>;
   brokenLinks: string[];
+  year: number;
 }
 
-const HomeView: FC<Props> = ({ imagePlaceholders, brokenLinks }) => (
-  <Box
-    display="flex"
-    flexDir={{
-      base: 'column',
-      lg: 'row',
-    }}
-  >
-    <Box flex="1" minW="0" color="white">
-      <HeroSection logoPlaceholder={imagePlaceholders.ralph} />
+const HomeView: FC<Props> = ({ imagePlaceholders, brokenLinks, year }) => (
+  <>
+    <Box
+      as="a"
+      href="#about"
+      position="absolute"
+      left="-9999px"
+      top="0"
+      zIndex={50}
+      bg="var(--color-accent)"
+      color="var(--color-accent-ink)"
+      fontFamily="var(--font-meta)"
+      fontSize="var(--text-xs)"
+      px="var(--space-sm)"
+      py="var(--space-2xs)"
+      _focus={{ left: 'var(--space-sm)', top: 'var(--space-sm)' }}
+    >
+      Skip to content
     </Box>
-    <Box flex="1" minW="0">
-      <Box
-        h={layout.right.height}
-        overflow={{ base: 'auto', lg: 'scroll' }}
-        overflowX={{ base: 'auto', lg: 'hidden' }}
-        py={layout.right.paddingY}
-        px={layout.right.paddingX}
-      >
-        <ContentContainer title="About Me">
-          <AboutMe />
-        </ContentContainer>
 
-        <ContentContainer title="Skills">
-          <Skills skills={PRIMARY_SKILLS} title="Primary Skills" imagePlaceholders={imagePlaceholders} />
-          <Box h="16px" />
-          <Skills skills={SECONDARY_SKILLS} title="Secondary Skills" imagePlaceholders={imagePlaceholders} />
-        </ContentContainer>
+    <Masthead />
+    <SideRail />
 
-        <ContentContainer title="Portfolio">
-          <Portfolio brokenLinks={brokenLinks} />
-        </ContentContainer>
+    <Box as="main">
+      <Opening portraitPlaceholder={imagePlaceholders.ralph} />
 
-        <ContentContainer title="Recommendations">
-          <Testimonials imagePlaceholders={imagePlaceholders} />
-        </ContentContainer>
+      <Section id="about">
+        <SectionHead
+          id="about"
+          title="About"
+          lede="What I work on, how I work with people, and the tools I reach for first."
+        />
+        <AboutMe />
+      </Section>
 
-        <ContentContainer title="Contact Me">
-          <ContactForm />
-        </ContentContainer>
-      </Box>
+      <Section id="work" sunken>
+        <SectionHead
+          id="work"
+          title="Selected work"
+          lede="Products and sites I have contributed to, plus things I built for myself. Marked entries are the engagements I spent the most time inside."
+        />
+        <WorkIndex brokenLinks={brokenLinks} />
+      </Section>
+
+      <Section id="capabilities">
+        <SectionHead
+          id="capabilities"
+          title="Capabilities"
+          lede="Primary is what I use daily. Secondary is what I have shipped with and can pick straight back up."
+        />
+        <Capabilities imagePlaceholders={imagePlaceholders} />
+      </Section>
+
+      <Section id="recommendations" sunken>
+        <SectionHead id="recommendations" title="Recommendations" lede="Written by people I have worked alongside." />
+        <Recommendations imagePlaceholders={imagePlaceholders} />
+      </Section>
+
+      <Section id="contact">
+        <SectionHead id="contact" title="Contact" />
+        <Contact />
+      </Section>
     </Box>
-  </Box>
+
+    <Colophon year={year} />
+  </>
 );
 
 export default HomeView;
