@@ -5,6 +5,7 @@
 ### Added
 
 - A hamburger menu on phones, opening an index of destinations that lists each one with its address.
+- A progress bar across the top of the page while a new page loads, which stays hidden if the page is instant.
 - Write-ups now show the date they were published, next to the reading time.
 - Search results can now show a breadcrumb trail and a date for each write-up, and list pages describe what they list.
 - A GitHub link in the colophon, which also tells search engines the profile and the site are the same person.

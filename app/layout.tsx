@@ -1,4 +1,5 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
+import RouteProgress from '@components/RouteProgress';
 import { ACTIVE_SOCIALS, PROFILE, SITE_URL } from '@constants/profile';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from '@constants/skills';
 import type { Metadata, Viewport } from 'next';
@@ -121,7 +122,10 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
       <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
     </head>
-    <body>{children}</body>
+    <body>
+      <RouteProgress />
+      {children}
+    </body>
     {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
   </html>
 );
