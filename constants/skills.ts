@@ -15,6 +15,8 @@ export const PRIMARY_SKILLS = [
   'Vite',
   'Vitest',
   'Git',
+  'Claude',
+  'Supabase',
 ];
 
 export const SECONDARY_SKILLS = [
@@ -35,4 +37,10 @@ export const SECONDARY_SKILLS = [
   'Ethers',
   'MySQL',
   'Docker',
+  'PostgreSQL',
+  'Prisma',
+  'Cursor',
+  'OpenAI',
+  'Vercel',
+  'AWS',
 ];

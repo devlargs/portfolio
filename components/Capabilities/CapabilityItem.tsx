@@ -11,8 +11,8 @@ interface Props {
 }
 
 /**
- * A named capability, not a logo tile. The mark is desaturated support at rest
- * and only earns its colour when the reader points at the name.
+ * A named capability, not a logo tile. The mark carries its own brand colour and
+ * the name picks up the accent when the reader points at the row.
  */
 const CapabilityItem: FC<Props> = ({ name, slug, blurDataURL, emphasis = false }) => {
   const markSize = emphasis ? 20 : 16;
@@ -27,12 +27,8 @@ const CapabilityItem: FC<Props> = ({ name, slug, blurDataURL, emphasis = false }
       py="var(--space-2xs)"
       borderBottom="var(--rule-hair) solid var(--color-rule)"
       sx={{
-        '& .cap-mark': {
-          filter: 'grayscale(1)',
-          opacity: 0.55,
-          transition: 'filter var(--dur-2) var(--ease-out), opacity var(--dur-2) var(--ease-out)',
-        },
-        '&:hover .cap-mark': { filter: 'grayscale(0)', opacity: 1 },
+        '& .cap-mark': { transition: 'transform var(--dur-2) var(--ease-out)' },
+        '&:hover .cap-mark': { transform: 'scale(1.12)' },
         '&:hover .cap-name': { color: 'var(--color-accent)' },
       }}
     >
