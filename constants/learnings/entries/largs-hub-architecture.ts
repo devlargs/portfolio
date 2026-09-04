@@ -5,6 +5,7 @@ const learning: Learning = {
   title: 'Building a Rambox alternative in Electron',
   summary:
     'Why I built one on WebContentsView instead of webview, and the three bugs that taught me the most: orphaned session partitions, a domain check missing a dot, and hibernation that killed running work.',
+  published: '2026-09-05',
   tags: ['electron', 'react', 'typescript', 'architecture'],
   body: [
     {

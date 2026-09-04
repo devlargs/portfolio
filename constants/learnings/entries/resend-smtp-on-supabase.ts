@@ -5,6 +5,7 @@ const learning: Learning = {
   title: 'How to set up Resend as SMTP on Supabase',
   summary:
     "Supabase's built-in mailer only delivers to your own team and caps at two messages an hour. Swapping in Resend takes ten minutes, and the step everyone forgets is the rate limit.",
+  published: '2026-09-04',
   tags: ['supabase', 'resend', 'email', 'auth'],
   body: [
     {

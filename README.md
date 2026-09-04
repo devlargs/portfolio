@@ -36,6 +36,7 @@ The dev server runs on Turbopack at http://localhost:3000.
 | `NEXT_PUBLIC_ADMIN_PASSWORD`     | Admin sign-in                        |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID`  | Analytics; omit to disable           |
 | `NEXT_PUBLIC_ENVIRONMENT`        | Environment label                    |
+| `GOOGLE_SITE_VERIFICATION`       | Search Console token; omit to skip   |
 
 ## Scripts
 
@@ -78,7 +79,7 @@ The accent is a mark, not a fill. Emphasis is a neutral surface step plus a soli
 
 **A capability.** Add the display name to `constants/skills.ts` _and_ drop a matching PNG into `public/images/`. The filename is the kebab-case of the name, so `'Nest JS'` needs `nest-js.png`. The build fails without it.
 
-**A write-up.** Add a typed document under `constants/learnings/entries/` and register it in `constants/learnings/index.ts`. Entries are structured blocks, not raw markdown, so headings, code, notes and field tables render consistently. The comment thread comes with it; nothing to set up per entry. Renaming a published slug starts a new thread, so rename the discussion in GitHub to match if the old comments matter.
+**A write-up.** Add a typed document under `constants/learnings/entries/` and register it in `constants/learnings/index.ts`. Every entry needs a `published` date (`YYYY-MM-DD`); it draws the visible dateline, the article's `datePublished`, and that URL's `lastmod` in the sitemap, so a wrong one is wrong in three places. Set `updated` only on a real revision. Entries are structured blocks, not raw markdown, so headings, code, notes and field tables render consistently. The comment thread comes with it; nothing to set up per entry. Renaming a published slug starts a new thread, so rename the discussion in GitHub to match if the old comments matter.
 
 ## Releases
 

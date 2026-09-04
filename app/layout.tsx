@@ -60,6 +60,9 @@ export const metadata: Metadata = {
     description,
   },
   icons: { shortcut: '/favicon.ico' },
+  /* Server-read, so the token never reaches the client bundle. Absent in dev
+     and in any deploy that has not set it, which Next renders as no tag. */
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
 };
 
 /* Dark is the default and the system preference is not consulted, so the

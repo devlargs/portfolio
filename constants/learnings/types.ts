@@ -18,6 +18,11 @@ export type Learning = {
   title: string;
   /** Standfirst. Carries the index row and the page description. */
   summary: string;
+  /** ISO date, YYYY-MM-DD. Drives the visible dateline, the article schema and
+   *  the entry's `lastModified` in the sitemap, so it is not decoration. */
+  published: string;
+  /** ISO date. Set it only on a real revision; absent means never revised. */
+  updated?: string;
   tags: readonly string[];
   body: readonly LearningBlock[];
 };

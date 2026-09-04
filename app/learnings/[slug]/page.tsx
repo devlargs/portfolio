@@ -1,4 +1,4 @@
-import { findLearning, LEARNINGS } from '@constants/learnings';
+import { findLearning, LEARNINGS, readingMinutes, wordCount } from '@constants/learnings';
 import { PROFILE, SITE_URL } from '@constants/profile';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -33,6 +33,8 @@ export const generateMetadata = async ({ params }: Params): Promise<Metadata> =>
       url,
       type: 'article',
       authors: [PROFILE.name],
+      publishedTime: learning.published,
+      modifiedTime: learning.updated ?? learning.published,
       tags: [...learning.tags],
     },
     twitter: { title: learning.title, description: learning.summary },
@@ -45,16 +47,42 @@ const Page = async ({ params }: Params): Promise<JSX.Element> => {
 
   if (!learning) notFound();
 
+  const url = `${SITE_URL}/learnings/${learning.slug}`;
+
+  /* The article and its trail ship as one graph. `datePublished` and the visible
+     dateline in the page head read from the same field on purpose: a schema date
+     that contradicts the rendered one is worse than no date at all. */
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    headline: learning.title,
-    description: learning.summary,
-    keywords: learning.tags.join(', '),
-    url: `${SITE_URL}/learnings/${learning.slug}`,
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/learnings/${learning.slug}` },
-    author: { '@id': `${SITE_URL}/#person` },
-    publisher: { '@id': `${SITE_URL}/#person` },
+    '@graph': [
+      {
+        '@type': 'TechArticle',
+        '@id': `${url}#article`,
+        headline: learning.title,
+        description: learning.summary,
+        keywords: learning.tags.join(', '),
+        articleSection: 'Learnings',
+        url,
+        datePublished: learning.published,
+        dateModified: learning.updated ?? learning.published,
+        wordCount: wordCount(learning),
+        timeRequired: `PT${readingMinutes(learning)}M`,
+        inLanguage: 'en',
+        isAccessibleForFree: true,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+        author: { '@id': `${SITE_URL}/#person` },
+        publisher: { '@id': `${SITE_URL}/#person` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${url}#breadcrumbs`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: PROFILE.name, item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Learnings', item: `${SITE_URL}/learnings` },
+          { '@type': 'ListItem', position: 3, name: learning.title, item: url },
+        ],
+      },
+    ],
   };
 
   return (

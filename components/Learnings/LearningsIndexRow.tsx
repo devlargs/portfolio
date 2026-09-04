@@ -1,4 +1,5 @@
 import { Learning, readingMinutes } from '@constants/learnings';
+import formatDate from '@utils/formatDate';
 import NextLink from 'next/link';
 import { FC } from 'react';
 import styles from './LearningsIndexRow.module.css';
@@ -18,7 +19,11 @@ const LearningsIndexRow: FC<Props> = ({ learning, index }) => (
         <span className={styles.index}>{index}</span>
 
         <div className={styles.main}>
-          <div className={styles.meta}>{readingMinutes(learning)} min read</div>
+          <div className={styles.meta}>
+            <time dateTime={learning.published}>{formatDate(learning.published)}</time>
+            <span aria-hidden="true"> · </span>
+            {readingMinutes(learning)} min read
+          </div>
 
           <h2 className={styles.title}>{learning.title}</h2>
 

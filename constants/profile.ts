@@ -20,12 +20,18 @@ export const PROFILE = {
 } as const;
 
 /**
- * TODO(ralph): fill these in. Anything left as an empty string is filtered out
- * of both the colophon and the `sameAs` array in the Person JSON-LD, so an
- * unfilled entry degrades quietly rather than shipping a dead link.
+ * These feed the colophon and, more importantly, the `sameAs` array in the
+ * Person JSON-LD. `sameAs` is how a search engine is told that this domain and
+ * that profile are one person rather than two entities with the same name, so
+ * an empty entry here is a real cost, not a cosmetic one.
+ *
+ * An empty `href` is filtered out of both surfaces, so an unfilled entry
+ * degrades quietly rather than shipping a dead link.
+ *
+ * TODO(ralph): LinkedIn. Use the full canonical profile URL.
  */
 export const SOCIALS: SocialLink[] = [
-  { label: 'GitHub', href: '', handle: '' },
+  { label: 'GitHub', href: 'https://github.com/devlargs', handle: '@devlargs' },
   { label: 'LinkedIn', href: '', handle: '' },
 ];
 

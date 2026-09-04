@@ -12,7 +12,7 @@ export const findLearning = (slug: string): Learning | undefined =>
 
 const WORDS_PER_MINUTE = 220;
 
-const blockWords = (learning: Learning): number =>
+export const wordCount = (learning: Learning): number =>
   learning.body.reduce((total, block) => {
     switch (block.kind) {
       case 'text':
@@ -30,4 +30,4 @@ const blockWords = (learning: Learning): number =>
   }, 0);
 
 export const readingMinutes = (learning: Learning): number =>
-  Math.max(1, Math.round(blockWords(learning) / WORDS_PER_MINUTE));
+  Math.max(1, Math.round(wordCount(learning) / WORDS_PER_MINUTE));
