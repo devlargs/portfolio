@@ -1,0 +1,29 @@
+.body {
+  padding-bottom: var(--space-2xl);
+}
+
+.tags {
+  max-width: var(--measure-wide);
+  margin-bottom: var(--space-lg);
+}
+
+.more {
+  max-width: var(--measure-wide);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-lg);
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+
+@media (min-width: 48em) {
+  .body {
+    padding-bottom: var(--space-3xl);
+  }
+
+  .tags {
+    margin-bottom: var(--space-xl);
+  }
+
+  .more {
+    margin-top: var(--space-3xl);
+  }
+}

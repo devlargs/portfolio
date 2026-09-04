@@ -44,15 +44,21 @@ Both cost real debugging time; check them before investigating a "broken" change
 
 ## Architecture
 
-### Tokens own the design system; Chakra only aliases them
+### Tokens own the design system; CSS Modules consume them
 
-`app/tokens.css` is the single source of truth for every colour, font, space, radius, easing and duration, and it owns both themes: a `prefers-color-scheme` block plus a `[data-theme]` block so the header toggle can override the system setting.
+There is no CSS-in-JS runtime and no UI library. Styling is CSS custom properties plus CSS Modules, and nothing else.
 
-`theme/defaults.ts` is nothing but `var(--*)` references, and `theme/index.ts` deliberately disables Chakra's own colour-mode machinery (`useSystemColorMode: false`) so components stay colour-mode agnostic. **Write `var(--color-accent)`, never a raw hex or oklch value.** If a value is needed that has no token, add the token first.
+`app/tokens.css` is the single source of truth for every colour, font, space, radius, easing and duration, and it owns both themes: a `prefers-color-scheme` block plus a `[data-theme]` block so the header toggle can override the system setting. **Write `var(--color-accent)`, never a raw hex or oklch value.** If a value is needed that has no token, add the token first.
+
+`app/globals.css` carries the base reset and the document styles. **The reset is load-bearing, not decoration.** It zeroes element margins, list padding and heading sizes, and every component in the tree is written against that clean slate, setting its own spacing. Delete it and user-agent margins reappear under a thousand explicit spacing rules. Its rules are wrapped in `:where()` so they carry zero specificity: any bare element selector, and any module class, overrides them without an `!important`.
+
+`.page-wrap` in `app/globals.css` is the one deliberately global class. Every full-width band centres its contents on it. Vertical padding stays with the band, in that band's own module.
+
+Breakpoints are plain `min-width` media queries at **30em / 48em / 87.5em**. The first two are the values the old responsive props resolved to, so they are load-bearing for parity, not arbitrary.
 
 Three places legitimately break that rule, and all three drift silently when tokens change:
 
-- `components/Admin/**`: a separate dark admin chrome with its own hardcoded palette, not part of the public site's system.
+- `components/Admin/adminTokens.css`: a separate dark admin chrome with its own palette, not part of the public site's system. Declared on `:root` rather than a wrapper class so the dialog and the toasts, which portal onto `document.body`, inherit it.
 - `app/opengraph-image.tsx`: Satori cannot read CSS custom properties, so the palette is duplicated as hex.
 - `app/layout.tsx`: the `themeColor` viewport entries paint mobile browser chrome and must be literal.
 
@@ -72,7 +78,7 @@ It also holds its promises at module scope so the ~50 sharp decodes and the outb
 
 ### Server to client boundary
 
-`app/page.tsx` is a `force-static` server component that awaits `siteData` and hands plain props to `app/HomeView.tsx`, which composes the client components. `app/providers.tsx` is the Chakra client boundary. Routes: `/` (single editorial document), `/work`, `/learnings` + `/learnings/[slug]`, `/admin`, and two route handlers under `app/api/`.
+`app/page.tsx` is a `force-static` server component that awaits `siteData` and hands plain props to `app/HomeView.tsx`, which composes the client components. There is no provider boundary: a component is a client component only when it owns state or an effect. Routes: `/` (single editorial document), `/work`, `/learnings` + `/learnings/[slug]`, `/admin`, and two route handlers under `app/api/`.
 
 ### Section composition
 
@@ -81,10 +87,11 @@ It also holds its promises at module scope so the ~50 sharp decodes and the outb
 ### Conventions
 
 - One feature per directory under `components/<Feature>/`, split into per-file sub-components, with an `index.ts` barrel re-exporting the default.
-- Path aliases cover only `@components`, `@constants`, `@utils`, `@lib`. `hooks/` and `theme/` are imported bare, resolved through `baseUrl: "."`.
+- Path aliases cover only `@components`, `@constants`, `@utils`, `@lib`. `hooks/` is imported bare, resolved through `baseUrl: "."`.
+- Every component that has styles owns a sibling `Name.module.css`. Conditional classes go through `@utils/cx`. Values that change per instance ride in as CSS custom properties on `style`, never as a second class per value.
 - ESLint makes `explicit-function-return-type` and `explicit-module-boundary-types` **errors**, so every function needs an explicit return type. `no-console` is an error too.
 - TypeScript runs `strict: false` but `strictNullChecks: true`.
-- Motion animates `transform` and `opacity` only, using the three named easings; `theme/styles.ts` carries a global `prefers-reduced-motion` override. Focus rings are never animated.
+- Motion animates `transform` and `opacity` only, using the three named easings; `app/globals.css` carries a global `prefers-reduced-motion` override. Focus rings are never animated.
 - Avoid em-dashes in user-facing copy.
 
 ## Design work

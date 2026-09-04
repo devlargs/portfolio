@@ -1,8 +1,8 @@
-import { Box, Text } from '@chakra-ui/react';
 import MoreLink from '@components/MoreLink';
 import { IndexGroup } from '@components/WorkIndex';
 import { COMPANY_CONTRIBUTIONS, PERSONAL_PROJECTS } from '@constants/portfolio';
 import { FC } from 'react';
+import styles from './WorkPreview.module.css';
 
 interface Props {
   brokenLinks?: string[];
@@ -20,31 +20,17 @@ const FEATURED = COMPANY_CONTRIBUTIONS.filter((project) => project.highlight).sl
  * document of its own and lives at /work.
  */
 const WorkPreview: FC<Props> = ({ brokenLinks = [] }) => (
-  <Box>
+  <div>
     <IndexGroup title="Longest engagements" projects={FEATURED} brokenSet={new Set(brokenLinks)} />
 
-    <Box
-      mt={{ base: 'var(--space-lg)', md: 'var(--space-xl)' }}
-      display="flex"
-      flexWrap="wrap"
-      alignItems="center"
-      justifyContent="space-between"
-      gap="var(--space-md)"
-    >
+    <div className={styles.footer}>
       <MoreLink href="/work" label="Read the full index" />
 
-      <Text
-        as="span"
-        fontFamily="var(--font-meta)"
-        fontSize="var(--text-2xs)"
-        letterSpacing="0.1em"
-        textTransform="uppercase"
-        color="var(--color-ink-3)"
-      >
+      <span className={styles.count}>
         {TOTAL} entries, {COMPANY_CONTRIBUTIONS.length} client and {PERSONAL_PROJECTS.length} personal
-      </Text>
-    </Box>
-  </Box>
+      </span>
+    </div>
+  </div>
 );
 
 export default WorkPreview;

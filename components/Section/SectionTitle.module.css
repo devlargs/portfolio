@@ -1,0 +1,7 @@
+.title {
+  margin: 0;
+  font-size: var(--text-4xl);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}

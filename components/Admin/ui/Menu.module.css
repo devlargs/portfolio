@@ -1,0 +1,35 @@
+.wrap {
+  position: relative;
+}
+
+/* bottom-end: the panel hangs from the trigger's right edge. */
+.list {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  z-index: 1000;
+  min-width: 14rem;
+  padding-block: 0.5rem;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  background: var(--admin-surface);
+  box-shadow: var(--admin-shadow-sm);
+}
+
+.item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding-block: 0.375rem;
+  padding-inline: 0.75rem;
+  background: transparent;
+  color: var(--admin-text);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 50ms ease-in;
+}
+
+.item:hover,
+.item:focus {
+  background: var(--admin-border);
+}

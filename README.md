@@ -6,7 +6,7 @@ Live at **[ralphlargo.com](https://ralphlargo.com)**.
 
 ## Stack
 
-Next.js 15 (App Router) · React 19 · TypeScript · Chakra UI over a CSS custom-property token layer · Mongoose/MongoDB · AWS SES.
+Next.js 15 (App Router) · React 19 · TypeScript · CSS Modules over a CSS custom-property token layer · Mongoose/MongoDB · AWS SES.
 
 ## Getting started
 
@@ -64,7 +64,7 @@ There is no test suite. Changes are verified by typecheck, build, and using the 
 
 **Content is data.** Everything the site says lives in `constants/`: profile and section list, skills, portfolio entries, testimonials, and the learnings documents. Components render it; they do not contain it.
 
-**One token layer owns the design.** `app/tokens.css` defines every colour, font, space, radius and easing as CSS custom properties, and carries both themes: a `prefers-color-scheme` block plus a `[data-theme]` block so the header toggle can override the system setting. `theme/` is a thin Chakra layer of `var(--*)` aliases, with Chakra's own colour-mode machinery deliberately switched off. Components reference tokens by name and never inline a raw colour.
+**One token layer owns the design.** `app/tokens.css` defines every colour, font, space, radius and easing as CSS custom properties, and carries both themes: a `prefers-color-scheme` block plus a `[data-theme]` block so the header toggle can override the system setting. `app/globals.css` holds the base reset and the document styles, and every component styles itself with a sibling `.module.css` that reads those tokens. There is no UI library and no CSS-in-JS runtime. Components reference tokens by name and never inline a raw colour.
 
 The accent is a mark, not a fill. Emphasis is a neutral surface step plus a solid accent edge, because a pale tint of the accent at full-row scale reads as a wash and flattens the page.
 

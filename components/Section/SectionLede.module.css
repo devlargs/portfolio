@@ -1,0 +1,7 @@
+.lede {
+  margin-top: var(--space-sm);
+  max-width: var(--measure);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}

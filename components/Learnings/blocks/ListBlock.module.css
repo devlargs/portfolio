@@ -1,0 +1,24 @@
+/* Markers are drawn in the gutter so the copy keeps a flush left edge. */
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 2.5ch minmax(0, 1fr);
+  gap: var(--space-sm);
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+}
+
+.marker {
+  font-family: var(--font-meta);
+  font-size: var(--text-2xs);
+  line-height: 2.6;
+  color: var(--color-accent);
+}

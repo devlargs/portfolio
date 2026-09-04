@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { FC, Fragment, ReactNode } from 'react';
+import styles from './RichText.module.css';
 
 interface Props {
   content: string;
@@ -17,35 +17,17 @@ const IS_TOKEN = /^(?:`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\([^)]+\))$/;
 
 const LINK = /^\[([^\]]+)\]\(([^)]+)\)$/;
 
-export const CODE_SX = {
-  fontFamily: 'var(--font-meta)',
-  fontSize: '0.875em',
-  background: 'var(--color-paper-3)',
-  color: 'var(--color-ink)',
-  padding: '0.1em 0.35em',
-  borderRadius: 'var(--radius-sm)',
-  overflowWrap: 'anywhere',
-} as const;
-
 const renderToken = (token: string): ReactNode => {
   if (token.startsWith('`')) {
-    return (
-      <Box as="code" sx={CODE_SX}>
-        {token.slice(1, -1)}
-      </Box>
-    );
+    return <code className={styles.code}>{token.slice(1, -1)}</code>;
   }
 
   if (token.startsWith('**')) {
-    return (
-      <Box as="strong" fontWeight={600} color="var(--color-ink)">
-        {token.slice(2, -2)}
-      </Box>
-    );
+    return <strong className={styles.strong}>{token.slice(2, -2)}</strong>;
   }
 
   if (token.startsWith('*')) {
-    return <Box as="em">{token.slice(1, -1)}</Box>;
+    return <em>{token.slice(1, -1)}</em>;
   }
 
   const link = LINK.exec(token);
@@ -54,18 +36,18 @@ const renderToken = (token: string): ReactNode => {
   const [, label, href] = link;
   const external = /^https?:/.test(href);
 
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer noopener" className={styles.link}>
+        {label}
+      </a>
+    );
+  }
+
   return (
-    <Box
-      as={external ? 'a' : NextLink}
-      href={href}
-      {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
-      color="var(--color-ink)"
-      borderBottom="var(--rule-hair) solid var(--color-accent)"
-      transition="color var(--dur-1) var(--ease-out)"
-      _hover={{ color: 'var(--color-accent)' }}
-    >
+    <NextLink href={href} className={styles.link}>
       {label}
-    </Box>
+    </NextLink>
   );
 };
 

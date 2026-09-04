@@ -1,10 +1,10 @@
-﻿'use client';
+'use client';
 
-import { Box, VStack } from '@chakra-ui/react';
+import cx from '@utils/cx';
 import { FC } from 'react';
-import defaults from 'theme/defaults';
 import { ADMIN_NAV_ITEMS } from '../constants';
 import { Section } from '../types';
+import styles from './AdminSidebar.module.css';
 
 interface AdminSidebarProps {
   activeSection: Section;
@@ -12,38 +12,20 @@ interface AdminSidebarProps {
 }
 
 const AdminSidebar: FC<AdminSidebarProps> = ({ activeSection, onSelect }) => (
-  <Box
-    as="aside"
-    w={{ base: '180px', md: '220px' }}
-    minH="calc(100vh - 60px)"
-    bg="#1a1c1f"
-    borderRight="1px solid #2b2d31"
-    py="20px"
-  >
-    <VStack spacing="4px" align="stretch">
-      {ADMIN_NAV_ITEMS.map((item) => {
-        const active = activeSection === item.key;
-        return (
-          <Box
-            key={item.key}
-            as="button"
-            textAlign="left"
-            px="20px"
-            py="10px"
-            color={active ? 'white' : '#878e99'}
-            bg={active ? '#2b2d31' : 'transparent'}
-            borderLeft={active ? `3px solid ${defaults.primary}` : '3px solid transparent'}
-            fontSize="14px"
-            fontWeight={active ? 'bold' : 'normal'}
-            _hover={{ bg: '#2b2d31', color: 'white' }}
-            onClick={(): void => onSelect(item.key)}
-          >
-            {item.label}
-          </Box>
-        );
-      })}
-    </VStack>
-  </Box>
+  <aside className={styles.sidebar}>
+    <div className={styles.list}>
+      {ADMIN_NAV_ITEMS.map((item) => (
+        <button
+          key={item.key}
+          type="button"
+          className={cx(styles.item, activeSection === item.key && styles.active)}
+          onClick={(): void => onSelect(item.key)}
+        >
+          {item.label}
+        </button>
+      ))}
+    </div>
+  </aside>
 );
 
 export default AdminSidebar;

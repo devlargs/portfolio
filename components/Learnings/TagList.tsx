@@ -1,38 +1,18 @@
-import { Box } from '@chakra-ui/react';
 import { FC } from 'react';
+import styles from './TagList.module.css';
 
 interface Props {
   tags: readonly string[];
 }
 
 const TagList: FC<Props> = ({ tags }) => (
-  <Box
-    as="ul"
-    listStyleType="none"
-    display="flex"
-    flexWrap="wrap"
-    gap="var(--space-xs)"
-    m="0"
-    p="0"
-    fontFamily="var(--font-meta)"
-    fontSize="var(--text-2xs)"
-    letterSpacing="0.08em"
-    color="var(--color-ink-3)"
-  >
+  <ul className={styles.list}>
     {tags.map((tag) => (
-      <Box
-        as="li"
-        key={tag}
-        px="var(--space-2xs)"
-        py="2px"
-        border="var(--rule-hair) solid var(--color-rule)"
-        borderRadius="var(--radius-sm)"
-        whiteSpace="nowrap"
-      >
+      <li key={tag} className={styles.tag}>
         {tag}
-      </Box>
+      </li>
     ))}
-  </Box>
+  </ul>
 );
 
 export default TagList;

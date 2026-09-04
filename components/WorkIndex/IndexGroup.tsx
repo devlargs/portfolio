@@ -1,7 +1,7 @@
-import { Box, Text } from '@chakra-ui/react';
 import Reveal from '@components/Reveal';
 import { Projects } from '@constants/portfolio';
 import { FC } from 'react';
+import styles from './IndexGroup.module.css';
 import IndexRow from './IndexRow';
 
 interface Props {
@@ -20,43 +20,16 @@ const toDomain = (rawUrl: string): string => {
 };
 
 const IndexGroup: FC<Props> = ({ title, projects, brokenSet }) => (
-  <Box>
-    <Box
-      display="flex"
-      alignItems="baseline"
-      justifyContent="space-between"
-      gap="var(--space-sm)"
-      pb="var(--space-2xs)"
-      mb="var(--space-2xs)"
-      borderBottom="var(--rule-hair) solid var(--color-ink)"
-    >
-      <Text
-        as="h3"
-        fontFamily="var(--font-meta)"
-        fontSize="var(--text-2xs)"
-        fontWeight={500}
-        letterSpacing="0.12em"
-        textTransform="uppercase"
-        color="var(--color-ink)"
-        m="0"
-      >
-        {title}
-      </Text>
-      <Text
-        as="span"
-        fontFamily="var(--font-meta)"
-        fontSize="var(--text-2xs)"
-        color="var(--color-ink-3)"
-        whiteSpace="nowrap"
-      >
-        {String(projects.length).padStart(2, '0')}
-      </Text>
-    </Box>
+  <div>
+    <div className={styles.head}>
+      <h3 className={styles.title}>{title}</h3>
+      <span className={styles.count}>{String(projects.length).padStart(2, '0')}</span>
+    </div>
 
     {/* One reveal for the whole run. Staggering thirty rows individually reads
         as decoration rather than intent, and delays the last row too long. */}
     <Reveal distance={12}>
-      <Box as="ul" listStyleType="none" m="0" p="0">
+      <ul className={styles.list}>
         {projects.map((project, i) => (
           <IndexRow
             key={project.link}
@@ -68,9 +41,9 @@ const IndexGroup: FC<Props> = ({ title, projects, brokenSet }) => (
             unavailable={brokenSet.has(project.link.trim())}
           />
         ))}
-      </Box>
+      </ul>
     </Reveal>
-  </Box>
+  </div>
 );
 
 export default IndexGroup;

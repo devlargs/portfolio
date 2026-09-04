@@ -1,0 +1,6 @@
+.paragraph {
+  margin: 0;
+  font-size: var(--text-lg);
+  line-height: 1.75;
+  color: var(--color-ink-2);
+}

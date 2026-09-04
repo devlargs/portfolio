@@ -1,0 +1,11 @@
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+@media (min-width: 48em) {
+  .groups {
+    gap: var(--space-2xl);
+  }
+}

@@ -1,0 +1,54 @@
+.carousel {
+  width: 100%;
+  position: relative;
+}
+
+.nav {
+  margin-bottom: var(--space-lg);
+}
+
+.track {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  transition: height var(--slide-ms) var(--ease-in-out);
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  contain: layout;
+}
+
+.track[data-dragging] {
+  cursor: grabbing;
+}
+
+/* The active slide stays in flow so the track is its true height in the server
+   HTML. If every slide were absolute the track would render 0px tall and only
+   gain its height after mount, shifting everything below it once the page had
+   already been scrolled. */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(var(--slide-offset, 0%));
+  transition: transform var(--slide-ms) var(--ease-in-out), opacity var(--slide-ms) var(--ease-in-out);
+}
+
+.active {
+  position: relative;
+  opacity: 1;
+}
+
+.track[data-dragging] .slide {
+  transition: none;
+}
+
+@media (min-width: 48em) {
+  .nav {
+    margin-bottom: var(--space-xl);
+  }
+}

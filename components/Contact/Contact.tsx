@@ -1,79 +1,41 @@
-import { Box, Text } from '@chakra-ui/react';
 import Reveal from '@components/Reveal';
 import { ACTIVE_SOCIALS } from '@constants/profile';
 import { FC } from 'react';
+import styles from './Contact.module.css';
 import ContactForm from './ContactForm';
 
 const Contact: FC = () => (
-  <Box
-    display="grid"
-    gap={{ base: 'var(--space-xl)', md: 'var(--space-2xl)' }}
-    gridTemplateColumns={{ base: 'minmax(0, 1fr)', md: 'minmax(0, 1fr) minmax(0, 1fr)' }}
-    alignItems="start"
-  >
+  <div className={styles.grid}>
     <Reveal>
-      <Text
-        fontFamily="var(--font-display)"
-        fontSize="var(--text-3xl)"
-        lineHeight={1.2}
-        letterSpacing="-0.02em"
-        color="var(--color-ink)"
-        maxW="20ch"
-        m="0"
-      >
-        Working on something that needs building properly?
-      </Text>
+      <p className={styles.pitch}>Working on something that needs building properly?</p>
 
-      <Text
-        mt="var(--space-md)"
-        fontSize="var(--text-md)"
-        lineHeight={1.7}
-        color="var(--color-ink-2)"
-        maxW="var(--measure-narrow)"
-      >
+      <p className={styles.body}>
         Roles, contracts and one-off builds are all welcome. Tell me what you are making and I will tell you honestly
         whether I am the right person for it.
-      </Text>
+      </p>
 
       {ACTIVE_SOCIALS.length > 0 && (
-        <Box mt="var(--space-lg)" display="flex" flexDirection="column" gap="var(--space-2xs)">
+        <div className={styles.socials}>
           {ACTIVE_SOCIALS.map((social) => (
-            <Box
-              as="a"
+            <a
               key={social.label}
               href={social.href}
               target="_blank"
               rel="noreferrer noopener"
-              display="flex"
-              alignItems="baseline"
-              justifyContent="space-between"
-              gap="var(--space-sm)"
-              maxW="var(--measure-narrow)"
-              py="var(--space-2xs)"
-              borderTop="var(--rule-hair) solid var(--color-rule)"
-              fontFamily="var(--font-meta)"
-              fontSize="var(--text-xs)"
-              letterSpacing="0.04em"
-              color="var(--color-ink-2)"
-              transition="color var(--dur-1) var(--ease-out)"
-              _hover={{ color: 'var(--color-accent)' }}
+              className={styles.social}
             >
-              <Box as="span" whiteSpace="nowrap">
-                {social.label}
-              </Box>
-              <Box as="span" color="var(--color-ink-3)" whiteSpace="nowrap">
-                {social.handle || '→'}
-              </Box>
-            </Box>
+              <span className={styles.socialLabel}>{social.label}</span>
+              <span className={styles.socialHandle}>{social.handle || '→'}</span>
+            </a>
           ))}
-        </Box>
+        </div>
       )}
     </Reveal>
 
     <Reveal delay={100}>
       <ContactForm />
     </Reveal>
-  </Box>
+  </div>
 );
 
 export default Contact;

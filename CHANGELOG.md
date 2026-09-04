@@ -22,6 +22,7 @@
 - The About section's stack notes start level with the heading, closing the empty space above them.
 - Both learnings write-ups rewritten in a plainer, more opinionated voice.
 - Repository guidance now keeps commit messages to a single subject line.
+- Rebuilt the styling on plain CSS, cutting about 27kB of JavaScript from every page.
 - Repository guidance now records the commit-per-prompt and changelog-entry rules.
 
 ### Fixed

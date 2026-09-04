@@ -1,15 +1,15 @@
-import { Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import RichText from '../RichText';
+import styles from './Paragraph.module.css';
 
 interface Props {
   content: string;
 }
 
 const Paragraph: FC<Props> = ({ content }) => (
-  <Text fontSize="var(--text-lg)" lineHeight={1.75} color="var(--color-ink-2)" m="0">
+  <p className={styles.paragraph}>
     <RichText content={content} />
-  </Text>
+  </p>
 );
 
 export default Paragraph;

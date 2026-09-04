@@ -1,6 +1,7 @@
-import { Box, Text } from '@chakra-ui/react';
 import { ACTIVE_SOCIALS, PROFILE } from '@constants/profile';
+import cx from '@utils/cx';
 import { FC } from 'react';
+import styles from './Colophon.module.css';
 
 interface Props {
   /** Passed from the server so the footer year never hydrates differently. */
@@ -12,66 +13,36 @@ interface Props {
  * line. No link columns, no social icon row.
  */
 const Colophon: FC<Props> = ({ year }) => (
-  <Box as="footer" borderTop="var(--rule-hair) solid var(--color-rule)" bg="var(--color-paper-2)">
-    <Box
-      maxW="var(--page-max)"
-      mx="auto"
-      px="var(--page-gutter)"
-      py={{ base: 'var(--space-xl)', md: 'var(--space-2xl)' }}
-    >
-      <Text
-        fontFamily="var(--font-display)"
-        fontSize="var(--text-display-s)"
-        lineHeight={1.02}
-        letterSpacing="-0.035em"
-        color="var(--color-ink)"
-        m="0"
-        overflowWrap="anywhere"
-      >
+  <footer className={styles.footer}>
+    <div className={cx('page-wrap', styles.inner)}>
+      <p className={styles.name}>
         {PROFILE.name}
-        <Box as="span" color="var(--color-accent)" aria-hidden="true">
+        <span className={styles.stop} aria-hidden="true">
           .
-        </Box>
-      </Text>
+        </span>
+      </p>
 
-      <Box
-        mt={{ base: 'var(--space-lg)', md: 'var(--space-xl)' }}
-        pt="var(--space-sm)"
-        borderTop="var(--rule-hair) solid var(--color-rule-strong)"
-        display="flex"
-        flexWrap="wrap"
-        alignItems="baseline"
-        justifyContent="space-between"
-        gap="var(--space-sm)"
-        fontFamily="var(--font-meta)"
-        fontSize="var(--text-2xs)"
-        letterSpacing="0.06em"
-        color="var(--color-ink-3)"
-      >
-        <Box as="span">&copy; {year} &middot; Built with Next.js, typeset in Fraunces and IBM Plex</Box>
+      <div className={styles.meta}>
+        <span>&copy; {year} &middot; Built with Next.js, typeset in Fraunces and IBM Plex</span>
 
         {ACTIVE_SOCIALS.length > 0 && (
-          <Box display="flex" gap="var(--space-md)">
+          <div className={styles.socials}>
             {ACTIVE_SOCIALS.map((social) => (
-              <Box
-                as="a"
+              <a
                 key={social.label}
                 href={social.href}
                 target="_blank"
                 rel="noreferrer noopener me"
-                whiteSpace="nowrap"
-                color="var(--color-ink-2)"
-                transition="color var(--dur-1) var(--ease-out)"
-                _hover={{ color: 'var(--color-accent)' }}
+                className={styles.social}
               >
                 {social.label}
-              </Box>
+              </a>
             ))}
-          </Box>
+          </div>
         )}
-      </Box>
-    </Box>
-  </Box>
+      </div>
+    </div>
+  </footer>
 );
 
 export default Colophon;

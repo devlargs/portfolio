@@ -1,9 +1,10 @@
-import { Box } from '@chakra-ui/react';
 import LearningsIndex from '@components/Learnings';
 import PageHead from '@components/PageHead';
 import PageShell from '@components/PageShell';
 import { Learning } from '@constants/learnings';
+import cx from '@utils/cx';
 import { FC } from 'react';
+import styles from './LearningsView.module.css';
 
 interface Props {
   learnings: readonly Learning[];
@@ -19,14 +20,9 @@ const LearningsView: FC<Props> = ({ learnings, year }) => (
       meta={`${learnings.length} ${learnings.length === 1 ? 'entry' : 'entries'}`}
     />
 
-    <Box
-      maxW="var(--page-max)"
-      mx="auto"
-      px="var(--page-gutter)"
-      pb={{ base: 'var(--space-2xl)', md: 'var(--space-3xl)' }}
-    >
+    <div className={cx('page-wrap', styles.body)}>
       <LearningsIndex learnings={learnings} />
-    </Box>
+    </div>
   </PageShell>
 );
 

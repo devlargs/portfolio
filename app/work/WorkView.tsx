@@ -1,10 +1,11 @@
-import { Box } from '@chakra-ui/react';
 import MoreLink from '@components/MoreLink';
 import PageHead from '@components/PageHead';
 import PageShell from '@components/PageShell';
 import WorkIndex from '@components/WorkIndex';
 import { COMPANY_CONTRIBUTIONS, PERSONAL_PROJECTS } from '@constants/portfolio';
+import cx from '@utils/cx';
 import { FC } from 'react';
+import styles from './WorkView.module.css';
 
 interface Props {
   brokenLinks: string[];
@@ -22,22 +23,13 @@ const WorkView: FC<Props> = ({ brokenLinks, year }) => (
       meta={`${TOTAL} entries`}
     />
 
-    <Box
-      maxW="var(--page-max)"
-      mx="auto"
-      px="var(--page-gutter)"
-      pb={{ base: 'var(--space-2xl)', md: 'var(--space-3xl)' }}
-    >
+    <div className={cx('page-wrap', styles.body)}>
       <WorkIndex brokenLinks={brokenLinks} />
 
-      <Box
-        mt={{ base: 'var(--space-2xl)', md: 'var(--space-3xl)' }}
-        pt="var(--space-lg)"
-        borderTop="var(--rule-hair) solid var(--color-rule)"
-      >
+      <div className={styles.more}>
         <MoreLink href="/#contact" label="Start a conversation" />
-      </Box>
-    </Box>
+      </div>
+    </div>
   </PageShell>
 );
 

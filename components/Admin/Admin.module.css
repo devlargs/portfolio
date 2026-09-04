@@ -1,0 +1,29 @@
+/* Rendered while the session is still being read, and left on screen if the
+   client bundle never runs at all. Returning `null` here instead meant /admin
+   prerendered to an empty document, so any hydration failure showed the reader
+   a blank white page with nothing to distinguish it from a broken deploy. */
+.shell {
+  min-height: 100vh;
+  background: var(--admin-bg);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.card {
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: var(--admin-text);
+  margin-bottom: 8px;
+}
+
+.note {
+  color: var(--admin-muted);
+  font-size: 14px;
+}

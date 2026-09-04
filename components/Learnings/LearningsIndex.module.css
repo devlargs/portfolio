@@ -1,0 +1,12 @@
+.empty {
+  font-size: var(--text-lg);
+  color: var(--color-ink-2);
+  max-width: var(--measure);
+}
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-top: var(--rule-hair) solid var(--color-ink);
+}

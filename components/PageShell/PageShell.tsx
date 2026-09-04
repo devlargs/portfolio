@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react';
 import Colophon from '@components/Colophon';
 import Masthead from '@components/Masthead';
 import { FC, PropsWithChildren, ReactNode } from 'react';
@@ -16,9 +15,7 @@ const PageShell: FC<PropsWithChildren<Props>> = ({ year, rail, children }) => (
     <Masthead />
     {rail}
 
-    <Box as="main" id="content">
-      {children}
-    </Box>
+    <main id="content">{children}</main>
 
     <Colophon year={year} />
   </>

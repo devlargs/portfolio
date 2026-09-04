@@ -1,9 +1,10 @@
-import { Box } from '@chakra-ui/react';
 import MoreLink from '@components/MoreLink';
 import PageHead from '@components/PageHead';
 import { Learning, readingMinutes } from '@constants/learnings';
+import cx from '@utils/cx';
 import { FC } from 'react';
 import LearningBody from './LearningBody';
+import styles from './LearningArticle.module.css';
 import TagList from './TagList';
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
 }
 
 const LearningArticle: FC<Props> = ({ learning }) => (
-  <Box as="article">
+  <article>
     <PageHead
       backHref="/learnings"
       backLabel="Learnings"
@@ -20,28 +21,18 @@ const LearningArticle: FC<Props> = ({ learning }) => (
       lede={learning.summary}
     />
 
-    <Box
-      maxW="var(--page-max)"
-      mx="auto"
-      px="var(--page-gutter)"
-      pb={{ base: 'var(--space-2xl)', md: 'var(--space-3xl)' }}
-    >
-      <Box maxW="var(--measure-wide)" mb={{ base: 'var(--space-lg)', md: 'var(--space-xl)' }}>
+    <div className={cx('page-wrap', styles.body)}>
+      <div className={styles.tags}>
         <TagList tags={learning.tags} />
-      </Box>
+      </div>
 
       <LearningBody body={learning.body} />
 
-      <Box
-        maxW="var(--measure-wide)"
-        mt={{ base: 'var(--space-2xl)', md: 'var(--space-3xl)' }}
-        pt="var(--space-lg)"
-        borderTop="var(--rule-hair) solid var(--color-rule)"
-      >
+      <div className={styles.more}>
         <MoreLink href="/learnings" label="More things I learned" />
-      </Box>
-    </Box>
-  </Box>
+      </div>
+    </div>
+  </article>
 );
 
 export default LearningArticle;

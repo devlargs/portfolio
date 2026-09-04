@@ -1,10 +1,12 @@
 'use client';
 
-import { Box, Heading, Text } from '@chakra-ui/react';
 import { FC } from 'react';
+import './adminTokens.css';
 import AdminDashboard from './AdminDashboard';
 import AdminLogin from './AdminLogin';
+import styles from './Admin.module.css';
 import useAdminAuth from './hooks/useAdminAuth';
+import { ToastProvider } from './ui';
 
 /**
  * Rendered while the session is still being read, and left on screen if the
@@ -13,24 +15,24 @@ import useAdminAuth from './hooks/useAdminAuth';
  * a blank white page with nothing to distinguish it from a broken deploy.
  */
 const AdminShell: FC = () => (
-  <Box minH="100vh" bg="#111316" display="grid" placeItems="center" p="24px">
-    <Box textAlign="center">
-      <Heading color="white" size="md" mb="8px">
-        Portfolio Admin
-      </Heading>
-      <Text color="#878e99" fontSize="14px">
-        Checking your session.
-      </Text>
-    </Box>
-  </Box>
+  <div className={styles.shell}>
+    <div className={styles.card}>
+      <h2 className={styles.title}>Portfolio Admin</h2>
+      <p className={styles.note}>Checking your session.</p>
+    </div>
+  </div>
 );
 
 const Admin: FC = () => {
   const { authed, login, logout } = useAdminAuth();
 
-  if (authed === null) return <AdminShell />;
-  if (!authed) return <AdminLogin onSubmit={login} />;
-  return <AdminDashboard onLogout={logout} />;
+  return (
+    <ToastProvider>
+      {authed === null && <AdminShell />}
+      {authed === false && <AdminLogin onSubmit={login} />}
+      {authed === true && <AdminDashboard onLogout={logout} />}
+    </ToastProvider>
+  );
 };
 
 export default Admin;

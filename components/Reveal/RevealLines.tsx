@@ -1,8 +1,8 @@
 'use client';
 
-import { Box } from '@chakra-ui/react';
 import useReveal from 'hooks/useReveal';
-import { ElementType, FC, ReactNode } from 'react';
+import { CSSProperties, ElementType, FC, ReactNode } from 'react';
+import styles from './RevealLines.module.css';
 
 interface Props {
   /** Copy authored as explicit lines so the mask lands on real line breaks. */
@@ -23,7 +23,7 @@ interface Props {
  */
 const RevealLines: FC<Props> = ({
   lines,
-  as = 'h2',
+  as: Tag = 'h2',
   stagger = 60,
   fontSize = 'var(--text-display-s)',
   lineHeight = 1.05,
@@ -34,24 +34,29 @@ const RevealLines: FC<Props> = ({
   const { ref, revealed } = useReveal<HTMLDivElement>();
 
   return (
-    <Box ref={ref} as={as} maxW={maxW} color={color} fontSize={fontSize} letterSpacing={letterSpacing} m="0">
+    <Tag
+      ref={ref}
+      className={styles.lines}
+      data-revealed={revealed || undefined}
+      style={
+        {
+          fontSize,
+          letterSpacing,
+          color,
+          maxWidth: maxW,
+          '--reveal-line-height': String(lineHeight),
+        } as CSSProperties
+      }
+    >
       {lines.map((line, i) => (
         // eslint-disable-next-line react/no-array-index-key
-        <Box key={i} overflow="hidden" display="block" lineHeight={lineHeight}>
-          <Box
-            display="block"
-            transform={revealed ? 'translateY(0)' : 'translateY(102%)'}
-            opacity={revealed ? 1 : 0}
-            transition={`transform var(--dur-4) var(--ease-out) ${
-              i * stagger
-            }ms, opacity var(--dur-3) var(--ease-out) ${i * stagger}ms`}
-            willChange="transform"
-          >
+        <span key={i} className={styles.row}>
+          <span className={styles.line} style={{ '--line-delay': `${i * stagger}ms` } as CSSProperties}>
             {line}
-          </Box>
-        </Box>
+          </span>
+        </span>
       ))}
-    </Box>
+    </Tag>
   );
 };
 

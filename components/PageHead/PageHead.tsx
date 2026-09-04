@@ -1,7 +1,8 @@
-import { Box, Text } from '@chakra-ui/react';
 import Reveal from '@components/Reveal';
+import cx from '@utils/cx';
 import NextLink from 'next/link';
 import { FC, ReactNode } from 'react';
+import styles from './PageHead.module.css';
 
 interface Props {
   /** Small uppercase kicker above the rule. */
@@ -19,87 +20,39 @@ interface Props {
  * heading-below rhythm as SectionHead, one level up in the outline.
  */
 const PageHead: FC<Props> = ({ eyebrow, title, lede, meta, backHref = '/', backLabel = 'Home' }) => (
-  <Box
-    maxW="var(--page-max)"
-    mx="auto"
-    px="var(--page-gutter)"
-    pt={{ base: 'var(--space-xl)', md: 'var(--space-2xl)' }}
-    pb={{ base: 'var(--space-lg)', md: 'var(--space-xl)' }}
-  >
+  <div className={cx('page-wrap', styles.band)}>
     <Reveal distance={8}>
-      <Box
-        display="flex"
-        flexWrap="wrap"
-        alignItems="baseline"
-        justifyContent="space-between"
-        gap="var(--space-sm)"
-        pb="var(--space-sm)"
-        fontFamily="var(--font-meta)"
-        fontSize="var(--text-2xs)"
-        letterSpacing="0.12em"
-        textTransform="uppercase"
-        color="var(--color-ink-3)"
-      >
-        <Box display="inline-flex" alignItems="baseline" gap="var(--space-xs)">
-          <Box
-            as={NextLink}
-            href={backHref}
-            display="inline-flex"
-            alignItems="baseline"
-            gap="var(--space-3xs)"
-            color="var(--color-ink-2)"
-            transition="color var(--dur-1) var(--ease-out)"
-            _hover={{ color: 'var(--color-accent)' }}
-          >
-            <Box as="span" aria-hidden="true">
-              &#8592;
-            </Box>
+      <div className={styles.kicker}>
+        <div className={styles.trail}>
+          <NextLink href={backHref} className={styles.back}>
+            <span aria-hidden="true">&#8592;</span>
             {backLabel}
-          </Box>
+          </NextLink>
 
           {eyebrow && (
             <>
-              <Box as="span" aria-hidden="true">
-                /
-              </Box>
-              <Box as="span">{eyebrow}</Box>
+              <span aria-hidden="true">/</span>
+              <span>{eyebrow}</span>
             </>
           )}
-        </Box>
+        </div>
 
-        {meta && <Box as="span">{meta}</Box>}
-      </Box>
+        {meta && <span>{meta}</span>}
+      </div>
     </Reveal>
 
-    <Box h="var(--rule-hair)" bg="var(--color-ink)" mb="var(--space-md)" />
+    <div className={styles.rule} />
 
     <Reveal distance={12}>
-      <Text
-        as="h1"
-        fontSize="var(--text-display-s)"
-        lineHeight={1.04}
-        letterSpacing="-0.03em"
-        color="var(--color-ink)"
-        m="0"
-      >
-        {title}
-      </Text>
+      <h1 className={styles.title}>{title}</h1>
     </Reveal>
 
     {lede && (
       <Reveal delay={80} distance={12}>
-        <Text
-          mt="var(--space-md)"
-          maxW="var(--measure)"
-          fontSize="var(--text-lg)"
-          lineHeight={1.65}
-          color="var(--color-ink-2)"
-        >
-          {lede}
-        </Text>
+        <p className={styles.lede}>{lede}</p>
       </Reveal>
     )}
-  </Box>
+  </div>
 );
 
 export default PageHead;

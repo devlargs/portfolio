@@ -1,0 +1,33 @@
+/* drop-cap opening — the one place the display face runs inside body copy */
+.opening {
+  margin: 0;
+  font-size: var(--text-xl);
+  line-height: 1.6;
+  color: var(--color-ink);
+  max-width: var(--measure);
+}
+
+.opening::first-letter {
+  font-family: var(--font-display);
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.82;
+  padding-right: 0.08em;
+  margin-top: 0.06em;
+  color: var(--color-accent);
+}
+
+.lead {
+  color: var(--color-accent);
+}
+
+.support {
+  /* The old markup set `mt` and then `m="0"`, and the shorthand won, so the
+     gap here has always come from the padding alone. */
+  margin: 0;
+  padding-top: var(--space-md);
+  font-size: var(--text-md);
+  line-height: 1.8;
+  color: var(--color-ink-2);
+  max-width: var(--measure);
+}

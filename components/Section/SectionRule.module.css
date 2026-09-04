@@ -1,0 +1,5 @@
+.rule {
+  height: var(--rule-hair);
+  background: var(--color-ink);
+  margin-bottom: var(--space-md);
+}

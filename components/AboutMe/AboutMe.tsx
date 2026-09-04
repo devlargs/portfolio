@@ -1,11 +1,11 @@
 'use client';
 
-import { Box } from '@chakra-ui/react';
 import Reveal from '@components/Reveal';
 import { SectionLede, SectionRule, SectionTitle } from '@components/Section';
 import { FC } from 'react';
 import AboutProse from './AboutProse';
 import AboutRail from './AboutRail';
+import styles from './AboutMe.module.css';
 
 interface Props {
   id: string;
@@ -24,29 +24,24 @@ interface Props {
  * Collapses to a single column below md, notes last.
  */
 const AboutMe: FC<Props> = ({ id, title, lede }) => (
-  <Box>
+  <div>
     <SectionRule />
 
-    <Box
-      display="grid"
-      gap={{ base: 'var(--space-xl)', md: 'var(--space-2xl)' }}
-      gridTemplateColumns={{ base: 'minmax(0, 1fr)', md: 'minmax(0, 1.6fr) minmax(0, 1fr)' }}
-      alignItems="start"
-    >
-      <Box minW="0">
+    <div className={styles.grid}>
+      <div className={styles.column}>
         <SectionTitle id={id}>{title}</SectionTitle>
         {lede && <SectionLede>{lede}</SectionLede>}
 
-        <Box mt={{ base: 'var(--space-lg)', md: 'var(--space-xl)' }}>
+        <div className={styles.prose}>
           <AboutProse />
-        </Box>
-      </Box>
+        </div>
+      </div>
 
       <Reveal delay={160}>
         <AboutRail />
       </Reveal>
-    </Box>
-  </Box>
+    </div>
+  </div>
 );
 
 export default AboutMe;
