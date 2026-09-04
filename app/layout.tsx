@@ -62,12 +62,12 @@ export const metadata: Metadata = {
   icons: { shortcut: '/favicon.ico' },
 };
 
+/* Dark is the default and the system preference is not consulted, so the
+   browser chrome is a single literal rather than a media-keyed pair. Satori
+   and this entry both duplicate the palette by hand: see app/tokens.css. */
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f1f4f7' },
-    { media: '(prefers-color-scheme: dark)', color: '#0d1013' },
-  ],
-  colorScheme: 'light dark',
+  themeColor: '#0d1013',
+  colorScheme: 'dark light',
 };
 
 /* Person + WebSite graph. `sameAs` only carries links that are actually filled
@@ -107,7 +107,7 @@ const structuredData = {
   ],
 };
 
-/* Runs before first paint so a reader who chose dark never sees a light flash. */
+/* Runs before first paint so a reader who chose light never sees a dark flash. */
 const THEME_INIT = `(function(){try{var m=localStorage.getItem('rl-theme');if(m==='dark'||m==='light'){document.documentElement.setAttribute('data-theme',m);}}catch(e){}})();`;
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;

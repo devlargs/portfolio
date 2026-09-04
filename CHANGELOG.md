@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Changed
+
+- The site now opens in dark mode for everyone, with light available from the header toggle.
+- The theme toggle is now a sun and moon icon that turns as it swaps, instead of a filled dot.
+- The social share card is drawn on the dark palette, matching the site you land on.
+
 ## [0.1.0] (2026-09-04)
 
 ### Added

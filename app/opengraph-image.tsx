@@ -6,11 +6,11 @@ export const alt = `${PROFILE.name}, ${PROFILE.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-/* mirrors app/tokens.css light mode - Satori cannot read CSS vars */
-const PAPER = '#f1f4f7';
-const INK = '#14161a';
-const INK_2 = '#4d5054';
-const ACCENT = '#732221';
+/* mirrors app/tokens.css dark mode, the site default - Satori cannot read CSS vars */
+const PAPER = '#0d1013';
+const INK = '#e5e8ec';
+const INK_2 = '#aeb1b6';
+const ACCENT = '#c07063';
 
 const FRAUNCES_CSS = 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&display=swap';
 

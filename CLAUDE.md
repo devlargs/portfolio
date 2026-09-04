@@ -48,7 +48,7 @@ Both cost real debugging time; check them before investigating a "broken" change
 
 There is no CSS-in-JS runtime and no UI library. Styling is CSS custom properties plus CSS Modules, and nothing else.
 
-`app/tokens.css` is the single source of truth for every colour, font, space, radius, easing and duration, and it owns both themes: a `prefers-color-scheme` block plus a `[data-theme]` block so the header toggle can override the system setting. **Write `var(--color-accent)`, never a raw hex or oklch value.** If a value is needed that has no token, add the token first.
+`app/tokens.css` is the single source of truth for every colour, font, space, radius, easing and duration, and it owns both themes. **Dark is the default**, declared on bare `:root`; light lives in a single `:root[data-theme='light']` block that only the header toggle sets. The system preference is deliberately not consulted, so a first visit is always dark and there is no `prefers-color-scheme` query in the repo. **Write `var(--color-accent)`, never a raw hex or oklch value.** If a value is needed that has no token, add the token first.
 
 `app/globals.css` carries the base reset and the document styles. **The reset is load-bearing, not decoration.** It zeroes element margins, list padding and heading sizes, and every component in the tree is written against that clean slate, setting its own spacing. Delete it and user-agent margins reappear under a thousand explicit spacing rules. Its rules are wrapped in `:where()` so they carry zero specificity: any bare element selector, and any module class, overrides them without an `!important`.
 
@@ -59,8 +59,8 @@ Breakpoints are plain `min-width` media queries at **30em / 48em / 87.5em**. The
 Three places legitimately break that rule, and all three drift silently when tokens change:
 
 - `components/Admin/adminTokens.css`: a separate dark admin chrome with its own palette, not part of the public site's system. Declared on `:root` rather than a wrapper class so the dialog and the toasts, which portal onto `document.body`, inherit it.
-- `app/opengraph-image.tsx`: Satori cannot read CSS custom properties, so the palette is duplicated as hex.
-- `app/layout.tsx`: the `themeColor` viewport entries paint mobile browser chrome and must be literal.
+- `app/opengraph-image.tsx`: Satori cannot read CSS custom properties, so the dark palette is duplicated as hex.
+- `app/layout.tsx`: the `themeColor` viewport entry paints mobile browser chrome and must be literal. It is a single dark value, not a media-keyed pair, because the site no longer follows the system setting.
 
 Change the palette and you must update the last two by hand.
 
