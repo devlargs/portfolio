@@ -13,18 +13,24 @@ interface Props {
 }
 
 const ROW_SX = {
-  /* `row-sweep`: the wash scales in from the left edge under the content.
+  /* `row-mark`: a neutral surface step plus a solid accent edge that draws up
+     the left side. Deliberately not a tinted fill — a light tint of the red
+     accent is pink, and at full-row scale it swamps the page.
      Same treatment on :focus-visible so keyboard gets identical feedback. */
-  '& .row-wash': {
+  transition: 'background var(--dur-2) var(--ease-out)',
+  '& .row-edge': {
     position: 'absolute',
-    inset: '0',
-    background: 'var(--color-accent-soft)',
-    transformOrigin: 'left center',
-    transform: 'scaleX(0)',
-    transition: 'transform var(--dur-3) var(--ease-out)',
+    insetBlock: '0',
+    insetInlineStart: '0',
+    width: 'var(--rule-edge)',
+    background: 'var(--color-accent)',
+    transformOrigin: 'center bottom',
+    transform: 'scaleY(0)',
+    transition: 'transform var(--dur-2) var(--ease-out)',
     pointerEvents: 'none',
   },
-  '&:hover .row-wash, &:focus-visible .row-wash': { transform: 'scaleX(1)' },
+  '&:hover, &:focus-visible': { background: 'var(--color-paper-2)' },
+  '&:hover .row-edge, &:focus-visible .row-edge': { transform: 'scaleY(1)' },
   '&:hover .row-arrow, &:focus-visible .row-arrow': { transform: 'translateX(4px)', opacity: 1 },
   '&:hover .row-domain, &:focus-visible .row-domain': { color: 'var(--color-accent)' },
 } as const;
@@ -32,7 +38,7 @@ const ROW_SX = {
 const IndexRow: FC<Props> = ({ index, title, href, domain, highlight = false, unavailable = false }) => {
   const content = (
     <>
-      {!unavailable && <Box className="row-wash" aria-hidden="true" />}
+      {!unavailable && <Box className="row-edge" aria-hidden="true" />}
 
       <Box
         position="relative"

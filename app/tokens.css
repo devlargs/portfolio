@@ -1,40 +1,50 @@
 /* Hallmark · macrostructure: Long Document (Broadsheet) · genre: editorial
- * theme: custom (tuned) · vibe: "warm paper, quiet authority, one red mark"
- * paper oklch(97.2% 0.008 85) · accent oklch(47% 0.148 28)
+ * theme: custom (tuned) · vibe: "cold stock, deep oxblood, one heavy mark"
+ * paper oklch(96.5% 0.005 255) · accent oklch(38% 0.115 25)
  * axes: paper-band=light · display-style=variable-serif (Fraunces, roman) · accent-hue=warm
  * nav: N9 edge-aligned · footer: Ft5 statement · enrichment: none (typography only)
  * tone: editorial · audience: hiring managers, recruiters, engineers
- * pre-emit critique: P5 H5 E4 S5 R5 V5
+ * pre-emit critique: P5 H5 E5 S5 R5 V4
+ *
+ * Recolour note — the accent is a MARK, never a field. There is no light
+ * accent wash on this site: row and card emphasis is carried by a neutral
+ * surface step plus a solid accent edge. A high-lightness tint of a red
+ * accent is pink, and pink at full-row scale was the old palette's tell.
  */
 
 :root {
   color-scheme: light;
 
-  /* ground */
-  --color-paper: oklch(97.2% 0.008 85);
-  --color-paper-2: oklch(94.4% 0.011 84);
-  --color-paper-3: oklch(90.5% 0.014 83);
+  /* ground — cold stock. Chroma stays at/near 0.005 so it reads as cold
+     paper rather than blue paper, and never fights the warm accent. */
+  --color-paper: oklch(96.5% 0.005 255);
+  --color-paper-2: oklch(93% 0.006 255);
+  --color-paper-3: oklch(89% 0.007 256);
 
-  /* ink */
-  --color-ink: oklch(21% 0.015 60);
-  --color-ink-2: oklch(44% 0.012 62);
-  --color-ink-3: oklch(56% 0.012 64);
+  /* ink — graphite */
+  --color-ink: oklch(20% 0.008 258);
+  --color-ink-2: oklch(43% 0.008 257);
+  --color-ink-3: oklch(53.5% 0.008 256);
 
   /* structure */
-  --color-rule: oklch(85% 0.01 80);
-  --color-rule-strong: oklch(70% 0.012 76);
+  --color-rule: oklch(86% 0.006 255);
+  --color-rule-strong: oklch(63% 0.008 256);
 
-  /* accent */
-  --color-accent: oklch(47% 0.148 28);
-  --color-accent-hover: oklch(41% 0.152 28);
-  --color-accent-soft: oklch(93.5% 0.042 30);
-  --color-accent-ink: oklch(98% 0.01 60);
+  /* accent — deep oxblood. Dark and low-chroma on purpose: every tint you
+     can derive from it stays in the clay/dust family instead of salmon. */
+  --color-accent: oklch(38% 0.115 25);
+  --color-accent-hover: oklch(31% 0.115 25);
+  /* transient surfaces only (::selection, field focus). Never a row fill. */
+  --color-accent-soft: oklch(88% 0.016 30);
+  --color-accent-ink: oklch(97% 0.005 255);
 
-  /* signal */
-  --color-focus: oklch(45% 0.15 28);
-  --color-danger: oklch(48% 0.17 26);
-  --color-danger-soft: oklch(94% 0.04 26);
-  --color-live: oklch(56% 0.14 145);
+  /* signal — danger sits deliberately brighter and hotter than the accent
+     (50% vs 38% lightness, 22° vs 25° hue) so the two reds never trade
+     places. Error states always ship a message alongside the colour. */
+  --color-focus: oklch(42% 0.13 25);
+  --color-danger: oklch(50% 0.19 22);
+  --color-danger-soft: oklch(84% 0.045 22);
+  --color-live: oklch(51% 0.115 150);
 
   /* type roles — the family lists are set by next/font on <html> */
   --font-display: var(--font-fraunces), 'Iowan Old Style', Georgia, serif;
@@ -76,9 +86,18 @@
   --page-gutter: clamp(1.25rem, 0.4rem + 3.4vw, 4.5rem);
   --rail-width: 2.75rem;
 
+  /* overlay — a floating label that must stay legible above running text.
+     92% paper is a chip, not glass: the blur only kills ghosting of the
+     8% that shows through, it is not a decorative frost. */
+  --surface-veil: color-mix(in oklch, var(--color-paper) 92%, transparent);
+  --blur-veil: blur(8px);
+  --shadow-pop: 0 6px 18px -10px oklch(20% 0.008 258 / 0.5);
+
   /* line */
   --rule-hair: 1px;
   --rule-thick: 2px;
+  /* the accent edge that replaced the row wash */
+  --rule-edge: 2px;
 
   --radius-none: 0px;
   --radius-sm: 2px;
@@ -95,46 +114,51 @@
   --dur-4: 640ms;
 }
 
-/* warm-dark inversion — system preference, unless the reader chose light */
+/* cold-dark inversion — system preference, unless the reader chose light.
+   Hue is held across modes; only lightness and chroma move. The accent
+   lifts to a muted clay rather than a bright red, which keeps it clear of
+   --color-danger on a dark ground. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
-    --color-paper: oklch(18.5% 0.012 62);
-    --color-paper-2: oklch(22.5% 0.014 62);
-    --color-paper-3: oklch(27% 0.016 62);
-    --color-ink: oklch(94% 0.01 85);
-    --color-ink-2: oklch(78% 0.011 78);
-    --color-ink-3: oklch(62% 0.012 72);
-    --color-rule: oklch(32% 0.014 62);
-    --color-rule-strong: oklch(45% 0.016 62);
-    --color-accent: oklch(70% 0.145 35);
-    --color-accent-hover: oklch(78% 0.13 38);
-    --color-accent-soft: oklch(29% 0.05 32);
-    --color-accent-ink: oklch(16% 0.02 40);
-    --color-focus: oklch(72% 0.15 35);
-    --color-danger: oklch(70% 0.15 26);
-    --color-danger-soft: oklch(28% 0.05 26);
-    --color-live: oklch(72% 0.14 148);
+    --color-paper: oklch(17% 0.008 258);
+    --color-paper-2: oklch(21% 0.009 258);
+    --color-paper-3: oklch(25.5% 0.01 258);
+    --color-ink: oklch(93% 0.006 255);
+    --color-ink-2: oklch(76% 0.007 256);
+    --color-ink-3: oklch(60% 0.008 256);
+    --color-rule: oklch(30% 0.01 258);
+    --color-rule-strong: oklch(50% 0.011 258);
+    --color-accent: oklch(63% 0.105 30);
+    --color-accent-hover: oklch(72% 0.1 32);
+    --color-accent-soft: oklch(26% 0.028 28);
+    --color-accent-ink: oklch(15% 0.01 258);
+    --color-focus: oklch(66% 0.12 28);
+    --color-danger: oklch(72% 0.17 20);
+    --color-danger-soft: oklch(27% 0.045 22);
+    --color-live: oklch(70% 0.115 152);
+    --shadow-pop: 0 6px 20px -8px oklch(2% 0.004 258 / 0.75);
   }
 }
 
-/* warm-dark inversion — explicit reader choice */
+/* cold-dark inversion — explicit reader choice */
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --color-paper: oklch(18.5% 0.012 62);
-  --color-paper-2: oklch(22.5% 0.014 62);
-  --color-paper-3: oklch(27% 0.016 62);
-  --color-ink: oklch(94% 0.01 85);
-  --color-ink-2: oklch(78% 0.011 78);
-  --color-ink-3: oklch(62% 0.012 72);
-  --color-rule: oklch(32% 0.014 62);
-  --color-rule-strong: oklch(45% 0.016 62);
-  --color-accent: oklch(70% 0.145 35);
-  --color-accent-hover: oklch(78% 0.13 38);
-  --color-accent-soft: oklch(29% 0.05 32);
-  --color-accent-ink: oklch(16% 0.02 40);
-  --color-focus: oklch(72% 0.15 35);
-  --color-danger: oklch(70% 0.15 26);
-  --color-danger-soft: oklch(28% 0.05 26);
-  --color-live: oklch(72% 0.14 148);
+  --color-paper: oklch(17% 0.008 258);
+  --color-paper-2: oklch(21% 0.009 258);
+  --color-paper-3: oklch(25.5% 0.01 258);
+  --color-ink: oklch(93% 0.006 255);
+  --color-ink-2: oklch(76% 0.007 256);
+  --color-ink-3: oklch(60% 0.008 256);
+  --color-rule: oklch(30% 0.01 258);
+  --color-rule-strong: oklch(50% 0.011 258);
+  --color-accent: oklch(63% 0.105 30);
+  --color-accent-hover: oklch(72% 0.1 32);
+  --color-accent-soft: oklch(26% 0.028 28);
+  --color-accent-ink: oklch(15% 0.01 258);
+  --color-focus: oklch(66% 0.12 28);
+  --color-danger: oklch(72% 0.17 20);
+  --color-danger-soft: oklch(27% 0.045 22);
+  --color-live: oklch(70% 0.115 152);
+  --shadow-pop: 0 6px 20px -8px oklch(2% 0.004 258 / 0.75);
 }

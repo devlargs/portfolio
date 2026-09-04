@@ -10,17 +10,21 @@ interface Props {
 }
 
 const ROW_SX = {
-  /* `row-sweep`, same treatment as the work index so the two read as one site. */
-  '& .row-wash': {
+  /* `row-mark`, same treatment as the work index so the two read as one site. */
+  transition: 'background var(--dur-2) var(--ease-out)',
+  '& .row-edge': {
     position: 'absolute',
-    inset: '0',
-    background: 'var(--color-accent-soft)',
-    transformOrigin: 'left center',
-    transform: 'scaleX(0)',
-    transition: 'transform var(--dur-3) var(--ease-out)',
+    insetBlock: '0',
+    insetInlineStart: '0',
+    width: 'var(--rule-edge)',
+    background: 'var(--color-accent)',
+    transformOrigin: 'center bottom',
+    transform: 'scaleY(0)',
+    transition: 'transform var(--dur-2) var(--ease-out)',
     pointerEvents: 'none',
   },
-  '&:hover .row-wash, &:focus-visible .row-wash': { transform: 'scaleX(1)' },
+  '&:hover, &:focus-visible': { background: 'var(--color-paper-2)' },
+  '&:hover .row-edge, &:focus-visible .row-edge': { transform: 'scaleY(1)' },
   '&:hover .row-arrow, &:focus-visible .row-arrow': { transform: 'translateX(4px)', opacity: 1 },
 } as const;
 
@@ -34,7 +38,7 @@ const LearningsIndexRow: FC<Props> = ({ learning, index }) => (
       overflow="hidden"
       sx={ROW_SX}
     >
-      <Box className="row-wash" aria-hidden="true" />
+      <Box className="row-edge" aria-hidden="true" />
 
       <Box
         position="relative"

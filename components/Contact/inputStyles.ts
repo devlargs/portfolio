@@ -24,7 +24,9 @@ export const getInputStyles = (hasError: boolean): SystemStyleObject => ({
   _focusVisible: {
     borderColor: hasError ? 'var(--color-danger)' : 'var(--color-accent)',
     borderBottomWidth: 'var(--rule-thick)',
-    bg: hasError ? 'var(--color-danger-soft)' : 'var(--color-accent-soft)',
+    /* neutral surface step on focus, same logic as the index rows — an accent
+       tint here would be the only pastel field on the page */
+    bg: hasError ? 'var(--color-danger-soft)' : 'var(--color-paper-2)',
     boxShadow: 'none',
     outline: '2px solid var(--color-focus)',
     outlineOffset: '3px',
