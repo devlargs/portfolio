@@ -18,11 +18,16 @@ const SideRail: FC = () => {
     <Box
       as="nav"
       aria-label="Document index"
-      /* xl and up only, and pinned into the leftover margin outside the page
-         container so it can never sit on top of the reading column. */
-      display={{ base: 'none', xl: 'block' }}
+      /* Shown only once the margin outside the page container genuinely fits
+         the rail: (100vw - page-max) / 2 >= rail-width + space-sm, which needs
+         ~1368px. 87.5em clears that with headroom. The old `max(0.5rem, ...)`
+         fallback silently parked the rail inside the gutter below that width,
+         which is what put the hover label on top of the reading column.
+         Below the breakpoint the masthead carries navigation alone. */
+      display="none"
+      sx={{ '@media (min-width: 87.5em)': { display: 'block' } }}
       position="fixed"
-      left="max(0.5rem, calc((100vw - var(--page-max)) / 2 - var(--rail-width) - 0.5rem))"
+      left="calc((100vw - var(--page-max)) / 2 - var(--rail-width) - var(--space-sm))"
       top="50%"
       transform="translateY(-50%)"
       zIndex={15}
@@ -67,13 +72,23 @@ const SideRail: FC = () => {
                 as="span"
                 className="rail-label"
                 position="absolute"
-                left="calc(100% + 10px)"
+                left="calc(100% + var(--space-2xs))"
                 whiteSpace="nowrap"
                 opacity={0}
                 transform="translateX(-6px)"
                 transition="opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out)"
                 pointerEvents="none"
                 textTransform="lowercase"
+                /* Even in the true margin the label still overhangs the reading
+                   column, so it carries its own paper surface rather than
+                   sitting naked on the body copy. */
+                px="var(--space-2xs)"
+                py="var(--space-3xs)"
+                bg="var(--surface-veil)"
+                backdropFilter="var(--blur-veil)"
+                border="var(--rule-hair) solid var(--color-rule)"
+                borderRadius="var(--radius-sm)"
+                boxShadow="var(--shadow-pop)"
               >
                 {section.label}
               </Box>
