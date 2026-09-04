@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { ACTIVE_SOCIALS, PROFILE, SITE_URL } from '@constants/profile';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from '@constants/skills';
 import type { Metadata, Viewport } from 'next';
@@ -109,6 +110,8 @@ const structuredData = {
 /* Runs before first paint so a reader who chose dark never sees a light flash. */
 const THEME_INIT = `(function(){try{var m=localStorage.getItem('rl-theme');if(m==='dark'||m==='light'){document.documentElement.setAttribute('data-theme',m);}}catch(e){}})();`;
 
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
 const RootLayout: FC<PropsWithChildren> = ({ children }) => (
   <html lang="en" className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}>
     <head>
@@ -118,6 +121,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
     <body>
       <Providers>{children}</Providers>
     </body>
+    {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
   </html>
 );
 

@@ -1,5 +1,6 @@
 import { connectToDatabase } from '@lib/api/connectToDatabase';
 import { sendContactEmail } from '@lib/api/sendContactEmail';
+import { isRecaptchaConfigured, verifyRecaptcha } from '@lib/api/verifyRecaptcha';
 import Contact from '@lib/models/Contact';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -24,23 +25,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (!email) return NextResponse.json({ error: 'Email is required' }, { status: 400, headers: corsHeaders });
     if (!message) return NextResponse.json({ error: 'Message is required' }, { status: 400, headers: corsHeaders });
 
+    /* In production a missing secret is a misconfiguration, not a licence to
+       accept unverified submissions. Locally it just means the check is off. */
     const isProduction = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production';
-    const secret = process.env.NEXT_RECAPTCHA_SECRET_KEY;
-    if (isProduction && secret) {
-      if (!recaptchaToken) {
-        return NextResponse.json({ error: 'reCAPTCHA token is required' }, { status: 400, headers: corsHeaders });
-      }
+    if (isProduction && !isRecaptchaConfigured()) {
+      return NextResponse.json({ error: 'Contact form is unavailable' }, { status: 503, headers: corsHeaders });
+    }
 
-      const verifyRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `secret=${encodeURIComponent(secret)}&response=${encodeURIComponent(recaptchaToken)}`,
-      });
-      const verifyData: { success: boolean; score?: number; action?: string } = await verifyRes.json();
-
-      if (!verifyData.success || (typeof verifyData.score === 'number' && verifyData.score < 0.5)) {
-        return NextResponse.json({ error: 'reCAPTCHA verification failed' }, { status: 400, headers: corsHeaders });
-      }
+    const recaptcha = await verifyRecaptcha(recaptchaToken, { required: isProduction });
+    if (recaptcha.status === 'rejected') {
+      return NextResponse.json({ error: recaptcha.reason }, { status: 400, headers: corsHeaders });
     }
 
     const newContact = new Contact({ name, email, message });

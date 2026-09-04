@@ -7,9 +7,12 @@ import { Controller, useForm } from 'react-hook-form';
 import FormField from './FormField';
 import { getInputStyles } from './inputStyles';
 
+/* Gated on the key, not on the environment: tying it to production meant the
+   whole path went untested until it was live. Add localhost to the key's
+   allowed domains in the reCAPTCHA console to exercise it in development. */
 const IS_PRODUCTION = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production';
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-const RECAPTCHA_ENABLED = IS_PRODUCTION && Boolean(RECAPTCHA_SITE_KEY);
+const RECAPTCHA_ENABLED = Boolean(RECAPTCHA_SITE_KEY);
 const RECAPTCHA_SCRIPT_ID = 'recaptcha-v3-script';
 const RECAPTCHA_STYLE_ID = 'recaptcha-v3-style';
 const RECAPTCHA_VISIBLE_CLASS = 'recaptcha-badge-visible';
@@ -105,8 +108,13 @@ const ContactForm: FC = () => {
         try {
           recaptchaToken = await getRecaptchaToken(RECAPTCHA_SITE_KEY);
         } catch {
-          fail('reCAPTCHA did not load. Refresh the page and try again.');
-          return;
+          /* Production must not send an unverified submission. Elsewhere the
+             failure is usually just a host missing from the key's domain list,
+             so the form stays usable and the server records it as unverified. */
+          if (IS_PRODUCTION) {
+            fail('reCAPTCHA did not load. Refresh the page and try again.');
+            return;
+          }
         }
       }
 
