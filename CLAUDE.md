@@ -106,10 +106,11 @@ The widget is styled with giscus's own built-in themes, so the palette is **not*
 - TypeScript runs `strict: false` but `strictNullChecks: true`.
 - Motion animates `transform` and `opacity` only, using the three named easings; `app/globals.css` carries a global `prefers-reduced-motion` override. Focus rings are never animated.
 - Avoid em-dashes in user-facing copy.
+- **No comments.** The codebase carries none, by preference, and that is not an oversight to correct. Do not add explanatory comments, JSDoc, section banners, or `// why` notes to code you write or touch here. The only exceptions are machine-read directives such as `eslint-disable-next-line` and `@ts-expect-error`, which are instructions to a tool rather than prose. When something genuinely needs explaining, the explanation belongs in this file or in `README.md`, where it is read on purpose instead of stumbled over.
 
 ## Design work
 
-Visual changes go through the `hallmark` skill rather than ad-hoc styling. `app/tokens.css` opens with a Hallmark stamp recording the macrostructure, theme, and axes; `.hallmark/log.json` is the rotation memory that the skill reads before picking a new structure. Update both when the design changes.
+Visual changes go through the `hallmark` skill rather than ad-hoc styling. `.hallmark/log.json` is the rotation memory the skill reads before picking a new structure, and it is now the **only** record: the Hallmark stamp that used to head `app/tokens.css` was a comment and went with the rest of them. It carried nothing the log does not already hold. Append to the log when the design changes; do not put the stamp back.
 
 ## Known security posture
 

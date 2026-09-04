@@ -1,5 +1,3 @@
-/* Plate-style portrait: hairline frame, full colour, lifting slightly on hover.
-   Sized in absolute units so it never drives the text measure. */
 .frame {
   position: relative;
   width: 84px;

@@ -1,9 +1,3 @@
-/* The admin chrome is a separate dark surface, deliberately outside the public
-   site's token system: it is a private tool, not part of the published design.
-   The palette was hardcoded per component before; naming it once here is the
-   only way the four panels stay in step.
-   Declared on :root rather than a wrapper class so the dialog and toast, which
-   render through a portal on document.body, inherit it too. */
 :root {
   --admin-bg: #111316;
   --admin-surface: #1a1c1f;
@@ -16,8 +10,6 @@
   --admin-field-border-hover: #4a4c50;
   --admin-field-border-focus: #5a5c60;
 
-  /* Carried over from Chakra's default palette so the buttons, the delete
-     affordance and the toasts keep the exact colours they had. */
   --admin-blue-400: #4299e1;
   --admin-blue-500: #3182ce;
   --admin-blue-600: #2b6cb0;

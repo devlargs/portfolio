@@ -15,7 +15,6 @@ interface Props {
 const Opening: FC<Props> = ({ portraitPlaceholder }) => (
   <section id="top" className={styles.section}>
     <div className={cx('page-wrap', styles.inner)}>
-      {/* standing head: role and place, the way a masthead dateline reads */}
       <Reveal distance={8}>
         <div className={styles.dateline}>
           <span className={styles.role}>{PROFILE.role}</span>
@@ -24,7 +23,6 @@ const Opening: FC<Props> = ({ portraitPlaceholder }) => (
         </div>
       </Reveal>
 
-      {/* the one h1 on the page */}
       <div className={styles.headline}>
         <RevealLines
           as="h1"
@@ -40,7 +38,6 @@ const Opening: FC<Props> = ({ portraitPlaceholder }) => (
         />
       </div>
 
-      {/* asymmetric band: reading column left, identity block right */}
       <div className={styles.band}>
         <Reveal delay={120}>
           <p className={styles.summary}>

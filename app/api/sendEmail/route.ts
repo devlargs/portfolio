@@ -25,8 +25,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (!email) return NextResponse.json({ error: 'Email is required' }, { status: 400, headers: corsHeaders });
     if (!message) return NextResponse.json({ error: 'Message is required' }, { status: 400, headers: corsHeaders });
 
-    /* In production a missing secret is a misconfiguration, not a licence to
-       accept unverified submissions. Locally it just means the check is off. */
     const isProduction = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production';
     if (isProduction && !isRecaptchaConfigured()) {
       return NextResponse.json({ error: 'Contact form is unavailable' }, { status: 503, headers: corsHeaders });
@@ -45,7 +43,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     } catch (error) {
       // eslint-disable-next-line
       console.error(error);
-      // Email delivery is best-effort; the contact is already persisted.
     }
 
     return NextResponse.json({ error: null }, { status: 201, headers: corsHeaders });

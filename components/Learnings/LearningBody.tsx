@@ -14,8 +14,6 @@ interface Props {
   body: readonly LearningBlock[];
 }
 
-/* Exhaustive by construction: adding a variant to LearningBlock without adding a
-   case here fails the build rather than rendering nothing. */
 const renderBlock = (block: LearningBlock): JSX.Element => {
   switch (block.kind) {
     case 'heading':

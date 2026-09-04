@@ -7,13 +7,6 @@ import { useMemo } from 'react';
 
 const HOME = '/';
 
-/**
- * Which destination the reader is currently inside.
- *
- * Hash links only light up while the home document is on screen, and then only
- * for the band the reader is actually in. Route links light up for the whole
- * subtree, so an entry at /learnings/some-slug still marks Learnings.
- */
 const useNavActive = (): ((link: NavLinkItem) => boolean) => {
   const pathname = usePathname();
   const onHome = pathname === HOME;

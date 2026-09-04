@@ -11,7 +11,6 @@ export interface ToastOptions {
   title: string;
   description?: string;
   status?: Status;
-  /** Kept for call-site parity. The admin only ever raises bottom toasts. */
   position?: 'bottom';
 }
 
@@ -19,7 +18,6 @@ interface Toast extends ToastOptions {
   id: number;
 }
 
-/** Chakra's default. Long enough to read a sentence, short enough to not nag. */
 const DURATION = 5000;
 
 const ICONS: Record<Status, FC> = {
@@ -30,10 +28,6 @@ const ICONS: Record<Status, FC> = {
 
 const ToastContext = createContext<((options: ToastOptions) => void) | null>(null);
 
-/**
- * `useToast` is called inside dependency arrays, so the function it hands back
- * has to keep its identity across renders or every consumer refetches forever.
- */
 export const useToast = (): ((options: ToastOptions) => void) => {
   const push = useContext(ToastContext);
   if (!push) throw new Error('useToast must be used inside ToastProvider');

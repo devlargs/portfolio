@@ -8,12 +8,6 @@ import styles from './Admin.module.css';
 import useAdminAuth from './hooks/useAdminAuth';
 import { ToastProvider } from './ui';
 
-/**
- * Rendered while the session is still being read, and left on screen if the
- * client bundle never runs at all. Returning `null` here instead meant /admin
- * prerendered to an empty document, so any hydration failure showed the reader
- * a blank white page with nothing to distinguish it from a broken deploy.
- */
 const AdminShell: FC = () => (
   <div className={styles.shell}>
     <div className={styles.card}>

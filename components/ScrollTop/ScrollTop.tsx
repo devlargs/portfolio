@@ -5,22 +5,12 @@ import useScrollProgress from 'hooks/useScrollProgress';
 import { CSSProperties, FC } from 'react';
 import styles from './ScrollTop.module.css';
 
-/** A screen's worth of travel before the way back is worth offering. */
 const THRESHOLD = 600;
 
-/**
- * `rail-track` primitive in its closed form: the same accent, the same reading
- * of scroll position, drawn as a ring instead of a line. The ring is the
- * button's edge, so there is no border competing with it.
- */
 const ScrollTop: FC = () => {
   const progress = useScrollProgress();
   const visible = useScrollPast(THRESHOLD);
 
-  /* No `behavior`, which means `auto`, which defers to the computed
-     `scroll-behavior`. app/globals.css already sets that to smooth and drops it
-     back to auto under `prefers-reduced-motion`, so the preference is honoured
-     without this component reading a media query. */
   const toTop = (): void => window.scrollTo({ top: 0 });
 
   return (
@@ -32,8 +22,6 @@ const ScrollTop: FC = () => {
       aria-label="Back to top"
       onClick={toTop}
     >
-      {/* pathLength normalises the circumference to 1, so the offset is just
-          the remaining fraction and no magic number has to be kept in sync. */}
       <svg className={styles.ring} viewBox="0 0 48 48" aria-hidden="true">
         <circle className={styles.track} cx="24" cy="24" r="22" pathLength="1" />
         <circle

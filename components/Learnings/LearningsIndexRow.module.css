@@ -3,7 +3,6 @@
   border-bottom: var(--rule-hair) solid var(--color-rule);
 }
 
-/* `row-mark`, same treatment as the work index so the two read as one site. */
 .link {
   display: block;
   position: relative;

@@ -4,7 +4,6 @@ import styles from './Heading.module.css';
 
 interface Props {
   content: string;
-  /** Anchor target, so a single step can be linked to directly. */
   id: string;
 }
 

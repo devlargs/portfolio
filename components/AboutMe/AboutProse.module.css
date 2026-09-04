@@ -1,4 +1,3 @@
-/* drop-cap opening — the one place the display face runs inside body copy */
 .opening {
   margin: 0;
   font-size: var(--text-xl);
@@ -22,8 +21,6 @@
 }
 
 .support {
-  /* The old markup set `mt` and then `m="0"`, and the shorthand won, so the
-     gap here has always come from the padding alone. */
   margin: 0;
   padding-top: var(--space-md);
   font-size: var(--text-md);

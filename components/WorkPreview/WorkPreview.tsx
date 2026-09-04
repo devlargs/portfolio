@@ -8,17 +8,12 @@ interface Props {
   brokenLinks?: string[];
 }
 
-/** Enough rows to show the shape of the work, short enough to stay a band. */
 const PREVIEW_ROWS = 6;
 
 const TOTAL = COMPANY_CONTRIBUTIONS.length + PERSONAL_PROJECTS.length;
 
 const FEATURED = COMPANY_CONTRIBUTIONS.filter((project) => project.highlight).slice(0, PREVIEW_ROWS);
 
-/**
- * The home page carries the pick, not the archive. The full run reads as a
- * document of its own and lives at /work.
- */
 const WorkPreview: FC<Props> = ({ brokenLinks = [] }) => (
   <div>
     <IndexGroup title="Longest engagements" projects={FEATURED} brokenSet={new Set(brokenLinks)} />

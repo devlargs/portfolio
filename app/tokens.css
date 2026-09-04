@@ -1,59 +1,31 @@
-/* Hallmark · macrostructure: Long Document (Broadsheet) · genre: editorial
- * theme: custom (tuned) · vibe: "cold stock, deep oxblood, one heavy mark"
- * paper oklch(17% 0.008 258) · accent oklch(63% 0.105 30)
- * axes: paper-band=dark · display-style=variable-serif (Fraunces, roman) · accent-hue=warm
- * default mode: dark. Light is an explicit reader choice only, carried by
- * [data-theme='light']; the system preference is deliberately not consulted.
- * nav: N9 edge-aligned · footer: Ft5 statement · enrichment: none (typography only)
- * tone: editorial · audience: hiring managers, recruiters, engineers
- * pre-emit critique: P5 H5 E5 S5 R5 V4
- *
- * Recolour note — the accent is a MARK, never a field. There is no light
- * accent wash on this site: row and card emphasis is carried by a neutral
- * surface step plus a solid accent edge. A high-lightness tint of a red
- * accent is pink, and pink at full-row scale was the old palette's tell.
- */
-
 :root {
   color-scheme: dark;
 
-  /* ground — cold stock, inverted. Chroma stays at/near 0.008 so it reads as
-     cold graphite rather than blue, and never fights the warm accent. */
   --color-paper: oklch(17% 0.008 258);
   --color-paper-2: oklch(21% 0.009 258);
   --color-paper-3: oklch(25.5% 0.01 258);
 
-  /* ink — chalk */
   --color-ink: oklch(93% 0.006 255);
   --color-ink-2: oklch(76% 0.007 256);
   --color-ink-3: oklch(60% 0.008 256);
 
-  /* structure */
   --color-rule: oklch(30% 0.01 258);
   --color-rule-strong: oklch(50% 0.011 258);
 
-  /* accent — oxblood lifted to a muted clay. Hue is held across modes; only
-     lightness and chroma move, which keeps it clear of --color-danger. */
   --color-accent: oklch(63% 0.105 30);
   --color-accent-hover: oklch(72% 0.1 32);
-  /* transient surfaces only (::selection, field focus). Never a row fill. */
   --color-accent-soft: oklch(26% 0.028 28);
   --color-accent-ink: oklch(15% 0.01 258);
 
-  /* signal — danger sits deliberately brighter and hotter than the accent
-     (72% vs 63% lightness, 20° vs 30° hue) so the two reds never trade
-     places. Error states always ship a message alongside the colour. */
   --color-focus: oklch(66% 0.12 28);
   --color-danger: oklch(72% 0.17 20);
   --color-danger-soft: oklch(27% 0.045 22);
   --color-live: oklch(70% 0.115 152);
 
-  /* type roles — the family lists are set by next/font on <html> */
   --font-display: var(--font-fraunces), 'Iowan Old Style', Georgia, serif;
   --font-body: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
   --font-meta: var(--font-plex-mono), ui-monospace, 'SFMono-Regular', monospace;
 
-  /* scale */
   --text-display: clamp(2.75rem, 1.1rem + 7.1vw, 7rem);
   --text-display-s: clamp(2.25rem, 1.35rem + 4vw, 4.5rem);
   --text-4xl: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
@@ -66,7 +38,6 @@
   --text-xs: 0.8125rem;
   --text-2xs: 0.6875rem;
 
-  /* 4pt space scale */
   --space-3xs: 0.25rem;
   --space-2xs: 0.5rem;
   --space-xs: 0.75rem;
@@ -79,26 +50,19 @@
   --space-4xl: 8rem;
   --space-5xl: 10rem;
 
-  /* measure */
   --measure: 62ch;
   --measure-narrow: 44ch;
-  /* code and tabular matter, which read fine wider than running prose */
   --measure-wide: 78ch;
   --page-max: 78rem;
   --page-gutter: clamp(1.25rem, 0.4rem + 3.4vw, 4.5rem);
   --rail-width: 2.75rem;
 
-  /* overlay — a floating label that must stay legible above running text.
-     92% paper is a chip, not glass: the blur only kills ghosting of the
-     8% that shows through, it is not a decorative frost. */
   --surface-veil: color-mix(in oklch, var(--color-paper) 92%, transparent);
   --blur-veil: blur(8px);
   --shadow-pop: 0 6px 20px -8px oklch(2% 0.004 258 / 0.75);
 
-  /* line */
   --rule-hair: 1px;
   --rule-thick: 2px;
-  /* the accent edge that replaced the row wash */
   --rule-edge: 2px;
 
   --radius-none: 0px;
@@ -106,7 +70,6 @@
   --radius-md: 4px;
   --radius-pill: 999px;
 
-  /* motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -116,8 +79,6 @@
   --dur-4: 640ms;
 }
 
-/* light inversion — an explicit reader choice, nothing else. The toggle is
-   the only thing that sets this attribute, so a first visit is always dark. */
 :root[data-theme='light'] {
   color-scheme: light;
   --color-paper: oklch(96.5% 0.005 255);

@@ -12,7 +12,6 @@ interface Props {
   imagePlaceholders: Record<string, string>;
 }
 
-/** `/images/linkedin/marc.jpg` -> `marc` */
 const getPlaceholderKey = (avatar: string): string => {
   const [path] = avatar.split('.jpg');
   const parts = path.split('/');

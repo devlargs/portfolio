@@ -61,21 +61,14 @@ export const metadata: Metadata = {
     description,
   },
   icons: { shortcut: '/favicon.ico' },
-  /* Server-read, so the token never reaches the client bundle. Absent in dev
-     and in any deploy that has not set it, which Next renders as no tag. */
   verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
 };
 
-/* Dark is the default and the system preference is not consulted, so the
-   browser chrome is a single literal rather than a media-keyed pair. Satori
-   and this entry both duplicate the palette by hand: see app/tokens.css. */
 export const viewport: Viewport = {
   themeColor: '#0d1013',
   colorScheme: 'dark light',
 };
 
-/* Person + WebSite graph. `sameAs` only carries links that are actually filled
-   in, so an unset social never ships as an empty string. */
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -111,7 +104,6 @@ const structuredData = {
   ],
 };
 
-/* Runs before first paint so a reader who chose light never sees a dark flash. */
 const THEME_INIT = `(function(){try{var m=localStorage.getItem('rl-theme');if(m==='dark'||m==='light'){document.documentElement.setAttribute('data-theme',m);}}catch(e){}})();`;
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;

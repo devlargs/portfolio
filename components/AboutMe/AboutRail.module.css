@@ -1,5 +1,3 @@
-/* Margin annotations. Starts level with the section heading rather than below
-   the lede, so the column head is not left holding dead space. */
 .rail {
   display: flex;
   flex-direction: column;

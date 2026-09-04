@@ -2,11 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-/**
- * Document scroll position as 0..1, sampled on rAF.
- * Drives the `rail-track` primitive: the masthead hairline and the side-rail
- * marker both read this and write only to `transform`.
- */
 const useScrollProgress = (): number => {
   const [progress, setProgress] = useState(0);
 

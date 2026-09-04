@@ -3,10 +3,6 @@
   border-bottom: var(--rule-hair) solid var(--color-rule);
 }
 
-/* `row-mark`: a neutral surface step plus a solid accent edge that draws up the
-   left side. Deliberately not a tinted fill — a light tint of the red accent is
-   pink, and at full-row scale it swamps the page.
-   Same treatment on :focus-visible so keyboard gets identical feedback. */
 .link {
   display: block;
   position: relative;

@@ -4,7 +4,6 @@
   transition: background var(--dur-2) var(--ease-out);
 }
 
-/* Sunken bands break the page rhythm without adding a card. */
 .sunken {
   background: var(--color-paper-2);
 }

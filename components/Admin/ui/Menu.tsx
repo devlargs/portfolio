@@ -10,17 +10,11 @@ export interface MenuItem {
 }
 
 interface Props {
-  /** Accessible name for the trigger. */
   label: string;
   icon: ReactNode;
   items: readonly MenuItem[];
 }
 
-/**
- * The one dropdown the admin needs, rather than a general menu system.
- * Click or Enter opens it, Escape closes it and returns focus to the trigger,
- * the arrow keys walk the items, and a click anywhere else dismisses it.
- */
 const Menu: FC<Props> = ({ label, icon, items }) => {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -43,8 +37,6 @@ const Menu: FC<Props> = ({ label, icon, items }) => {
     return (): void => document.removeEventListener('mousedown', onPointerDown);
   }, [open]);
 
-  /* Opening with the keyboard should land on the first item. Opening with the
-     mouse should not steal focus from wherever the reader was. */
   const openAndFocusFirst = (): void => {
     setOpen(true);
     window.requestAnimationFrame(() => itemRefs.current[0]?.focus());

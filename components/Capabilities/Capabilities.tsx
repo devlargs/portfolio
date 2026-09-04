@@ -7,8 +7,6 @@ interface Props {
   imagePlaceholders: Record<string, string>;
 }
 
-/* Primary and secondary are a grouping, not a hierarchy of treatment: both
-   render identically and the heading is what tells them apart. */
 const Capabilities: FC<Props> = ({ imagePlaceholders }) => (
   <div className={styles.groups}>
     <CapabilityGroup title="Primary" skills={PRIMARY_SKILLS} imagePlaceholders={imagePlaceholders} />

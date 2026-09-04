@@ -1,6 +1,3 @@
-/* An index of destinations dropped from under the masthead rule. The panel is
-   opaque paper on purpose: the header above it is translucent and blurred, and
-   two frosted layers stacked read as glass for its own sake. */
 .root {
   position: absolute;
   inset-inline: 0;
@@ -12,9 +9,6 @@
   pointer-events: none;
 }
 
-/* Absolute, not fixed: the header carries a backdrop-filter, which makes it the
-   containing block for fixed descendants, so `inset: 0` would resolve to the
-   56px bar. Anchored under the panel and given the viewport's height instead. */
 .scrim {
   position: absolute;
   top: 0;
@@ -62,8 +56,6 @@
   padding: 0;
 }
 
-/* Each row draws its own rule, swept in from the left. Same gesture as the
-   underline on the desktop links, so the two navs speak one language. */
 .row {
   position: relative;
 }
@@ -101,7 +93,6 @@
   outline-offset: -2px;
 }
 
-/* The mask crops the label; the label starts below the crop and rises into it. */
 .mask {
   display: block;
   overflow: hidden;
@@ -129,7 +120,6 @@
   color: var(--color-accent);
 }
 
-/* The real href, not a decorative kicker. */
 .path {
   flex-shrink: 0;
   font-family: var(--font-meta);
@@ -145,7 +135,6 @@
   transition: opacity var(--dur-2) var(--ease-out) calc(var(--i, 0) * 45ms + 80ms);
 }
 
-/* The band you are in: accent ink and a solid accent edge, never a wash. */
 .active .label {
   color: var(--color-accent);
 }

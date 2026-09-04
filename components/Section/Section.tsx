@@ -4,7 +4,6 @@ import styles from './Section.module.css';
 
 interface Props {
   id: string;
-  /** Sunken bands break the page rhythm without adding a card. */
   sunken?: boolean;
 }
 

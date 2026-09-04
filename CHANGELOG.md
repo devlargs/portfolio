@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Stripped every comment out of the source, leaving only the lint directives the tooling needs.
+
 ## [0.2.2] (2026-09-04)
 
 ### Changed

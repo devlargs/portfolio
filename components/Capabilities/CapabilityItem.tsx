@@ -8,10 +8,6 @@ interface Props {
   blurDataURL?: string;
 }
 
-/**
- * A named capability, not a logo tile. The mark carries its own brand colour and
- * the name picks up the accent when the reader points at the row.
- */
 const CapabilityItem: FC<Props> = ({ name, slug, blurDataURL }) => (
   <li className={styles.item}>
     <div className={styles.mark} aria-hidden="true">

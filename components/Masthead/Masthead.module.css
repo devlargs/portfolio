@@ -1,4 +1,3 @@
-/* N9 edge-aligned: wordmark hard left, destinations hard right, hairline under. */
 .header {
   position: sticky;
   top: 0;
@@ -53,7 +52,6 @@
   flex-shrink: 0;
 }
 
-/* Above the sheet, so the trigger stays tappable while the scrim is down. */
 .actions {
   position: relative;
   z-index: 1;

@@ -1,6 +1,3 @@
-/* 44px tap target per WCAG AA, with a 20px mark inside it. The button carries
-   no chip or border: next to the circled theme toggle it reads as a mark, and
-   two competing containers in a 56px bar is one too many. */
 .toggle {
   display: grid;
   place-content: center;
@@ -33,14 +30,10 @@
   transition: transform var(--dur-1) var(--ease-out);
 }
 
-/* The press reads on the mark itself; the button has no chip to depress. */
 .toggle:active .rules {
   transform: scale(0.92);
 }
 
-/* Two nested elements per rule on purpose: the wrapper rotates about its centre
-   to build the cross, the ink scales from its left edge to set the rag. One
-   element cannot carry both transform origins. */
 .rule {
   position: absolute;
   left: 0;
@@ -70,7 +63,6 @@
   top: 12px;
 }
 
-/* the rag: a full line, a short line, a line that nearly reaches */
 .mid .ink {
   transform: scaleX(0.62);
 }
@@ -79,8 +71,6 @@
   transform: scaleX(0.84);
 }
 
-/* The middle rule clears first, then the outer two rotate into it. 60ms is
-   enough to read as a sequence without the button feeling slow to answer. */
 .toggle[data-open='true'] .top {
   transform: translateY(6px) rotate(45deg);
   transition-delay: 60ms;
@@ -100,7 +90,6 @@
   transform: scaleX(1);
 }
 
-/* Closing runs shorter than opening and drops the sequencing. */
 .toggle[data-open='false'] .rule,
 .toggle[data-open='false'] .ink {
   transition-duration: var(--dur-1);
@@ -108,7 +97,6 @@
   transition-delay: 0ms;
 }
 
-/* The cross is the state indicator, so it still forms. Only the sequencing goes. */
 @media (prefers-reduced-motion: reduce) {
   .toggle[data-open='true'] .top,
   .toggle[data-open='true'] .bottom {

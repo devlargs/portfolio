@@ -3,7 +3,6 @@ import { FC } from 'react';
 import styles from './SectionTitle.module.css';
 
 interface Props {
-  /** Section id. The heading is what `Section` points `aria-labelledby` at. */
   id: string;
   children: string;
   delay?: number;

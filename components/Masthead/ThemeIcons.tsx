@@ -2,9 +2,6 @@ import { FC } from 'react';
 
 type IconProps = { className?: string };
 
-/* Both glyphs are drawn on the same 24-unit box with the same 1.75 stroke, so
-   the toggle can cross-fade one into the other without the mark changing
-   weight. Stroke-only, currentColor, no fill: the button owns the colour. */
 const base = {
   viewBox: '0 0 24 24',
   width: 16,

@@ -2,7 +2,6 @@
   margin: 0;
 }
 
-/* Each line gets its own clipped row so the copy unmasks on a real line break. */
 .row {
   display: block;
   overflow: hidden;

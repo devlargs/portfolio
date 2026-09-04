@@ -49,9 +49,6 @@ const Page = async ({ params }: Params): Promise<JSX.Element> => {
 
   const url = `${SITE_URL}/learnings/${learning.slug}`;
 
-  /* The article and its trail ship as one graph. `datePublished` and the visible
-     dateline in the page head read from the same field on purpose: a schema date
-     that contradicts the rendered one is worse than no date at all. */
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [

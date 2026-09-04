@@ -1,20 +1,3 @@
-/* Global document styles, in two layers.
- *
- *   1. A base reset. This is a port of Chakra's CSSReset, kept because every
- *      component in the tree was written against it: element margins are zero
- *      and components set every space themselves. Dropping it would reintroduce
- *      user-agent margins under a thousand explicit spacing rules.
- *   2. The document styles that used to live in theme/styles.ts.
- *
- * The reset uses :where() so it carries zero specificity, exactly as Chakra's
- * did. A bare element selector below, or any class in a CSS module, overrides
- * it without an !important.
- *
- * Every value here reads from app/tokens.css. No raw colour values.
- */
-
-/* ── reset ─────────────────────────────────────────────────────────────── */
-
 :where(*, *::before, *::after) {
   border-width: 0;
   border-style: solid;
@@ -164,8 +147,6 @@ template {
   display: none !important;
 }
 
-/* ── document ──────────────────────────────────────────────────────────── */
-
 html {
   box-sizing: border-box;
   line-height: 1.5;
@@ -175,13 +156,11 @@ html {
   text-rendering: optimizeLegibility;
   touch-action: manipulation;
   scroll-behavior: smooth;
-  /* the sticky masthead must not cover an anchored section head */
   scroll-padding-top: calc(var(--space-2xl) + 64px);
 }
 
 html,
 body {
-  /* clip, never hidden — `hidden` breaks position: sticky in the rail */
   overflow-x: clip;
   background: var(--color-paper);
   color: var(--color-ink);
@@ -230,7 +209,6 @@ p {
   color: var(--color-ink-3);
 }
 
-/* focus is never animated — it must appear the instant focus lands */
 :focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 3px;
@@ -268,11 +246,6 @@ p {
   background-clip: padding-box;
 }
 
-/* ── page macrostructure ───────────────────────────────────────────────── */
-
-/* The one shared layout class. Every full-width band on the site centres its
-   contents on this measure, so it lives here rather than being repeated in
-   eight modules and drifting. Vertical padding stays with the band. */
 .page-wrap {
   max-width: var(--page-max);
   margin-inline: auto;

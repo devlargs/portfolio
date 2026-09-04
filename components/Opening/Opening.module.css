@@ -6,7 +6,6 @@
   padding-block: var(--space-2xl);
 }
 
-/* standing head: role and place, the way a masthead dateline reads */
 .dateline {
   display: flex;
   flex-wrap: wrap;
@@ -45,7 +44,6 @@
   opacity: 0.42;
 }
 
-/* asymmetric band: reading column left, identity block right */
 .band {
   margin-top: var(--space-xl);
   display: grid;

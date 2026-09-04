@@ -1,8 +1,5 @@
 import { FC, SVGProps } from 'react';
 
-/* Traced from the Chakra icon set that used to be imported here, so the glyphs
-   are unchanged. Sized in `em` like Chakra's Icon, which is why every caller
-   controls them with font-size rather than width. */
 const base: SVGProps<SVGSVGElement> = {
   width: '1em',
   height: '1em',

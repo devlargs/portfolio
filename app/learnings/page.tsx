@@ -18,8 +18,6 @@ export const metadata: Metadata = {
   twitter: { title, description },
 };
 
-/* A CollectionPage plus the ordered list of what is in it. Without the ItemList
-   the index reads to a crawler as prose that happens to contain links. */
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [

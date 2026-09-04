@@ -7,7 +7,6 @@ interface Props {
   delay?: number;
 }
 
-/** Short standfirst. Sits under the heading at narrow measure, never beside it. */
 const SectionLede: FC<Props> = ({ children, delay = 80 }) => (
   <Reveal delay={delay} distance={12}>
     <p className={styles.lede}>{children}</p>

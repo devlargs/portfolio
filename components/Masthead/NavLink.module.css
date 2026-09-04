@@ -19,7 +19,6 @@
   color: var(--color-accent);
 }
 
-/* drawn underline, not text-decoration — it can be animated on transform */
 .link::after {
   content: '';
   position: absolute;

@@ -7,17 +7,10 @@ import styles from './MenuToggle.module.css';
 interface Props {
   ref?: Ref<HTMLButtonElement>;
   open: boolean;
-  /** id of the sheet this button discloses */
   controls: string;
   onToggle: () => void;
 }
 
-/**
- * Closed, the three rules sit ragged like a set text block. Open, they even out
- * and the outer two cross while the middle one leaves. The rules are drawn at
- * `--rule-thick`, so the mark belongs to the same rule language as the section
- * dividers rather than reading as an imported glyph.
- */
 const MenuToggle: FC<Props> = ({ ref, open, controls, onToggle }) => (
   <button
     ref={ref}

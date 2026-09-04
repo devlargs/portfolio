@@ -4,14 +4,6 @@ import useRouteProgress from 'hooks/useRouteProgress';
 import { CSSProperties, FC } from 'react';
 import styles from './RouteProgress.module.css';
 
-/**
- * `rail-track` primitive again, pinned to the top of the viewport. Same accent,
- * same `scaleX` gesture as the masthead's scroll bar, 56px above it so the two
- * never sit on the same line.
- *
- * Hidden from assistive tech on purpose: the App Router already announces the
- * new page, and a live progressbar would talk over it.
- */
 const RouteProgress: FC = () => {
   const { visible, progress } = useRouteProgress();
 

@@ -4,7 +4,6 @@ import { Learning } from './types';
 
 export type { Learning, LearningBlock } from './types';
 
-/** Newest first. Add an entry file, import it, drop it at the top of the array. */
 export const LEARNINGS: readonly Learning[] = [largsHubArchitecture, resendSmtpOnSupabase];
 
 export const findLearning = (slug: string): Learning | undefined =>
@@ -23,7 +22,6 @@ export const wordCount = (learning: Learning): number =>
         return total + block.items.join(' ').split(/\s+/).length;
       case 'fields':
         return total + block.items.length * 4;
-      /* Code is scanned, not read. A flat estimate beats counting tokens. */
       case 'code':
         return total + 20;
     }

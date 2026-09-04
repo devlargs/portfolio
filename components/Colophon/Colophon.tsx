@@ -4,14 +4,9 @@ import { FC } from 'react';
 import styles from './Colophon.module.css';
 
 interface Props {
-  /** Passed from the server so the footer year never hydrates differently. */
   year: number;
 }
 
-/**
- * Ft5 statement footer: the name set large, then one hairline, then the meta
- * line. No link columns, no social icon row.
- */
 const Colophon: FC<Props> = ({ year }) => (
   <footer className={styles.footer}>
     <div className={cx('page-wrap', styles.inner)}>

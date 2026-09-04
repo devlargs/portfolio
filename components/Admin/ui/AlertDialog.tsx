@@ -10,20 +10,11 @@ interface Props {
   title: string;
   children: ReactNode;
   footer: ReactNode;
-  /** Focused when the dialog opens. Point it at the least destructive control. */
   initialFocusRef?: RefObject<HTMLElement | null>;
 }
 
 const FOCUSABLE = 'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-/**
- * A confirmation dialog: overlay, Escape to dismiss, focus parked on the safe
- * control and trapped inside until it closes.
- *
- * Rendered through a portal so the dialog is never clipped by an ancestor's
- * overflow, and mounted only on the client because there is no document to
- * portal into while the page is being prerendered.
- */
 const AlertDialog: FC<Props> = ({ isOpen, onClose, title, children, footer, initialFocusRef }) => {
   const [mounted, setMounted] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);

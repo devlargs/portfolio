@@ -1,5 +1,3 @@
-/* Marginal note: a mono label over a hairline-separated set list.
-   Reads as an annotation in the margin rather than a card of chips. */
 .label {
   margin: 0;
   font-family: var(--font-meta);

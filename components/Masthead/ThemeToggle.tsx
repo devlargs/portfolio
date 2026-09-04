@@ -23,9 +23,7 @@ const ThemeToggle: FC = () => {
     document.documentElement.setAttribute('data-theme', next);
     try {
       window.localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      /* private mode — the choice just does not persist */
-    }
+    } catch {}
   };
 
   return (

@@ -8,10 +8,6 @@ interface Props {
   blurDataURL?: string;
 }
 
-/**
- * Plate-style portrait: hairline frame, full colour, lifting slightly on hover.
- * Sized in absolute units so it never drives the text measure.
- */
 const Portrait: FC<Props> = ({ src, alt, blurDataURL }) => (
   <div className={styles.frame}>
     <Image

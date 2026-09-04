@@ -13,16 +13,6 @@ interface Props {
   lede?: string;
 }
 
-/**
- * Broadsheet body: one reading column at measure, annotations in the margin.
- *
- * The section head is composed here rather than sitting above as a full-width
- * SectionHead, so the margin column starts on the same grid row as the heading.
- * Rendered the other way round the rail can only begin below the lede, which
- * leaves a block of dead space at the top of the column.
- *
- * Collapses to a single column below md, notes last.
- */
 const AboutMe: FC<Props> = ({ id, title, lede }) => (
   <div>
     <SectionRule />

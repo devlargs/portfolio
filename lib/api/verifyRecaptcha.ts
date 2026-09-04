@@ -2,15 +2,9 @@ const VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
 const MIN_SCORE = 0.5;
 const EXPECTED_ACTION = 'contact';
 
-/**
- * `skipped` means no verdict was reached, either because no secret is set or
- * because a missing token is tolerated outside production. It is deliberately
- * distinct from `passed` so a misconfiguration can never read as a pass.
- */
 export type RecaptchaOutcome = { status: 'skipped' } | { status: 'passed' } | { status: 'rejected'; reason: string };
 
 interface VerifyOptions {
-  /** When true, a submission with no token is rejected instead of skipped. */
   required: boolean;
 }
 
@@ -48,7 +42,6 @@ export const verifyRecaptcha = async (
 
   if (!data.success) return { status: 'rejected', reason: 'reCAPTCHA verification failed' };
 
-  /* A token minted for a different action is a token lifted from elsewhere. */
   if (data.action && data.action !== EXPECTED_ACTION) {
     return { status: 'rejected', reason: 'reCAPTCHA verification failed' };
   }

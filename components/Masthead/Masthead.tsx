@@ -16,16 +16,9 @@ import useNavActive from './useNavActive';
 const MENU_ID = 'masthead-menu';
 
 interface Props {
-  /** Draws the reading bar on the masthead's hairline. Long-form documents
-   *  only: on an index the line measures a scroll nobody is reading through. */
   readingProgress?: boolean;
 }
 
-/**
- * N9 edge-aligned: wordmark hard left, destinations hard right, hairline under.
- * Below 48em the destinations collapse into a sheet, since four mono labels and
- * a toggle cannot hold their rhythm across a 320px bar.
- */
 const Masthead: FC<Props> = ({ readingProgress = false }) => {
   const isActive = useNavActive();
   const menuButton = useRef<HTMLButtonElement>(null);

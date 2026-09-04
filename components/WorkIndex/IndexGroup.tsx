@@ -10,7 +10,6 @@ interface Props {
   brokenSet: Set<string>;
 }
 
-/** Strips protocol, `www.` and any trailing path so the column stays scannable. */
 const toDomain = (rawUrl: string): string => {
   try {
     return new URL(rawUrl.trim()).hostname.replace(/^www\./, '');
@@ -26,8 +25,6 @@ const IndexGroup: FC<Props> = ({ title, projects, brokenSet }) => (
       <span className={styles.count}>{String(projects.length).padStart(2, '0')}</span>
     </div>
 
-    {/* One reveal for the whole run. Staggering thirty rows individually reads
-        as decoration rather than intent, and delays the last row too long. */}
     <Reveal distance={12}>
       <ul className={styles.list}>
         {projects.map((project, i) => (

@@ -2,10 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-/**
- * Id of the section currently occupying the reading band of the viewport.
- * Used by the side rail and the masthead to mark position.
- */
 const useActiveSection = (ids: readonly string[]): string => {
   const [active, setActive] = useState(ids[0] ?? '');
 

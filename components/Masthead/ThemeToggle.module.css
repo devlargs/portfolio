@@ -14,9 +14,6 @@
     background var(--dur-1) var(--ease-out);
 }
 
-/* The circle stays 32px because that is the size the bar wants, but the tap
-   area is pushed out to the 44px WCAG floor. Sitting beside a 44px hamburger,
-   a 32px target is a miss a thumb finds immediately. */
 .toggle::after {
   content: '';
   position: absolute;
@@ -32,10 +29,6 @@
   background: var(--color-paper-3);
 }
 
-/* Sun and moon are stacked in one 16px cell so the button never resizes and
-   neither icon is laid out on top of the other. The pair is hidden until
-   mounted, which is what keeps the wrong glyph off the screen during
-   hydration: the server cannot know the reader's stored choice. */
 .glyph {
   display: grid;
   place-items: center;
@@ -54,9 +47,6 @@
   transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
 }
 
-/* The visible glyph is the one you are switching TO, which is what the
-   aria-label says as well. Dark ground offers the sun; light offers the moon.
-   The hidden one shrinks and rotates out rather than simply vanishing. */
 .toggle[data-mode='dark'] .moon,
 .toggle[data-mode='light'] .sun {
   opacity: 0;

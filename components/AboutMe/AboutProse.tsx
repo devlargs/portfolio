@@ -4,7 +4,6 @@ import styles from './AboutProse.module.css';
 
 const Lead: FC<PropsWithChildren> = ({ children }) => <span className={styles.lead}>{children}</span>;
 
-/** The reading column: one drop-cap opening, one supporting paragraph. */
 const AboutProse: FC = () => (
   <>
     <Reveal>

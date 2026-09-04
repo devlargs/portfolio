@@ -6,10 +6,6 @@ interface Props {
   items: readonly string[];
 }
 
-/**
- * Marginal note: a mono label over a hairline-separated set list.
- * Reads as an annotation in the margin rather than a card of chips.
- */
 const StackList: FC<Props> = ({ label, items }) => (
   <div>
     <h3 className={styles.label}>{label}</h3>

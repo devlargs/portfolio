@@ -44,7 +44,6 @@ const escapeHtml = (value: string): string =>
 
 export async function sendContactEmail({ name, email, message }: ContactEmailInput): Promise<void> {
   if (!sesClient || !config) {
-    // Missing SES configuration should not break contact form submissions.
     return;
   }
 

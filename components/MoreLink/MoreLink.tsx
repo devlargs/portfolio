@@ -7,7 +7,6 @@ interface Props {
   label: string;
 }
 
-/** Underlined-in-accent continuation link. The arrow steps out on hover. */
 const MoreLink: FC<Props> = ({ href, label }) => (
   <NextLink href={href} className={styles.link}>
     {label}

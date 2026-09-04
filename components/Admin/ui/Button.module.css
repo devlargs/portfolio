@@ -30,7 +30,6 @@
   font-size: 0.875rem;
 }
 
-/* variants */
 .solidBlue {
   background: var(--admin-blue-500);
   color: #fff;
@@ -84,13 +83,10 @@
   width: 100%;
 }
 
-/* An icon-only button is square and carries no horizontal padding. */
 .icon {
   padding-inline: 0;
 }
 
-/* Without a loading label the spinner takes the button's place, so the box
-   never changes width mid-request. */
 .hiddenLabel {
   opacity: 0;
 }

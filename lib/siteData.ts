@@ -42,9 +42,6 @@ const buildImagePlaceholders = async (): Promise<Record<string, string>> => {
 };
 
 const buildBrokenLinks = async (): Promise<string[]> => {
-  /* Link health is a publish-time quality gate. Running 41 outbound HEAD
-     requests on every dev render costs seconds per refresh and tells us nothing
-     we did not already know, so dev renders every link as healthy. */
   if (process.env.NODE_ENV !== 'production') return [];
 
   const allLinks = [...COMPANY_CONTRIBUTIONS, ...PERSONAL_PROJECTS].map((p) => p.link.trim());
@@ -53,11 +50,6 @@ const buildBrokenLinks = async (): Promise<string[]> => {
   return results.filter((r) => !r.ok).map((r) => r.url);
 };
 
-/* Both inputs are identical for every render, and both are slow: ~50 sharp
-   decodes and, in production, a network round trip per project link. Holding
-   the promises at module scope means the work happens once per server process
-   instead of once per request, which is what keeps `next dev` snappy after the
-   first hit. Editing a file still invalidates the module and recomputes. */
 let placeholdersPromise: Promise<Record<string, string>> | undefined;
 let brokenLinksPromise: Promise<string[]> | undefined;
 
@@ -71,11 +63,6 @@ export const getBrokenLinks = (): Promise<string[]> => {
   return brokenLinksPromise;
 };
 
-/* Quotes run from 172px to 932px tall, so whichever one sits at index 0 decides
-   where the contact section starts. Shuffling in a mount effect moved that
-   boundary after hydration and dragged an in-flight anchor scroll off target, so
-   the order is drawn once when the page is generated. The deck still changes,
-   per deploy rather than per visit. */
 const shuffledTestimonials: Testimonial[] = shuffleArray(testimonials) ?? testimonials;
 
 export const getTestimonials = (): Testimonial[] => shuffledTestimonials;

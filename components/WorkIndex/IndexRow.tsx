@@ -7,9 +7,7 @@ interface Props {
   title: string;
   href: string;
   domain: string;
-  /** Notable engagement — carries the accent tick and full-strength ink. */
   highlight?: boolean;
-  /** Server-side link check failed, so no anchor is rendered. */
   unavailable?: boolean;
 }
 

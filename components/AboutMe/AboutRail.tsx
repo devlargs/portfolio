@@ -5,10 +5,6 @@ import StackList from './StackList';
 const CORE_STACK = ['ReactJS', 'Next.js', 'NodeJS', 'TypeScript', 'MongoDB'] as const;
 const WAYS_OF_WORKING = ['Daily stand-ups', 'Code reviews', 'Shared project management'] as const;
 
-/**
- * Margin annotations. Starts level with the section heading rather than below
- * the lede, so the column head is not left holding dead space.
- */
 const AboutRail: FC = () => (
   <div className={styles.rail}>
     <StackList label="Core stack" items={CORE_STACK} />

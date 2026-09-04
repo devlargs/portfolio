@@ -1,12 +1,3 @@
-/* `rail-track` primitive, vertical form.
-   A numbered index of the document that marks where the reader is.
-
-   Shown only once the margin outside the page container genuinely fits the
-   rail: (100vw - page-max) / 2 >= rail-width + space-sm, which needs ~1368px.
-   87.5em clears that with headroom. The old `max(0.5rem, ...)` fallback
-   silently parked the rail inside the gutter below that width, which is what
-   put the hover label on top of the reading column. Below the breakpoint the
-   masthead carries navigation alone. */
 .rail {
   display: none;
   position: fixed;
@@ -63,8 +54,6 @@
   transform: scaleX(1);
 }
 
-/* Even in the true margin the label still overhangs the reading column, so it
-   carries its own paper surface rather than sitting naked on the body copy. */
 .label {
   position: absolute;
   left: calc(100% + var(--space-2xs));

@@ -23,11 +23,6 @@ interface Carousel<T extends HTMLElement> {
   };
 }
 
-/**
- * Pointer-driven slide track. Measures the active slide so the container can
- * animate its own height, and translates the whole track by percentage so the
- * drag stays 1:1 with the finger.
- */
 const useCarousel = <T extends HTMLElement = HTMLDivElement>(total: number): Carousel<T> => {
   const [index, setIndex] = useState(0);
   const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined);

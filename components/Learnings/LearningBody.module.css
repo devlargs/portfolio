@@ -1,14 +1,10 @@
 .body {
   display: grid;
-  /* Explicit column: the implicit one sizes to max-content, and a wide `pre`
-     would then stretch every paragraph past the measure instead of scrolling
-     inside its own box. */
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-md);
   max-width: var(--measure-wide);
 }
 
-/* Prose holds the reading measure; a snippet is scanned, so it runs wider. */
 .block {
   max-width: var(--measure);
 }

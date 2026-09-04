@@ -24,10 +24,6 @@
   cursor: grabbing;
 }
 
-/* The active slide stays in flow so the track is its true height in the server
-   HTML. If every slide were absolute the track would render 0px tall and only
-   gain its height after mount, shifting everything below it once the page had
-   already been scrolled. */
 .slide {
   position: absolute;
   top: 0;

@@ -1,5 +1,3 @@
-/* The `<h1>` band for a document that is not the home page. Same rule-above,
-   heading-below rhythm as SectionHead, one level up in the outline. */
 .band {
   padding-top: var(--space-xl);
   padding-bottom: var(--space-lg);

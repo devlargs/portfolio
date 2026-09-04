@@ -1,4 +1,3 @@
-/* An aside, marked by a rule in the margin rather than a tinted card. */
 .note {
   border-left: var(--rule-thick) solid var(--color-rule-strong);
   padding-left: var(--space-sm);

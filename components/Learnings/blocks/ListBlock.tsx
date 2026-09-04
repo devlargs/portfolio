@@ -7,7 +7,6 @@ interface Props {
   ordered?: boolean;
 }
 
-/** Markers are drawn in the gutter so the copy keeps a flush left edge. */
 const ListBlock: FC<Props> = ({ items, ordered = false }) => {
   const List = ordered ? 'ol' : 'ul';
 

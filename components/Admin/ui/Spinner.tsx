@@ -3,7 +3,6 @@ import { FC } from 'react';
 import styles from './Spinner.module.css';
 
 interface Props {
-  /** `inline` matches the button spinner: one em, inheriting the text colour. */
   inline?: boolean;
   className?: string;
 }

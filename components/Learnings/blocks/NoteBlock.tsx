@@ -8,7 +8,6 @@ interface Props {
   tone?: 'info' | 'warn';
 }
 
-/** An aside, marked by a rule in the margin rather than a tinted card. */
 const NoteBlock: FC<Props> = ({ content, tone = 'info' }) => (
   <aside className={cx(styles.note, tone === 'warn' && styles.warn)}>
     <p className={styles.text}>

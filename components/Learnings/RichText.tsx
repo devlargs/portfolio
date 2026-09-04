@@ -6,12 +6,6 @@ interface Props {
   content: string;
 }
 
-/* One pass, four inline forms: `code`, **strong**, *emphasis*, [label](href).
-   Deliberately not a markdown parser. Anything richer than this belongs in a
-   block, where it gets a component and a considered treatment.
-
-   Neither regex is global: `split` keeps capture groups without /g, and a
-   stateful lastIndex would make the membership test below alternate. */
 const TOKEN = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\([^)]+\))/;
 const IS_TOKEN = /^(?:`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\([^)]+\))$/;
 
@@ -51,7 +45,6 @@ const renderToken = (token: string): ReactNode => {
   );
 };
 
-/** Inline formatting for authored copy. Block structure is the caller's job. */
 const RichText: FC<Props> = ({ content }) => (
   <>
     {content.split(TOKEN).map((part, i) => (

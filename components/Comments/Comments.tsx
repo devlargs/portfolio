@@ -5,15 +5,6 @@ import useThemeMode, { readThemeMode } from 'hooks/useThemeMode';
 import { FC, useEffect, useRef } from 'react';
 import styles from './Comments.module.css';
 
-/**
- * The giscus thread for the current pathname.
- *
- * giscus ships as a script tag that replaces itself with an iframe, which React
- * cannot render declaratively: a `<script>` written into JSX never executes.
- * So the tag is appended to an empty container on mount, and the container is
- * emptied on cleanup. Emptying matters in development, where StrictMode runs
- * the effect twice and would otherwise leave two threads stacked on the page.
- */
 const Comments: FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mode = useThemeMode();
@@ -46,10 +37,6 @@ const Comments: FC = () => {
     };
   }, []);
 
-  /* Theme changes reach the iframe by message, not by re-injection: remounting
-     would lose anything half-typed in the comment box. The iframe is
-     cross-origin, so `postMessage` is the only channel, and the target origin
-     is pinned so the config never goes to whatever else may be framed. */
   useEffect(() => {
     const iframe = containerRef.current?.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
     iframe?.contentWindow?.postMessage({ giscus: { setConfig: { theme: giscusTheme(mode) } } }, GISCUS_ORIGIN);

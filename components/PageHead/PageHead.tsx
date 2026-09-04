@@ -5,20 +5,14 @@ import { FC, ReactNode } from 'react';
 import styles from './PageHead.module.css';
 
 interface Props {
-  /** Small uppercase kicker above the rule. */
   eyebrow?: string;
   title: string;
   lede?: string;
-  /** Right-hand meta on the kicker line: counts, dates, tags. */
   meta?: ReactNode;
   backHref?: string;
   backLabel?: string;
 }
 
-/**
- * The `<h1>` band for a document that is not the home page. Same rule-above,
- * heading-below rhythm as SectionHead, one level up in the outline.
- */
 const PageHead: FC<Props> = ({ eyebrow, title, lede, meta, backHref = '/', backLabel = 'Home' }) => (
   <div className={cx('page-wrap', styles.band)}>
     <Reveal distance={8}>

@@ -1,6 +1,3 @@
-/* `rail-track` primitive, horizontal form. Sits on the masthead's bottom
-   hairline and scales along it. Decorative only: the side rail carries the
-   accessible position information. */
 .track {
   position: absolute;
   left: 0;

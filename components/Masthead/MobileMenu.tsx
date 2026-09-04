@@ -14,14 +14,6 @@ interface Props {
   onDismiss: () => void;
 }
 
-/**
- * An index of destinations dropped from under the masthead rule, not a
- * full-screen takeover: four entries do not earn one, and a takeover reads
- * nothing like the rest of the document.
- *
- * It stays mounted so the close can animate, and goes `inert` when shut, which
- * takes it out of the tab order and the accessibility tree at once.
- */
 const MobileMenu: FC<Props> = ({ id, open, links, isActive, onDismiss }) => {
   const firstLink = useRef<HTMLAnchorElement>(null);
 
@@ -47,7 +39,6 @@ const MobileMenu: FC<Props> = ({ id, open, links, isActive, onDismiss }) => {
                   className={cx(styles.link, active && styles.active)}
                   onClick={onDismiss}
                 >
-                  {/* The mask is the row itself; the label rises out from behind its own rule. */}
                   <span className={styles.mask}>
                     <span className={styles.label}>{link.label}</span>
                   </span>

@@ -5,7 +5,6 @@ import { CSSProperties, ElementType, FC, ReactNode } from 'react';
 import styles from './RevealLines.module.css';
 
 interface Props {
-  /** Copy authored as explicit lines so the mask lands on real line breaks. */
   lines: ReadonlyArray<ReactNode>;
   as?: ElementType;
   stagger?: number;
@@ -16,11 +15,6 @@ interface Props {
   maxW?: string;
 }
 
-/**
- * `line-reveal` primitive, multi-line form.
- * Each line sits in its own overflow-clipped row and travels up from below it,
- * so the copy unmasks rather than fading in as a block.
- */
 const RevealLines: FC<Props> = ({
   lines,
   as: Tag = 'h2',

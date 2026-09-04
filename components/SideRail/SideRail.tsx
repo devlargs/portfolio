@@ -5,11 +5,6 @@ import useActiveSection from 'hooks/useActiveSection';
 import { FC, useMemo } from 'react';
 import styles from './SideRail.module.css';
 
-/**
- * `rail-track` primitive, vertical form.
- * A numbered index of the document that marks where the reader is.
- * lg and up only: on narrow screens the masthead carries navigation alone.
- */
 const SideRail: FC = () => {
   const ids = useMemo(() => SECTIONS.map((s) => s.id), []);
   const active = useActiveSection(ids);

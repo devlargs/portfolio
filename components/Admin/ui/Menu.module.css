@@ -2,7 +2,6 @@
   position: relative;
 }
 
-/* bottom-end: the panel hangs from the trigger's right edge. */
 .list {
   position: absolute;
   top: calc(100% + 0.25rem);

@@ -6,7 +6,6 @@ import styles from './CodeBlock.module.css';
 
 interface Props {
   content: string;
-  /** Filename or shell, printed on the header strip. */
   label?: string;
 }
 
@@ -23,10 +22,7 @@ const CodeBlock: FC<Props> = ({ content, label }) => {
       await navigator.clipboard.writeText(content);
       setCopied(true);
       timer.current = setTimeout(() => setCopied(false), RESET_AFTER);
-    } catch {
-      /* Clipboard is permission-gated and can simply say no. The snippet is
-         already on screen and selectable, so there is nothing to recover. */
-    }
+    } catch {}
   };
 
   return (

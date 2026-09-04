@@ -21,8 +21,6 @@
   color: var(--color-ink-3);
 }
 
-/* Reserves the height of the signed-out prompt so the page below does not jump
-   when the iframe arrives and reports its real height. */
 .thread {
   margin-top: var(--space-lg);
   min-height: 10rem;

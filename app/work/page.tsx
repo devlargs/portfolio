@@ -21,8 +21,6 @@ export const metadata: Metadata = {
 
 const ALL_WORK = [...COMPANY_CONTRIBUTIONS, ...PERSONAL_PROJECTS];
 
-/* Every entry carries its outbound URL, which is what makes this an index a
-   crawler can follow rather than a list of names. */
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [

@@ -8,11 +8,9 @@ type Variant = 'solidBlue' | 'solidRed' | 'ghost' | 'ghostRed';
 interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   variant?: Variant;
   size?: 'md' | 'sm';
-  /** Square, no horizontal padding. Pair with an `aria-label`. */
   iconOnly?: boolean;
   fullWidth?: boolean;
   isLoading?: boolean;
-  /** Shown beside the spinner. Without it the spinner replaces the label. */
   loadingText?: string;
   children?: ReactNode;
 }
