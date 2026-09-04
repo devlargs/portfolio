@@ -9,8 +9,8 @@ interface Props {
 }
 
 /**
- * Plate-style portrait: hairline frame, desaturated at rest, full colour on
- * hover. Sized in absolute units so it never drives the text measure.
+ * Plate-style portrait: hairline frame, full colour, lifting slightly on hover.
+ * Sized in absolute units so it never drives the text measure.
  */
 const Portrait: FC<Props> = ({ src, alt, blurDataURL }) => (
   <Box
@@ -22,11 +22,8 @@ const Portrait: FC<Props> = ({ src, alt, blurDataURL }) => (
     border="var(--rule-hair) solid var(--color-rule-strong)"
     bg="var(--color-paper-2)"
     sx={{
-      '& img': {
-        filter: 'grayscale(1) contrast(1.05)',
-        transition: 'filter var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out)',
-      },
-      '&:hover img': { filter: 'grayscale(0) contrast(1)', transform: 'scale(1.03)' },
+      '& img': { transition: 'transform var(--dur-3) var(--ease-out)' },
+      '&:hover img': { transform: 'scale(1.03)' },
     }}
   >
     <Image

@@ -70,6 +70,8 @@
   /* measure */
   --measure: 62ch;
   --measure-narrow: 44ch;
+  /* code and tabular matter, which read fine wider than running prose */
+  --measure-wide: 78ch;
   --page-max: 78rem;
   --page-gutter: clamp(1.25rem, 0.4rem + 3.4vw, 4.5rem);
   --rail-width: 2.75rem;

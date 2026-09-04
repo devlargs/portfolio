@@ -1,6 +1,8 @@
+import type { Testimonial } from '@components/Recommendations/Quote';
 import { COMPANY_CONTRIBUTIONS, PERSONAL_PROJECTS } from '@constants/portfolio';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from '@constants/skills';
-import { toKebabCase } from 'largs-utils';
+import testimonials from '@constants/testimonials';
+import { shuffleArray, toKebabCase } from 'largs-utils';
 import { getPlaiceholder } from 'plaiceholder';
 import { checkLink } from './checkLink';
 
@@ -68,3 +70,12 @@ export const getBrokenLinks = (): Promise<string[]> => {
   brokenLinksPromise ??= buildBrokenLinks();
   return brokenLinksPromise;
 };
+
+/* Quotes run from 172px to 932px tall, so whichever one sits at index 0 decides
+   where the contact section starts. Shuffling in a mount effect moved that
+   boundary after hydration and dragged an in-flight anchor scroll off target, so
+   the order is drawn once when the page is generated. The deck still changes,
+   per deploy rather than per visit. */
+const shuffledTestimonials: Testimonial[] = shuffleArray(testimonials) ?? testimonials;
+
+export const getTestimonials = (): Testimonial[] => shuffledTestimonials;

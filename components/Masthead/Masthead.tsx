@@ -1,17 +1,17 @@
 'use client';
 
 import { Box, Text } from '@chakra-ui/react';
-import { NAV_LINKS, PROFILE, SECTIONS } from '@constants/profile';
-import useActiveSection from 'hooks/useActiveSection';
-import { FC, useMemo } from 'react';
+import { NAV_LINKS, PROFILE } from '@constants/profile';
+import NextLink from 'next/link';
+import { FC } from 'react';
 import NavLink from './NavLink';
 import ScrollProgress from './ScrollProgress';
 import ThemeToggle from './ThemeToggle';
+import useNavActive from './useNavActive';
 
 /** N9 edge-aligned: wordmark hard left, destinations hard right, hairline under. */
 const Masthead: FC = () => {
-  const ids = useMemo(() => SECTIONS.map((s) => s.id), []);
-  const active = useActiveSection(ids);
+  const isActive = useNavActive();
 
   return (
     <Box
@@ -36,8 +36,8 @@ const Masthead: FC = () => {
         gap="var(--space-sm)"
       >
         <Box
-          as="a"
-          href="#top"
+          as={NextLink}
+          href="/"
           display="inline-flex"
           alignItems="baseline"
           gap="var(--space-2xs)"
@@ -65,9 +65,9 @@ const Masthead: FC = () => {
           />
         </Box>
 
-        <Box as="nav" aria-label="Sections" display="flex" alignItems="center" gap={{ base: '14px', md: '24px' }}>
+        <Box as="nav" aria-label="Primary" display="flex" alignItems="center" gap={{ base: '12px', md: '24px' }}>
           {NAV_LINKS.map((link) => (
-            <NavLink key={link.id} href={`#${link.id}`} label={link.label} active={active === link.id} />
+            <NavLink key={link.href} href={link.href} label={link.label} active={isActive(link)} />
           ))}
           <ThemeToggle />
         </Box>

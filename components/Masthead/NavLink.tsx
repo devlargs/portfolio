@@ -1,4 +1,5 @@
 import { Box } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import { FC } from 'react';
 
 interface Props {
@@ -9,9 +10,9 @@ interface Props {
 
 const NavLink: FC<Props> = ({ href, label, active = false }) => (
   <Box
-    as="a"
+    as={NextLink}
     href={href}
-    aria-current={active ? 'true' : undefined}
+    aria-current={active ? 'page' : undefined}
     position="relative"
     display="inline-block"
     whiteSpace="nowrap"

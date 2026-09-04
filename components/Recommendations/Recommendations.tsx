@@ -1,14 +1,13 @@
 'use client';
 
 import { Box } from '@chakra-ui/react';
-import testimonials from '@constants/testimonials';
-import { shuffleArray } from 'largs-utils';
-import { FC, useEffect, useState } from 'react';
-import Quote from './Quote';
+import { FC } from 'react';
+import Quote, { Testimonial } from './Quote';
 import QuoteNav from './QuoteNav';
 import useCarousel, { SLIDE_MS } from './useCarousel';
 
 interface Props {
+  items: Testimonial[];
   imagePlaceholders: Record<string, string>;
 }
 
@@ -19,14 +18,7 @@ const getPlaceholderKey = (avatar: string): string => {
   return parts[parts.length - 1];
 };
 
-const Recommendations: FC<Props> = ({ imagePlaceholders }) => {
-  /* Server and first client render share the source order, then the list
-     shuffles after mount so nobody is permanently last. */
-  const [items, setItems] = useState(testimonials);
-  useEffect(() => {
-    setItems(shuffleArray(testimonials) ?? testimonials);
-  }, []);
-
+const Recommendations: FC<Props> = ({ items, imagePlaceholders }) => {
   const total = items.length;
   const { index, goTo, next, prev, trackRef, slideRefs, containerHeight, isDragging, dragPercent, handlers } =
     useCarousel<HTMLDivElement>(total);
@@ -59,7 +51,11 @@ const Recommendations: FC<Props> = ({ imagePlaceholders }) => {
               ref={(el: HTMLDivElement | null): void => {
                 slideRefs.current[i] = el;
               }}
-              position="absolute"
+              /* The active slide stays in flow so the track is its true height
+                 in the server HTML. If every slide were absolute the track would
+                 render 0px tall and only gain its height after mount, shifting
+                 everything below it once the page had already been scrolled. */
+              position={isActive ? 'relative' : 'absolute'}
               top="0"
               left="0"
               w="100%"

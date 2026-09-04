@@ -39,9 +39,20 @@ export const SECTIONS = [
   { id: 'contact', label: 'Contact', index: '05' },
 ] as const;
 
-/** The masthead carries destinations, not a table of contents. */
-export const NAV_LINKS = [
-  { id: 'work', label: 'Work' },
-  { id: 'about', label: 'About' },
-  { id: 'contact', label: 'Contact' },
-] as const;
+export type NavLinkItem = {
+  /** Route, or a home-anchored hash so the link resolves from any page. */
+  href: string;
+  label: string;
+};
+
+/**
+ * The masthead carries destinations, not a table of contents. Work and Learnings
+ * are their own documents; About and Contact are still bands on the home page,
+ * so they stay hash links and are written absolute to survive a jump from /work.
+ */
+export const NAV_LINKS: readonly NavLinkItem[] = [
+  { href: '/work', label: 'Work' },
+  { href: '/learnings', label: 'Learnings' },
+  { href: '/#about', label: 'About' },
+  { href: '/#contact', label: 'Contact' },
+];
