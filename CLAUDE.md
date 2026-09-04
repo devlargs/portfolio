@@ -35,12 +35,13 @@ Releases are automated. `CHANGELOG.md` keeps an `## [Unreleased]` section, and `
 
 Husky v4 runs `npm run tsc-node && lint-staged` on pre-commit.
 
-### Two build-cache traps
+### Three build-cache traps
 
-Both cost real debugging time; check them before investigating a "broken" change.
+All three cost real debugging time; check them before investigating a "broken" change.
 
 - `dev` uses Turbopack and `build` uses webpack. Running one after the other leaves mixed artifacts in `.next` and the server 500s with `Cannot find module '../chunks/ssr/[turbopack]_runtime.js'`. Delete `.next` and rebuild.
 - `.next/cache/images` survives a rebuild. After replacing a file in `public/images/`, the optimizer keeps serving the **old** image, so a corrected asset appears unchanged. Delete that directory. Deploys are unaffected.
+- Killing a `build` or a `start` mid-write leaves a **truncated** `.next/routes-manifest.json`. It fails two different ways depending on when you look: a running server answers 404 for routes the build clearly listed, and the next `next start` dies with `TypeError: routesManifest.dataRoutes is not iterable`. Neither points at the manifest. Check it with `node -e "console.log(Object.keys(require('./.next/routes-manifest.json')).length)"` — a healthy one has 12 keys, a truncated one has 6. Delete `.next` and rebuild.
 
 ## Architecture
 
