@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.2.2] (2026-09-04)
+
 ### Changed
 
 - Reading progress is now a ring on a back-to-top button in the corner, instead of a line under the header.
