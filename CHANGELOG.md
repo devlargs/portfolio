@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.2.0] (2026-09-04)
+
 ### Added
 
 - A hamburger menu on phones, opening an index of destinations that lists each one with its address.
