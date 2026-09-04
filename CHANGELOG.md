@@ -11,6 +11,7 @@
 - A reading progress bar in the header.
 - Social share cards, a sitemap and a robots file, so shared links preview properly.
 - Expo and React Native in the primary capabilities list.
+- A learnings write-up on building an Electron workspace browser as a Rambox alternative.
 
 ### Changed
 

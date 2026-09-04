@@ -1,10 +1,11 @@
+import largsHubArchitecture from './entries/largs-hub-architecture';
 import resendSmtpOnSupabase from './entries/resend-smtp-on-supabase';
 import { Learning } from './types';
 
 export type { Learning, LearningBlock } from './types';
 
 /** Newest first. Add an entry file, import it, drop it at the top of the array. */
-export const LEARNINGS: readonly Learning[] = [resendSmtpOnSupabase];
+export const LEARNINGS: readonly Learning[] = [largsHubArchitecture, resendSmtpOnSupabase];
 
 export const findLearning = (slug: string): Learning | undefined =>
   LEARNINGS.find((learning) => learning.slug === slug);
