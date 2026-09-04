@@ -1,0 +1,197 @@
+name: Release
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version bump level
+        type: choice
+        options: [patch, minor, major]
+        default: patch
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # Never let the workflow's own release commit start another run.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      !startsWith(github.event.head_commit.message, 'chore: release v')
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check the push touched the changelog
+        id: touched
+        if: github.event_name == 'push'
+        env:
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [ -z "${BEFORE}" ] || [ "${BEFORE}" = "0000000000000000000000000000000000000000" ] \
+             || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            echo "No usable diff base; falling back to the changelog content check."
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          elif git diff --name-only "${BEFORE}" "${SHA}" | grep -qx 'CHANGELOG.md'; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "CHANGELOG.md was not touched by this push. Nothing to release."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Read the unreleased section
+        id: unreleased
+        if: github.event_name == 'workflow_dispatch' || steps.touched.outputs.changed == 'true'
+        env:
+          EVENT: ${{ github.event_name }}
+          BUMP_INPUT: ${{ inputs.bump }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+
+          const md = fs.readFileSync('CHANGELOG.md', 'utf8');
+          const lines = md.split('\n');
+          const start = lines.findIndex((l) => /^##\s*\[Unreleased\]/i.test(l));
+          if (start === -1) {
+            console.error('No "## [Unreleased]" heading in CHANGELOG.md.');
+            process.exit(1);
+          }
+          let end = lines.length;
+          for (let i = start + 1; i < lines.length; i++) {
+            if (/^##\s/.test(lines[i])) { end = i; break; }
+          }
+
+          const body = lines.slice(start + 1, end);
+          const bullets = body.filter((l) => /^\s*[-*]\s+\S/.test(l));
+
+          const out = (k, v) => fs.appendFileSync(process.env.GITHUB_OUTPUT, `${k}=${v}\n`);
+
+          if (bullets.length === 0) {
+            if (process.env.EVENT === 'workflow_dispatch') {
+              console.error('## [Unreleased] has no entries. Nothing to release.');
+              process.exit(1);
+            }
+            console.log('## [Unreleased] has no entries. Nothing to release.');
+            out('proceed', 'false');
+            process.exit(0);
+          }
+
+          // Bump level: manual runs use the input, pushes read it off the entries.
+          let level;
+          if (process.env.EVENT === 'workflow_dispatch') {
+            level = process.env.BUMP_INPUT || 'patch';
+          // Marked breaking only: bold "**breaking**", or the word in caps.
+          // Prose such as "fixed a bug breaking the form" must not cut a major.
+          } else if (bullets.some((l) => /\*\*breaking\b/i.test(l) || /\bBREAKING\b/.test(l))) {
+            level = 'major';
+          } else {
+            const added = body.some((l, i) => {
+              if (!/^###\s*Added\s*$/i.test(l)) return false;
+              for (let j = i + 1; j < body.length && !/^###\s/.test(body[j]); j++) {
+                if (/^\s*[-*]\s+\S/.test(body[j])) return true;
+              }
+              return false;
+            });
+            level = added ? 'minor' : 'patch';
+          }
+
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const [maj, min, pat] = String(pkg.version || '0.0.0').split('.').map((n) => parseInt(n, 10) || 0);
+          const next =
+            level === 'major' ? `${maj + 1}.0.0` :
+            level === 'minor' ? `${maj}.${min + 1}.0` :
+                                `${maj}.${min}.${pat + 1}`;
+
+          // Trim blank lines off both ends so the release body has no padding.
+          const trimmed = body.join('\n').replace(/^\n+/, '').replace(/\n+$/, '');
+          fs.writeFileSync('.release-body.md', trimmed + '\n');
+
+          console.log(`Bump: ${level}  ${pkg.version} -> ${next}`);
+          out('proceed', 'true');
+          out('level', level);
+          out('version', next);
+          out('start', String(start));
+          out('end', String(end));
+          NODE
+
+      - name: Skip if the tag already exists
+        id: tag
+        if: steps.unreleased.outputs.proceed == 'true'
+        env:
+          VERSION: ${{ steps.unreleased.outputs.version }}
+        run: |
+          set -euo pipefail
+          git fetch --tags --force
+          if git rev-parse -q --verify "refs/tags/v${VERSION}" >/dev/null; then
+            echo "Tag v${VERSION} already exists. Nothing to do."
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Cut the version
+        if: steps.unreleased.outputs.proceed == 'true' && steps.tag.outputs.fresh == 'true'
+        env:
+          VERSION: ${{ steps.unreleased.outputs.version }}
+          START: ${{ steps.unreleased.outputs.start }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+
+          const version = process.env.VERSION;
+          const start = parseInt(process.env.START, 10);
+          const date = new Date().toISOString().slice(0, 10); // UTC
+
+          // Rename [Unreleased] in place and open a fresh empty one above it.
+          const lines = fs.readFileSync('CHANGELOG.md', 'utf8').split('\n');
+          lines[start] = `## [${version}] (${date})`;
+          lines.splice(start, 0, '## [Unreleased]', '');
+          fs.writeFileSync('CHANGELOG.md', lines.join('\n'));
+
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          pkg.version = version;
+          fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+          NODE
+
+      - name: Commit, tag and push
+        if: steps.unreleased.outputs.proceed == 'true' && steps.tag.outputs.fresh == 'true'
+        env:
+          VERSION: ${{ steps.unreleased.outputs.version }}
+        run: |
+          set -euo pipefail
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CHANGELOG.md package.json
+          git commit -m "chore: release v${VERSION}"
+          git tag "v${VERSION}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
+          git push origin "refs/tags/v${VERSION}"
+
+      - name: Publish the GitHub release
+        if: steps.unreleased.outputs.proceed == 'true' && steps.tag.outputs.fresh == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.unreleased.outputs.version }}
+        run: |
+          set -euo pipefail
+          gh release create "v${VERSION}" \
+            --title "v${VERSION}" \
+            --notes-file .release-body.md
