@@ -22,12 +22,12 @@ const HomeView: FC<Props> = ({ imagePlaceholders, testimonials, brokenLinks, yea
     <Opening portraitPlaceholder={imagePlaceholders.ralph} />
 
     <Section id="about">
-      <SectionHead
+      {/* AboutMe owns its own head so the stack rail can start level with the heading */}
+      <AboutMe
         id="about"
         title="About"
         lede="What I work on, how I work with people, and the tools I reach for first."
       />
-      <AboutMe />
     </Section>
 
     <Section id="work" sunken>
