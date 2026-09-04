@@ -31,27 +31,27 @@
     ]
   },
   "dependencies": {
-    "@aws-sdk/client-ses": "^3.1085.0",
+    "@aws-sdk/client-ses": "^3.1126.0",
     "@next/third-parties": "^15.5.25",
-    "body-parser": "^1.20.4",
+    "body-parser": "^1.20.6",
     "cors": "^2.8.6",
     "largs-utils": "^0.16.0",
-    "mongoose": "^8.23.0",
-    "next": "^15.5.18",
+    "mongoose": "^8.24.4",
+    "next": "^15.5.25",
     "plaiceholder": "^2.5.0",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "react-hook-form": "^7.73.1",
-    "sharp": "^0.34.5"
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-hook-form": "^7.87.0",
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
     "@types/node": "^18.19.130",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
-    "eslint": "8.33.0",
-    "eslint-config-next": "^15.5.18",
+    "eslint": "8.57.1",
+    "eslint-config-next": "^15.5.25",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^4.6.2",
@@ -59,6 +59,6 @@
     "lint-staged": "^13.3.0",
     "npm-check-updates": "^16.14.20",
     "prettier": "^2.8.8",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   }
 }
