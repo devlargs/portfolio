@@ -1,0 +1,25 @@
+.grid {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+.column {
+  min-width: 0;
+}
+
+.prose {
+  margin-top: var(--space-lg);
+}
+
+@media (min-width: 48em) {
+  .grid {
+    gap: var(--space-2xl);
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  }
+
+  .prose {
+    margin-top: var(--space-xl);
+  }
+}

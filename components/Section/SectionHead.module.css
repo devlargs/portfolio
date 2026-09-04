@@ -1,0 +1,9 @@
+.head {
+  margin-bottom: var(--space-lg);
+}
+
+@media (min-width: 48em) {
+  .head {
+    margin-bottom: var(--space-xl);
+  }
+}

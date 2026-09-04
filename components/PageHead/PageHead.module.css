@@ -1,0 +1,67 @@
+/* The `<h1>` band for a document that is not the home page. Same rule-above,
+   heading-below rhythm as SectionHead, one level up in the outline. */
+.band {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-lg);
+}
+
+.kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  font-family: var(--font-meta);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.trail {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.back {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-3xs);
+  color: var(--color-ink-2);
+  transition: color var(--dur-1) var(--ease-out);
+}
+
+.back:hover {
+  color: var(--color-accent);
+}
+
+.rule {
+  height: var(--rule-hair);
+  background: var(--color-ink);
+  margin-bottom: var(--space-md);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-display-s);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+}
+
+.lede {
+  margin-top: var(--space-md);
+  max-width: var(--measure);
+  font-size: var(--text-lg);
+  line-height: 1.65;
+  color: var(--color-ink-2);
+}
+
+@media (min-width: 48em) {
+  .band {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+  }
+}

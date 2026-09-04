@@ -4,8 +4,8 @@ import { PRIMARY_SKILLS, SECONDARY_SKILLS } from '@constants/skills';
 import type { Metadata, Viewport } from 'next';
 import { Fraunces, IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
 import { FC, PropsWithChildren } from 'react';
-import Providers from './providers';
 import './tokens.css';
+import './globals.css';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -118,9 +118,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
       <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
     </head>
-    <body>
-      <Providers>{children}</Providers>
-    </body>
+    <body>{children}</body>
     {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
   </html>
 );

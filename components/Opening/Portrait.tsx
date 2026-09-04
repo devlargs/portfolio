@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/react';
 import Image from 'next/image';
 import { FC } from 'react';
+import styles from './Portrait.module.css';
 
 interface Props {
   src: string;
@@ -13,19 +13,7 @@ interface Props {
  * Sized in absolute units so it never drives the text measure.
  */
 const Portrait: FC<Props> = ({ src, alt, blurDataURL }) => (
-  <Box
-    position="relative"
-    w={{ base: '84px', md: '104px' }}
-    h={{ base: '84px', md: '104px' }}
-    flexShrink={0}
-    overflow="hidden"
-    border="var(--rule-hair) solid var(--color-rule-strong)"
-    bg="var(--color-paper-2)"
-    sx={{
-      '& img': { transition: 'transform var(--dur-3) var(--ease-out)' },
-      '&:hover img': { transform: 'scale(1.03)' },
-    }}
-  >
+  <div className={styles.frame}>
     <Image
       src={src}
       alt={alt}
@@ -36,7 +24,7 @@ const Portrait: FC<Props> = ({ src, alt, blurDataURL }) => (
       blurDataURL={blurDataURL}
       priority
     />
-  </Box>
+  </div>
 );
 
 export default Portrait;

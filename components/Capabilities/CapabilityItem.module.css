@@ -1,0 +1,41 @@
+/* A named capability, not a logo tile. The mark carries its own brand colour
+   and the name picks up the accent when the reader points at the row. */
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  min-width: 0;
+  padding-block: var(--space-2xs);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+
+.mark {
+  position: relative;
+  width: var(--mark-size, 16px);
+  height: var(--mark-size, 16px);
+  flex-shrink: 0;
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.item:hover .mark {
+  transform: scale(1.12);
+}
+
+.name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: var(--text-xs);
+  line-height: 1.35;
+  color: var(--color-ink-2);
+  transition: color var(--dur-2) var(--ease-out);
+}
+
+.emphasis {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.item:hover .name {
+  color: var(--color-accent);
+}

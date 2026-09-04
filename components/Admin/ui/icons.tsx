@@ -1,0 +1,56 @@
+import { FC, SVGProps } from 'react';
+
+/* Traced from the Chakra icon set that used to be imported here, so the glyphs
+   are unchanged. Sized in `em` like Chakra's Icon, which is why every caller
+   controls them with font-size rather than width. */
+const base: SVGProps<SVGSVGElement> = {
+  width: '1em',
+  height: '1em',
+  focusable: false,
+  'aria-hidden': true,
+  style: { display: 'inline-block', lineHeight: '1em', flexShrink: 0, color: 'currentColor', verticalAlign: 'middle' },
+};
+
+export const SettingsIcon: FC = () => (
+  <svg {...base} viewBox="0 0 14 14">
+    <path
+      fill="currentColor"
+      d="M14,7.77 L14,6.17 L12.06,5.53 L11.61,4.44 L12.49,2.6 L11.36,1.47 L9.55,2.38 L8.46,1.93 L7.77,0.01 L6.17,0.01 L5.54,1.95 L4.43,2.4 L2.59,1.52 L1.46,2.65 L2.37,4.46 L1.92,5.55 L0,6.23 L0,7.82 L1.94,8.46 L2.39,9.55 L1.51,11.39 L2.64,12.52 L4.45,11.61 L5.54,12.06 L6.23,13.98 L7.82,13.98 L8.45,12.04 L9.56,11.59 L11.4,12.47 L12.53,11.34 L11.61,9.53 L12.08,8.44 L14,7.75 L14,7.77 Z M7,10 C5.34,10 4,8.66 4,7 C4,5.34 5.34,4 7,4 C8.66,4 10,5.34 10,7 C10,8.66 8.66,10 7,10 Z"
+    />
+  </svg>
+);
+
+export const DeleteIcon: FC = () => (
+  <svg {...base} viewBox="0 0 24 24">
+    <g fill="currentColor">
+      <path d="M19.452 7.5H4.547a.5.5 0 00-.5.545l1.287 14.136A2 2 0 007.326 24h9.347a2 2 0 001.992-1.819L19.95 8.045a.5.5 0 00-.129-.382.5.5 0 00-.369-.163zm-9.2 13a.75.75 0 01-1.5 0v-9a.75.75 0 011.5 0zm5 0a.75.75 0 01-1.5 0v-9a.75.75 0 011.5 0zM22 4h-4.75a.25.25 0 01-.25-.25V2.5A2.5 2.5 0 0014.5 0h-5A2.5 2.5 0 007 2.5v1.25a.25.25 0 01-.25.25H2a1 1 0 000 2h20a1 1 0 000-2zM9 3.75V2.5a.5.5 0 01.5-.5h5a.5.5 0 01.5.5v1.25a.25.25 0 01-.25.25h-5.5A.25.25 0 019 3.75z" />
+    </g>
+  </svg>
+);
+
+export const CheckIcon: FC = () => (
+  <svg {...base} viewBox="0 0 24 24">
+    <path
+      fill="currentColor"
+      d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
+    />
+  </svg>
+);
+
+export const WarningIcon: FC = () => (
+  <svg {...base} viewBox="0 0 24 24">
+    <path
+      fill="currentColor"
+      d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z"
+    />
+  </svg>
+);
+
+export const InfoIcon: FC = () => (
+  <svg {...base} viewBox="0 0 24 24">
+    <path
+      fill="currentColor"
+      d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm.25,5a1.5,1.5,0,1,1-1.5,1.5A1.5,1.5,0,0,1,12.25,5ZM14.5,18.5h-4a1,1,0,0,1,0-2h.75a.25.25,0,0,0,.25-.25v-4.5a.25.25,0,0,0-.25-.25H10.5a1,1,0,0,1,0-2h1a2,2,0,0,1,2,2v4.75a.25.25,0,0,0,.25.25h.75a1,1,0,1,1,0,2Z"
+    />
+  </svg>
+);

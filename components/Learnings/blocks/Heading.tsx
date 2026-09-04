@@ -1,6 +1,6 @@
-import { Box, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import RichText from '../RichText';
+import styles from './Heading.module.css';
 
 interface Props {
   content: string;
@@ -9,12 +9,12 @@ interface Props {
 }
 
 const Heading: FC<Props> = ({ content, id }) => (
-  <Box pt="var(--space-md)">
-    <Box h="var(--rule-hair)" bg="var(--color-rule-strong)" mb="var(--space-sm)" />
-    <Text as="h2" id={id} fontSize="var(--text-2xl)" lineHeight={1.2} letterSpacing="-0.015em" m="0">
+  <div className={styles.block}>
+    <div className={styles.rule} />
+    <h2 id={id} className={styles.heading}>
       <RichText content={content} />
-    </Text>
-  </Box>
+    </h2>
+  </div>
 );
 
 export default Heading;

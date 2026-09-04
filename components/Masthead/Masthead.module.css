@@ -1,0 +1,78 @@
+/* N9 edge-aligned: wordmark hard left, destinations hard right, hairline under. */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in oklab, var(--color-paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+
+.bar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2xs);
+  white-space: nowrap;
+  color: var(--color-ink);
+  transition: color var(--dur-1) var(--ease-out);
+}
+
+.wordmark:hover {
+  color: var(--color-accent);
+}
+
+.wordmarkText {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  letter-spacing: -0.01em;
+}
+
+.wordmarkFull {
+  display: none;
+}
+
+.wordmarkShort {
+  display: inline;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (min-width: 30em) {
+  .wordmarkFull {
+    display: inline;
+  }
+
+  .wordmarkShort {
+    display: none;
+  }
+}
+
+@media (min-width: 48em) {
+  .bar {
+    height: 64px;
+  }
+
+  .nav {
+    gap: 24px;
+  }
+}

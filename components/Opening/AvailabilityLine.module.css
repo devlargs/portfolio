@@ -1,0 +1,46 @@
+.line {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-ink-3);
+}
+
+.live {
+  background: var(--color-live);
+  animation: availability-pulse 3.2s var(--ease-in-out) infinite;
+}
+
+.label {
+  font-family: var(--font-meta);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  color: var(--color-ink-2);
+  white-space: nowrap;
+}
+
+@keyframes availability-pulse {
+  0%,
+  70%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  35% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live {
+    animation: none;
+  }
+}

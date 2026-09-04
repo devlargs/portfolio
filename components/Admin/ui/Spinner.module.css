@@ -1,0 +1,21 @@
+.spinner {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid currentColor;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-radius: 99999px;
+  animation: admin-spin 0.45s linear infinite;
+}
+
+.inline {
+  width: 1em;
+  height: 1em;
+}
+
+@keyframes admin-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

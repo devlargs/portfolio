@@ -1,11 +1,11 @@
-﻿'use client';
+'use client';
 
-import { Box, Flex, Heading } from '@chakra-ui/react';
 import { FC, useMemo, useState } from 'react';
+import { ADMIN_NAV_ITEMS, DEFAULT_ADMIN_SECTION } from '../constants';
 import ContactsView from '../ContactsView';
 import SettingsView from '../SettingsView';
-import { ADMIN_NAV_ITEMS, DEFAULT_ADMIN_SECTION } from '../constants';
 import { Section } from '../types';
+import styles from './AdminDashboard.module.css';
 import AdminHeader from './AdminHeader';
 import AdminSidebar from './AdminSidebar';
 
@@ -25,18 +25,16 @@ const AdminDashboard: FC<AdminDashboardProps> = ({ onLogout }) => {
   const activeLabel = useMemo(() => ADMIN_NAV_ITEMS.find((item) => item.key === section)?.label ?? '', [section]);
 
   return (
-    <Box minH="100vh">
+    <div className={styles.page}>
       <AdminHeader onLogout={onLogout} />
-      <Flex>
+      <div className={styles.split}>
         <AdminSidebar activeSection={section} onSelect={setSection} />
-        <Box flex="1" p={{ base: '20px', md: '32px' }} minW="0">
-          <Heading color="white" size="lg" mb="24px">
-            {activeLabel}
-          </Heading>
+        <div className={styles.main}>
+          <h2 className={styles.heading}>{activeLabel}</h2>
           <ActiveView />
-        </Box>
-      </Flex>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

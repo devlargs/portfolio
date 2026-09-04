@@ -1,0 +1,89 @@
+.figure {
+  margin: 0;
+}
+
+.quote {
+  margin: 0;
+  position: relative;
+}
+
+.text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: 1.32;
+  letter-spacing: -0.012em;
+  color: var(--color-ink);
+  max-width: 34ch;
+}
+
+.caption {
+  margin-top: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: var(--rule-hair) solid var(--color-rule-strong);
+  background: var(--color-paper-2);
+}
+
+.who {
+  min-width: 0;
+}
+
+.name {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink);
+  transition: color var(--dur-1) var(--ease-out);
+}
+
+.name:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.role {
+  margin: 0;
+  font-family: var(--font-meta);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.04em;
+  color: var(--color-ink-3);
+}
+
+@media (min-width: 48em) {
+  .quote {
+    padding-left: var(--space-xl);
+  }
+
+  .quote::before {
+    content: '\201C';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -0.18em;
+    font-family: var(--font-display);
+    font-size: 3.2em;
+    line-height: 1;
+    color: var(--color-accent);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .text {
+    font-size: var(--text-3xl);
+  }
+
+  .caption {
+    margin-top: var(--space-lg);
+    margin-left: var(--space-xl);
+  }
+}

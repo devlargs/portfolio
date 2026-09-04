@@ -1,0 +1,37 @@
+.toggle {
+  display: grid;
+  place-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  border: var(--rule-hair) solid var(--color-rule);
+  color: var(--color-ink-2);
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out),
+    background var(--dur-1) var(--ease-out);
+}
+
+.toggle:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.toggle:active {
+  background: var(--color-paper-3);
+}
+
+/* Sun and moon are the same 14px box; only the glyph swaps, so the button
+   never resizes between states. Hidden until mounted to avoid rendering the
+   wrong glyph during hydration. */
+.glyph {
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity var(--dur-1) var(--ease-out);
+}
+
+.mounted {
+  opacity: 1;
+}

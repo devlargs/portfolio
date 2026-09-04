@@ -1,0 +1,19 @@
+.body {
+  padding-bottom: var(--space-2xl);
+}
+
+.more {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-lg);
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+
+@media (min-width: 48em) {
+  .body {
+    padding-bottom: var(--space-3xl);
+  }
+
+  .more {
+    margin-top: var(--space-3xl);
+  }
+}

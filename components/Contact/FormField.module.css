@@ -1,0 +1,23 @@
+.field {
+  margin-bottom: var(--space-md);
+}
+
+.label {
+  display: block;
+  font-family: var(--font-meta);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  margin-bottom: var(--space-3xs);
+}
+
+.error {
+  margin: 0;
+  margin-top: var(--space-3xs);
+  font-family: var(--font-meta);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.04em;
+  color: var(--color-danger);
+}

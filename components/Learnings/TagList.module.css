@@ -1,0 +1,20 @@
+.list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-meta);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.08em;
+  color: var(--color-ink-3);
+}
+
+.tag {
+  padding-inline: var(--space-2xs);
+  padding-block: 2px;
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}

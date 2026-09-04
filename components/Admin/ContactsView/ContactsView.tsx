@@ -1,9 +1,9 @@
-﻿'use client';
+'use client';
 
-import { DeleteIcon } from '@chakra-ui/icons';
-import { Flex, IconButton, Spinner, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import { Contact } from '../types';
+import { DeleteIcon, IconButton, Spinner } from '../ui';
+import styles from './ContactsView.module.css';
 import DeleteContactDialog from './DeleteContactDialog';
 import useContacts from './useContacts';
 
@@ -13,55 +13,50 @@ const ContactsView: FC = () => {
 
   if (loading) {
     return (
-      <Flex justify="center" py="40px">
-        <Spinner color="blue.400" />
-      </Flex>
+      <div className={styles.loading}>
+        <Spinner />
+      </div>
     );
   }
 
   if (contacts.length === 0) {
-    return <Text color="#878e99">No contacts found.</Text>;
+    return <p className={styles.empty}>No contacts found.</p>;
   }
 
   return (
     <>
-      <TableContainer>
-        <Table variant="simple" colorScheme="whiteAlpha">
-          <Thead>
-            <Tr>
-              <Th color="white">Name</Th>
-              <Th color="white">Email</Th>
-              <Th color="white">Message</Th>
-              <Th color="white">Date</Th>
-              <Th color="white" width="60px" textAlign="right">
-                Actions
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
+      <div className={styles.scroller}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Message</th>
+              <th>Date</th>
+              <th className={styles.actionsHead}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
             {contacts.map((contact) => (
-              <Tr key={contact._id}>
-                <Td color="#878e99">{contact.name}</Td>
-                <Td color="#878e99">{contact.email}</Td>
-                <Td color="#878e99" maxW="400px" whiteSpace="normal" wordBreak="break-word">
-                  {contact.message}
-                </Td>
-                <Td color="#878e99">{new Date(contact.createdAt).toLocaleDateString()}</Td>
-                <Td textAlign="right">
+              <tr key={contact._id}>
+                <td>{contact.name}</td>
+                <td>{contact.email}</td>
+                <td className={styles.message}>{contact.message}</td>
+                <td>{new Date(contact.createdAt).toLocaleDateString()}</td>
+                <td className={styles.actions}>
                   <IconButton
-                    aria-label={`Remove contact from ${contact.name}`}
+                    label={`Remove contact from ${contact.name}`}
                     icon={<DeleteIcon />}
                     size="sm"
-                    variant="ghost"
-                    colorScheme="red"
+                    danger
                     onClick={(): void => setPendingDelete(contact)}
                   />
-                </Td>
-              </Tr>
+                </td>
+              </tr>
             ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+          </tbody>
+        </table>
+      </div>
 
       <DeleteContactDialog
         contact={pendingDelete}

@@ -1,0 +1,33 @@
+.page {
+  min-height: 100vh;
+}
+
+.split {
+  display: flex;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: 20px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.33;
+  color: var(--admin-text);
+  margin-bottom: 24px;
+}
+
+@media (min-width: 48em) {
+  .main {
+    padding: 32px;
+  }
+
+  .heading {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+}

@@ -1,0 +1,9 @@
+.body {
+  padding-bottom: var(--space-2xl);
+}
+
+@media (min-width: 48em) {
+  .body {
+    padding-bottom: var(--space-3xl);
+  }
+}

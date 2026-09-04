@@ -1,0 +1,63 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  padding-block: 40px;
+  color: var(--admin-blue-400);
+}
+
+.empty {
+  color: var(--admin-muted);
+}
+
+.scroller {
+  display: block;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  font-variant-numeric: lining-nums tabular-nums;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: start;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  padding-inline: 1.5rem;
+  padding-block: 0.75rem;
+  border-bottom: 1px solid var(--admin-white-alpha-100);
+  color: var(--admin-text);
+}
+
+.table td {
+  text-align: start;
+  line-height: 1.25rem;
+  padding-inline: 1.5rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--admin-white-alpha-100);
+  color: var(--admin-muted);
+}
+
+.table th.actionsHead {
+  width: 60px;
+  text-align: right;
+}
+
+.table td.actions {
+  text-align: right;
+}
+
+.table td.message {
+  max-width: 400px;
+  white-space: normal;
+  word-break: break-word;
+}

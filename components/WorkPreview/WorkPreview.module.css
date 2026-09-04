@@ -1,0 +1,22 @@
+.footer {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.count {
+  font-family: var(--font-meta);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+@media (min-width: 48em) {
+  .footer {
+    margin-top: var(--space-xl);
+  }
+}

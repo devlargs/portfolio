@@ -1,35 +1,35 @@
 'use client';
 
-import { Box, BoxProps } from '@chakra-ui/react';
+import cx from '@utils/cx';
 import useReveal from 'hooks/useReveal';
-import { FC, PropsWithChildren } from 'react';
+import { CSSProperties, FC, PropsWithChildren } from 'react';
+import styles from './Reveal.module.css';
 
-interface Props extends BoxProps {
+interface Props {
   /** Stagger offset in ms. Keep siblings under ~240ms total. */
   delay?: number;
   /** Vertical travel. 0 gives a pure fade for content that must not shift. */
   distance?: number;
+  className?: string;
 }
 
 /**
  * `line-reveal` primitive, single-element form.
  * Animates transform + opacity only; collapses to a 150ms fade under
- * prefers-reduced-motion via the global override in theme/styles.ts.
+ * prefers-reduced-motion via the global override in app/globals.css.
  */
-const Reveal: FC<PropsWithChildren<Props>> = ({ delay = 0, distance = 16, children, ...rest }) => {
+const Reveal: FC<PropsWithChildren<Props>> = ({ delay = 0, distance = 16, className, children }) => {
   const { ref, revealed } = useReveal<HTMLDivElement>();
 
   return (
-    <Box
+    <div
       ref={ref}
-      opacity={revealed ? 1 : 0}
-      transform={revealed ? 'translateY(0)' : `translateY(${distance}px)`}
-      transition={`opacity var(--dur-4) var(--ease-out) ${delay}ms, transform var(--dur-4) var(--ease-out) ${delay}ms`}
-      willChange="transform, opacity"
-      {...rest}
+      className={cx(styles.reveal, className)}
+      data-revealed={revealed || undefined}
+      style={{ '--reveal-delay': `${delay}ms`, '--reveal-distance': `${distance}px` } as CSSProperties}
     >
       {children}
-    </Box>
+    </div>
   );
 };
 

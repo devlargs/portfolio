@@ -1,0 +1,28 @@
+/* An aside, marked by a rule in the margin rather than a tinted card. */
+.note {
+  border-left: var(--rule-thick) solid var(--color-rule-strong);
+  padding-left: var(--space-sm);
+  padding-block: var(--space-3xs);
+}
+
+.warn {
+  border-left-color: var(--color-accent);
+}
+
+.text {
+  margin: 0;
+  font-size: var(--text-md);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+  font-style: italic;
+}
+
+.warn .text {
+  font-style: normal;
+}
+
+@media (min-width: 48em) {
+  .note {
+    padding-left: var(--space-md);
+  }
+}

@@ -1,0 +1,12 @@
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance, 16px));
+  transition: opacity var(--dur-4) var(--ease-out) var(--reveal-delay, 0ms),
+    transform var(--dur-4) var(--ease-out) var(--reveal-delay, 0ms);
+  will-change: transform, opacity;
+}
+
+.reveal[data-revealed] {
+  opacity: 1;
+  transform: translateY(0);
+}

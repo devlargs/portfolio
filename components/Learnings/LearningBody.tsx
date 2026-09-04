@@ -1,5 +1,5 @@
-import { Box } from '@chakra-ui/react';
 import { LearningBlock } from '@constants/learnings';
+import cx from '@utils/cx';
 import { FC, JSX } from 'react';
 import CodeBlock from './blocks/CodeBlock';
 import FieldsBlock from './blocks/FieldsBlock';
@@ -8,6 +8,7 @@ import ListBlock from './blocks/ListBlock';
 import NoteBlock from './blocks/NoteBlock';
 import Paragraph from './blocks/Paragraph';
 import headingId from './headingId';
+import styles from './LearningBody.module.css';
 
 interface Props {
   body: readonly LearningBlock[];
@@ -33,23 +34,14 @@ const renderBlock = (block: LearningBlock): JSX.Element => {
 };
 
 const LearningBody: FC<Props> = ({ body }) => (
-  <Box
-    display="grid"
-    /* Explicit column: the implicit one sizes to max-content, and a wide `pre`
-       would then stretch every paragraph past the measure instead of scrolling
-       inside its own box. */
-    gridTemplateColumns="minmax(0, 1fr)"
-    gap={{ base: 'var(--space-md)', md: 'var(--space-lg)' }}
-    maxW="var(--measure-wide)"
-  >
+  <div className={styles.body}>
     {body.map((block, i) => (
-      // Prose holds the reading measure; a snippet is scanned, so it runs wider.
       // eslint-disable-next-line react/no-array-index-key
-      <Box key={i} maxW={block.kind === 'code' ? 'none' : 'var(--measure)'}>
+      <div key={i} className={cx(styles.block, block.kind === 'code' && styles.wide)}>
         {renderBlock(block)}
-      </Box>
+      </div>
     ))}
-  </Box>
+  </div>
 );
 
 export default LearningBody;

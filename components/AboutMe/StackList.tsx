@@ -1,5 +1,5 @@
-import { Box, Text } from '@chakra-ui/react';
 import { FC } from 'react';
+import styles from './StackList.module.css';
 
 interface Props {
   label: string;
@@ -11,45 +11,20 @@ interface Props {
  * Reads as an annotation in the margin rather than a card of chips.
  */
 const StackList: FC<Props> = ({ label, items }) => (
-  <Box>
-    <Text
-      as="h3"
-      fontFamily="var(--font-meta)"
-      fontSize="var(--text-2xs)"
-      fontWeight={500}
-      letterSpacing="0.12em"
-      textTransform="uppercase"
-      color="var(--color-ink-3)"
-      m="0"
-      pb="var(--space-2xs)"
-      borderBottom="var(--rule-hair) solid var(--color-rule)"
-    >
-      {label}
-    </Text>
+  <div>
+    <h3 className={styles.label}>{label}</h3>
 
-    <Box as="ul" listStyleType="none" m="0" p="0">
+    <ul className={styles.list}>
       {items.map((item) => (
-        <Box
-          as="li"
-          key={item}
-          display="flex"
-          alignItems="baseline"
-          gap="var(--space-2xs)"
-          py="var(--space-2xs)"
-          borderBottom="var(--rule-hair) solid var(--color-rule)"
-          fontSize="var(--text-sm)"
-          color="var(--color-ink-2)"
-        >
-          <Box as="span" color="var(--color-accent)" aria-hidden="true" flexShrink={0} fontSize="var(--text-2xs)">
+        <li key={item} className={styles.item}>
+          <span className={styles.marker} aria-hidden="true">
             &#9642;
-          </Box>
-          <Box as="span" minW="0">
-            {item}
-          </Box>
-        </Box>
+          </span>
+          <span className={styles.name}>{item}</span>
+        </li>
       ))}
-    </Box>
-  </Box>
+    </ul>
+  </div>
 );
 
 export default StackList;

@@ -1,0 +1,68 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 16px;
+}
+
+.container {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 28rem;
+  padding-inline: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.33;
+  color: var(--admin-text);
+  text-align: center;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  outline: 0;
+  appearance: none;
+  height: 2.5rem;
+  padding-inline: 1rem;
+  border-radius: var(--admin-radius);
+  border: 1px solid var(--admin-field-border);
+  background: var(--admin-field-bg);
+  color: var(--admin-text);
+  font-size: 1rem;
+  transition: border-color 200ms;
+}
+
+.input::placeholder {
+  color: var(--admin-muted);
+}
+
+.input:hover {
+  border-color: var(--admin-field-border-hover);
+}
+
+.input:focus {
+  border-color: var(--admin-field-border-focus);
+}
+
+@media (min-width: 48em) {
+  .title {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+}

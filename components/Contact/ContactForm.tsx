@@ -1,11 +1,11 @@
 'use client';
 
-import { Box, Button, Input, Text, Textarea } from '@chakra-ui/react';
+import cx from '@utils/cx';
 import { isValidEmail } from 'largs-utils';
 import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import styles from './ContactForm.module.css';
 import FormField from './FormField';
-import { getInputStyles } from './inputStyles';
 
 /* Gated on the key, not on the environment: tying it to production meant the
    whole path went untested until it was live. Add localhost to the key's
@@ -68,7 +68,7 @@ const ContactForm: FC = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
   const [statusMessage, setStatusMessage] = useState('');
-  const formRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     if (!RECAPTCHA_ENABLED || !RECAPTCHA_SITE_KEY) return;
@@ -149,16 +149,16 @@ const ContactForm: FC = () => {
       : undefined;
 
   return (
-    <Box as="form" ref={formRef} onSubmit={handleSubmit(onSubmit)} data-contact-form noValidate>
+    <form ref={formRef} onSubmit={handleSubmit(onSubmit)} data-contact-form noValidate>
       <FormField label="Name" htmlFor="contact-name" error={errors.name ? 'Name is required' : undefined}>
-        <Input
+        <input
           id="contact-name"
+          className={styles.input}
           placeholder="Your name"
           autoComplete="name"
           aria-invalid={Boolean(errors.name)}
           aria-describedby={errors.name ? 'contact-name-error' : undefined}
           {...register('name', { required: true })}
-          sx={getInputStyles(Boolean(errors.name))}
         />
       </FormField>
 
@@ -168,8 +168,9 @@ const ContactForm: FC = () => {
           name="email"
           rules={{ required: true, validate: isValidEmail }}
           render={({ field }): ReactElement => (
-            <Input
+            <input
               id="contact-email"
+              className={styles.input}
               type="email"
               inputMode="email"
               autoComplete="email"
@@ -177,99 +178,53 @@ const ContactForm: FC = () => {
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? 'contact-email-error' : undefined}
               {...field}
-              sx={getInputStyles(Boolean(errors.email))}
             />
           )}
         />
       </FormField>
 
       <FormField label="Message" htmlFor="contact-message" error={errors.message ? 'Message is required' : undefined}>
-        <Textarea
+        <textarea
           id="contact-message"
+          className={cx(styles.input, styles.textarea)}
           placeholder="What would you like to say?"
           rows={5}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? 'contact-message-error' : undefined}
           {...register('message', { required: true })}
-          sx={{ ...getInputStyles(Boolean(errors.message)), resize: 'vertical' }}
         />
       </FormField>
 
-      <Button
-        type="submit"
-        isDisabled={Boolean(Object.keys(errors).length)}
-        isLoading={loading}
-        loadingText="Sending"
-        bg="var(--color-accent)"
-        color="var(--color-accent-ink)"
-        fontFamily="var(--font-meta)"
-        fontSize="var(--text-xs)"
-        fontWeight={500}
-        letterSpacing="0.08em"
-        textTransform="uppercase"
-        whiteSpace="nowrap"
-        px="var(--space-md)"
-        h="44px"
-        borderRadius="var(--radius-none)"
-        transition="background var(--dur-2) var(--ease-out), transform var(--dur-1) var(--ease-out)"
-        _hover={{ bg: 'var(--color-accent-hover)', transform: 'translateY(-1px)' }}
-        _active={{ transform: 'translateY(1px)' }}
-        _focusVisible={{ outline: '2px solid var(--color-focus)', outlineOffset: '3px', boxShadow: 'none' }}
-        _disabled={{
-          opacity: 0.45,
-          cursor: 'not-allowed',
-          _hover: { transform: 'none', bg: 'var(--color-accent)' },
-        }}
-      >
-        Send message
-      </Button>
+      <button type="submit" className={styles.submit} disabled={loading || Boolean(Object.keys(errors).length)}>
+        {loading && <span className={styles.spinner} aria-hidden="true" />}
+        {loading ? 'Sending' : 'Send message'}
+      </button>
 
       {/* Inline resolution beats a toast: it stays put, it is announced once,
           and it does not cover the form the reader just filled in. */}
-      <Box mt="var(--space-sm)" minH="1.25rem" aria-live="polite" role="status">
+      <div className={styles.status} aria-live="polite" role="status">
         {status !== 'idle' && (
-          <Text
-            display="inline-flex"
-            alignItems="center"
-            gap="var(--space-3xs)"
-            fontFamily="var(--font-meta)"
-            fontSize="var(--text-2xs)"
-            letterSpacing="0.04em"
-            color={status === 'success' ? 'var(--color-live)' : 'var(--color-danger)'}
-            m="0"
-          >
-            <Box as="span" aria-hidden="true">
-              {status === 'success' ? '✓' : '⚠'}
-            </Box>
+          <p className={cx(styles.statusLine, status === 'success' && styles.statusSuccess)}>
+            <span aria-hidden="true">{status === 'success' ? '✓' : '⚠'}</span>
             {statusMessage}
-          </Text>
+          </p>
         )}
-      </Box>
+      </div>
 
       {RECAPTCHA_ENABLED && (
-        <Text fontSize="var(--text-2xs)" color="var(--color-ink-3)" mt="var(--space-sm)" lineHeight={1.6}>
+        <p className={styles.legal}>
           This site is protected by reCAPTCHA and the Google{' '}
-          <a
-            href="https://policies.google.com/privacy"
-            target="_blank"
-            rel="noreferrer"
-            style={{ textDecoration: 'underline' }}
-          >
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
             Privacy Policy
           </a>{' '}
           and{' '}
-          <a
-            href="https://policies.google.com/terms"
-            target="_blank"
-            rel="noreferrer"
-            style={{ textDecoration: 'underline' }}
-          >
+          <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer">
             Terms of Service
           </a>{' '}
           apply.
-        </Text>
+        </p>
       )}
-    </Box>
+    </form>
   );
 };
 

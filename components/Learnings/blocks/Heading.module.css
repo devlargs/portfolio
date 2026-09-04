@@ -1,0 +1,16 @@
+.block {
+  padding-top: var(--space-md);
+}
+
+.rule {
+  height: var(--rule-hair);
+  background: var(--color-rule-strong);
+  margin-bottom: var(--space-sm);
+}
+
+.heading {
+  margin: 0;
+  font-size: var(--text-2xl);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}

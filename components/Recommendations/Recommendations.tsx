@@ -1,9 +1,10 @@
 'use client';
 
-import { Box } from '@chakra-ui/react';
-import { FC } from 'react';
+import cx from '@utils/cx';
+import { CSSProperties, FC } from 'react';
 import Quote, { Testimonial } from './Quote';
 import QuoteNav from './QuoteNav';
+import styles from './Recommendations.module.css';
 import useCarousel, { SLIDE_MS } from './useCarousel';
 
 interface Props {
@@ -24,57 +25,43 @@ const Recommendations: FC<Props> = ({ items, imagePlaceholders }) => {
     useCarousel<HTMLDivElement>(total);
 
   return (
-    <Box w="100%" position="relative">
-      <Box mb={{ base: 'var(--space-lg)', md: 'var(--space-xl)' }}>
+    <div className={styles.carousel}>
+      <div className={styles.nav}>
         <QuoteNav total={total} index={index} onPrev={prev} onNext={next} onGoTo={goTo} />
-      </Box>
+      </div>
 
-      <Box
+      <div
         ref={trackRef}
-        position="relative"
-        overflow="hidden"
-        w="100%"
-        minW="0"
-        height={containerHeight ? `${containerHeight}px` : 'auto'}
-        transition={`height ${SLIDE_MS}ms var(--ease-in-out)`}
-        cursor={isDragging ? 'grabbing' : 'grab'}
-        sx={{ touchAction: 'pan-y', userSelect: 'none', contain: 'layout' }}
+        className={styles.track}
+        data-dragging={isDragging || undefined}
+        style={
+          {
+            '--slide-ms': `${SLIDE_MS}ms`,
+            height: containerHeight ? `${containerHeight}px` : 'auto',
+          } as CSSProperties
+        }
         {...handlers}
       >
         {items.map((testimonial, i) => {
-          const offset = (i - index) * 100 + dragPercent;
           const isActive = i === index;
 
           return (
-            <Box
+            <div
               key={testimonial.name}
               ref={(el: HTMLDivElement | null): void => {
                 slideRefs.current[i] = el;
               }}
-              /* The active slide stays in flow so the track is its true height
-                 in the server HTML. If every slide were absolute the track would
-                 render 0px tall and only gain its height after mount, shifting
-                 everything below it once the page had already been scrolled. */
-              position={isActive ? 'relative' : 'absolute'}
-              top="0"
-              left="0"
-              w="100%"
+              className={cx(styles.slide, isActive && styles.active)}
               aria-hidden={!isActive}
               inert={!isActive}
-              transform={`translateX(${offset}%)`}
-              opacity={isActive ? 1 : 0}
-              transition={
-                isDragging
-                  ? 'none'
-                  : `transform ${SLIDE_MS}ms var(--ease-in-out), opacity ${SLIDE_MS}ms var(--ease-in-out)`
-              }
+              style={{ '--slide-offset': `${(i - index) * 100 + dragPercent}%` } as CSSProperties}
             >
               <Quote testimonial={testimonial} blurDataURL={imagePlaceholders[getPlaceholderKey(testimonial.avatar)]} />
-            </Box>
+            </div>
           );
         })}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

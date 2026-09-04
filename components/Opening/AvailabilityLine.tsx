@@ -1,5 +1,6 @@
-import { Box, Text } from '@chakra-ui/react';
+import cx from '@utils/cx';
 import { FC } from 'react';
+import styles from './AvailabilityLine.module.css';
 
 interface Props {
   label: string;
@@ -7,39 +8,10 @@ interface Props {
 }
 
 const AvailabilityLine: FC<Props> = ({ label, live = true }) => (
-  <Box display="inline-flex" alignItems="center" gap="var(--space-2xs)">
-    <Box
-      as="span"
-      w="7px"
-      h="7px"
-      flexShrink={0}
-      borderRadius="var(--radius-pill)"
-      bg={live ? 'var(--color-live)' : 'var(--color-ink-3)'}
-      aria-hidden="true"
-      sx={
-        live
-          ? {
-              '@keyframes availability-pulse': {
-                '0%, 70%, 100%': { opacity: 1, transform: 'scale(1)' },
-                '35%': { opacity: 0.45, transform: 'scale(0.82)' },
-              },
-              animation: 'availability-pulse 3.2s var(--ease-in-out) infinite',
-              '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
-            }
-          : undefined
-      }
-    />
-    <Text
-      as="span"
-      fontFamily="var(--font-meta)"
-      fontSize="var(--text-xs)"
-      letterSpacing="0.06em"
-      color="var(--color-ink-2)"
-      whiteSpace="nowrap"
-    >
-      {label}
-    </Text>
-  </Box>
+  <div className={styles.line}>
+    <span className={cx(styles.dot, live && styles.live)} aria-hidden="true" />
+    <span className={styles.label}>{label}</span>
+  </div>
 );
 
 export default AvailabilityLine;

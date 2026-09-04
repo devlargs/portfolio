@@ -1,6 +1,7 @@
-import { Box, Text } from '@chakra-ui/react';
+import cx from '@utils/cx';
 import { FC } from 'react';
 import RichText from '../RichText';
+import styles from './NoteBlock.module.css';
 
 interface Props {
   content: string;
@@ -9,22 +10,11 @@ interface Props {
 
 /** An aside, marked by a rule in the margin rather than a tinted card. */
 const NoteBlock: FC<Props> = ({ content, tone = 'info' }) => (
-  <Box
-    as="aside"
-    borderLeft={`var(--rule-thick) solid ${tone === 'warn' ? 'var(--color-accent)' : 'var(--color-rule-strong)'}`}
-    pl={{ base: 'var(--space-sm)', md: 'var(--space-md)' }}
-    py="var(--space-3xs)"
-  >
-    <Text
-      fontSize="var(--text-md)"
-      lineHeight={1.7}
-      color="var(--color-ink-2)"
-      fontStyle={tone === 'warn' ? 'normal' : 'italic'}
-      m="0"
-    >
+  <aside className={cx(styles.note, tone === 'warn' && styles.warn)}>
+    <p className={styles.text}>
       <RichText content={content} />
-    </Text>
-  </Box>
+    </p>
+  </aside>
 );
 
 export default NoteBlock;

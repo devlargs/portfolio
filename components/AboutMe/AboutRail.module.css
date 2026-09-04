@@ -1,0 +1,14 @@
+/* Margin annotations. Starts level with the section heading rather than below
+   the lede, so the column head is not left holding dead space. */
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 48em) {
+  .rail {
+    padding-left: var(--space-md);
+    border-left: var(--rule-hair) solid var(--color-rule);
+  }
+}

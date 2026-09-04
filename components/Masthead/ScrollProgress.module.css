@@ -1,0 +1,18 @@
+/* `rail-track` primitive, horizontal form. Sits on the masthead's bottom
+   hairline and scales along it. Decorative only: the side rail carries the
+   accessible position information. */
+.track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: var(--rule-thick);
+}
+
+.bar {
+  height: 100%;
+  background: var(--color-accent);
+  transform-origin: left center;
+  transform: scaleX(var(--progress, 0));
+  will-change: transform;
+}

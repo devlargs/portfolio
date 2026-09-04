@@ -1,6 +1,6 @@
-import { useToast } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { Contact } from '../types';
+import { useToast } from '../ui';
 
 interface UseContactsResult {
   contacts: Contact[];

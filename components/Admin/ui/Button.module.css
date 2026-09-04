@@ -1,0 +1,107 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  vertical-align: middle;
+  white-space: nowrap;
+  user-select: none;
+  line-height: 1.2;
+  font-weight: 600;
+  border-radius: var(--admin-radius);
+  height: 2.5rem;
+  min-width: 2.5rem;
+  padding-inline: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 200ms, border-color 200ms, color 200ms, box-shadow 200ms;
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.sm {
+  height: 2rem;
+  min-width: 2rem;
+  padding-inline: 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* variants */
+.solidBlue {
+  background: var(--admin-blue-500);
+  color: #fff;
+}
+
+.solidBlue:hover:not(:disabled) {
+  background: var(--admin-blue-600);
+}
+
+.solidBlue:active:not(:disabled) {
+  background: var(--admin-blue-700);
+}
+
+.solidRed {
+  background: var(--admin-red-500);
+  color: #fff;
+}
+
+.solidRed:hover:not(:disabled) {
+  background: var(--admin-red-600);
+}
+
+.solidRed:active:not(:disabled) {
+  background: var(--admin-red-700);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--admin-text);
+}
+
+.ghost:hover:not(:disabled),
+.ghost:active:not(:disabled) {
+  background: var(--admin-border);
+}
+
+.ghostRed {
+  background: transparent;
+  color: var(--admin-red-600);
+}
+
+.ghostRed:hover:not(:disabled) {
+  background: var(--admin-red-50);
+}
+
+.ghostRed:active:not(:disabled) {
+  background: var(--admin-red-100);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* An icon-only button is square and carries no horizontal padding. */
+.icon {
+  padding-inline: 0;
+}
+
+/* Without a loading label the spinner takes the button's place, so the box
+   never changes width mid-request. */
+.hiddenLabel {
+  opacity: 0;
+}
+
+.centredSpinner {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.labelledSpinner {
+  margin-right: 0.5rem;
+}

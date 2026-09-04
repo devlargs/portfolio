@@ -1,7 +1,8 @@
 'use client';
 
-import { Box, Text } from '@chakra-ui/react';
+import cx from '@utils/cx';
 import { FC, useEffect, useRef, useState } from 'react';
+import styles from './CodeBlock.module.css';
 
 interface Props {
   content: string;
@@ -29,62 +30,19 @@ const CodeBlock: FC<Props> = ({ content, label }) => {
   };
 
   return (
-    <Box border="var(--rule-hair) solid var(--color-rule)" bg="var(--color-paper-2)" borderRadius="var(--radius-sm)">
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        gap="var(--space-sm)"
-        px="var(--space-sm)"
-        py="var(--space-3xs)"
-        borderBottom="var(--rule-hair) solid var(--color-rule)"
-      >
-        <Text
-          as="span"
-          fontFamily="var(--font-meta)"
-          fontSize="var(--text-2xs)"
-          letterSpacing="0.1em"
-          textTransform="uppercase"
-          color="var(--color-ink-3)"
-          overflow="hidden"
-          textOverflow="ellipsis"
-          whiteSpace="nowrap"
-        >
-          {label ?? 'snippet'}
-        </Text>
+    <div className={styles.block}>
+      <div className={styles.head}>
+        <span className={styles.label}>{label ?? 'snippet'}</span>
 
-        <Box
-          as="button"
-          type="button"
-          onClick={copy}
-          flexShrink={0}
-          fontFamily="var(--font-meta)"
-          fontSize="var(--text-2xs)"
-          letterSpacing="0.08em"
-          textTransform="uppercase"
-          color={copied ? 'var(--color-accent)' : 'var(--color-ink-2)'}
-          transition="color var(--dur-1) var(--ease-out)"
-          _hover={{ color: 'var(--color-accent)' }}
-        >
+        <button type="button" onClick={copy} className={cx(styles.copy, copied && styles.copied)}>
           {copied ? 'Copied' : 'Copy'}
-        </Box>
-      </Box>
+        </button>
+      </div>
 
-      <Box
-        as="pre"
-        overflowX="auto"
-        m="0"
-        px="var(--space-sm)"
-        py="var(--space-sm)"
-        fontFamily="var(--font-meta)"
-        fontSize="var(--text-xs)"
-        lineHeight={1.7}
-        color="var(--color-ink)"
-        sx={{ tabSize: 2 }}
-      >
-        <Box as="code">{content}</Box>
-      </Box>
-    </Box>
+      <pre className={styles.pre}>
+        <code>{content}</code>
+      </pre>
+    </div>
   );
 };
 

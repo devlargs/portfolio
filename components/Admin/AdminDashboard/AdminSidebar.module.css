@@ -1,0 +1,43 @@
+.sidebar {
+  width: 180px;
+  min-height: calc(100vh - 60px);
+  background: var(--admin-surface);
+  border-right: 1px solid var(--admin-border);
+  padding-block: 20px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.item {
+  text-align: left;
+  padding-inline: 20px;
+  padding-block: 10px;
+  color: var(--admin-muted);
+  background: transparent;
+  border-left: 3px solid transparent;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.item:hover {
+  background: var(--admin-border);
+  color: var(--admin-text);
+}
+
+.active {
+  color: var(--admin-text);
+  background: var(--admin-border);
+  border-left-color: var(--color-accent);
+  font-weight: bold;
+}
+
+@media (min-width: 48em) {
+  .sidebar {
+    width: 220px;
+  }
+}

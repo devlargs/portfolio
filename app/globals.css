@@ -1,0 +1,295 @@
+/* Global document styles, in two layers.
+ *
+ *   1. A base reset. This is a port of Chakra's CSSReset, kept because every
+ *      component in the tree was written against it: element margins are zero
+ *      and components set every space themselves. Dropping it would reintroduce
+ *      user-agent margins under a thousand explicit spacing rules.
+ *   2. The document styles that used to live in theme/styles.ts.
+ *
+ * The reset uses :where() so it carries zero specificity, exactly as Chakra's
+ * did. A bare element selector below, or any class in a CSS module, overrides
+ * it without an !important.
+ *
+ * Every value here reads from app/tokens.css. No raw colour values.
+ */
+
+/* ── reset ─────────────────────────────────────────────────────────────── */
+
+:where(*, *::before, *::after) {
+  border-width: 0;
+  border-style: solid;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+
+:where(blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre) {
+  margin: 0;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+:where(ol, ul) {
+  margin: 0;
+  padding: 0;
+}
+
+:where(b, strong) {
+  font-weight: bold;
+}
+
+:where(pre, code, kbd, samp) {
+  font-family: var(--font-meta);
+  font-size: 1em;
+}
+
+:where(img, svg, video, canvas, audio, iframe, embed, object) {
+  display: block;
+}
+
+:where(img, video) {
+  max-width: 100%;
+  height: auto;
+}
+
+:where(img) {
+  border-style: none;
+}
+
+:where(button, input, optgroup, select, textarea) {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+:where(button, input) {
+  overflow: visible;
+}
+
+:where(button, select) {
+  text-transform: none;
+}
+
+:where(button, [role='button']) {
+  cursor: pointer;
+}
+
+:where(button) {
+  background: transparent;
+}
+
+:where(
+    button::-moz-focus-inner,
+    [type='button']::-moz-focus-inner,
+    [type='reset']::-moz-focus-inner,
+    [type='submit']::-moz-focus-inner
+  ) {
+  border-style: none;
+  padding: 0;
+}
+
+:where(textarea) {
+  overflow: auto;
+  resize: vertical;
+}
+
+:where(a) {
+  background-color: transparent;
+  color: inherit;
+  text-decoration: inherit;
+}
+
+:where(abbr[title]) {
+  border-bottom: none;
+  text-decoration: underline dotted;
+}
+
+:where(small) {
+  font-size: 80%;
+}
+
+:where(sub, sup) {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+:where(sub) {
+  bottom: -0.25em;
+}
+
+:where(sup) {
+  top: -0.5em;
+}
+
+:where(hr) {
+  border-top-width: 1px;
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+:where(fieldset) {
+  margin: 0;
+  padding: 0;
+}
+
+:where(table) {
+  border-collapse: collapse;
+}
+
+:where(details) {
+  display: block;
+}
+
+:where(summary) {
+  display: list-item;
+}
+
+main {
+  display: block;
+}
+
+template {
+  display: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ── document ──────────────────────────────────────────────────────────── */
+
+html {
+  box-sizing: border-box;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  touch-action: manipulation;
+  scroll-behavior: smooth;
+  /* the sticky masthead must not cover an anchored section head */
+  scroll-padding-top: calc(var(--space-2xl) + 64px);
+}
+
+html,
+body {
+  /* clip, never hidden — `hidden` breaks position: sticky in the rail */
+  overflow-x: clip;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  font-feature-settings: 'kern';
+  line-height: 1.65;
+  transition: background var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 400;
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+p {
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+::placeholder {
+  opacity: 1;
+  color: var(--color-ink-3);
+}
+
+/* focus is never animated — it must appear the instant focus lands */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+  transition: none;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-rule-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-rule-strong);
+  border-radius: var(--radius-pill);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+  background-clip: padding-box;
+}
+
+/* ── page macrostructure ───────────────────────────────────────────────── */
+
+/* The one shared layout class. Every full-width band on the site centres its
+   contents on this measure, so it lives here rather than being repeated in
+   eight modules and drifting. Vertical padding stays with the band. */
+.page-wrap {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 150ms !important;
+    scroll-behavior: auto !important;
+  }
+}

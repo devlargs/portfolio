@@ -1,7 +1,7 @@
-import { Box } from '@chakra-ui/react';
 import { FC } from 'react';
 import SectionLede from './SectionLede';
 import SectionRule from './SectionRule';
+import styles from './SectionHead.module.css';
 import SectionTitle from './SectionTitle';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 }
 
 /**
- * Rule above, heading below, standfirst below that — one column, always.
+ * Rule above, heading below, standfirst below that. One column, always.
  * The tag-left / heading-right hanging header is deliberately not used here.
  *
  * A section whose margin column must start level with the heading composes
@@ -20,11 +20,11 @@ interface Props {
  * the margin share one grid. See components/AboutMe.
  */
 const SectionHead: FC<Props> = ({ id, title, lede }) => (
-  <Box mb={{ base: 'var(--space-lg)', md: 'var(--space-xl)' }}>
+  <div className={styles.head}>
     <SectionRule />
     <SectionTitle id={id}>{title}</SectionTitle>
     {lede && <SectionLede>{lede}</SectionLede>}
-  </Box>
+  </div>
 );
 
 export default SectionHead;

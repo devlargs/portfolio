@@ -1,0 +1,20 @@
+.band {
+  position: relative;
+  background: transparent;
+  transition: background var(--dur-2) var(--ease-out);
+}
+
+/* Sunken bands break the page rhythm without adding a card. */
+.sunken {
+  background: var(--color-paper-2);
+}
+
+.inner {
+  padding-block: var(--space-2xl);
+}
+
+@media (min-width: 48em) {
+  .inner {
+    padding-block: var(--space-3xl);
+  }
+}
