@@ -1,6 +1,8 @@
 export const PRIMARY_SKILLS = [
   'Javascript',
   'React JS',
+  'React Native',
+  'Expo',
   'Chakra UI',
   'Next JS',
   'Typescript',
@@ -9,7 +11,8 @@ export const PRIMARY_SKILLS = [
   'React Testing Library',
   'Jest',
   'Node',
-  'Antd',
+  'Nest JS',
+  'Express',
   'Redux',
   'Zustand',
   'Vite',
@@ -20,15 +23,14 @@ export const PRIMARY_SKILLS = [
 ];
 
 export const SECONDARY_SKILLS = [
-  'Nest JS',
   'Strapi',
   'Sanity Io',
   'Electron',
   'Firebase',
-  'Express',
   'GraphQL',
   'Sass',
   'Tailwind',
+  'Antd',
   'Angular',
   'Vue',
   'MongoDB',
