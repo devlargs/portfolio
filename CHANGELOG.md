@@ -8,6 +8,7 @@
 - The theme toggle is now a sun and moon icon that turns as it swaps, instead of a filled dot.
 - The social share card is drawn on the dark palette, matching the site you land on.
 - Secondary capabilities now read exactly like primary ones: same mark size, type and column grid.
+- Recommendations now name the person first and set the quote in smaller type, so it reads as a quote.
 
 ## [0.1.0] (2026-09-04)
 

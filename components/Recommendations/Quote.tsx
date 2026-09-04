@@ -18,10 +18,6 @@ interface Props {
 
 const Quote: FC<Props> = ({ testimonial, blurDataURL }) => (
   <figure className={styles.figure}>
-    <blockquote className={styles.quote}>
-      <p className={styles.text}>{testimonial.testimonial}</p>
-    </blockquote>
-
     <figcaption className={styles.caption}>
       <div className={styles.avatar}>
         <Image
@@ -50,6 +46,10 @@ const Quote: FC<Props> = ({ testimonial, blurDataURL }) => (
         </p>
       </div>
     </figcaption>
+
+    <blockquote className={styles.quote}>
+      <p className={styles.text}>{testimonial.testimonial}</p>
+    </blockquote>
   </figure>
 );
 
