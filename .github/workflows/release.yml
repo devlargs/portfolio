@@ -177,8 +177,8 @@ jobs:
           VERSION: ${{ steps.unreleased.outputs.version }}
         run: |
           set -euo pipefail
-          git config user.name  'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name  'Ralph Largo'
+          git config user.email 'devlargs@gmail.com'
           git add CHANGELOG.md package.json
           git commit -m "chore: release v${VERSION}"
           git tag "v${VERSION}"
