@@ -42,6 +42,6 @@
 
 @media (min-width: 48em) {
   .list {
-    grid-template-columns: repeat(var(--cap-columns, 5), minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
