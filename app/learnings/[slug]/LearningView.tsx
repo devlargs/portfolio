@@ -9,7 +9,7 @@ interface Props {
 }
 
 const LearningView: FC<Props> = ({ learning, year }) => (
-  <PageShell year={year}>
+  <PageShell year={year} readingProgress>
     <LearningArticle learning={learning} />
   </PageShell>
 );

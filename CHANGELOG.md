@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Reading progress is now a ring on a back-to-top button in the corner, instead of a line under the header.
+- The line under the header is kept on write-ups, where knowing how much is left actually helps.
+
 ## [0.2.1] (2026-09-04)
 
 ### Changed
