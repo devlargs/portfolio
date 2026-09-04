@@ -7,7 +7,7 @@ export const dynamic = 'force-static';
 
 const title = 'Learnings';
 const description =
-  'Short write-ups on the configuration, tooling and platform details that cost Ralph Largo an afternoon.';
+  'A notebook Ralph Largo keeps for himself: short write-ups on the configuration, tooling and platform details that cost him an afternoon. Anyone is welcome to read along.';
 
 export const metadata: Metadata = {
   title,

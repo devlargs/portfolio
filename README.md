@@ -1,37 +1,94 @@
-# NextJS, Typescript, Chakra UI Boilerplate
+# ralphlargo.com
 
-A simple repository that bootstraps application. npm packages will be updated from time to time.
+My portfolio and writing, built as a single editorial document rather than a deck of cards.
 
-## Setup
+Live at **[ralphlargo.com](https://ralphlargo.com)**.
 
-- git clone this repo
-- npm install
-- npm run dev
+## Stack
 
+Next.js 15 (App Router) · React 19 · TypeScript · Chakra UI over a CSS custom-property token layer · Mongoose/MongoDB · AWS SES.
+
+## Getting started
+
+Node 22.x.
+
+```bash
+npm install          # add --legacy-peer-deps if peer resolution fails
+cp .env.example .env # then fill it in; .env is gitignored
+npm run dev
 ```
-*if ever you encounter errors during npm install, you can try to run `npm i --legacy-peer-deps`
-```
 
-## Directory Structure
+The dev server runs on Turbopack at http://localhost:3000.
 
-The boilerplate has basic default folders. The top level directory structure will be as follows:
+### Environment
 
-- .vscode - A default vscode configuration to help organize imports
-- components - This is where we put global shared/reusable components, such as layout (wrappers, navigation), form components, buttons
-- pages - NextJS page files
-- public - folder for self hosted assets
-- store - Global state management tool
+| Variable                         | Used for                             |
+| -------------------------------- | ------------------------------------ |
+| `NEXT_PUBLIC_MONGODB_URI`        | Contact submissions store            |
+| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | reCAPTCHA widget on the contact form |
+| `RECAPTCHA_SECRET_KEY`           | Server-side reCAPTCHA verification   |
+| `AWS_SES_ACCESS_KEY_ID`          | Contact email delivery               |
+| `AWS_SES_SECRET_ACCESS_KEY`      | Contact email delivery               |
+| `AWS_SES_REGION`                 | Contact email delivery               |
+| `AWS_SES_FROM_EMAIL`             | Contact email sender                 |
+| `AWS_SES_TO_EMAIL`               | Contact email recipient              |
+| `NEXT_PUBLIC_ADMIN_USERNAME`     | Admin sign-in                        |
+| `NEXT_PUBLIC_ADMIN_PASSWORD`     | Admin sign-in                        |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID`  | Analytics; omit to disable           |
+| `NEXT_PUBLIC_ENVIRONMENT`        | Environment label                    |
 
-## Path aliasing
+## Scripts
 
-Added path aliasing **(@folder-name)** is used to easily determine which files were imported locally and from library, this is very helpful for better organization of imports. Library imports should come first then local.
+| Script                  | What it does                                               |
+| ----------------------- | ---------------------------------------------------------- |
+| `npm run dev`           | Dev server (Turbopack)                                     |
+| `npm run dev:webpack`   | Dev server on webpack, for isolating Turbopack-only issues |
+| `npm run build`         | Production build                                           |
+| `npm start`             | Serve the production build                                 |
+| `npm run tsc-node`      | Typecheck                                                  |
+| `npm run lint`          | Lint                                                       |
+| `npm run check-updates` | Bump dependencies with `ncu`                               |
 
-## We use this tools
+There is no test suite. Changes are verified by typecheck, build, and using the site.
 
-- [ESLint](https://eslint.org/docs/user-guide/configuring/)
-- [Husky](https://typicode.github.io/husky/#/)
-- [Prettier](https://prettier.io/)
-- [Lint Staged](https://github.com/okonet/lint-staged)
-- [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
+## Routes
 
-### [Structure reference](https://www.taniarascia.com/react-architecture-directory-structure)
+| Route                             |                                                                                     |
+| --------------------------------- | ----------------------------------------------------------------------------------- |
+| `/`                               | The document: opening, about, selected work, capabilities, recommendations, contact |
+| `/work`                           | Full index of every engagement, client and personal                                 |
+| `/learnings`, `/learnings/[slug]` | Short write-ups                                                                     |
+| `/admin`                          | Contact submissions                                                                 |
+
+## How it is put together
+
+**Content is data.** Everything the site says lives in `constants/`: profile and section list, skills, portfolio entries, testimonials, and the learnings documents. Components render it; they do not contain it.
+
+**One token layer owns the design.** `app/tokens.css` defines every colour, font, space, radius and easing as CSS custom properties, and carries both themes: a `prefers-color-scheme` block plus a `[data-theme]` block so the header toggle can override the system setting. `theme/` is a thin Chakra layer of `var(--*)` aliases, with Chakra's own colour-mode machinery deliberately switched off. Components reference tokens by name and never inline a raw colour.
+
+The accent is a mark, not a fill. Emphasis is a neutral surface step plus a solid accent edge, because a pale tint of the accent at full-row scale reads as a wash and flattens the page.
+
+**Build-time work happens once.** `lib/siteData.ts` generates blur placeholders for every image and, in production only, checks each outbound project link so dead ones can be labelled rather than left to fail. Both are cached at module scope so they run once per server process instead of once per request.
+
+## Adding things
+
+**A project.** Add an entry to `constants/portfolio.ts`. Links are health-checked at build time in production.
+
+**A capability.** Add the display name to `constants/skills.ts` _and_ drop a matching PNG into `public/images/`. The filename is the kebab-case of the name, so `'Nest JS'` needs `nest-js.png`. The build fails without it.
+
+**A write-up.** Add a typed document under `constants/learnings/entries/` and register it in `constants/learnings/index.ts`. Entries are structured blocks, not raw markdown, so headings, code, notes and field tables render consistently.
+
+## Releases
+
+`CHANGELOG.md` keeps an `## [Unreleased]` section. Pushing changelog entries to `master` triggers `.github/workflows/release.yml`, which picks the semver bump from the entries, cuts the section into a dated version, tags `v<version>`, and publishes a GitHub release. Nothing to release means the workflow exits quietly.
+
+## Two build-cache traps
+
+Worth knowing before debugging a change that "did not apply":
+
+- `dev` runs Turbopack and `build` runs webpack. Running one after the other can leave mixed artifacts in `.next` and the server 500s with `Cannot find module '../chunks/ssr/[turbopack]_runtime.js'`. Delete `.next`.
+- `.next/cache/images` survives a rebuild, so a replaced file in `public/images/` keeps serving the old optimized copy locally. Delete that directory. Deploys are unaffected.
+
+## Deployment
+
+Vercel.

@@ -15,7 +15,7 @@ const LearningsView: FC<Props> = ({ learnings, year }) => (
     <PageHead
       eyebrow="Learnings"
       title="Things I learned"
-      lede="Short write-ups of things that cost me an afternoon, kept so they only ever cost one. Mostly configuration that is obvious in hindsight and documented nowhere in one piece."
+      lede="I keep this for myself, so the things that cost me an afternoon only ever cost one. Mostly configuration that is obvious in hindsight and documented nowhere in one piece. If you have wandered in and find something useful here, all the better."
       meta={`${learnings.length} ${learnings.length === 1 ? 'entry' : 'entries'}`}
     />
 
