@@ -19,6 +19,7 @@
 - Row hover states now use a neutral surface shift and an accent edge instead of a pale colour wash.
 - NestJS and Express are now primary capabilities, and Ant Design has moved to secondary.
 - The About section's stack notes start level with the heading, closing the empty space above them.
+- Repository guidance now records the commit-per-prompt and changelog-entry rules.
 
 ### Fixed
 
