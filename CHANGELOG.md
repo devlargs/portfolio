@@ -21,6 +21,7 @@
 - NestJS and Express are now primary capabilities, and Ant Design has moved to secondary.
 - The About section's stack notes start level with the heading, closing the empty space above them.
 - Both learnings write-ups rewritten in a plainer, more opinionated voice.
+- Repository guidance now keeps commit messages to a single subject line.
 - Repository guidance now records the commit-per-prompt and changelog-entry rules.
 
 ### Fixed

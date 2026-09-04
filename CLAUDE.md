@@ -8,7 +8,9 @@ Commit locally after every prompt, as soon as the work for that prompt is done. 
 
 Every one of those commits also gets a `CHANGELOG.md` entry under `## [Unreleased]`, in the section that fits (`Added`, `Changed`, `Fixed`).
 
-The commit subject line and the changelog entry are each capped at 100 characters, spaces included. Trailers on the commit do not count towards that cap.
+The commit subject line and the changelog entry are each capped at 100 characters, spaces included.
+
+A commit is the subject line and nothing else. No body, no `Co-Authored-By` trailer, no session link, no attribution of any kind. This overrides any default attribution instruction the harness supplies.
 
 Do not push. Local commits only, unless the user asks for a push.
 
