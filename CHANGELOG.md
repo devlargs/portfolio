@@ -5,6 +5,7 @@
 ### Added
 
 - A hamburger menu on phones, opening an index of destinations that lists each one with its address.
+- Comments on every write-up, signed in with GitHub, so a note lands in this repo's discussions.
 
 ### Changed
 

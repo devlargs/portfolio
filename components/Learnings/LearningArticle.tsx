@@ -1,3 +1,4 @@
+import Comments from '@components/Comments';
 import MoreLink from '@components/MoreLink';
 import PageHead from '@components/PageHead';
 import { Learning, readingMinutes } from '@constants/learnings';
@@ -27,6 +28,8 @@ const LearningArticle: FC<Props> = ({ learning }) => (
       </div>
 
       <LearningBody body={learning.body} />
+
+      <Comments />
 
       <div className={styles.more}>
         <MoreLink href="/learnings" label="More things I learned" />

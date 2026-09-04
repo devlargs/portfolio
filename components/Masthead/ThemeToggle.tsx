@@ -1,34 +1,24 @@
 'use client';
 
 import cx from '@utils/cx';
+import { readThemeMode, ThemeMode } from 'hooks/useThemeMode';
 import { FC, useEffect, useState } from 'react';
 import { MoonIcon, SunIcon } from './ThemeIcons';
 import styles from './ThemeToggle.module.css';
 
-type Mode = 'light' | 'dark';
-
 const STORAGE_KEY = 'rl-theme';
 
-/* Dark is the site default, so an unset attribute means dark. The system
-   preference is deliberately not consulted: only an explicit choice, stored
-   under STORAGE_KEY and replayed by the inline script in app/layout.tsx,
-   moves the reader off dark. */
-const readInitialMode = (): Mode => {
-  if (typeof document === 'undefined') return 'dark';
-  return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-};
-
 const ThemeToggle: FC = () => {
-  const [mode, setMode] = useState<Mode>('dark');
+  const [mode, setMode] = useState<ThemeMode>('dark');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMode(readInitialMode());
+    setMode(readThemeMode());
     setMounted(true);
   }, []);
 
   const toggle = (): void => {
-    const next: Mode = mode === 'dark' ? 'light' : 'dark';
+    const next: ThemeMode = mode === 'dark' ? 'light' : 'dark';
     setMode(next);
     document.documentElement.setAttribute('data-theme', next);
     try {

@@ -57,7 +57,7 @@ There is no test suite. Changes are verified by typecheck, build, and using the 
 | --------------------------------- | ----------------------------------------------------------------------------------- |
 | `/`                               | The document: opening, about, selected work, capabilities, recommendations, contact |
 | `/work`                           | Full index of every engagement, client and personal                                 |
-| `/learnings`, `/learnings/[slug]` | Short write-ups                                                                     |
+| `/learnings`, `/learnings/[slug]` | Short write-ups, each with a giscus comment thread                                  |
 | `/admin`                          | Contact submissions                                                                 |
 
 ## How it is put together
@@ -68,6 +68,8 @@ There is no test suite. Changes are verified by typecheck, build, and using the 
 
 The accent is a mark, not a fill. Emphasis is a neutral surface step plus a solid accent edge, because a pale tint of the accent at full-row scale reads as a wash and flattens the page.
 
+**Comments are GitHub Discussions.** Each write-up ends with a [giscus](https://giscus.app) thread keyed on the pathname, so a comment is a discussion in this repo and there is no database and no moderation queue. Configuration lives in `constants/giscus.ts`; the ids there are public identifiers, not secrets. The widget is told the theme outright rather than left on `preferred_color_scheme`, because the site does not follow the system setting.
+
 **Build-time work happens once.** `lib/siteData.ts` generates blur placeholders for every image and, in production only, checks each outbound project link so dead ones can be labelled rather than left to fail. Both are cached at module scope so they run once per server process instead of once per request.
 
 ## Adding things
@@ -76,7 +78,7 @@ The accent is a mark, not a fill. Emphasis is a neutral surface step plus a soli
 
 **A capability.** Add the display name to `constants/skills.ts` _and_ drop a matching PNG into `public/images/`. The filename is the kebab-case of the name, so `'Nest JS'` needs `nest-js.png`. The build fails without it.
 
-**A write-up.** Add a typed document under `constants/learnings/entries/` and register it in `constants/learnings/index.ts`. Entries are structured blocks, not raw markdown, so headings, code, notes and field tables render consistently.
+**A write-up.** Add a typed document under `constants/learnings/entries/` and register it in `constants/learnings/index.ts`. Entries are structured blocks, not raw markdown, so headings, code, notes and field tables render consistently. The comment thread comes with it; nothing to set up per entry. Renaming a published slug starts a new thread, so rename the discussion in GitHub to match if the old comments matter.
 
 ## Releases
 

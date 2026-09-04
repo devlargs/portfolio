@@ -78,7 +78,17 @@ It also holds its promises at module scope so the ~50 sharp decodes and the outb
 
 ### Server to client boundary
 
-`app/page.tsx` is a `force-static` server component that awaits `siteData` and hands plain props to `app/HomeView.tsx`, which composes the client components. There is no provider boundary: a component is a client component only when it owns state or an effect. Routes: `/` (single editorial document), `/work`, `/learnings` + `/learnings/[slug]`, `/admin`, and two route handlers under `app/api/`.
+`app/page.tsx` is a `force-static` server component that awaits `siteData` and hands plain props to `app/HomeView.tsx`, which composes the client components. There is no provider boundary: a component is a client component only when it owns state or an effect. `components/Comments` is one such leaf: the learning page and its article stay server components, and only the giscus mount is client-side. Routes: `/` (single editorial document), `/work`, `/learnings` + `/learnings/[slug]`, `/admin`, and two route handlers under `app/api/`.
+
+### Comments are a cross-origin iframe, and the theme has to be pushed to it
+
+`components/Comments` mounts a [giscus](https://giscus.app) thread at the foot of every `/learnings/[slug]` page. Three things about it are not obvious:
+
+- **The script cannot be JSX.** giscus ships as a `<script>` that replaces itself with an iframe, and a `<script>` written into JSX never executes. The tag is built and appended in a mount effect, and the container is emptied on cleanup, otherwise StrictMode's double invocation in dev leaves two threads stacked on the page.
+- **`data-theme` is set from the site's theme, never `preferred_color_scheme`.** The site is dark by default and ignores the system setting, so `preferred_color_scheme` would light the widget up under a dark page for anyone whose OS is light. `hooks/useThemeMode` reads `data-theme` off `<html>` and watches it with a MutationObserver; `constants/giscus.ts` maps the two site modes onto `transparent_dark` and `light`. A theme change repaints the live iframe by `postMessage` to `https://giscus.app` rather than re-injecting the script, because remounting loses whatever is half-typed in the comment box.
+- **`data-mapping` is `pathname`, so the slug is the thread key.** Renaming a published learning orphans its discussion and starts an empty one. Rename the discussion title in GitHub to match, or accept the loss.
+
+The widget is styled with giscus's own built-in themes, so the palette is **not** duplicated a fourth time. Switching to a custom giscus stylesheet would add one more hand-maintained copy of the tokens to the list above; do not do it without deciding that is worth it.
 
 ### Section composition
 

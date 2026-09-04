@@ -1,0 +1,35 @@
+.comments {
+  max-width: var(--measure-wide);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-lg);
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-2xl);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--color-ink);
+}
+
+.lede {
+  margin-top: var(--space-2xs);
+  max-width: var(--measure);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+/* Reserves the height of the signed-out prompt so the page below does not jump
+   when the iframe arrives and reports its real height. */
+.thread {
+  margin-top: var(--space-lg);
+  min-height: 10rem;
+}
+
+@media (min-width: 48em) {
+  .comments {
+    margin-top: var(--space-3xl);
+  }
+}
