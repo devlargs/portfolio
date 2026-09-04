@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Releases no longer trigger a redundant deploy, since the release commit changes nothing on the site.
+
 ## [0.2.0] (2026-09-04)
 
 ### Added

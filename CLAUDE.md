@@ -29,6 +29,8 @@ npm run lint         # next lint
 
 Releases are automated. `CHANGELOG.md` keeps an `## [Unreleased]` section, and `.github/workflows/release.yml` cuts it into a dated version on push to `master`, picking the semver bump from the entries and tagging `v<version>`. Never hand-edit a version number or move bullets out of `[Unreleased]`.
 
+Two guards keep that release commit from looping, and they are separate mechanisms in separate files. `release.yml` skips its own run with a `!startsWith(github.event.head_commit.message, 'chore: release v')` job condition, and `vercel.json`'s `ignoreCommand` cancels the Vercel build for the same prefix. **`ignoreCommand` inverts the usual shell convention: exit 0 skips the build, exit 1 runs it.** Getting that backwards silently stops every deploy, and the symptom is a green pipeline with a stale site. If the release commit subject in `release.yml` ever changes, both guards match on the literal prefix and both must change with it.
+
 **There is no test framework.** No jest, vitest, or Playwright is installed and there are no test files, so there is no "run a single test" command. Verify changes with `npm run tsc-node`, `npm run build`, and by exercising the page. Do not add a test-related instruction to a PR description implying tests were run.
 
 `lint:js` in `package.json` targets `src`, which does not exist in this repo. It is a dead script inherited from the boilerplate. Use `npm run lint`.

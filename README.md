@@ -85,6 +85,8 @@ The accent is a mark, not a fill. Emphasis is a neutral surface step plus a soli
 
 `CHANGELOG.md` keeps an `## [Unreleased]` section. Pushing changelog entries to `master` triggers `.github/workflows/release.yml`, which picks the semver bump from the entries, cuts the section into a dated version, tags `v<version>`, and publishes a GitHub release. Nothing to release means the workflow exits quietly.
 
+The release commit itself touches only `CHANGELOG.md` and `package.json`, so the site it would build is byte-identical to the one already live. `vercel.json` skips it: the ignored build step exits 0 for any commit whose message starts with `chore: release v`, and 1 for everything else.
+
 ## Two build-cache traps
 
 Worth knowing before debugging a change that "did not apply":
@@ -94,4 +96,4 @@ Worth knowing before debugging a change that "did not apply":
 
 ## Deployment
 
-Vercel.
+Vercel, on push to `master`. `vercel.json` carries one setting, `ignoreCommand`, which cancels the build for the automated release commit. Exit code 0 there means skip and 1 means build, which is the reverse of the usual shell convention, so read it twice before editing.
