@@ -4,23 +4,23 @@ const learning: Learning = {
   slug: 'largs-hub-architecture',
   title: 'Building a Rambox alternative in Electron',
   summary:
-    'An open-source workspace browser built on WebContentsView instead of webview, and the bugs that shaped it: orphaned session partitions, a domain check missing a dot, and hibernation that killed running work.',
+    'Why I built one on WebContentsView instead of webview, and the three bugs that taught me the most: orphaned session partitions, a domain check missing a dot, and hibernation that killed running work.',
   tags: ['electron', 'react', 'typescript', 'architecture'],
   body: [
     {
       kind: 'text',
       content:
-        'I use about eight web apps all day: Gmail, Slack, Discord, Messenger, WhatsApp, Notion, LinkedIn. In a browser they become eight tabs that get buried under forty other tabs, and I lose them.',
+        'I use about eight web apps all day: Gmail, Slack, Discord, Messenger, WhatsApp, Notion, LinkedIn. In a browser they become eight tabs that get buried under forty other tabs, and I lose them. Every single day.',
     },
     {
       kind: 'text',
       content:
-        'Rambox solves this, but the free tier is limited and the app phones home. So I built [Largs Hub](https://github.com/devlargs/largs-hub): an open-source workspace browser that keeps every web app in one window, each in its own isolated session, with no account and no telemetry. Everything lives in a local `electron-store` file.',
+        'Rambox solves this. The free tier is limited though, and the app phones home, so I built [Largs Hub](https://github.com/devlargs/largs-hub): an open-source workspace browser that keeps every web app in one window, each in its own isolated session, with no account and no telemetry. Everything lives in a local `electron-store` file.',
     },
     {
       kind: 'text',
       content:
-        'The stack is Electron 35, React 19, TypeScript, Vite, Zustand and Tailwind 4. What follows is the set of decisions that actually shaped the codebase, and the bugs that forced most of them.',
+        'Electron 35, React 19, TypeScript, Vite, Zustand, Tailwind 4. Below are the decisions that actually shaped the codebase, and the bugs that forced most of them.',
     },
     {
       kind: 'heading',
@@ -29,12 +29,12 @@ const learning: Learning = {
     {
       kind: 'text',
       content:
-        'Electron gives you three ways to embed a third-party page. `<iframe>` is out immediately, because every app worth embedding sends `X-Frame-Options`. That leaves the `<webview>` tag and `WebContentsView`.',
+        'Electron gives you three ways to embed a third-party page. `<iframe>` is out immediately. Every app worth embedding sends `X-Frame-Options`. That leaves the `<webview>` tag and `WebContentsView`.',
     },
     {
       kind: 'text',
       content:
-        '`<webview>` is the tempting one because it looks like React. You render a component, you get a page. But it has been officially discouraged for years, it drags in a heavier process model, and the moment you need a service to keep running while it is off screen, you are fighting the DOM to keep an element mounted that the user cannot see.',
+        "`<webview>` is the tempting one because it looks like React. You render a component, you get a page. But it's been officially discouraged for years, it drags in a heavier process model, and the moment you need a service to keep running while it's off screen, you're fighting the DOM to keep an element mounted that the user can't see.",
     },
     {
       kind: 'text',
@@ -55,12 +55,12 @@ sendUiToBack: (): void => ipcRenderer.send("send-ui-to-back"),`,
     {
       kind: 'text',
       content:
-        'When a modal opens, the UI comes forward and the service view goes behind it. When it closes, the UI drops back. There is no CSS `z-index` that can do this, because the service page is not a DOM node.',
+        "When a modal opens, the UI comes forward and the service view goes behind it. When it closes, the UI drops back. There is no CSS `z-index` that can do this, because the service page isn't a DOM node.",
     },
     {
       kind: 'text',
       content:
-        '`main.ts` ended up as the module that owns the window, the UI view, the link preview overlay and z-order IPC. Everything else is delegated:',
+        '`main.ts` ended up owning the window, the UI view, the link preview overlay and z-order IPC. Everything else is delegated:',
     },
     {
       kind: 'code',
@@ -97,7 +97,7 @@ ipc/security.ts       workspace lock: master password + auto-lock timer`,
     {
       kind: 'text',
       content:
-        'The part I got wrong: removing a service did not remove its partition. Since re-adding a service mints a fresh UUID and therefore a fresh partition, the old one became permanently unreachable, a live session cookie sitting on disk that no code path could ever touch again. *Remove* left your login behind.',
+        "The part I got wrong: removing a service didn't remove its partition. Re-adding one mints a fresh UUID, so it mints a fresh partition too, and the old one became permanently unreachable. A live session cookie sitting on disk that no code path could ever touch again. *Remove* left your login behind.",
     },
     {
       kind: 'text',
@@ -119,7 +119,7 @@ ipc/security.ts       workspace lock: master password + auto-lock timer`,
     {
       kind: 'text',
       content:
-        'It runs at startup, before any service view instantiates a session, so nothing being deleted is in use. And it only touches directory names plain enough that Chromium would have written them through unescaped. Anything ambiguous is left alone rather than guessed at: a stale directory costs disk space, a wrong deletion costs someone their login.',
+        'It runs at startup, before any service view instantiates a session, so nothing being deleted is in use. And it only touches directory names plain enough that Chromium would have written them through unescaped. Anything ambiguous gets left alone rather than guessed at. A stale directory costs disk space. A wrong deletion costs someone their login.',
     },
     {
       kind: 'heading',
@@ -133,7 +133,7 @@ ipc/security.ts       workspace lock: master password + auto-lock timer`,
     {
       kind: 'text',
       content:
-        'For a while the constants were typed out in both layers with comments asking future readers to keep them in step. That is not a system, that is a wish. They are now one module:',
+        "For a while the constants were typed out in both layers with comments asking future readers to keep them in step. That's not a system. That's a wish. They're now one module:",
     },
     {
       kind: 'code',
@@ -145,7 +145,7 @@ export const FIND_BAR_HEIGHT = 44;`,
     {
       kind: 'text',
       content:
-        'It compiles into the main bundle via `tsconfig.electron.json` and into the renderer bundle via a Vite `@shared` alias. The rule for anything added there is strict: pure values and pure functions only, no `electron` or `node:` imports, because anything platform specific breaks one of the two builds.',
+        'It compiles into the main bundle via `tsconfig.electron.json` and into the renderer bundle via a Vite `@shared` alias. The rule for anything added there is strict: pure values and pure functions only, no `electron` or `node:` imports, because anything platform-specific breaks one of the two builds.',
     },
     {
       kind: 'text',
@@ -196,7 +196,7 @@ export const FIND_BAR_HEIGHT = 44;`,
       kind: 'list',
       ordered: true,
       items: [
-        '**The tab title.** `(N)` anywhere in `document.title` is the shared convention across Gmail, Messenger, Slack and most web apps. It always runs first, and it is deliberately *not* an adapter concern: adapters only add what the title cannot provide.',
+        "**The tab title.** `(N)` anywhere in `document.title` is the shared convention across Gmail, Messenger, Slack and most web apps. It always runs first, and it's deliberately *not* an adapter concern: adapters only add what the title can't provide.",
         '**A targeted DOM script**, injected by the poller when the title carries no count. Messenger and WhatsApp need this.',
         "**A main-process fetch** that bypasses the DOM entirely. Gmail's Atom feed, fetched with the service session's own cookies, is more accurate than anything you can scrape.",
       ],
@@ -209,16 +209,16 @@ export const FIND_BAR_HEIGHT = 44;`,
     {
       kind: 'text',
       content:
-        'Two rules I would keep on any version of this. Adapter selectors must be narrow, because broad heuristics produce phantom badges that erode trust in the whole feature. And `fetchCount` must never reject: it resolves `null` when it cannot tell, whether that is logged out, endpoint moved or network down, so callers fall through to the title path instead of the badge vanishing.',
+        "Two rules I'd keep on any version of this. Adapter selectors must be narrow, because broad heuristics produce phantom badges, and a badge you stop trusting is worse than no badge at all. And `fetchCount` must never reject: it resolves `null` when it can't tell, whether that's logged out, endpoint moved or network down, so callers fall through to the title path instead of the badge vanishing.",
     },
     {
       kind: 'heading',
-      content: 'Doing less work when nobody is looking',
+      content: "Doing less work when nobody's looking",
     },
     {
       kind: 'text',
       content:
-        'Ten services polling every three seconds is about 1,200 script injections an hour, most of them scraping pages nobody is looking at. Worse, each injection wakes the exact renderer process that hibernation exists to keep quiet.',
+        "Ten services polling every three seconds is about 1,200 script injections an hour, most of them scraping pages nobody's looking at. Worse, each injection wakes the exact renderer process that hibernation exists to keep quiet.",
     },
     {
       kind: 'text',
@@ -244,7 +244,7 @@ export const FIND_BAR_HEIGHT = 44;`,
     {
       kind: 'text',
       content:
-        'Hibernation, unloading idle views to reclaim RAM, has the same shape, and taught me a sharper lesson. Originally it only skipped the active service, and that broke a feature. A Messenger view running a scheduled automation task is a background view *by definition*: you switch away and let it run. So the sweep destroyed the view, the destroy hook stopped every task, and the panel showed an empty list with no explanation.',
+        'Hibernation, unloading idle views to reclaim RAM, has the same shape. It also taught me the sharper lesson. Originally it only skipped the active service, and that broke a feature. A Messenger view running a scheduled automation task is a background view *by definition*: you switch away and let it run. So the sweep destroyed the view, the destroy hook stopped every task, and the panel showed an empty list. No error, no warning. Just gone.',
     },
     {
       kind: 'text',
@@ -265,6 +265,10 @@ export const FIND_BAR_HEIGHT = 44;`,
     {
       kind: 'heading',
       content: 'The security boundary I nearly left open',
+    },
+    {
+      kind: 'text',
+      content: 'This is the one worth reading twice.',
     },
     {
       kind: 'note',
@@ -292,7 +296,7 @@ export const FIND_BAR_HEIGHT = 44;`,
     },
     {
       kind: 'heading',
-      content: 'Convincing Google you are a browser',
+      content: "Convincing Google you're a browser",
     },
     {
       kind: 'text',
@@ -302,7 +306,7 @@ export const FIND_BAR_HEIGHT = 44;`,
     {
       kind: 'text',
       content:
-        '`session.setUserAgent()` was not enough. Chromium also sends User-Agent Client Hints, and in Electron those hints cheerfully advertise the runtime:',
+        "`session.setUserAgent()` wasn't enough. Chromium also sends User-Agent Client Hints, and in Electron those hints cheerfully advertise the runtime:",
     },
     {
       kind: 'code',
@@ -312,7 +316,7 @@ export const FIND_BAR_HEIGHT = 44;`,
     {
       kind: 'text',
       content:
-        "`setUserAgent()` does not touch those headers. They have to be rewritten on the way out, including the GREASE brand, so the set looks like a stock browser's rather than like something trying to look like one.",
+        "`setUserAgent()` doesn't touch those headers. They have to be rewritten on the way out, including the GREASE brand, so the set looks like a stock browser's rather than like something trying to look like one.",
     },
     {
       kind: 'heading',
@@ -326,12 +330,12 @@ export const FIND_BAR_HEIGHT = 44;`,
     {
       kind: 'text',
       content:
-        '`shouldHibernate`, `pollIntervalMs`, `shouldKeepInView`, `orphanedPartitionDirs`, `linkPreviewBounds`, `parseTitleCount` and `spoofedUserAgent`: none of them import `electron`. They take plain data and return a decision. `serviceViews.ts` is the messy 1,300 line module that owns real runtime state, and it calls into them.',
+        '`shouldHibernate`, `pollIntervalMs`, `shouldKeepInView`, `orphanedPartitionDirs`, `linkPreviewBounds`, `parseTitleCount`, `spoofedUserAgent`. None of them import `electron`. They take plain data and return a decision. `serviceViews.ts` is the messy 1,300 line module that owns real runtime state, and it calls into them.',
     },
     {
       kind: 'text',
       content:
-        'That was not a plan, it was a consequence. Electron code is genuinely painful to test: you need a display, an app lifecycle, a live window. So the logic I most wanted to be *sure* about kept migrating out into files that do not need any of it. The repo has 34 test files, and every one of them runs in plain Vitest with no Electron runtime at all.',
+        "That wasn't a plan, it was a consequence. Electron code is genuinely painful to test: you need a display, an app lifecycle, a live window. So the logic I most wanted to be *sure* about kept migrating out into files that don't need any of it. The repo has 34 test files, and every one runs in plain Vitest with no Electron runtime at all.",
     },
     {
       kind: 'text',
