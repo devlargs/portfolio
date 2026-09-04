@@ -2,11 +2,16 @@
 
 ## [Unreleased]
 
+### Added
+
+- A hamburger menu on phones, opening an index of destinations that lists each one with its address.
+
 ### Changed
 
 - The site now opens in dark mode for everyone, with light available from the header toggle.
 - The theme toggle is now a sun and moon icon that turns as it swaps, instead of a filled dot.
 - The social share card is drawn on the dark palette, matching the site you land on.
+- The theme toggle's tap area now meets the 44px minimum, without changing how big the button looks.
 - Secondary capabilities now read exactly like primary ones: same mark size, type and column grid.
 - Recommendations now name the person first and set the quote in smaller type, so it reads as a quote.
 

@@ -1,4 +1,5 @@
 .toggle {
+  position: relative;
   display: grid;
   place-content: center;
   width: 32px;
@@ -11,6 +12,15 @@
   cursor: pointer;
   transition: color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out),
     background var(--dur-1) var(--ease-out);
+}
+
+/* The circle stays 32px because that is the size the bar wants, but the tap
+   area is pushed out to the 44px WCAG floor. Sitting beside a 44px hamburger,
+   a 32px target is a miss a thumb finds immediately. */
+.toggle::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
 }
 
 .toggle:hover {

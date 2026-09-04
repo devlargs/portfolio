@@ -3,16 +3,27 @@
 import { NAV_LINKS, PROFILE } from '@constants/profile';
 import cx from '@utils/cx';
 import NextLink from 'next/link';
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import styles from './Masthead.module.css';
+import MenuToggle from './MenuToggle';
+import MobileMenu from './MobileMenu';
 import NavLink from './NavLink';
 import ScrollProgress from './ScrollProgress';
 import ThemeToggle from './ThemeToggle';
+import useMenuDisclosure from './useMenuDisclosure';
 import useNavActive from './useNavActive';
 
-/** N9 edge-aligned: wordmark hard left, destinations hard right, hairline under. */
+const MENU_ID = 'masthead-menu';
+
+/**
+ * N9 edge-aligned: wordmark hard left, destinations hard right, hairline under.
+ * Below 48em the destinations collapse into a sheet, since four mono labels and
+ * a toggle cannot hold their rhythm across a 320px bar.
+ */
 const Masthead: FC = () => {
   const isActive = useNavActive();
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const { open, toggle, close } = useMenuDisclosure(menuButton);
 
   return (
     <header className={styles.header}>
@@ -27,13 +38,20 @@ const Masthead: FC = () => {
           <span className={styles.dot} aria-hidden="true" />
         </NextLink>
 
-        <nav aria-label="Primary" className={styles.nav}>
-          {NAV_LINKS.map((link) => (
-            <NavLink key={link.href} href={link.href} label={link.label} active={isActive(link)} />
-          ))}
+        <div className={styles.actions}>
+          <nav aria-label="Primary" className={styles.links}>
+            {NAV_LINKS.map((link) => (
+              <NavLink key={link.href} href={link.href} label={link.label} active={isActive(link)} />
+            ))}
+          </nav>
+
           <ThemeToggle />
-        </nav>
+
+          <MenuToggle ref={menuButton} open={open} controls={MENU_ID} onToggle={toggle} />
+        </div>
       </div>
+
+      <MobileMenu id={MENU_ID} open={open} links={NAV_LINKS} isActive={isActive} onDismiss={close} />
     </header>
   );
 };

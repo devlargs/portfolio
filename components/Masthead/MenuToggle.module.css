@@ -1,0 +1,123 @@
+/* 44px tap target per WCAG AA, with a 20px mark inside it. The button carries
+   no chip or border: next to the circled theme toggle it reads as a mark, and
+   two competing containers in a 56px bar is one too many. */
+.toggle {
+  display: grid;
+  place-content: center;
+  width: 44px;
+  height: 44px;
+  margin-right: calc(var(--space-2xs) * -1);
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink-2);
+  cursor: pointer;
+  transition: color var(--dur-1) var(--ease-out);
+}
+
+.toggle:hover,
+.toggle[data-open='true'] {
+  color: var(--color-accent);
+}
+
+.toggle:focus-visible {
+  outline: var(--rule-thick) solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.rules {
+  position: relative;
+  width: 20px;
+  height: 14px;
+  transition: transform var(--dur-1) var(--ease-out);
+}
+
+/* The press reads on the mark itself; the button has no chip to depress. */
+.toggle:active .rules {
+  transform: scale(0.92);
+}
+
+/* Two nested elements per rule on purpose: the wrapper rotates about its centre
+   to build the cross, the ink scales from its left edge to set the rag. One
+   element cannot carry both transform origins. */
+.rule {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--rule-thick);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.ink {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  transform-origin: left center;
+  transition: transform var(--dur-2) var(--ease-out), opacity var(--dur-1) var(--ease-out);
+}
+
+.top {
+  top: 0;
+}
+
+.mid {
+  top: 6px;
+}
+
+.bottom {
+  top: 12px;
+}
+
+/* the rag: a full line, a short line, a line that nearly reaches */
+.mid .ink {
+  transform: scaleX(0.62);
+}
+
+.bottom .ink {
+  transform: scaleX(0.84);
+}
+
+/* The middle rule clears first, then the outer two rotate into it. 60ms is
+   enough to read as a sequence without the button feeling slow to answer. */
+.toggle[data-open='true'] .top {
+  transform: translateY(6px) rotate(45deg);
+  transition-delay: 60ms;
+}
+
+.toggle[data-open='true'] .bottom {
+  transform: translateY(-6px) rotate(-45deg);
+  transition-delay: 60ms;
+}
+
+.toggle[data-open='true'] .mid .ink {
+  transform: scaleX(0);
+  opacity: 0;
+}
+
+.toggle[data-open='true'] .bottom .ink {
+  transform: scaleX(1);
+}
+
+/* Closing runs shorter than opening and drops the sequencing. */
+.toggle[data-open='false'] .rule,
+.toggle[data-open='false'] .ink {
+  transition-duration: var(--dur-1);
+  transition-timing-function: var(--ease-in);
+  transition-delay: 0ms;
+}
+
+/* The cross is the state indicator, so it still forms. Only the sequencing goes. */
+@media (prefers-reduced-motion: reduce) {
+  .toggle[data-open='true'] .top,
+  .toggle[data-open='true'] .bottom {
+    transition-delay: 0ms;
+  }
+}
+
+@media (min-width: 48em) {
+  .toggle {
+    display: none;
+  }
+}

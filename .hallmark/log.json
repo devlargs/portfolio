@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-09-05",
+    "component": "mobile nav disclosure",
+    "macrostructure": "n/a (component scope)",
+    "theme": "inherited (custom, dark default)",
+    "theme_axes": "dark / variable-serif (Fraunces, roman) / warm",
+    "nav": "N9 edge-aligned, collapsing to a drop index sheet below 48em",
+    "enrichment": "none (typography only)",
+    "brief": "Hamburger + index sheet for mobile: ragged-rule icon morph, masked line reveal, rule sweep"
+  },
+  {
+    "date": "2026-09-05",
     "macrostructure": "Long Document (Broadsheet)",
     "theme": "custom",
     "theme_axes": "dark / variable-serif (Fraunces, roman) / warm",

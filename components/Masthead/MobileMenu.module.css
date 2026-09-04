@@ -1,0 +1,187 @@
+/* An index of destinations dropped from under the masthead rule. The panel is
+   opaque paper on purpose: the header above it is translucent and blurred, and
+   two frosted layers stacked read as glass for its own sake. */
+.root {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: 0;
+}
+
+.root[data-open='false'] {
+  pointer-events: none;
+}
+
+/* Absolute, not fixed: the header carries a backdrop-filter, which makes it the
+   containing block for fixed descendants, so `inset: 0` would resolve to the
+   56px bar. Anchored under the panel and given the viewport's height instead. */
+.scrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100dvh;
+  border: 0;
+  padding: 0;
+  cursor: default;
+  background: color-mix(in oklab, var(--color-ink) 42%, transparent);
+  opacity: 0;
+  transition: opacity var(--dur-1) var(--ease-in);
+}
+
+.root[data-open='true'] .scrim {
+  opacity: 1;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.panel {
+  position: relative;
+  max-height: calc(100dvh - 56px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-inline: var(--page-gutter);
+  padding-block: var(--space-2xs) var(--space-lg);
+  padding-bottom: max(var(--space-lg), env(safe-area-inset-bottom));
+  background: var(--color-paper);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+  box-shadow: var(--shadow-pop);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity var(--dur-1) var(--ease-in), transform var(--dur-1) var(--ease-in);
+}
+
+.root[data-open='true'] .panel {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
+}
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each row draws its own rule, swept in from the left. Same gesture as the
+   underline on the desktop links, so the two navs speak one language. */
+.row {
+  position: relative;
+}
+
+.row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--rule-hair);
+  background: var(--color-rule);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-1) var(--ease-in);
+}
+
+.root[data-open='true'] .row::after {
+  transform: scaleX(1);
+  transition: transform var(--dur-3) var(--ease-out) calc(var(--i, 0) * 45ms);
+}
+
+.link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  min-height: 56px;
+  padding-block: var(--space-xs);
+  color: var(--color-ink);
+}
+
+.link:focus-visible {
+  outline: var(--rule-thick) solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+/* The mask crops the label; the label starts below the crop and rises into it. */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.08em;
+  margin-block: -0.08em;
+}
+
+.label {
+  display: block;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  transform: translateY(105%);
+  transition: transform var(--dur-1) var(--ease-in), color var(--dur-1) var(--ease-out);
+}
+
+.root[data-open='true'] .label {
+  transform: none;
+  transition: transform var(--dur-3) var(--ease-out) calc(var(--i, 0) * 45ms + 40ms), color var(--dur-1) var(--ease-out);
+}
+
+.link:active .label {
+  color: var(--color-accent);
+}
+
+/* The real href, not a decorative kicker. */
+.path {
+  flex-shrink: 0;
+  font-family: var(--font-meta);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.06em;
+  color: var(--color-ink-3);
+  opacity: 0;
+  transition: opacity var(--dur-1) var(--ease-in);
+}
+
+.root[data-open='true'] .path {
+  opacity: 1;
+  transition: opacity var(--dur-2) var(--ease-out) calc(var(--i, 0) * 45ms + 80ms);
+}
+
+/* The band you are in: accent ink and a solid accent edge, never a wash. */
+.active .label {
+  color: var(--color-accent);
+}
+
+.active .path {
+  color: var(--color-accent);
+}
+
+.row:has(.active)::after {
+  height: var(--rule-edge);
+  background: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .label {
+    transform: none;
+  }
+
+  .root[data-open='true'] .row::after,
+  .root[data-open='true'] .label,
+  .root[data-open='true'] .path {
+    transition-delay: 0ms;
+  }
+
+  .label {
+    transition-property: color;
+  }
+
+  .row::after {
+    transform: scaleX(1);
+  }
+}
+
+@media (min-width: 48em) {
+  .root {
+    display: none;
+  }
+}
