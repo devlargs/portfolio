@@ -6,6 +6,7 @@
 
 ### Changed
 
+- Write-ups no longer show the date they were published; the reading time stays.
 - Stripped every comment out of the source, leaving only the lint directives the tooling needs.
 
 ## [0.2.2] (2026-09-04)
