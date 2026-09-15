@@ -1,13 +1,19 @@
 import awsForgottenPhoneNumber from './entries/aws-forgotten-phone-number';
 import expoFirebasePushNotifications from './entries/expo-firebase-push-notifications';
+import googlePlayClosedTesting from './entries/google-play-closed-testing';
 import largsHubArchitecture from './entries/largs-hub-architecture';
 import resendSmtpOnSupabase from './entries/resend-smtp-on-supabase';
+import reviewingMyOwnRepoScope from './entries/reviewing-my-own-repo-scope';
 import s3CloudfrontImages from './entries/s3-cloudfront-images';
+import whisperCppVsWhisperApi from './entries/whisper-cpp-vs-whisper-api';
 import { Learning } from './types';
 
 export type { Learning, LearningBlock } from './types';
 
 export const LEARNINGS: readonly Learning[] = [
+  googlePlayClosedTesting,
+  reviewingMyOwnRepoScope,
+  whisperCppVsWhisperApi,
   awsForgottenPhoneNumber,
   expoFirebasePushNotifications,
   s3CloudfrontImages,

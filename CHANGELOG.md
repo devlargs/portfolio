@@ -4,6 +4,7 @@
 
 ### Added
 
+- Write-ups on Google Play closed testing, scoping a review of my own repo, and whisper.cpp.
 - A write-up on the forgotten AWS phone number that kept billing from a region I never opened.
 - New write-ups on Expo push notifications with Firebase and S3 images behind CloudFront.
 
