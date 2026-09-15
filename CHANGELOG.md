@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.5.0] (2026-09-15)
+
 ### Added
 
 - A write-up on signing users in with X (Twitter) OAuth 2.0 and PKCE from a React app.
