@@ -6,6 +6,7 @@ import largsHubArchitecture from './entries/largs-hub-architecture';
 import resendSmtpOnSupabase from './entries/resend-smtp-on-supabase';
 import reviewingMyOwnRepoScope from './entries/reviewing-my-own-repo-scope';
 import s3CloudfrontImages from './entries/s3-cloudfront-images';
+import uploadImagesToS3FromNextjs from './entries/upload-images-to-s3-from-nextjs';
 import whisperCppVsWhisperApi from './entries/whisper-cpp-vs-whisper-api';
 import { Learning } from './types';
 
@@ -21,6 +22,7 @@ export const LEARNINGS: readonly Learning[] = [
   s3CloudfrontImages,
   largsHubArchitecture,
   resendSmtpOnSupabase,
+  uploadImagesToS3FromNextjs,
 ];
 
 export const findLearning = (slug: string): Learning | undefined =>
