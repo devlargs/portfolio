@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.4.0] (2026-09-15)
+
 ### Added
 
 - Write-ups on Google Play closed testing, scoping a review of my own repo, and whisper.cpp.
