@@ -29,3 +29,13 @@ export const wordCount = (learning: Learning): number =>
 
 export const readingMinutes = (learning: Learning): number =>
   Math.max(1, Math.round(wordCount(learning) / WORDS_PER_MINUTE));
+
+export type LearningTag = { tag: string; count: number };
+
+export const learningTags = (learnings: readonly Learning[]): LearningTag[] => {
+  const counts = new Map<string, number>();
+  learnings.forEach((learning) => learning.tags.forEach((tag) => counts.set(tag, (counts.get(tag) ?? 0) + 1)));
+  return Array.from(counts, ([tag, count]) => ({ tag, count })).sort(
+    (a, b) => b.count - a.count || a.tag.localeCompare(b.tag)
+  );
+};

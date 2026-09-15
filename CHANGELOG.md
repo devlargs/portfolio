@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- The learnings list can be filtered by tag, from a row of tags under the page heading.
+
 ## [0.2.3] (2026-09-05)
 
 ### Changed
