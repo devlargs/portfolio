@@ -1,6 +1,7 @@
 import awsForgottenPhoneNumber from './entries/aws-forgotten-phone-number';
 import expoFirebasePushNotifications from './entries/expo-firebase-push-notifications';
 import googlePlayClosedTesting from './entries/google-play-closed-testing';
+import ispBlackholedFastly from './entries/isp-blackholed-fastly';
 import largsHubArchitecture from './entries/largs-hub-architecture';
 import resendSmtpOnSupabase from './entries/resend-smtp-on-supabase';
 import reviewingMyOwnRepoScope from './entries/reviewing-my-own-repo-scope';
@@ -11,6 +12,7 @@ import { Learning } from './types';
 export type { Learning, LearningBlock } from './types';
 
 export const LEARNINGS: readonly Learning[] = [
+  ispBlackholedFastly,
   googlePlayClosedTesting,
   reviewingMyOwnRepoScope,
   whisperCppVsWhisperApi,

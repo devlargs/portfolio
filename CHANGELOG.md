@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- A write-up on the day my ISP silently dropped traffic to Fastly and I blamed my own machine.
+
 ### Fixed
 
 - The back-to-top button no longer covers the reCAPTCHA badge beside the contact form.
