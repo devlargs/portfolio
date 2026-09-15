@@ -4,6 +4,7 @@
 
 ### Added
 
+- A write-up on the forgotten AWS phone number that kept billing from a region I never opened.
 - New write-ups on Expo push notifications with Firebase and S3 images behind CloudFront.
 
 ## [0.3.0] (2026-09-15)

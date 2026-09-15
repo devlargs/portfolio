@@ -1,3 +1,4 @@
+import awsForgottenPhoneNumber from './entries/aws-forgotten-phone-number';
 import expoFirebasePushNotifications from './entries/expo-firebase-push-notifications';
 import largsHubArchitecture from './entries/largs-hub-architecture';
 import resendSmtpOnSupabase from './entries/resend-smtp-on-supabase';
@@ -7,6 +8,7 @@ import { Learning } from './types';
 export type { Learning, LearningBlock } from './types';
 
 export const LEARNINGS: readonly Learning[] = [
+  awsForgottenPhoneNumber,
   expoFirebasePushNotifications,
   s3CloudfrontImages,
   largsHubArchitecture,
