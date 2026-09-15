@@ -21,13 +21,20 @@ const useReveal = <T extends HTMLElement = HTMLDivElement>({
       return;
     }
 
+    const height = node.getBoundingClientRect().height;
+    const fit = height > 0 ? Math.min(threshold, (window.innerHeight * threshold) / height) : threshold;
+
+    let first = true;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
+        const onArrival = first && entry.intersectionRect.height > 0;
+        first = false;
+        if (!entry.isIntersecting && !onArrival) return;
         setRevealed(true);
         observer.disconnect();
       },
-      { threshold, rootMargin }
+      { threshold: fit, rootMargin }
     );
 
     observer.observe(node);

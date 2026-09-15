@@ -10,6 +10,7 @@
 
 ### Fixed
 
+- The learnings list now shows up on arrival instead of waiting for a scroll.
 - The back-to-top button no longer covers the reCAPTCHA badge beside the contact form.
 
 ## [0.4.0] (2026-09-15)
