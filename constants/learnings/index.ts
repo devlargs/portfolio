@@ -1,10 +1,17 @@
+import expoFirebasePushNotifications from './entries/expo-firebase-push-notifications';
 import largsHubArchitecture from './entries/largs-hub-architecture';
 import resendSmtpOnSupabase from './entries/resend-smtp-on-supabase';
+import s3CloudfrontImages from './entries/s3-cloudfront-images';
 import { Learning } from './types';
 
 export type { Learning, LearningBlock } from './types';
 
-export const LEARNINGS: readonly Learning[] = [largsHubArchitecture, resendSmtpOnSupabase];
+export const LEARNINGS: readonly Learning[] = [
+  expoFirebasePushNotifications,
+  s3CloudfrontImages,
+  largsHubArchitecture,
+  resendSmtpOnSupabase,
+];
 
 export const findLearning = (slug: string): Learning | undefined =>
   LEARNINGS.find((learning) => learning.slug === slug);
