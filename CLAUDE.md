@@ -14,6 +14,17 @@ A commit is the subject line and nothing else. No body, no `Co-Authored-By` trai
 
 Do not push. Local commits only, unless the user asks for a push.
 
+## Learnings imported from Notion
+
+When the user posts a Notion link to add as a learning:
+
+- Treat the page as a draft to correct, not text to transcribe. Grammar-check every sentence, and verify every technical claim, command, endpoint and code sample against current official documentation, so nothing incorrect gets published.
+- Update anything obsolete: deprecated SDKs, renamed products, changed console flows, dead URLs. Whatever is still correct stays as close to the original wording as possible.
+- `WebFetch` on a Notion URL returns an empty shell, because Notion renders client-side. A public page loads through `POST https://www.notion.so/api/v3/loadPageChunk` with its page id: the 32 hex characters at the end of the URL, hyphenated 8-4-4-4-12.
+- Use the page's `created_time` as `published`, and set `updated` to the revision date.
+- Do not open or publish child pages that look like they hold credentials.
+- In the reply, list what changed and why, anything added that the original did not have, and any claim that could not be verified.
+
 ## Commands
 
 ```bash

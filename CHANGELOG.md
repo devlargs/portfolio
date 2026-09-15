@@ -4,6 +4,7 @@
 
 ### Added
 
+- A write-up on signing users in with X (Twitter) OAuth 2.0 and PKCE from a React app.
 - A write-up on uploading images from Next.js straight to S3 with presigned URLs.
 - A write-up on the day my ISP silently dropped traffic to Fastly and I blamed my own machine.
 
