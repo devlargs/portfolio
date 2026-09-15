@@ -93,6 +93,10 @@ It also holds its promises at module scope so the ~50 sharp decodes and the outb
 
 The widget is styled with giscus's own built-in themes, so the palette is **not** duplicated a fourth time. Switching to a custom giscus stylesheet would add one more hand-maintained copy of the tokens to the list above; do not do it without deciding that is worth it.
 
+### The back-to-top button dodges the reCAPTCHA badge
+
+`components/ScrollTop` and Google's reCAPTCHA v3 badge both pin to the bottom-right corner. `ContactForm` shows the badge only while the form is on screen, by toggling `recaptcha-badge-visible` on `<body>`, and `ScrollTop.module.css` lifts the button with `translate` off that same class. The lift is sized from the badge's own geometry (14px from the bottom, 60px tall), which Google owns and can change. Rename the class in one file and the button lands back on top of the badge.
+
 ### Section composition
 
 `Section` wraps a band and sets `aria-labelledby={id}-head`, so whatever renders the title **must** emit `id="{id}-head"`. `SectionHead` composes `SectionRule` / `SectionTitle` / `SectionLede`; those three are exported separately so a section whose margin column must start level with the heading can compose them into its own grid. `components/AboutMe` is the worked example. Rendered the default way, its stack rail can only begin below the lede and leaves dead space at the top of the column.

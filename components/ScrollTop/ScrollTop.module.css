@@ -15,16 +15,21 @@
   color: var(--color-ink-2);
   cursor: pointer;
   opacity: 0;
+  --recaptcha-badge-clearance: calc(74px + var(--space-xs));
   transform: translateY(8px) scale(0.92);
   transition: opacity var(--dur-1) var(--ease-in), transform var(--dur-1) var(--ease-in),
-    color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);
+    translate var(--dur-2) var(--ease-out), color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);
 }
 
 .fab[data-visible='true'] {
   opacity: 1;
   transform: none;
   transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out),
-    color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);
+    translate var(--dur-2) var(--ease-out), color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);
+}
+
+:global(body.recaptcha-badge-visible) .fab {
+  translate: 0 calc(var(--space-md) - var(--recaptcha-badge-clearance));
 }
 
 .fab:hover {

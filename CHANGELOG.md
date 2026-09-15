@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- The back-to-top button no longer covers the reCAPTCHA badge beside the contact form.
+
 ## [0.4.0] (2026-09-15)
 
 ### Added
