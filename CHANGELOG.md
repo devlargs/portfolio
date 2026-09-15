@@ -8,6 +8,10 @@
 - A write-up on uploading images from Next.js straight to S3 with presigned URLs.
 - A write-up on the day my ISP silently dropped traffic to Fastly and I blamed my own machine.
 
+### Changed
+
+- Visits from localhost and from my own IP address no longer count in analytics.
+
 ### Fixed
 
 - The learnings list now shows up on arrival instead of waiting for a scroll.

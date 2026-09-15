@@ -1,4 +1,4 @@
-import { GoogleAnalytics } from '@next/third-parties/google';
+import Analytics from '@components/Analytics';
 import RouteProgress from '@components/RouteProgress';
 import { ACTIVE_SOCIALS, PROFILE, SITE_URL } from '@constants/profile';
 import { PRIMARY_SKILLS, SECONDARY_SKILLS } from '@constants/skills';
@@ -118,7 +118,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
       <RouteProgress />
       {children}
     </body>
-    {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
+    {GA_MEASUREMENT_ID && <Analytics gaId={GA_MEASUREMENT_ID} />}
   </html>
 );
 

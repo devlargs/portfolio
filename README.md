@@ -35,6 +35,7 @@ The dev server runs on Turbopack at http://localhost:3000.
 | `NEXT_PUBLIC_ADMIN_USERNAME`     | Admin sign-in                        |
 | `NEXT_PUBLIC_ADMIN_PASSWORD`     | Admin sign-in                        |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID`  | Analytics; omit to disable           |
+| `ANALYTICS_EXCLUDED_IPS`         | IPs whose visits analytics skips     |
 | `NEXT_PUBLIC_ENVIRONMENT`        | Environment label                    |
 | `GOOGLE_SITE_VERIFICATION`       | Search Console token; omit to skip   |
 

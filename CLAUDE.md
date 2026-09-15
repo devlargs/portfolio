@@ -108,6 +108,10 @@ The widget is styled with giscus's own built-in themes, so the palette is **not*
 
 `components/ScrollTop` and Google's reCAPTCHA v3 badge both pin to the bottom-right corner. `ContactForm` shows the badge only while the form is on screen, by toggling `recaptcha-badge-visible` on `<body>`, and `ScrollTop.module.css` lifts the button with `translate` off that same class. The lift is sized from the badge's own geometry (14px from the bottom, 60px tall), which Google owns and can change. Rename the class in one file and the button lands back on top of the badge.
 
+### Analytics skips localhost and the owner's IP
+
+The pages are `force-static`, so no page can see a visitor's IP. `middleware.ts` can: on every page request it compares `x-real-ip`, falling back to the first `x-forwarded-for` hop, against `ANALYTICS_EXCLUDED_IPS`, and sets or clears the `rl-analytics-opt-out` cookie. `components/Analytics` is the client leaf that mounts `<GoogleAnalytics>` only when that cookie is absent and the hostname is not localhost, a loopback or a private LAN address. Two consequences. GA never loads locally, even under `npm start`, so check a tracking change on a preview deploy. And the IP list is fixed per deployment, so a changed home IP needs the variable updated and a redeploy. A connection behind CGNAT shares its public IP with other customers, and excluding it drops their visits as well.
+
 ### Section composition
 
 `Section` wraps a band and sets `aria-labelledby={id}-head`, so whatever renders the title **must** emit `id="{id}-head"`. `SectionHead` composes `SectionRule` / `SectionTitle` / `SectionLede`; those three are exported separately so a section whose margin column must start level with the heading can compose them into its own grid. `components/AboutMe` is the worked example. Rendered the default way, its stack rail can only begin below the lede and leaves dead space at the top of the column.
