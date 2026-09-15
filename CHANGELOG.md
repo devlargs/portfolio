@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.0] (2026-09-15)
+
 ### Added
 
 - The learnings list can be filtered by tag, from a row of tags under the page heading.
