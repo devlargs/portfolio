@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.5.1] (2026-09-15)
+
 ### Changed
 
 - New versions no longer post a GitHub release, so they stay off the GitHub feed.
