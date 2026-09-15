@@ -118,10 +118,6 @@ jobs:
             level === 'minor' ? `${maj}.${min + 1}.0` :
                                 `${maj}.${min}.${pat + 1}`;
 
-          // Trim blank lines off both ends so the release body has no padding.
-          const trimmed = body.join('\n').replace(/^\n+/, '').replace(/\n+$/, '');
-          fs.writeFileSync('.release-body.md', trimmed + '\n');
-
           console.log(`Bump: ${level}  ${pkg.version} -> ${next}`);
           out('proceed', 'true');
           out('level', level);
@@ -184,13 +180,3 @@ jobs:
           git push origin HEAD:"${GITHUB_REF_NAME}"
           git push origin "refs/tags/v${VERSION}"
 
-      - name: Publish the GitHub release
-        if: steps.unreleased.outputs.proceed == 'true' && steps.tag.outputs.fresh == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ steps.unreleased.outputs.version }}
-        run: |
-          set -euo pipefail
-          gh release create "v${VERSION}" \
-            --title "v${VERSION}" \
-            --notes-file .release-body.md

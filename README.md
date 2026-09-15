@@ -84,7 +84,7 @@ The accent is a mark, not a fill. Emphasis is a neutral surface step plus a soli
 
 ## Releases
 
-`CHANGELOG.md` keeps an `## [Unreleased]` section. Pushing changelog entries to `master` triggers `.github/workflows/release.yml`, which picks the semver bump from the entries, cuts the section into a dated version, tags `v<version>`, and publishes a GitHub release. Nothing to release means the workflow exits quietly.
+`CHANGELOG.md` keeps an `## [Unreleased]` section. Pushing changelog entries to `master` triggers `.github/workflows/release.yml`, which picks the semver bump from the entries, cuts the section into a dated version, and tags `v<version>`. It does not publish a GitHub release, so new versions stay off the GitHub feed. Nothing to release means the workflow exits quietly.
 
 The release commit itself touches only `CHANGELOG.md` and `package.json`, so the site it would build is byte-identical to the one already live. `vercel.json` skips it: the ignored build step exits 0 for any commit whose message starts with `chore: release v`, and 1 for everything else.
 
